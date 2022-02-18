@@ -21,5 +21,20 @@ public class District {
     @Column(name = "district_id", nullable = false)
     private Long districtId;
 
+    @Column(name = "district_name")
+    private String districtName;
+
+
+// One to many - Many to one
+    @ManyToOne
+    @JoinColumn(name = "province_id", nullable = false)
+    private Province province;
+
+//    @OneToMany(mappedBy = "district")
+//    private List<Users> userList;
+//
+//    @OneToMany(mappedBy = "district")
+//    private List<Posts> postList;
+
 }
 

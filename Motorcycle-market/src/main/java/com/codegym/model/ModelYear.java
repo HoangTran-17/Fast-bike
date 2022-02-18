@@ -25,11 +25,14 @@ public class ModelYear {
     @Column(name = "model_year_name")
     private int modelYearName;
 
+
+
+// One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "series_id", nullable = false)
     private SeriesMotor seriesMotor;
 
-    @OneToMany(mappedBy = "modelYear")
-    private List<DetailMotor> detailMotorList;
+//    @OneToMany(mappedBy = "modelYear")
+//    private List<DetailMotor> detailMotorList;
 }
 

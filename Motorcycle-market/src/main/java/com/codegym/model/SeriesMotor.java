@@ -23,13 +23,15 @@ public class SeriesMotor {
     @Column(name = "series_id", nullable = false)
     private Long seriesId;
 
-     @OneToOne(mappedBy = "seriesMotor")
-     private Specifications specifications;
-
     @Column(name = "series_name")
     @NotBlank(message = "series name can't blank!")
     private String seriesName;
 
+    @Column(name = "capacity")
+    private int capacity;
+
+
+// One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
     private BrandMotor brandMotor;
@@ -38,14 +40,14 @@ public class SeriesMotor {
      @JoinColumn(name = "typeMotor", nullable = false)
      private TypeMotor typeMotor;
 
-    @Column(name = "capacity")
-    private int capacity;
-
-    @OneToMany(mappedBy = "seriesMotor")
-    private List<ModelYear> modelYearList;
-
-    @OneToMany(mappedBy = "seriesMotor")
-    private List<DetailMotor> detailMotorList;
+//    @OneToOne(mappedBy = "seriesMotor")
+//    private Specifications specifications;
+//
+//    @OneToMany(mappedBy = "seriesMotor")
+//    private List<ModelYear> modelYearList;
+//
+//    @OneToMany(mappedBy = "seriesMotor")
+//    private List<DetailMotor> detailMotorList;
 
 }
 

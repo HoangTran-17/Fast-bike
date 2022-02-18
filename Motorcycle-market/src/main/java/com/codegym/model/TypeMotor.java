@@ -21,12 +21,15 @@ public class TypeMotor {
     @Column(name = "type_motor_id", nullable = false)
     private Long typeMotorId;
 
-    @OneToMany(mappedBy = "typeMotor")
-    private List<SeriesMotor> seriesMotorList;
-
     @Column(name = "type_motor_name")
     private String typeMotorName;
 
-    @OneToMany(mappedBy = "typeMotor")
-    private List<DetailMotor> detailMotorList;
+
+
+    // One to many - Many to one
+//    @OneToMany(mappedBy = "typeMotor")
+//    private List<SeriesMotor> seriesMotorList;
+//
+//    @OneToMany(mappedBy = "typeMotor")
+//    private List<DetailMotor> detailMotorList;
 }

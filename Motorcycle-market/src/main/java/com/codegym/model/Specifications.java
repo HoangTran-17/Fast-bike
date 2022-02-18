@@ -20,11 +20,6 @@ public class Specifications {
     @Column(name = "specifications_id", nullable = false)
     private Long specifications_id;
 
-
-     @OneToOne(cascade = CascadeType.ALL)
-     @JoinColumn(name = "series_motor", referencedColumnName = "series_id")
-     private SeriesMotor seriesMotor;
-
     @Column(name = "engine")
     private String engine;
 
@@ -78,6 +73,13 @@ public class Specifications {
 
     @Column(name = "rear_tire")
     private String rearTire;
+
+
+
+// One to many - Many to one
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "series_motor", referencedColumnName = "series_id")
+//    private SeriesMotor seriesMotor;
 
 }
 

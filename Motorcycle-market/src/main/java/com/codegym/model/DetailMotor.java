@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +21,8 @@ public class DetailMotor {
     @Column(name = "detail_motor_id", nullable = false)
     private Long detailMotorId;
 
+
+// One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
     private BrandMotor brandMotor;
@@ -40,4 +43,6 @@ public class DetailMotor {
     @JoinColumn(name = "color_id", nullable = false)
     private ColorMotor colorMotor;
 
+//    @OneToMany(mappedBy = "detailMotor")
+//    private List<Posts> postList;
 }
