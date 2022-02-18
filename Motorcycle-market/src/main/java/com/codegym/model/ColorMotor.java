@@ -25,7 +25,7 @@ public class ColorMotor {
     private String colorName;
 
 // One to many - Many to one
-//    @OneToMany(mappedBy = "colorMotor")
-//    private List<DetailMotor> detailMotorList;
+    @OneToMany(mappedBy = "colorMotor")
+    private List<DetailMotor> detailMotorList;
 }
 

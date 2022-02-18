@@ -27,9 +27,9 @@ public class TypeMotor {
 
 
     // One to many - Many to one
-//    @OneToMany(mappedBy = "typeMotor")
-//    private List<SeriesMotor> seriesMotorList;
-//
-//    @OneToMany(mappedBy = "typeMotor")
-//    private List<DetailMotor> detailMotorList;
+    @OneToMany(mappedBy = "typeMotor")
+    private List<SeriesMotor> seriesMotorList;
+
+    @OneToMany(mappedBy = "typeMotor")
+    private List<DetailMotor> detailMotorList;
 }

@@ -40,14 +40,14 @@ public class SeriesMotor {
      @JoinColumn(name = "typeMotor", nullable = false)
      private TypeMotor typeMotor;
 
-//    @OneToOne(mappedBy = "seriesMotor")
-//    private Specifications specifications;
-//
-//    @OneToMany(mappedBy = "seriesMotor")
-//    private List<ModelYear> modelYearList;
-//
-//    @OneToMany(mappedBy = "seriesMotor")
-//    private List<DetailMotor> detailMotorList;
+    @OneToOne(mappedBy = "seriesMotor")
+    private Specifications specifications;
+
+    @OneToMany(mappedBy = "seriesMotor")
+    private List<ModelYear> modelYearList;
+
+    @OneToMany(mappedBy = "seriesMotor")
+    private List<DetailMotor> detailMotorList;
 
 }
 

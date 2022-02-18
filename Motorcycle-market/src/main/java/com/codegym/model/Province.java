@@ -27,8 +27,8 @@ public class Province {
 
 
 // One to many - Many to one
-//    @OneToMany(mappedBy = "province")
-//    private List<District> districtList;
+    @OneToMany(mappedBy = "province")
+    private List<District> districtList;
 
 }
 

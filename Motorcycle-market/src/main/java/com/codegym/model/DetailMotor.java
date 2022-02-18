@@ -43,6 +43,6 @@ public class DetailMotor {
     @JoinColumn(name = "color_id", nullable = false)
     private ColorMotor colorMotor;
 
-//    @OneToMany(mappedBy = "detailMotor")
-//    private List<Posts> postList;
+    @OneToMany(mappedBy = "detailMotor")
+    private List<Posts> postList;
 }

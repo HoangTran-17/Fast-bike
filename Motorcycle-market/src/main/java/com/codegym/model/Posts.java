@@ -51,8 +51,8 @@ public class Posts {
 
 
 // One to many - Many to one
-//    @OneToMany(mappedBy = "posts")
-//    private List<Image> imageList;
+    @OneToMany(mappedBy = "posts")
+    private List<Image> imageList;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

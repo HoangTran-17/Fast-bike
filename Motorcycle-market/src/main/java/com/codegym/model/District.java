@@ -30,11 +30,11 @@ public class District {
     @JoinColumn(name = "province_id", nullable = false)
     private Province province;
 
-//    @OneToMany(mappedBy = "district")
-//    private List<Users> userList;
-//
-//    @OneToMany(mappedBy = "district")
-//    private List<Posts> postList;
+    @OneToMany(mappedBy = "district")
+    private List<Users> userList;
+
+    @OneToMany(mappedBy = "district")
+    private List<Posts> postList;
 
 }
 

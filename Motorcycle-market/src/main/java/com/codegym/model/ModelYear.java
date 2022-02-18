@@ -32,7 +32,7 @@ public class ModelYear {
     @JoinColumn(name = "series_id", nullable = false)
     private SeriesMotor seriesMotor;
 
-//    @OneToMany(mappedBy = "modelYear")
-//    private List<DetailMotor> detailMotorList;
+    @OneToMany(mappedBy = "modelYear")
+    private List<DetailMotor> detailMotorList;
 }
 

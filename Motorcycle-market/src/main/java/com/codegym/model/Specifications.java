@@ -77,9 +77,9 @@ public class Specifications {
 
 
 // One to many - Many to one
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "series_motor", referencedColumnName = "series_id")
-//    private SeriesMotor seriesMotor;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "series_motor", referencedColumnName = "series_id")
+    private SeriesMotor seriesMotor;
 
 }
 

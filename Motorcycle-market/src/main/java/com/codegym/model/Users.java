@@ -43,8 +43,8 @@ public class Users {
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
-//    @OneToMany(mappedBy = "users")
-//    private List<Posts> postList;
+    @OneToMany(mappedBy = "users")
+    private List<Posts> postList;
 
 
 }
