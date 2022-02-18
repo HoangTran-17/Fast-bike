@@ -15,14 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity(name = "brand_motor")
+@Entity
+@Table(name = "brand_motor")
 public class BrandMotor {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     @Column(name = "brand_id", nullable = false)
     private Long brandId;
 
-    @NotBlank(message = "tên hãng không được để trống!")
     @Column(name = "brand_name")
     private String brandName;
 
