@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,21 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "image")
-public class Image {
-
+@Table(name = "color_motor")
+public class ColorMotor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "image_id", nullable = false)
-    private Long imageId;
+    @Column(name = "color_id", nullable = false)
+    private Long colorId;
 
-   // image
-
-
+    @Column(name = "color_name")
+    private String colorName;
 
 // One to many - Many to one
-    @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
-    private Posts posts;
-
+    @OneToMany(mappedBy = "colorMotor")
+    private List<DetailMotor> detailMotorList;
 }
+

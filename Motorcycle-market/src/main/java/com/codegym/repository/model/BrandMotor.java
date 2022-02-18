@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,24 +12,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
-public class TypeMotor {
 
+@Entity
+@Table(name = "brand_motor")
+public class BrandMotor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "type_motor_id", nullable = false)
-    private Long typeMotorId;
+    @Column(name = "brand_id", nullable = false)
+    private Long brandId;
 
-    @Column(name = "type_motor_name")
-    private String typeMotorName;
+    @Column(name = "brand_name")
+    private String brandName;
 
-
-
-    // One to many - Many to one
-    @OneToMany(mappedBy = "typeMotor")
+// One to many - Many to one
+    @OneToMany(mappedBy = "brandMotor")
     private List<SeriesMotor> seriesMotorList;
 
-    @OneToMany(mappedBy = "typeMotor")
+    @OneToMany(mappedBy = "brandMotor")
     private List<DetailMotor> detailMotorList;
 }
