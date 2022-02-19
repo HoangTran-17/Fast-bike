@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IDetailMotorRepository extends JpaRepository<Posts, Long> {
+public interface IBrandMotorRepository extends JpaRepository<Posts, Long> {
 
 //    @Query("SELECT u " +
 //            "from User u " +
