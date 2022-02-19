@@ -3,13 +3,12 @@ package com.codegym.repository;
 import com.codegym.repository.model.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface IPostsRepository extends JpaRepository<Posts, Long> {
+public interface IDetailMotorRepository extends JpaRepository<Posts, Long> {
 
 //    @Query("SELECT u " +
 //            "from User u " +
