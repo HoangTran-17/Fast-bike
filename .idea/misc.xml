@@ -4,6 +4,10 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Motorcycle-market" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+>>>>>>> 4ff64b78fcf53b04c870baa3eb6f982bb2f4b8a8
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
