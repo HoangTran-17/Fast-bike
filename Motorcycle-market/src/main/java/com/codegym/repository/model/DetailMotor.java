@@ -44,5 +44,5 @@ public class DetailMotor {
     private ColorMotor colorMotor;
 
     @OneToMany(mappedBy = "detailMotor")
-    private List<Posts> postList;
+    private List<Post> postList;
 }

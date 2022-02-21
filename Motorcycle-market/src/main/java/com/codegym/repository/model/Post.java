@@ -16,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "posts")
-public class Posts {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +56,7 @@ public class Posts {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users users;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "detail_motor_id", nullable = false)

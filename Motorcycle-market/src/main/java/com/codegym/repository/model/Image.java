@@ -28,6 +28,6 @@ public class Image {
 // One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    private Posts posts;
+    private Post posts;
 
 }

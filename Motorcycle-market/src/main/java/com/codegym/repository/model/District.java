@@ -31,10 +31,10 @@ public class District {
     private Province province;
 
     @OneToMany(mappedBy = "district")
-    private List<Users> userList;
+    private List<User> userList;
 
     @OneToMany(mappedBy = "district")
-    private List<Posts> postList;
+    private List<Post> postList;
 
 }
 
