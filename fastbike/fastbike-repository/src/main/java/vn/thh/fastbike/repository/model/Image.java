@@ -1,4 +1,4 @@
-package com.codegym.repository.model;
+package vn.thh.fastbike.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +28,6 @@ public class Image {
 // One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    private Posts posts;
+    private Post posts;
 
 }

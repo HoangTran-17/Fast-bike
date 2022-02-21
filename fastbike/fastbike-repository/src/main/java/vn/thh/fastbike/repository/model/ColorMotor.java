@@ -1,4 +1,4 @@
-package com.codegym.repository.model;
+package vn.thh.fastbike.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

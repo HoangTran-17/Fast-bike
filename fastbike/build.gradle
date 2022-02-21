@@ -1,0 +1,27 @@
+group 'vn.thh'
+version '1.0-SNAPSHOT'
+allprojects {
+
+    apply plugin: 'java'
+    //so that we can use 'compile', 'testCompile' for dependencies
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation 'org.modelmapper:modelmapper:3.0.0'
+
+
+        implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.3'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.3'
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.3'
+        implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.3'
+        implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
+        implementation 'org.springframework.boot:spring-boot-devtools:2.6.3'
+
+        implementation 'mysql:mysql-connector-java:8.0.28'
+
+        compileOnly 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    }
+}

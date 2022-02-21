@@ -1,4 +1,4 @@
-package com.codegym.repository.model;
+package vn.thh.fastbike.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,5 +44,5 @@ public class DetailMotor {
     private ColorMotor colorMotor;
 
     @OneToMany(mappedBy = "detailMotor")
-    private List<Posts> postList;
+    private List<Post> postList;
 }
