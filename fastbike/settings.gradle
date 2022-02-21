@@ -1,7 +1,0 @@
-rootProject.name = 'fastbike'
-include 'fastbike-service'
-include 'fastbike-repository'
-//include 'fastbike-admin'
-include 'fastbike-admin'
-include 'fastbike-home'
-
