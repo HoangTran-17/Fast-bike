@@ -15,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 //avatar	Blob
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,8 @@ public class Users {
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
-    @OneToMany(mappedBy = "users")
-    private List<Posts> postList;
+    @OneToMany(mappedBy = "user")
+    private List<Post> postList;
 
 
 }
