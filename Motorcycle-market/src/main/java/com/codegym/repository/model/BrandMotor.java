@@ -24,10 +24,16 @@ public class BrandMotor {
     @Column(name = "brand_name")
     private String brandName;
 
-// One to many - Many to one
+
+    // One to many - Many to one
     @OneToMany(mappedBy = "brandMotor")
     private List<SeriesMotor> seriesMotorList;
 
     @OneToMany(mappedBy = "brandMotor")
     private List<DetailMotor> detailMotorList;
+
+    public BrandMotor(Long brandId, String brandName) {
+        this.brandId = brandId;
+        this.brandName = brandName;
+    }
 }

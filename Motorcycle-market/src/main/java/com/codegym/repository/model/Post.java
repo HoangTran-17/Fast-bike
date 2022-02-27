@@ -1,5 +1,6 @@
 package com.codegym.repository.model;
 
+import com.codegym.service.dto.PostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,6 +66,22 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
+
+    public Post( StatusPost statusPost, String title, String modelMotor, String kilometerCount, String description, Double price, String sellerName, String sellerPhoneNumber, Date postDate, Ownership ownership, User user, DetailMotor detailMotor, District district) {
+        this.statusPost = statusPost;
+        this.title = title;
+        this.modelMotor = modelMotor;
+        this.kilometerCount = kilometerCount;
+        this.description = description;
+        this.price = price;
+        this.sellerName = sellerName;
+        this.sellerPhoneNumber = sellerPhoneNumber;
+        this.postDate = postDate;
+        this.ownership = ownership;
+        this.user = user;
+        this.detailMotor = detailMotor;
+        this.district = district;
+    }
 }
 
 

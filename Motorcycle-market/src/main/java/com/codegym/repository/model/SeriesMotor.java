@@ -24,7 +24,6 @@ public class SeriesMotor {
     private Long seriesId;
 
     @Column(name = "series_name")
-    @NotBlank(message = "series name can't blank!")
     private String seriesName;
 
     @Column(name = "capacity")
