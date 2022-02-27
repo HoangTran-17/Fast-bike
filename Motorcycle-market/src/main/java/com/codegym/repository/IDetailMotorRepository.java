@@ -1,11 +1,11 @@
 package com.codegym.repository;
 
-import com.codegym.repository.model.Post;
+import com.codegym.repository.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IDetailMotorRepository extends JpaRepository<Post, Long> {
+public interface IDetailMotorRepository extends JpaRepository<DetailMotor, Long> {
 
 //    @Query("SELECT u " +
 //            "from User u " +
@@ -14,8 +14,8 @@ public interface IDetailMotorRepository extends JpaRepository<Post, Long> {
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
 
+    DetailMotor getByModelYearAndColorMotor(ModelYear modelYear, ColorMotor colorMotor);
 
-
-
+    void deleteAllBySeriesMotor(SeriesMotor seriesMotor);
 }
 

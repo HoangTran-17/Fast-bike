@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name = "type_motor")
 public class TypeMotor {
 
     @Id
@@ -32,4 +32,9 @@ public class TypeMotor {
 
     @OneToMany(mappedBy = "typeMotor")
     private List<DetailMotor> detailMotorList;
+
+    public TypeMotor(Long typeMotorId, String typeMotorName) {
+        this.typeMotorId = typeMotorId;
+        this.typeMotorName = typeMotorName;
+    }
 }

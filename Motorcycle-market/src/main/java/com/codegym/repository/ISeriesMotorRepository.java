@@ -1,12 +1,14 @@
 package com.codegym.repository;
 
 import com.codegym.repository.model.BrandMotor;
-import com.codegym.repository.model.Post;
+import com.codegym.repository.model.SeriesMotor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface IBrandMotorRepository extends JpaRepository<BrandMotor, Long> {
+public interface ISeriesMotorRepository extends JpaRepository<SeriesMotor, Long> {
 
 //    @Query("SELECT u " +
 //            "from User u " +
@@ -14,9 +16,6 @@ public interface IBrandMotorRepository extends JpaRepository<BrandMotor, Long> {
 //            "where w.id = :id")
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
-
-
-
-
+    List<SeriesMotor> getAllByBrandMotor(BrandMotor brandMotor);
 }
 

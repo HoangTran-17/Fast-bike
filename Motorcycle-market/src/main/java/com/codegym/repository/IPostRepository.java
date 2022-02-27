@@ -1,6 +1,8 @@
 package com.codegym.repository;
 
 import com.codegym.repository.model.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,9 +18,13 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
 //            "where w.id = :id")
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
-//    Tìm bài viết theo brand motor (Tìm bằng ModelMotor bắt đầu với tên hãng xe).
-    @Query("select u from Post u where u.modelMotor like '1%'")
-    List<Post> getAllByModelMotorStartingWith(String brandMotor);
+
+    @Override
+    Page<Post> findAll(Pageable pageable);
+
+    //    Tìm bài viết theo brand motor (Tìm bằng ModelMotor bắt đầu với tên hãng xe).
+//    @Query("select u from Post u where u.modelMotor like '1%'")
+//    Page<Post> getAllByModelMotorStartingWith(String brandMotor);
 
 
 //    Tìm bài viết theo p
