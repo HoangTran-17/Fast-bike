@@ -1,0 +1,18 @@
+.background-view-message{
+    background-color: #d8ff0057;
+}
+  
+.popup_shop_message{
+      height: 350px
+}
+
+.fancybox-message-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 8040;
+    background: url('../img/common/popup_close_btn.png') -44px 50% no-repeat;
+}

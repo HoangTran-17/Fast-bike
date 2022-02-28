@@ -1,0 +1,94 @@
+(function ($) {
+
+    // filter list on page list
+    filterlist('#list-brand-filter','#filter-brand-list');
+    filterlist('#list-type-filter','#filter-type-list');
+    filterlist('#list-city-filter','#filter-city-list');
+    function filterlist(listfilter, checkboxlist){
+        $(listfilter).on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(checkboxlist).find('li').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    }
+
+    $('ul.checkbox-list input:disabled').closest('li').addClass('disabled');
+    $('ul.checkbox-list li.disabled input').prop('disabled', true);
+
+    $('.input-number').on('load input', function(){
+        var $this = $( this );
+        var input = $this.val();
+
+        // 2
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+
+        // 3
+        input = input ? parseInt( input, 10 ) : 0;
+
+        // 4
+        $this.val( function() {
+            return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+        } );
+    })
+
+    // Init select2
+    if($(".select-box").length){
+        $('.select-box').each(function() {
+            $(this).select2({
+                width: '100%',
+                placeholder: $(this).attr('placeholder'),
+                language: {
+                   noResults: function(){
+                       return "Không tìm thấy";
+                   }
+               },
+            });
+        });
+    }
+
+    var view_list = $("#view-cell-bike-list"),
+        view_grid = $("#view-grid-bike-list");
+        box       = $('.list-product .list-bike');
+    view_grid.click(function(){
+        $(this).addClass('active');
+        view_list.removeClass('active');
+        box.removeClass('list-view').addClass('grid-view');
+    })
+
+    view_list.click(function(){
+        $(this).addClass('active');
+        view_grid.removeClass('active');
+        box.removeClass('grid-view').addClass('list-view');
+    })
+
+    var checkbox   = $('.filter-checkbox').find('input[type="checkbox"]'),
+        box_filter = $('.list-filters');
+
+    checkbox.change(function(){
+        var a = $(this).closest('label').find('a'),
+            href = a.attr('href');
+        box_filter.addClass('disabled');
+
+    });
+
+    var defer = window.defer || $;
+
+    defer(function(){
+        let div="";
+
+        if($('.list-product .list-bike > li').length < 5 ){
+             div = $('.list-product .list-bike > li:last-child');
+        }else {
+             div = $('.list-product .list-bike > li:nth-child(5)');
+        }
+
+        let script = "<ins class='adsbygoogle' style='display:block;height:90px' data-ad-client='ca-pub-8343966218625736' data-ad-slot='2453231423' ></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>";
+        $( "<li style='width:100%; height:auto;'>"+script+"</li>" ).insertAfter(div);
+    }, 1000);
+
+    // Hanlde image lazy load fail
+    document.addEventListener('error', function(e){
+        if(e.target.nodeName == 'IMG'){e.target.src = IMAGE_BIKE_LAZY;}
+    }, true);
+})(jQuery)
