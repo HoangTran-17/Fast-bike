@@ -20,11 +20,11 @@ public class TypeMotorDTO {
     @NotBlank(message = "Vui lòng nhập tên loại xe!")
     private String typeMotorName;
 
-    TypeMotorDTO parseTypeMotorDTO(TypeMotor typeMotor) {
+    public static TypeMotorDTO parseTypeMotorDTO(TypeMotor typeMotor) {
         return new TypeMotorDTO(typeMotor.getTypeMotorId(), typeMotor.getTypeMotorName());
     }
 
-    public TypeMotor parseTypeMotor(TypeMotorDTO typeMotorDTO) {
+    public static TypeMotor parseTypeMotor(TypeMotorDTO typeMotorDTO) {
         return new TypeMotor(typeMotorDTO.getTypeMotorId(), typeMotorDTO.getTypeMotorName());
     }
 }

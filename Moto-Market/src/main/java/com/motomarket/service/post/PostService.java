@@ -63,4 +63,13 @@ public class PostService implements IPostService{
     public void remove(Long id) {
 
     }
+
+    @Override
+    public List<PostDTO> findTop12ByOrderByPostIdDesc() {
+        List<PostDTO> postDTOList = new ArrayList<>();
+        postRepository.findTop12ByOrderByPostIdDesc().forEach(post -> {
+            postDTOList.add(PostDTO.parsePostDTO(post));
+        });
+        return postDTOList;
+    }
 }

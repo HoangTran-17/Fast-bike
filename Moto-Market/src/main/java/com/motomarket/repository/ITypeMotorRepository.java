@@ -1,15 +1,11 @@
 package com.motomarket.repository;
 
-import com.motomarket.repository.model.Post;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.motomarket.repository.model.TypeMotor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface IPostRepository extends JpaRepository<Post, Long> {
+public interface ITypeMotorRepository extends JpaRepository<TypeMotor, Long> {
 
 //    @Query("SELECT u " +
 //            "from User u " +
@@ -17,12 +13,6 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
 //            "where w.id = :id")
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
-
-    @Override
-    Page<Post> findAll(Pageable pageable);
-
-//    List 12 records latest
-    List<Post> findTop12ByOrderByPostIdDesc();
 
 
 
