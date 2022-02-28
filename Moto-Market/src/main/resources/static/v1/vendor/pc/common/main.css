@@ -1187,7 +1187,7 @@ li {
   .list-info > .source {
     margin-bottom: 5px; }
     .lb_package {
-      background: url(/v1/pc/img/icon_prioritize.png) 0% center no-repeat;
+      background: url(/static/v1/pc/img/icon_prioritize.png) 0% center no-repeat;
       background-size: contain;
     }
     .list-info > .lb_package > .condition {

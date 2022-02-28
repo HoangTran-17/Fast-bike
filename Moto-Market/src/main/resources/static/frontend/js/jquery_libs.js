@@ -3987,7 +3987,7 @@ var fixto = (function($, window, document) {
  */
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["frontend/js/jquery"], factory);
+        define(["static/frontend/js/jquery"], factory);
     } else {
         factory(jQuery);
     }
@@ -5411,7 +5411,7 @@ var fixto = (function($, window, document) {
  */
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["frontend/js/jquery", "./jquery.validate"], factory);
+        define(["static/frontend/js/jquery", "./jquery.validate"], factory);
     } else {
         factory(jQuery);
     }
@@ -6408,7 +6408,7 @@ var fixto = (function($, window, document) {
 
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["frontend/js/jquery", "./jquery.validate"], factory);
+        define(["static/frontend/js/jquery", "./jquery.validate"], factory);
     } else {
         factory(jQuery);
     }
@@ -6432,7 +6432,7 @@ var fixto = (function($, window, document) {
 
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["frontend/js/jquery", "../jquery.validate"], factory);
+        define(["static/frontend/js/jquery", "../jquery.validate"], factory);
     } else {
         factory(jQuery);
     }
@@ -6467,7 +6467,7 @@ var fixto = (function($, window, document) {
 
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(["frontend/js/jquery", "../jquery.validate"], factory);
+        define(["static/frontend/js/jquery", "../jquery.validate"], factory);
     } else {
         factory(jQuery);
     }
