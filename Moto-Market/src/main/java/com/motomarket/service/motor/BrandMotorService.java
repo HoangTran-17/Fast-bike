@@ -2,6 +2,7 @@ package com.motomarket.service.motor;
 
 import com.motomarket.repository.IBrandMotorRepository;
 import com.motomarket.repository.model.BrandMotor;
+import com.motomarket.repository.model.SeriesMotor;
 import com.motomarket.service.dto.BrandMotorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,6 @@ public class BrandMotorService implements IBrandMotorService {
     BrandMotor parseBrandMotor(BrandMotorDTO brandMotorDTO) {
         return new BrandMotor(brandMotorDTO.getBrandId(), brandMotorDTO.getBrandName());
     }
+
+
 }
