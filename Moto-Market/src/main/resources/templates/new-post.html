@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -206,18 +206,8 @@
                                     </div>
                                     <div class="f-bottom bg-white">
                                         <div class="input-list">
-                                            <ul class="custom_scroll">
-                                                <li class="hide">
-                                                    <label>
-                                                        <input type="radio" name="color_code" value="012">
-                                                        <span>Đen Mờ</span>
-                                                    </label>
-                                                </li>
+                                            <ul class="custom_scroll" id="filter-color-list">
 
-                                                <label>
-                                                    <input type="radio" name="color_code" value="0210">
-                                                    <span>Đỏ Trắng Đen</span>
-                                                </label>
                                             </ul>
                                         </div>
                                     </div>
@@ -293,7 +283,7 @@
                                     </div>
                                     <div class="item-center">
                                         <div class="input-style1">
-                                            <input required="true" class="" type="text" name="product_description"
+                                            <input required="true" class="" id="title-post" type="text" name="product_description"
                                                    maxlength="100" value="">
                                         </div>
                                     </div>
@@ -954,11 +944,15 @@
 
         })
     }
-     let brand;
+
+    let brand;
+    let series;
+    let year;
+
     function handlerClickBrand() {
         $(".span-brand").on("click", function () {
             var dataId = $(this).attr('data-id')
-             brand = $(this).text();
+            brand = $(this).text();
             $("#temp_description").text(brand);
             $.ajax({
                 type: "GET",
@@ -975,6 +969,8 @@
                                  </label> </li>`
                 })
                 $('#filter-series-list').replaceWith(`<ul id="filter-series-list" class="custom_scroll">${str}</ul>`);
+                $('#filter-year-list').replaceWith(`<ul id="filter-year-list" class="custom_scroll"></ul>`);
+                $('#filter-color-list').replaceWith(`<ul id="filter-color-list" class="custom_scroll"></ul>`);
                 handlerClickSeries();
             }).fail(function () {
 
@@ -985,35 +981,73 @@
     function handlerClickSeries() {
         $(".span-series").on("click", function () {
             var dataId = $(this).attr('data-id')
-            let series = $(this).text();
-            $("#temp_description").text(brand + " "+ series);
-       })
-    }
+            series = $(this).text();
+            $("#temp_description").text(brand + " " + series);
 
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getModelYears/" + dataId,
+            }).done(function (data) {
+                console.log(data);
+                let str = "";
+                $.each(data, (index, item) => {
+                    str += `<li><label> <input type="radio" name="manufacturer_code">
+                                        <span data-id="${item.modelYearId}" class="span-year">${item.modelYearName}</span>
+                                 </label> </li>`
+                })
+                $('#filter-year-list').replaceWith(`<ul id="filter-year-list" class="custom_scroll">${str}</ul>`);
+                handlerClickYear();
+            }).fail(function () {
 
-    function getModelYears() {
-        $.ajax({
-            type: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            url: "/api/moto/getAllBrand",
-        }).done(function (data) {
-            console.log(data);
-            $.each(data, (index, item) => {
-                $('#filter-brand-list').append(`<li><label>
-                                                        <input type="radio" name="manufacturer_code" ">
-                                                        <span data-id="${item.brandId}" class="span-brand">${item.brandName}</span>
-                                                    </label>
-                                                </li>`);
             })
-            handlerClickBrand();
-        }).fail(function () {
 
         })
     }
 
+
+    function handlerClickYear() {
+        $(".span-year").on("click", function () {
+            var dataId = $(this).attr('data-id')
+            year = $(this).text();
+            $("#temp_description").text(brand + " " + series + " " + year);
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getColors",
+            }).done(function (data) {
+                console.log(data);
+                let str = "";
+                $.each(data, (index, item) => {
+                    str += `<li><label> <input type="radio" name="manufacturer_code">
+                                        <span data-id="${item.colorId}" class="span-color">${item.colorName}</span>
+                                 </label> </li>`
+                })
+                $('#filter-color-list').replaceWith(`<ul id="filter-color-list" class="custom_scroll">${str}</ul>`);
+                handlerClickColor();
+            }).fail(function () {
+
+            })
+        })
+    }
+
+
+    function handlerClickColor() {
+        $(".span-color").on("click", function () {
+            var dataId = $(this).attr('data-id')
+            let color = $(this).text();
+            $("#temp_description").text(brand + " " + series + " " + year + " " + color);
+            let nameMoto =  $("#temp_description").text();
+            $("#title-post").val(nameMoto);
+        })
+    }
 
 </script>
 </body>

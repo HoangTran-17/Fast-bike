@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Login V2</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/login/images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/login/css/main.css">
+
+	<link rel="stylesheet" type="text/css" href="/frontend/toast-plugin/jquery.basic.toast.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" id="register-form">
+					<span class="login100-form-title p-b-0">
+						Register
+					</span>
+					<span class="login100-form-title p-b-0">
+						<img src="/login/images/icons/logofastbike2.png" height="200" width="290" alt="">
+					</span>
+					<div class="wrap-input100 validate-input" data-validate="Username is required">
+						<input class="input100" type="text" name="username">
+						<span class="focus-input100" data-placeholder="Username"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Phone Number not valid">
+						<input class="input100" type="text" name="phoneNumber">
+						<span class="focus-input100" data-placeholder="	 Number"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input class="input100" type="email" name="email" id="email-input">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" >
+								Sign Up
+							</button>
+						</div>
+					</div>
+					<div class="text-center ">
+						<span class="txt1">
+							You have an account?
+						</span>
+
+						<a class="txt2" href="/">
+							Sign In
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="verifyEmailModal" tabindex="-1" role="dialog" aria-labelledby="verifyEmailModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<fieldset>
+					<input type="text" name="code-input" id="code-input" inputmode="numeric" minlength="6"
+					maxlength="6" size="6" >
+					<span class="hint">New pin must be 6 digit number only</span>
+				</fieldset>
+				<p>Please check mail, enter code to the authentication your account</p>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" id="verify-btn" class="btn btn-outline-success">Verify</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	<div id="dropDownSelect1"></div>
+
+	<!--===============================================================================================-->
+	<script src="/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/frontend/toast-plugin/jquery.basic.toast.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/login/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="/login/js/registerJS.js"></script>
+
+
+	<script>
+
+
+
+	</script>
+
+</body>
+
+</html>
