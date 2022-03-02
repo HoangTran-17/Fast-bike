@@ -27,8 +27,6 @@ public class UserDTO {
 
     private String phoneNumber;
 
-    private Long district;
-
     public UserDTO(Long userId) {
         this.userId = userId;
     }
@@ -36,8 +34,7 @@ public class UserDTO {
     public static UserDTO parseUserDTO(User user) {
         return new UserDTO(user.getUserId(), user.getUserName(),
                 user.getEmail(), user.getRole(), user.getUserStatus(),
-                user.getPassword(), user.getPhoneNumber(),
-                user.getDistrict().getDistrictId());
+                user.getPassword(), user.getPhoneNumber());
     }
 }
 

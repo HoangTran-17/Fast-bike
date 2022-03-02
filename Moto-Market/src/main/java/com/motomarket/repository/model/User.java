@@ -40,9 +40,7 @@ public class User {
 
 
 // One to many - Many to one
-    @ManyToOne
-    @JoinColumn(name = "district_id", nullable = false)
-    private District district;
+
 
     @OneToMany(mappedBy = "user")
     private List<Post> postList;
