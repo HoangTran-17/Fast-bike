@@ -1,7 +1,6 @@
 package com.motomarket.service.user;
 
 import com.motomarket.repository.IUserRepository;
-import com.motomarket.repository.model.District;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;

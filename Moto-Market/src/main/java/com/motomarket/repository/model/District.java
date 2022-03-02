@@ -30,10 +30,6 @@ public class District {
     @JoinColumn(name = "province_id", nullable = false)
     private Province province;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> hoang-dev
     @OneToMany(mappedBy = "district")
     private List<Post> postList;
 
