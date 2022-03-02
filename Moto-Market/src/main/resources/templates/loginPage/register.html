@@ -36,7 +36,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" id="register-form">
+				<form class="login100-form validate-form"  th:action="@{/signup}" method="post"  id="register-form"  th:object="${user}">
 					<span class="login100-form-title p-b-0">
 						Register
 					</span>
@@ -44,22 +44,22 @@
 						<img src="/login/images/icons/logofastbike2.png" height="200" width="290" alt="">
 					</span>
 					<div class="wrap-input100 validate-input" data-validate="Username is required">
-						<input class="input100" type="text" name="username">
+						<input class="input100" type="text" name="username"  th:field="*{userName}">
 						<span class="focus-input100" data-placeholder="Username"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Phone Number not valid">
-						<input class="input100" type="text" name="phoneNumber">
+						<input class="input100" type="text" name="phoneNumber" th:field="*{phoneNumber}">
 						<span class="focus-input100" data-placeholder="	 Number"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-						<input class="input100" type="email" name="email" id="email-input">
+						<input class="input100" type="email" name="email" id="email-input" th:field="*{email}">
 						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="pass" th:field="*{password}">
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 					<div class="container-login100-form-btn">
@@ -74,7 +74,6 @@
 						<span class="txt1">
 							You have an account?
 						</span>
-
 						<a class="txt2" href="/">
 							Sign In
 						</a>

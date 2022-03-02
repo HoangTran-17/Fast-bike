@@ -434,10 +434,7 @@
                                         <div class="select2-style">
                                             <select placeholder="Khu vực" autocomplete="1" id="province_code"
                                                     class="form-control" required="true" name="province_code">
-                                                <option value="14">Tuyên Quang</option>
-                                                <option value="63">Vĩnh Long</option>
-                                                <option value="25">Vĩnh Phúc</option>
-                                                <option value="15">Yên Bai</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -921,6 +918,7 @@
 <script>
 
     getAllBrand();
+    getAllProvince();
 
     function getAllBrand() {
         $.ajax({
@@ -1049,6 +1047,26 @@
         })
     }
 
+   // API Province
+
+    function getAllProvince() {
+        $.ajax({
+            type: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            url: "https://vapi.vnappmob.com/api/province",
+        }).done(function (data) {
+            console.log(data)
+            $.each(data, (index, item) => {
+                console.log(item)
+                // $('#province_code').append(` <option value="${item.code}">${item.name}</option>`);
+            })
+        }).fail(function () {
+
+        })
+    }
 </script>
 </body>
 

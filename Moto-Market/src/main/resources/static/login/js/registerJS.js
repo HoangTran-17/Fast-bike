@@ -61,7 +61,7 @@
             if (data === "true"){
                 $('#verifyEmailModal').modal('hide');
                 // $.Toast('Mã PIN đúng, đăng kí thành công, hãy đăng nhập để tiếp tục', {'position': 'top','class': 'success', 'duration': 3000});
-                setTimeout(() =>  $("#register-form").submit(), 3000);
+                $("#register-form").submit();
             } else {
                 $.Toast("Mã PIN không đúng, hãy kiểm tra lại!!", {'position': 'top','class': 'alert', 'duration': 1500});
             }
