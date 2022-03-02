@@ -43,6 +43,9 @@ public class UserService implements IUserService{
     @Override
     public UserDTO findUserByEmail(String email) {
         User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            return null;
+        }
         return UserDTO.parseUserDTO(user);
     }
 
