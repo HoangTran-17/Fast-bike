@@ -23,16 +23,21 @@ public class UserDTO {
 
     private StatusUser userStatus;
 
-//    private String password;
+    private String password;
 
     private String phoneNumber;
+
+    private Long district;
 
     public UserDTO(Long userId) {
         this.userId = userId;
     }
 
     public static UserDTO parseUserDTO(User user) {
-        return new UserDTO(user.getUserId(), user.getUserName(), user.getEmail(), user.getRole(), user.getUserStatus(), user.getPhoneNumber());
+        return new UserDTO(user.getUserId(), user.getUserName(),
+                user.getEmail(), user.getRole(), user.getUserStatus(),
+                user.getPassword(), user.getPhoneNumber(),
+                user.getDistrict().getDistrictId());
     }
 }
 
