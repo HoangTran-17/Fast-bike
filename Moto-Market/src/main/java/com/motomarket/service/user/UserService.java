@@ -48,10 +48,8 @@ public class UserService implements IUserService{
     }
 
     private User parseUser(UserDTO userDTO) {
-        District district = new District();
-        district.setDistrictId(userDTO.getDistrict());
         return new User(userDTO.getUserId(), userDTO.getUserName(), userDTO.getEmail(),
                 userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword(),
-                userDTO.getPhoneNumber(), district, null);
+                userDTO.getPhoneNumber(), null);
     }
 }

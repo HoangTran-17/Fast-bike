@@ -40,6 +40,10 @@ public class User {
 
 
 // One to many - Many to one
+<<<<<<< HEAD
+=======
+
+>>>>>>> hoang-dev
 
     @OneToMany(mappedBy = "user")
     private List<Post> postList;
