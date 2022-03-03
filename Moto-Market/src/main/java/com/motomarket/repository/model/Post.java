@@ -44,6 +44,10 @@ public class Post {
     @Column(name = "seller_phone_number")
     private String sellerPhoneNumber;
 
+    private String province;
+
+    private String district;
+
     @Column(name = "post_date")
     private Date postDate;
 
@@ -61,11 +65,8 @@ public class Post {
     @JoinColumn(name = "detail_motor_id", nullable = false)
     private DetailMotor detailMotor;
 
-    @ManyToOne
-    @JoinColumn(name = "district_id", nullable = false)
-    private District district;
 
-    public Post( StatusPost statusPost, String title, String modelMotor, String kilometerCount, String description, Double price, String sellerName, String sellerPhoneNumber, Date postDate, Ownership ownership, User user, DetailMotor detailMotor, District district) {
+    public Post( StatusPost statusPost, String title, String modelMotor, String kilometerCount, String description, Double price, String sellerName, String sellerPhoneNumber,String province, String district , Date postDate, Ownership ownership, User user, DetailMotor detailMotor) {
         this.statusPost = statusPost;
         this.title = title;
         this.modelMotor = modelMotor;
@@ -74,11 +75,12 @@ public class Post {
         this.price = price;
         this.sellerName = sellerName;
         this.sellerPhoneNumber = sellerPhoneNumber;
+        this.province = province;
+        this.district = district;
         this.postDate = postDate;
         this.ownership = ownership;
         this.user = user;
         this.detailMotor = detailMotor;
-        this.district = district;
     }
 }
 

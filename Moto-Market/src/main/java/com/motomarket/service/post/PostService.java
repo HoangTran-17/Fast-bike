@@ -1,11 +1,9 @@
 package com.motomarket.service.post;
 
 import com.motomarket.repository.IDetailMotorRepository;
-import com.motomarket.repository.IDistrictRepository;
 import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.DetailMotor;
-import com.motomarket.repository.model.District;
 import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.PostDTO;
@@ -21,8 +19,6 @@ public class PostService implements IPostService{
     private IPostRepository postRepository;
     @Autowired
     private IDetailMotorRepository detailMotorRepository;
-    @Autowired
-    private IDistrictRepository districtRepository;
     @Autowired
     private IUserRepository userRepository;
 
@@ -50,13 +46,13 @@ public class PostService implements IPostService{
     private Post parsePost(PostDTO postDTO) {
         Long detailMotorId = postDTO.getDetailMotorDTO().getDetailMotorId();
         DetailMotor detailMotor = detailMotorRepository.getById(detailMotorId);
-        District district = districtRepository.getById(postDTO.getDistrictDTO().getDistrictId());
         User user = userRepository.getById(postDTO.getUserDTO().getUserId());
 
         return new Post(postDTO.getStatusPost(), postDTO.getTitle(),
                 postDTO.getModelMotor(), postDTO.getKilometerCount(), postDTO.getDescription(),
                 postDTO.getPrice(), postDTO.getSellerName(), postDTO.getSellerPhoneNumber(),
-                postDTO.getPostDate(), postDTO.getOwnership(),user,detailMotor,district);
+                postDTO.getProvince(), postDTO.getDistrict(),
+                postDTO.getPostDate(), postDTO.getOwnership(),user,detailMotor);
     }
 
     @Override

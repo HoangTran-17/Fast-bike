@@ -4,6 +4,8 @@ import com.motomarket.repository.IBrandMotorRepository;
 import com.motomarket.repository.ISeriesMotorRepository;
 import com.motomarket.repository.model.BrandMotor;
 import com.motomarket.repository.model.SeriesMotor;
+import com.motomarket.repository.model.Specifications;
+import com.motomarket.repository.model.TypeMotor;
 import com.motomarket.service.dto.BrandMotorDTO;
 import com.motomarket.service.dto.SeriesMotorDTO;
 import com.motomarket.service.dto.SpecificationsDTO;
@@ -54,7 +56,18 @@ public class SeriesMotorService implements ISeriesMotorService {
 
     @Override
     public SeriesMotorDTO save(SeriesMotorDTO seriesMotorDTO) {
-        return null;
+        SeriesMotor seriesMotor = new SeriesMotor();
+        seriesMotor.setSeriesId(seriesMotorDTO.getSeriesId());
+        seriesMotor.setSeriesName(seriesMotorDTO.getSeriesName());
+        seriesMotor.setCapacity(seriesMotorDTO.getCapacity());
+        seriesMotor.setBrandMotor(seriesMotor.getBrandMotor());
+        TypeMotor typeMotor = TypeMotorDTO.parseTypeMotor(seriesMotorDTO.getTypeMotorDTO());
+        seriesMotor.setTypeMotor(typeMotor);
+        Specifications specifications = SpecificationsDTO.parseSpecifications(seriesMotorDTO.getSpecificationsDTO());
+        seriesMotor.setSpecifications(specifications);
+
+        SeriesMotor newSeriesMotor = seriesMotorRepository.save(seriesMotor);
+        return SeriesMotorDTO.parseSeriesMotorDTO(newSeriesMotor);
     }
 
     @Override

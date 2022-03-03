@@ -21,8 +21,8 @@ public class Image {
     @Column(name = "image_id", nullable = false)
     private Long imageId;
 
-   // image
-
+   @Column(name = "image_name")
+   private String imageName;
 
 
 // One to many - Many to one
