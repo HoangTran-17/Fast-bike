@@ -44,6 +44,10 @@ public class PostDTO {
     @Pattern(regexp = "(0[3|5|7|8|9])+([0-9]{8})", message = "Vui lòng nhập đúng số điện thoại! (VD: 0987654321)")
     private String sellerPhoneNumber;
 
+    private String province;
+
+    private  String district;
+
     @NotBlank
     private Date postDate;
 
@@ -53,17 +57,15 @@ public class PostDTO {
 
     private DetailMotorDTO detailMotorDTO;
 
-    private DistrictDTO districtDTO;
-
     public static PostDTO parsePostDTO(Post post) {
         UserDTO userDTO = UserDTO.parseUserDTO(post.getUser());
         DetailMotorDTO detailMotorDTO = DetailMotorDTO.parseDetailMotorDTO(post.getDetailMotor());
-        DistrictDTO districtDTO = DistrictDTO.parseDistrictDTO(post.getDistrict());
+
 
         return new PostDTO(post.getPostId(), post.getStatusPost(), post.getTitle(), post.getModelMotor(),
                 post.getKilometerCount(), post.getDescription(), post.getPrice(),
-                post.getSellerName(), post.getSellerPhoneNumber(), post.getPostDate(), post.getOwnership(),
-                userDTO,detailMotorDTO, districtDTO);
+                post.getSellerName(), post.getSellerPhoneNumber(), post.getProvince(), post.getDistrict(), post.getPostDate(), post.getOwnership(),
+                userDTO,detailMotorDTO);
     }
 
 }

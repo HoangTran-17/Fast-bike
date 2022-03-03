@@ -53,7 +53,7 @@ public class SpecificationsDTO {
 
     private String rearTire;
 
-    SpecificationsDTO parseSpecificationsDTO(Specifications specifications) {
+    public static SpecificationsDTO parseSpecificationsDTO(Specifications specifications) {
         return new SpecificationsDTO(specifications.getSpecifications_id(),
                 specifications.getEngine(), specifications.getBootSystem(),
                 specifications.getCompressionRatio(), specifications.getCoolingSystem(),
@@ -65,7 +65,7 @@ public class SpecificationsDTO {
                 specifications.getFrontTire(), specifications.getRearTire());
     }
 
-    public Specifications parseSpecifications(SpecificationsDTO specificationsDTO) {
+    public static Specifications parseSpecifications(SpecificationsDTO specificationsDTO) {
         return new Specifications(specificationsDTO.getSpecifications_id(), specificationsDTO.getEngine(),
                 specificationsDTO.getBootSystem(), specificationsDTO.getCompressionRatio(),
                 specificationsDTO.getCoolingSystem(), specificationsDTO.getCapacity(),

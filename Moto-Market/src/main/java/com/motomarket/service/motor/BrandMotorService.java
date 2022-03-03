@@ -38,13 +38,10 @@ public class BrandMotorService implements IBrandMotorService {
 
     @Override
     public BrandMotorDTO save(BrandMotorDTO brandMotorDTO) {
-//        BrandMotor brandMotor = new BrandMotor();
-//
-//        brandMotor.setBrandId(brandMotorDTO.getBrandId());
-//        brandMotor.setBrandName(brandMotorDTO.getBrandName());
-//
-//        brandMotorRepository.save(brandMotor);
-
+        BrandMotor brandMotor = new BrandMotor();
+        brandMotor.setBrandId(brandMotorDTO.getBrandId());
+        brandMotor.setBrandName(brandMotorDTO.getBrandName());
+        brandMotorRepository.save(brandMotor);
         return brandMotorDTO;
     }
 
