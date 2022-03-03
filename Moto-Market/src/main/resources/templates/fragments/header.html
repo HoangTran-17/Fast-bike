@@ -6,7 +6,7 @@
             </figure>
         <div class="header-content">
             <div class="top">
-                <div class="menu-right">
+                <div class="menu-right" style="margin-left: 900px">
                     <ul class="account dropdown">
                         <li>
                             <a title="Đăng nhập" href="https://www.webike.vn/sign-in.html" class="btn-sign-in">
@@ -21,21 +21,21 @@
                         </li>
                         <ul class="dropdown-menu">
                             <li class="login">
-                                <a title="Đăng nhập" href="https://www.webike.vn/sign-in.html"
+                                <a title="Đăng nhập" href="/signin"
                                    class="btn btn-block btn-danger btn-sm btn-login">Đăng nhập</a>
-                                <a title="Đăng ký" href="https://www.webike.vn/sign-up.html"
+                                <a title="Đăng ký" href="/signup"
                                    class="btn btn-block btn-link btn-sm btn-signup">Đăng ký</a>
                             </li>
-                            <li>
-                                <a title="Dịch vụ khach hang"
-                                   href="https://shop.webike.vn/wp_helpdesk/customer-account/"
-                                   target="_blank">Dịch vụ khách hàng</a>
-                            </li>
-                            <li>
-                                <a title="Hỗ trợ khach hang"
-                                   href="https://shop.webike.vn/wp_helpdesk/">Hỗ trợ khách
-                                    hàng</a>
-                            </li>
+<!--                            <li>-->
+<!--                                <a title="Dịch vụ khach hang"-->
+<!--                                   href="https://shop.webike.vn/wp_helpdesk/customer-account/"-->
+<!--                                   target="_blank">Dịch vụ khách hàng</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a title="Hỗ trợ khach hang"-->
+<!--                                   href="https://shop.webike.vn/wp_helpdesk/">Hỗ trợ khách-->
+<!--                                    hàng</a>-->
+<!--                            </li>-->
                         </ul>
                     </ul>
                 </div>
@@ -45,16 +45,18 @@
                     <div class="button-area">
                         <label class="select-search">
                             <select id="type_search">
-                                <option value='1'>T&igrave;m xe</option>
-                                <option value='2'>T&igrave;m phụ tùng</option>
+                                <option value='1'>Tìm xe</option>
+                                <option value='2'>Tìm phụ tùng</option>
                             </select>
                         </label>
                         <button type="button" id="btn_submit">
-                            <i class="icon icon-search-white"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
                         </button>
                     </div>
                     <div class="search-input">
-                        <input class="txt-search" id="keyword" placeholder="Nhập từ kh&oacute;a t&igrave;m kiếm"
+                        <input class="txt-search" id="keyword" placeholder="Nhập từ khóa tìm kiếm"
                                type="text" value="" name="q">
                         <label id="div_loading " class="loading"></label>
                         <input id="m_code" type="hidden" value="" name="m_code" />
@@ -64,8 +66,11 @@
 
                 <ul class="info-right">
                     <li>
-                        <a href="https://www.webike.vn/cho-xe-may/dang-tin-ban-xe.html" class="btn-header">
-                            <i class="icon icon-post"></i>
+                        <a href="/post" class="btn-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-journal" >
+                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                            </svg>
                           Đăng bán xe
                         </a>
                     </li>

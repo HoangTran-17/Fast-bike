@@ -98,19 +98,7 @@
 <div id="main">
     <div th:replace="~{fragments/header :: header}"></div>
     <section class="wrapper create-product">
-        <input type="hidden" id="post_data_series" value="https://www.webike.vn/post-data-series"/>
-        <input type="hidden" id="post_data_product_odo" value="https://www.webike.vn/post-data-product-odo"/>
-        <input type="hidden" id="sign_up_get_firebase" value="https://www.webike.vn/authentication-sms.html"/>
-        <input type="hidden" id="manage_product" value="https://www.webike.vn/account/manage-product.html"/>
-
-        <input type="hidden" id="customer_id" value=""/>
-        <input type="hidden" id="ajax_check_contact_for_post_bike"
-               value="https://www.webike.vn/ajax/check_contact_for_post_bike.json"/>
-        <input type="hidden" id="edit_profile_get" value="https://www.webike.vn/account/edit-profile.html"/>
-        <form method="POST" action="https://www.webike.vn/cho-xe-may/dang-tin-ban-xe.html" accept-charset="UTF-8"
-              name="signup_form" id="product-editor" enctype="multipart/form-data"><input name="_token" type="hidden"
-                                                                                          value="fsMZCcHkbYAJErpViiBBJhuXk47mIxVqOiMApzQY">
-
+        <form method="POST"  accept-charset="UTF-8" name="signup_form" id="product-editor" th:action="@{/post}" th:object="${post}" enctype="multipart/form-data">
             <div class="container">
                 <section>
                     <ul class="breadcrumb">
@@ -120,7 +108,6 @@
                                property="item" typeof="WebPage">Chợ xe may</a>
                             <meta property="position" content="1">
                         </li>
-
                         <li>
                             <span property="name">Đăng tin bán xe</span>
                             <meta property="position" content="1">
@@ -132,7 +119,7 @@
                     <div class="col-left">
                         <div class="block bg-white">
                             <div class="title-h1">
-                                <h1>Đăng ban xe của bạn</h1>
+                                <h1>Đăng bán xe của bạn</h1>
                             </div>
                             <div class="sub-title">
                                 <p>Điền đầy đủ thông tin giúp khách hàng dễ tìm xe</p>
@@ -222,7 +209,7 @@
                                             Xe bạn đang chọn:
                                         </label>
                                     </div>
-                                    <div class="item-center" id="temp_description"></div>
+                                    <input type="text" class="item-center" readonly id="temp_description"  th:field="*{modelMotor}"/>
                                     <div class="item-right"></div>
                                 </div>
 
@@ -233,9 +220,9 @@
                                             <span class="require">*</span>
                                         </label>
                                     </div>
-                                    <select name="" id="">
-                                        <option value="1">Chính chủ</option>
-                                        <option value="2">Không Chính chủ</option>
+                                    <select name="ownershipSelect" id="ownershipSelect">
+                                        <option value="0">Chính chủ</option>
+                                        <option value="1">Không Chính chủ</option>
                                     </select>
                                 </div>
                                 <div class="items">
@@ -247,27 +234,27 @@
                                     </div>
                                     <div class="item-center">
                                         <div class="select2-style select_odo">
-                                            <select placeholder="Đa đi" autocomplete="1" data-hide-search="1"
-                                                    id="product_odo" class="form-control" required="true"
+                                            <select placeholder="Đa đi"  autocomplete="1" data-hide-search="1"
+                                                    id="product_odo" class="form-control" th:field="*{kilometerCount}" required="true"
                                                     name="odo_code">
-                                                <option value="" selected="selected"></option>
-                                                <option value="1">0 - 4 999</option>
-                                                <option value="2">5 000 - 9 999</option>
-                                                <option value="3">10 000 - 14 999</option>
-                                                <option value="4">15 000 - 19 999</option>
-                                                <option value="5">20 000 - 24 999</option>
-                                                <option value="6">25 000 - 29 999</option>
-                                                <option value="7">30 000 - 34 999</option>
-                                                <option value="8">35 000 - 39 999</option>
-                                                <option value="9">40 000 - 44 999</option>
-                                                <option value="10">45 000 - 49 999</option>
-                                                <option value="11">50 000 - 59 999</option>
-                                                <option value="12">60 000 - 69 999</option>
-                                                <option value="13">70 000 - 79 999</option>
-                                                <option value="14">80 000 - 89 999</option>
-                                                <option value="15">90 000 - 99 999</option>
-                                                <option value="16">&gt; 100 000</option>
-                                                <option value="0">Không rõ</option>
+                                                <option value="" selected hidden>Đã đi</option>
+                                                <option value="0 - 4 999">0 - 4 999</option>
+                                                <option value="5 000 - 9 999">5 000 - 9 999</option>
+                                                <option value="10 000 - 14 999">10 000 - 14 999</option>
+                                                <option value="15 000 - 19 999">15 000 - 19 999</option>
+                                                <option value="20 000 - 24 999">20 000 - 24 999</option>
+                                                <option value="25 000 - 29 999">25 000 - 29 999</option>
+                                                <option value="30 000 - 34 999">30 000 - 34 999</option>
+                                                <option value="35 000 - 39 999">35 000 - 39 999</option>
+                                                <option value="40 000 - 44 999">40 000 - 44 999</option>
+                                                <option value="45 000 - 49 999">45 000 - 49 999</option>
+                                                <option value="50 000 - 59 999">50 000 - 59 999</option>
+                                                <option value="60 000 - 69 999">60 000 - 69 999</option>
+                                                <option value="70 000 - 79 999">70 000 - 79 999</option>
+                                                <option value="80 000 - 89 999">80 000 - 89 999</option>
+                                                <option value="90 000 - 99 999">90 000 - 99 999</option>
+                                                <option value="&gt; 100 000">&gt; 100 000</option>
+                                                <option value="Không rõ">Không rõ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -283,9 +270,9 @@
                                     </div>
                                     <div class="item-center">
                                         <div class="input-style1">
-                                            <input required="true" class="" id="title-post" type="text"
+                                            <input required="true"   class="" id="title-post" type="text"
                                                    name="product_description"
-                                                   maxlength="100" value="">
+                                                   maxlength="100" value="" th:field="*{title}">
                                         </div>
                                     </div>
                                     <div class="item-right"><label class="msg_warning hide"></label></div>
@@ -301,7 +288,7 @@
                                         <div class="textarea-style1">
                                                 <textarea required="true"
                                                           name="product_other_description" rows="5"
-                                                          class="form-control"></textarea>
+                                                          class="form-control" th:field="*{description}"></textarea>
                                         </div>
                                         <label class="msg_warning msg_other_desc hide"></label>
                                     </div>
@@ -319,7 +306,7 @@
                                         <div class="input-style1 input_price">
                                             <div class="unit"><span>đ</span></div>
                                             <input required="true" type="text" id="product_price_tmp"
-                                                   name="product_price_tmp" value="">
+                                                   name="product_price_tmp" value="" th:field="*{price}" >
                                             <input class="" type="hidden" name="product_price" value="">
                                         </div>
                                         <label class="msg_warning hide"></label>
@@ -380,7 +367,8 @@
                                         <a href="#" data-select="Chọn hình" data-remove="Xóa hình">
                                             Thêm ảnh
                                         </a>
-                                        <input class="" id="ip-upload-multi" type="file" multiple accept="image/*">
+                                        <input class="" id="ip-upload-multi" name="ip-upload-multi" type="file" multiple minlength="5"
+                                               maxlength="10" accept="image/*">
                                     </label>
                                     <p class="errmsg help-block small error_photo_0"></p>
                                 </div>
@@ -405,7 +393,7 @@
                                     </div>
                                     <div class="item-center ">
                                         <div class="input-style1">
-                                            <input required="true" type="text" name="contact_name" value="">
+                                            <input required="true" type="text" th:field="*{sellerName}"  name="contact_name" value="">
                                         </div>
                                     </div>
                                     <div class="item-right"><label class="msg_warning hide"></label></div>
@@ -421,7 +409,7 @@
                                     <div class="item-center ">
                                         <div class="input-style1">
                                             <input required="true" type="text" name="contact_phone"
-                                                   id="contact_phone" value="">
+                                                   id="contact_phone" value="" th:field="*{sellerPhoneNumber}" >
                                         </div>
                                     </div>
                                 </div>
@@ -436,8 +424,8 @@
                                     <div class="item-center">
                                         <div class="select2-style">
                                             <select placeholder="Khu vực" autocomplete="1" id="province_code"
-                                                    class="form-control" required="true" name="province_code">
-
+                                            class="form-control" required="true" name="province_code" th:field="*{province}" >
+                                                <option value="" disabled selected hidden>Tỉnh/Thành phố</option>
                                             </select>
                                         </div>
                                     </div>
@@ -453,52 +441,13 @@
                                     </div>
                                     <div class="item-center">
                                         <div class="select2-style">
-                                            <select placeholder="Quận/huyện" autocomplete="1" id="district_code"
-                                                    class="form-control" required="true" name="district_code">
-
+                                            <select  autocomplete="1" id="district_code"
+                                                    class="form-control" name="district_code" th:field="*{district}" >
+                                                <option value="" selected hidden>Vui Lòng chọn tỉnh/thành</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="item-right"><label class="msg_warning hide"></label></div>
-                                </div>
-
-                                <div class="items pass_field hide">
-                                    <div class="item-left">
-                                        <label>
-                                            Mật khẩu
-                                            <span class="require">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="item-center">
-                                        <div class="input-style1">
-                                            <input type="password" name="passwd">
-                                        </div>
-                                    </div>
-                                    <div class="item-right"><label class="msg_warning hide"></label></div>
-                                </div>
-
-                                <div class="items pass_field hide">
-                                    <div class="item-left">
-                                        <label>
-                                            Xác nhận mật khẩu
-                                            <span class="require">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="item-center">
-                                        <div class="input-style1">
-                                            <input type="password" name="confirmPasswd">
-                                        </div>
-                                    </div>
-                                    <div class="item-right"><label class="msg_warning hide"></label></div>
-                                </div>
-
-                                <div class="items pass_field hide">
-                                    <div class="item-left"></div>
-                                    <div class="item-center">
-                                        <p class="msg-notice text-orange">Nhập mật khẩu để tạo tài khoản đăng xe.
-                                        </p>
-                                    </div>
-                                    <div class="item-right"></div>
                                 </div>
                             </div>
                         </div>
@@ -510,8 +459,6 @@
                                             class="btn btn-gray btn-post-bike">Đóng
                                     </button>
                                 </div>
-
-
                                 <div class="btn_post">
                                     <button type="submit" id="submit_btn" class="btn btn-danger btn-post-bike">Đăng
                                         xe
@@ -519,7 +466,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-right inner-wrap-sticky">
                         <div class="block bg-white">
@@ -548,7 +494,7 @@
                         </div>
 
                         <div class="block">
-                            <div class="bg-light-orange block-fixed hide" id="block_notice">
+                            <div class="bg-light-orange block-fixed" id="block_notice">
                                 <div class="items-notice title ">
                                     <span class="s-title text-orange">Để bán nhanh hơn!</span>
                                 </div>
@@ -585,57 +531,8 @@
         <div class="layout" id="layout"></div>
     </section>
 
+    <div th:replace="~{fragments/footer :: footer}"></div>
     <button type="button" id="back-to-top">PAGE TOP</button>
-    <div class="chat-box">
-            <span class="btn-open-chatbox">
-                <i class="icon icon-chat-orange"></i>
-                Chat
-            </span>
-        <ul>
-            <li>
-                <a href="https://zalo.me/654506731362465430?src=qr&f=1" class="btn btn-block btn-zalo"
-                   target="_blank">
-                    <i class="icon icon-zalo"></i>
-                    Zalo Webike chat
-                </a>
-            </li>
-            <li>
-                <a href="https://m.me/webike.vn" class="btn btn-block btn-facebook" target="_blank">
-                    <i class="icon icon-messenger"></i>
-                    Facebook Messenger
-                </a>
-            </li>
-        </ul>
-    </div>
-    <footer>
-        <div class="menu" style="height: 110px">
-            <div class="container clearfix">
-                <div style="color: white">
-                    <h2 style="margin-top: -30px">Thông tin liên hệ</h2>
-                    <ul class="basic-info">
-                        <li>
-                            <address>Lầu 4, Tòa nhà Đại học Phú Xuân, số 28 Nguyễn Tri Phương, P. Phú Hội, Tp. Huêd,
-                                Thừa Thiên Huế.
-                            </address>
-                        </li>
-                        <li>
-                            <time>Giờ lam việc: Thứ 2 - 6: 8h00 - 17h30</time>
-
-                        </li>
-                        <li>
-                            <p class="mail">
-                                Email: <a href="fastbike.tht@gmail.com">fastbike.tht@gmail.com</a>
-                            </p>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <p class="container">&copy; 2022 FastBike Vietnam. All rights reserved. Developer By C0821 Team</p>
-        </div>
-    </footer>
     <button type="button" id="btn-back-to-top">
         Page top
     </button>
@@ -652,19 +549,13 @@
 </script>
 
 
-<script type="text/javascript">
-    deferimg('img.lazy')
-    var IMAGE_BIKE_LAZY = '/frontend/img/common/product_default.jpg?152472729920200827';
-</script>
+
 <script src="/frontend/js/jquery-upload.js?152472729920200827"></script>
 
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="/frontend/js/ie-fixes/jquery.xdr-transport.js?152472729920200827"></script>
 <![endif]-->
 
-<script type="text/javascript">
-    var IMAGE_BIKE_LAZY = '/frontend/img/common/product_default.jpg?152472729920200827';
-</script>
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="/frontend/vendor/OwlCarousel2-2.3.4/dist/owl.carousel.min.js?158926651720200827"></script>
@@ -712,12 +603,20 @@
         })
     }
 
+    handlerClickBrand();
+    handlerClickSeries();
+    handlerClickYear();
+    handlerClickColor();
 
     function handlerClickBrand() {
         $(".span-brand").on("click", function () {
+            $("#list-brand-filter").prop('required', false)
+            $("#list-series-filter").prop('required', true)
+            $("#list-year-filter").prop('required', true)
+            $("#list-color-filter").prop('required', true)
             var dataId = $(this).attr('data-id')
             brand = $(this).text();
-            $("#temp_description").text(brand);
+            $("#temp_description").val(brand);
             $.ajax({
                 type: "GET",
                 headers: {
@@ -732,9 +631,9 @@
                                         <span data-id="${item.seriesId}" class="span-series">${item.seriesName}</span>
                                  </label> </li>`
                 })
-                $('#filter-series-list').replaceWith(`<ul id="filter-series-list" class="custom_scroll">${str}</ul>`);
-                $('#filter-year-list').replaceWith(`<ul id="filter-year-list" class="custom_scroll"></ul>`);
-                $('#filter-color-list').replaceWith(`<ul id="filter-color-list" class="custom_scroll"></ul>`);
+                $('#filter-series-list').html(str);
+                $('#filter-year-list').html(` `);
+                $('#filter-color-list').html(` `);
                 handlerClickSeries();
             }).fail(function () {
 
@@ -744,9 +643,12 @@
 
     function handlerClickSeries() {
         $(".span-series").on("click", function () {
+            $("#list-series-filter").prop('required', false)
+            $("#list-year-filter").prop('required', true)
+            $("#list-color-filter").prop('required', true)
             var dataId = $(this).attr('data-id')
             series = $(this).text();
-            $("#temp_description").text(brand + " " + series);
+            $("#temp_description").val(brand + " " + series);
 
             $.ajax({
                 type: "GET",
@@ -763,7 +665,7 @@
                                         <span data-id="${item.modelYearId}" class="span-year">${item.modelYearName}</span>
                                  </label> </li>`
                 })
-                $('#filter-year-list').replaceWith(`<ul id="filter-year-list" class="custom_scroll">${str}</ul>`);
+                $('#filter-year-list').html(str);
                 handlerClickYear();
             }).fail(function () {
 
@@ -775,9 +677,11 @@
 
     function handlerClickYear() {
         $(".span-year").on("click", function () {
+            $("#list-year-filter").prop('required', false)
+            $("#list-color-filter").prop('required', true)
             var dataId = $(this).attr('data-id')
             year = $(this).text();
-            $("#temp_description").text(brand + " " + series + " " + year);
+            $("#temp_description").val(brand + " " + series + " " + year);
 
             $.ajax({
                 type: "GET",
@@ -794,7 +698,7 @@
                                         <span data-id="${item.colorId}" class="span-color">${item.colorName}</span>
                                  </label> </li>`
                 })
-                $('#filter-color-list').replaceWith(`<ul id="filter-color-list" class="custom_scroll">${str}</ul>`);
+                $('#filter-color-list').html(str);
                 handlerClickColor();
             }).fail(function () {
 
@@ -805,10 +709,11 @@
 
     function handlerClickColor() {
         $(".span-color").on("click", function () {
+            $("#list-color-filter").prop('required', false)
             var dataId = $(this).attr('data-id')
             let color = $(this).text();
-            $("#temp_description").text(brand + " " + series + " " + year + " " + color);
-            let nameMoto = $("#temp_description").text();
+            $("#temp_description").val(brand + " " + series + " " + year + " " + color);
+            let nameMoto = $("#temp_description").val();
             $("#title-post").val(nameMoto);
         })
     }
@@ -821,7 +726,7 @@
             url: "https://vapi.vnappmob.com/api/province",
         }).done(function (data) {
             $.each(data.results, (index, item) => {
-                $('#province_code').append(` <option value="${item.province_id}">${item.province_name}</option>`);
+                $('#province_code').append(` <option value="${item.province_name}" data-id="${item.province_id} ">${item.province_name}</option>`);
             })
             hanlderOnchangeProvince()
         }).fail(function () {
@@ -829,23 +734,22 @@
     }
 
     function hanlderOnchangeProvince() {
-        $('#province_code').on('change', function () {
-            let provinceId = $(this).val();
+        $('#province_code').change(function(){
+           let provinceId = $(this).find(':selected').attr('data-id')
             let str = "";
             $.ajax({
                 type: "GET",
                 url: "https://vapi.vnappmob.com/api/province/district/" + provinceId,
             }).done(function (data) {
                 $.each(data.results, (index, item) => {
-                    str += `<option value="${item.district_id}">${item.district_name}</option>`
+                    str += `<option value="${item.district_name}">${item.district_name}</option>`
                 })
-                $('#district_code').replaceWith(` <select placeholder="Quận/huyện" autocomplete="1" id="district_code"
-                                                    class="form-control" required="true" name="district_code">${str}</select>`);
+                $('#district_code').html(str);
             }).fail(function () {
             })
         });
-    }
 
+    }
 
     //--------------------------------- Filter select Moto
     $("#list-brand-filter").on("keyup", function () {
@@ -875,9 +779,18 @@
         });
     });
 
-//    Upload image and preview JS
+    //  --------------------------  Upload image and preview JS
+    var filesBuffer = new DataTransfer();
+    let allFile = filesBuffer.items;
+
+    function addFile() {
+        var newFile = document.getElementById("ip-upload-multi").files;
+        allFile.add(newFile[newFile.length - 1]);
+        document.getElementById("ip-upload-multi").files = filesBuffer.files;
+        previewImages();
+    }
+
     function previewImages() {
-        var preview = document.querySelector('#preview-img');
         if (this.files) {
             [].forEach.call(this.files, readAndPreview);
         }
@@ -887,20 +800,19 @@
                 return alert(file.name + " is not an image");
             } // else..
             var reader = new FileReader();
-            reader.addEventListener("load", function() {
-                var image = new Image();
-                image.height = 100;
-                image.title  = file.name;
-                image.src    = this.result;
-                console.log(this.result)
-                preview.append(`<div class="item-photo" data-index="0"><label class="upload has-photo">
-                                        <figure class="thumbnail placeholder loaded"><img
-                                                src="${this.result}"
-                                                class="static"  rel="nofollow"><em
-                                                class="icon"></em></figure>
-                                        <a href="javascript:void(0)" data-select="Chọn hình" data-remove="Xóa hình">Xóa
-                                            hình</a></label>
-                                    </div>`);
+            reader.addEventListener("load", function () {
+                let src = this.result;
+                addFile();
+                let length = document.getElementById("ip-upload-multi").files.length;
+                $('#preview-img').append(`<div class="item-photo item-img"  data-id="${length - 1}" data-index="0">
+                                           <label class="upload has-photo">
+                                            <figure class="thumbnail placeholder loaded">
+                                           <img src="${src}" class="static"   rel="nofollow">
+                                            </figure>
+                                        </label>
+                                        <a href="javascript:void(0)" onclick="removeImage(${length - 1})"   class="remove-img-btn" >Xóa hình</a>
+                                    </div>`)
+                console.log(length)
             });
             reader.readAsDataURL(file);
         }
@@ -908,6 +820,41 @@
 
     document.querySelector('#ip-upload-multi').addEventListener("change", previewImages);
 
+    // document.querySelector('#ip-upload-multi').addEventListener("change",addFile);
+    function removeImage(id) {
+        $('.item-photo').filter("[data-id='" + id + "']").remove();
+        removeFile(Number(id))
+        var els = document.getElementsByClassName("remove-img-btn");
+        let itemimg = document.getElementsByClassName("item-img");
+
+        for (var i = id; i < els.length; i++) {
+            // let ids = i-1;
+            $(els[i]).attr("onclick", "removeImage(" + i + ")");
+            $(itemimg[i]).attr("data-id", "" + i + "");
+        }
+    }
+
+
+    function removeFile(index) {
+        let attachments = document.getElementById("ip-upload-multi").files;
+        let fileBuffer = new DataTransfer();
+        for (let i = 0; i < attachments.length; i++) {
+            if (index !== i) {
+                fileBuffer.items.add(attachments[i]);
+            }
+        }
+        for (let i = 0; i < attachments.length; i++) {
+            if (index == i) {
+                allFile.remove(i);
+            }
+        }
+        document.getElementById("ip-upload-multi").files = fileBuffer.files;
+        let length = document.getElementById("ip-upload-multi").files.length;
+        if (length === 0) {
+            fileBuffer.items.clear()
+            filesBuffer.items.clear()
+        }
+    }
 
 
 </script>

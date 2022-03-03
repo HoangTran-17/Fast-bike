@@ -1,9 +1,6 @@
 package com.motomarket.repository.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,6 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "image")
+@ToString
 public class Image {
 
     @Id

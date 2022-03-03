@@ -19,12 +19,14 @@ public class LoginController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/")
+
+    @GetMapping("/signin")
     public ModelAndView toLoginView(){
         ModelAndView modelAndView = new ModelAndView("/loginPage/login");
         modelAndView.addObject("user",new UserDTO());
         return modelAndView;
     }
+
 
     @GetMapping("/signup")
     public ModelAndView toSignUpView(){
@@ -60,15 +62,15 @@ public class LoginController {
        return modelAndView;
     }
 
-    @GetMapping("/test")
-    public ModelAndView testController(){
-        final String uri = "https://vapi.vnappmob.com/api/province/district/44";
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        System.out.println(result);
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }
+//    @GetMapping("/test")
+//    public ModelAndView testController(){
+//        final String uri = "https://vapi.vnappmob.com/api/province/district/44";
+//        RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+//        System.out.println(result);
+//        ModelAndView modelAndView = new ModelAndView("index");
+//        return modelAndView;
+//    }
 
 
 
