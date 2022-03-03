@@ -49,7 +49,6 @@ public class Post {
 
     private Ownership ownership;
 
-
 // One to many - Many to one
     @OneToMany(mappedBy = "posts")
     private List<Image> imageList;
