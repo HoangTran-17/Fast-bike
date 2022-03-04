@@ -50,7 +50,7 @@ public class PostController {
     @PostMapping("post")
     public ModelAndView handlePost(@ModelAttribute Post post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files) throws IOException {
         Date date = new Date();
-        post.setStatusPost(StatusPost.PUBLIC);
+        post.setStatusPost(StatusPost.WAITING);
         post.setPostDate(date);
         if (ownershipSelect == 0) {
             post.setOwnership(Ownership.OWNERSHIP);

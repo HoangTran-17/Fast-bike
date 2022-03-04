@@ -25,7 +25,10 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/login/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/login/css/main.css">
-<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="/frontend/css/error.css">
+
+	<!--===============================================================================================-->
 </head>
 <body>
 	
@@ -70,9 +73,16 @@
 					</div>
 				</form>
 			</div>
+
+<!--			<div class="warning" th:if="${message}" th:utext="${message}"-->
+<!--				 style="color:red;font-style:italic; margin-right: -500px; margin-top: -450px; margin-left: 100px; z-index: 999">-->
+<!--			</div>-->
 		</div>
-		<div th:if="${message}" th:utext="${message}"
-			 style="color:red;font-style:italic;">
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" style="z-index: 1; position: absolute">
+			<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 	</div>
 
