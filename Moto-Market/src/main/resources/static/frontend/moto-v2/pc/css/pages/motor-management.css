@@ -1,0 +1,14 @@
+.create-product .filter-model .filter-col .f-add {
+    width: 100%;
+}
+
+.create-product .filter-model .filter-col .f-add {
+    margin: 8px 0 8px 0;
+}
+
+.create-product .filter-model .input-add {
+    position: relative;
+    padding: 7px 16px;
+    align-items: center;
+    display: flex;
+}
