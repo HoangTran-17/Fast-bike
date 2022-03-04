@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface IImageRepository extends JpaRepository<Image, Long> {
-//    List<Image> findAllByPost(Post post);
+    List<Image> findAllByPost(Post post);
 }

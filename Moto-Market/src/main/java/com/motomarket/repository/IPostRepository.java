@@ -24,6 +24,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
 //    List 12 records latest
     List<Post> findTop12ByOrderByPostIdDesc();
 
+    Page<Post> findAllByModelMotorBefore(Pageable pageable, String modelMotor);
+
 
 
 

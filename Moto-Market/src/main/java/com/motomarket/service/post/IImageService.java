@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface IImageService extends IGeneralService<ImageDTO> {
-//    List<ImageDTO> findAllByPostDTO(PostDTO postDTO);
+    List<ImageDTO> findAllByPostDTO(PostDTO postDTO);
 
     Image saveImage(Image image);
 }
