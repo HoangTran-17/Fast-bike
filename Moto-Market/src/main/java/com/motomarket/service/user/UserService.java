@@ -30,6 +30,11 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public User getUserById(Long id) {
+        return userRepository.getById(id);
+    }
+
+    @Override
     public UserDTO save(UserDTO userDTO) {
         User newUser = userRepository.save(parseUser(userDTO));
         return UserDTO.parseUserDTO(newUser);

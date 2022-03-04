@@ -52,10 +52,12 @@ public class LoginController {
            if (userDTO.getPassword().equals(user.getPassword())){
                modelAndView.setViewName("index");
            } else {
+               modelAndView.addObject("message", "Đăng nhập không thành công vui lòng thử lại!");
                modelAndView.addObject("user", new UserDTO());
                modelAndView.setViewName("/loginPage/login");
            }
        } else {
+           modelAndView.addObject("message", "Đăng nhập không thành công vui lòng thử lại!");
            modelAndView.addObject("user", new UserDTO());
            modelAndView.setViewName("/loginPage/login");
        }

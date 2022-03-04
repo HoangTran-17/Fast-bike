@@ -1,9 +1,8 @@
 package com.motomarket.controlller;
 
-import com.motomarket.repository.model.Image;
-import com.motomarket.repository.model.Ownership;
-import com.motomarket.repository.model.Post;
-import com.motomarket.repository.model.StatusPost;
+import com.motomarket.repository.model.*;
+import com.motomarket.service.motor.IDetailMotorService;
+import com.motomarket.service.post.IImageService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,14 @@ public class PostController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IImageService imageService;
+
+    @Autowired
+    private IDetailMotorService detailMotorService;
+
     @GetMapping("post")
-    public ModelAndView toPostPage(){
+    public ModelAndView toPostPage() {
         ModelAndView modelAndView = new ModelAndView("new-post");
         modelAndView.addObject("post", new Post());
         return modelAndView;
@@ -47,20 +52,24 @@ public class PostController {
         Date date = new Date();
         post.setStatusPost(StatusPost.PUBLIC);
         post.setPostDate(date);
-        if (ownershipSelect == 0){
+        if (ownershipSelect == 0) {
             post.setOwnership(Ownership.OWNERSHIP);
         } else {
             post.setOwnership(Ownership.NO_OWNERSHIP);
         }
+        User user = userService.getUserById(1L);
+        post.setUser(user);
+        DetailMotor detailMotor = detailMotorService.getDetailMotorById(2L);
+        post.setDetailMotor(detailMotor);
+        Post newPost = postService.savePost(post);
         for (MultipartFile file : files) {
             UUID uuidCode = UUID.randomUUID();
             Image image = new Image();
             image.setImageName(uuidCode.toString());
-            image.setPosts(post);
+            image.setPosts(newPost);
             file.transferTo(new File(rootPath + "/" + uuidCode+".png"));
+            imageService.saveImage(image);
         }
-//        post.setUser(userService.getById(1L));
-        System.out.println(post);
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }

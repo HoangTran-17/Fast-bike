@@ -43,6 +43,11 @@ public class PostService implements IPostService{
         return newPostDTO;
     }
 
+    @Override
+    public Post savePost(Post post) {
+        return postRepository.save(post);
+    }
+
     private Post parsePost(PostDTO postDTO) {
         Long detailMotorId = postDTO.getDetailMotorDTO().getDetailMotorId();
         DetailMotor detailMotor = detailMotorRepository.getById(detailMotorId);

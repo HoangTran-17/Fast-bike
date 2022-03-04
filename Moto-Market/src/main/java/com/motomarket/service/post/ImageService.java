@@ -37,18 +37,23 @@ public class ImageService implements IImageService {
     }
 
     @Override
+    public Image saveImage(Image image) {
+        return imageRepository.save(image);
+    }
+
+    @Override
     public void remove(Long id) {
 
     }
 
-    @Override
-    public List<ImageDTO> findAllByPostDTO(PostDTO postDTO) {
-        Post post = new Post();
-        post.setPostId(post.getPostId());
-        List<ImageDTO> imageDTOList = new ArrayList<>();
-        imageRepository.findAllByPost(post).forEach(image -> {
-            imageDTOList.add(ImageDTO.parseImageDTO(image));
-        });
-        return imageDTOList;
-    }
+//    @Override
+//    public List<ImageDTO> findAllByPostDTO(PostDTO postDTO) {
+//        Post post = new Post();
+//        post.setPostId(post.getPostId());
+//        List<ImageDTO> imageDTOList = new ArrayList<>();
+//        imageRepository.findAllByPost(post).forEach(image -> {
+//            imageDTOList.add(ImageDTO.parseImageDTO(image));
+//        });
+//        return imageDTOList;
+//    }
 }

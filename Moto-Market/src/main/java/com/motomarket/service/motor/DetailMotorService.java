@@ -49,6 +49,11 @@ public class DetailMotorService implements IDetailMotorService{
     }
 
     @Override
+    public DetailMotor getDetailMotorById(Long id) {
+        return detailMotorRepository.getById(id);
+    }
+
+    @Override
     public DetailMotorDTO save(DetailMotorDTO detailMotorDTO) {
         return null;
     }
