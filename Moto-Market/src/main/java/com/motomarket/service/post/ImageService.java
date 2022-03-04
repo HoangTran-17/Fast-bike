@@ -51,7 +51,7 @@ public class ImageService implements IImageService {
         Post post = new Post();
         post.setPostId(post.getPostId());
         List<ImageDTO> imageDTOList = new ArrayList<>();
-        imageRepository.findAllByPost(post).forEach(image -> {
+        imageRepository.findAllByPosts(post).forEach(image -> {
             imageDTOList.add(ImageDTO.parseImageDTO(image));
         });
         return imageDTOList;

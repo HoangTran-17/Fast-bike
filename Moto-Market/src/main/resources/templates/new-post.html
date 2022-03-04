@@ -178,7 +178,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="" class="model_year_tmp" value="">
+                                    <input type="hidden" id="moder-year-id" name="moder-year-id" value="">
                                     <label class="msg_warning hide"></label>
                                 </div>
 
@@ -198,6 +198,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="color-id" id="color-id" value="">
                                     <label class="msg_warning hide"></label>
                                 </div>
                             </div>
@@ -313,7 +314,7 @@
                                     </div>
                                     <div class="item-right">
                                         <label class="checkbox">
-                                            <input type="checkbox" name="contact_price">
+                                            <input type="checkbox" id="contact_price" name="contact_price">
                                             <span class="checkmark"></span>
                                             Liên hệ
                                         </label>
@@ -680,6 +681,7 @@
             $("#list-year-filter").prop('required', false)
             $("#list-color-filter").prop('required', true)
             var dataId = $(this).attr('data-id')
+            $("#moder-year-id").val(dataId);
             year = $(this).text();
             $("#temp_description").val(brand + " " + series + " " + year);
 
@@ -711,6 +713,7 @@
         $(".span-color").on("click", function () {
             $("#list-color-filter").prop('required', false)
             var dataId = $(this).attr('data-id')
+            $("#color-id").val(dataId);
             let color = $(this).text();
             $("#temp_description").val(brand + " " + series + " " + year + " " + color);
             let nameMoto = $("#temp_description").val();
@@ -855,6 +858,15 @@
             filesBuffer.items.clear()
         }
     }
+
+//    Hanlder Click Check contact price
+    $("#contact_price").change(function() {
+        if(this.checked) {
+            $("#product_price_tmp").prop('disabled', true);
+        }else {
+            $("#product_price_tmp").prop('disabled', false);
+        }
+    });
 
 
 </script>

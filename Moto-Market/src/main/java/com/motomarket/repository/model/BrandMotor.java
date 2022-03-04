@@ -24,7 +24,6 @@ public class BrandMotor {
     @Column(name = "brand_name")
     private String brandName;
 
-
     // One to many - Many to one
     @OneToMany(mappedBy = "brandMotor")
     private List<SeriesMotor> seriesMotorList;

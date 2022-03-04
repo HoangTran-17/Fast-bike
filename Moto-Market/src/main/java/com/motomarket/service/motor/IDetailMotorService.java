@@ -8,7 +8,10 @@ import com.motomarket.service.dto.ModelYearDTO;
 
 
 public interface IDetailMotorService extends IGeneralService<DetailMotorDTO> {
-    DetailMotorDTO getByModelYearAndColorMotor(ModelYearDTO modelYearDTO, ColorMotorDTO colorMotorDTO);
+//    DetailMotorDTO getByModelYearAndColorMotor(ModelYearDTO modelYearDTO, ColorMotorDTO colorMotorDTO);
+
+    DetailMotorDTO getByModelYearAndColorMotor(Long modelYearId, Long colorId);
+
     DetailMotor getDetailMotorById(Long id);
 }
 

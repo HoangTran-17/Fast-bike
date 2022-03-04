@@ -25,9 +25,9 @@ public class DetailMotorService implements IDetailMotorService{
 
 
     @Override
-    public DetailMotorDTO getByModelYearAndColorMotor(ModelYearDTO modelYearDTO, ColorMotorDTO colorMotorDTO) {
-        ModelYear modelYear = modelYearRepository.getById(modelYearDTO.getModelYearId());
-        ColorMotor colorMotor = colorMotorRepository.getById(colorMotorDTO.getColorId());
+    public DetailMotorDTO getByModelYearAndColorMotor(Long modelYearId, Long colorId) {
+        ModelYear modelYear = modelYearRepository.getById(modelYearId);
+        ColorMotor colorMotor = colorMotorRepository.getById(colorId);
 
         DetailMotor detailMotor = detailMotorRepository.getByModelYearAndColorMotor(modelYear, colorMotor);
 
@@ -35,7 +35,6 @@ public class DetailMotorService implements IDetailMotorService{
 //            DetailMotor detailMotor1 = new DetailMotor();
 //            detailMotorRepository.save(detailMotor1);
         }
-
         return new DetailMotorDTO(detailMotor.getDetailMotorId());
     }
     @Override

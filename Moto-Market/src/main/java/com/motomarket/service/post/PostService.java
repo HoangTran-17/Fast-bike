@@ -4,7 +4,10 @@ import com.motomarket.repository.IDetailMotorRepository;
 import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.*;
+import com.motomarket.service.dto.DetailMotorDTO;
+import com.motomarket.service.dto.ImageDTO;
 import com.motomarket.service.dto.PostDTO;
+import com.motomarket.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,7 +33,7 @@ public class PostService implements IPostService{
     private IUserRepository userRepository;
 
     @Autowired
-    IImageService imageService;
+    private IImageService imageService;
 
     @Override
     public List<PostDTO> findAll() {
@@ -54,31 +57,29 @@ public class PostService implements IPostService{
     }
 
     @Override
-    public Post savePost(Post post, User user, DetailMotor detailMotor, Long ownershipSelect, MultipartFile[] files)  {
+    public PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files)  {
         Date date = new Date();
-        post.setStatusPost(StatusPost.PUBLIC);
+        post.setStatusPost(StatusPost.WAITING);
         post.setPostDate(date);
         if (ownershipSelect == 0) {
             post.setOwnership(Ownership.OWNERSHIP);
         } else {
             post.setOwnership(Ownership.NO_OWNERSHIP);
         }
-
-        post.setUser(user);
-
-        post.setDetailMotor(detailMotor);
-        Post newPost = postRepository.save(post);
+        post.setUserDTO(user);
+        post.setDetailMotorDTO(detailMotor);
+        PostDTO newPost = save(post);
         for (MultipartFile file : files) {
             String uuid = UUID.randomUUID().toString();
-            Image image = new Image();
+            ImageDTO image = new ImageDTO();
             image.setImageName(uuid);
-            image.setPosts(newPost);
+            image.setPostId(newPost.getPostId());
             try {
                 file.transferTo(new File(rootPath + "/" + uuid+".png"));
             } catch (IOException e) {
                 throw  new IllegalArgumentException(e);
             }
-            imageService.saveImage(image);
+            imageService.save(image);
         }
         return newPost;
     }

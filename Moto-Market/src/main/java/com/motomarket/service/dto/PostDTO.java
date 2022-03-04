@@ -4,6 +4,7 @@ import com.motomarket.repository.model.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -36,8 +37,8 @@ public class PostDTO {
     @NotBlank(message = "Vui lòng nhập thêm thông tin về tình trạng xe, giấy tờ,chủ xe,...!")
     private String description;
 
-    @NotBlank
     @DecimalMin("1.0")
+    @Column(columnDefinition="Decimal(12,2) default '0.00'")
     private Double price;
 
     @NotBlank(message = "Vui lòng nhập tên người bán!")

@@ -17,13 +17,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=1050">
     <link rel="shortcut icon" href="/favicon.png?152472729920200827" type="image/png">
-    <script src="https://kit.fontawesome.com/938ba861d3.js" crossorigin="anonymous"></script>
+<!--    Fonntawesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <!-- Bootstrap Core and vendor CSS -->
     <!-- <link rel="stylesheet" href="/v1/pc/css/template-tet.min.css?154892590120200827" /> -->
     <link rel="stylesheet" type="text/css" href="/v1/vendor/bootstrap/css/bootstrap.min.css?152472729920200827"
           media="screen" onload="media='screen'">
-    <link rel="stylesheet" type="text/css" href="/v1/vendor/font-awesome/css/font-awesome.min.css?152472729920200827"
-          media="screen" onload="media='screen'">
+<!--    <link rel="stylesheet" type="text/css" href="/v1/vendor/font-awesome/css/font-awesome.min.css?152472729920200827"-->
+<!--          media="screen" onload="media='screen'">-->
     <link rel="stylesheet" type="text/css" href="/v1/vendor/slick/slick.css?152472729920200827">
     <link rel="stylesheet" type="text/css" href="/v1/vendor/slick/slick-theme.css?152472729920200827">
     <link rel="stylesheet" type="text/css" href="/v1/vendor/select2/css/select2.min.css?152472729920200827"
@@ -55,7 +56,7 @@
 
 <!-- End Google Tag Manager -->
 <div class="wrapper">
-    <div th:replace="~{fragments/header :: header}"></div>
+    <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
     <div class="container-page container-series">
         <section id="banner-topmoto">
             <!--banner-->

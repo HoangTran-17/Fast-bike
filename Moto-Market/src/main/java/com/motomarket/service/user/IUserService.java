@@ -6,6 +6,8 @@ import com.motomarket.service.dto.UserDTO;
 
 
 public interface IUserService extends IGeneralService<UserDTO> {
+    UserDTO getByUserName(String userName);
+
     UserDTO findUserByEmail(String email);
 
     User getUserById(Long id);
