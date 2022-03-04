@@ -4,6 +4,7 @@ import com.motomarket.repository.model.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class PostDTO {
 
     private Long postId;
 
+    @NotBlank
     private StatusPost statusPost;
 
     @NotBlank(message = "Vui lòng nhập tiêu đề bài đăng!")
@@ -28,13 +30,14 @@ public class PostDTO {
     @NotBlank
     private String modelMotor;
 
-    @NotBlank
+    @NotBlank(message = "Vui lòng chọn khoảng km mà xe đã chạy!")
     private String kilometerCount;
 
     @NotBlank(message = "Vui lòng nhập thêm thông tin về tình trạng xe, giấy tờ,chủ xe,...!")
     private String description;
 
     @NotBlank
+    @DecimalMin("1.0")
     private Double price;
 
     @NotBlank(message = "Vui lòng nhập tên người bán!")
@@ -44,17 +47,21 @@ public class PostDTO {
     @Pattern(regexp = "(0[3|5|7|8|9])+([0-9]{8})", message = "Vui lòng nhập đúng số điện thoại! (VD: 0987654321)")
     private String sellerPhoneNumber;
 
+    @NotBlank(message = "Vui lòng chọn tỉnh!")
     private String province;
 
+    @NotBlank(message = "Vui lòng chọn huyện!")
     private  String district;
 
-    @NotBlank
     private Date postDate;
 
+    @NotBlank
     private Ownership ownership;
 
+    @NotBlank
     private UserDTO userDTO;
 
+    @NotBlank
     private DetailMotorDTO detailMotorDTO;
 
     public static PostDTO parsePostDTO(Post post) {

@@ -25,8 +25,6 @@ import java.util.UUID;
 @Controller
 public class PostController {
 
-    @Value("${server.rootPath}")
-    private String rootPath;
 
     @Autowired
     private IPostService postService;
@@ -49,27 +47,30 @@ public class PostController {
 
     @PostMapping("post")
     public ModelAndView handlePost(@ModelAttribute Post post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files) throws IOException {
-        Date date = new Date();
-        post.setStatusPost(StatusPost.PUBLIC);
-        post.setPostDate(date);
-        if (ownershipSelect == 0) {
-            post.setOwnership(Ownership.OWNERSHIP);
-        } else {
-            post.setOwnership(Ownership.NO_OWNERSHIP);
-        }
+//        Date date = new Date();
+//        post.setStatusPost(StatusPost.PUBLIC);
+//        post.setPostDate(date);
+//        if (ownershipSelect == 0) {
+//            post.setOwnership(Ownership.OWNERSHIP);
+//        } else {
+//            post.setOwnership(Ownership.NO_OWNERSHIP);
+//        }
+//        User user = userService.getUserById(1L);
+//        post.setUser(user);
+//        DetailMotor detailMotor = detailMotorService.getDetailMotorById(2L);
+//        post.setDetailMotor(detailMotor);
+//        Post newPost = postService.savePost(post);
+//        for (MultipartFile file : files) {
+//            UUID uuidCode = UUID.randomUUID();
+//            Image image = new Image();
+//            image.setImageName(uuidCode.toString());
+//            image.setPosts(newPost);
+//            file.transferTo(new File(rootPath + "/" + uuidCode+".png"));
+//            imageService.saveImage(image);
+//        }
         User user = userService.getUserById(1L);
-        post.setUser(user);
         DetailMotor detailMotor = detailMotorService.getDetailMotorById(2L);
-        post.setDetailMotor(detailMotor);
-        Post newPost = postService.savePost(post);
-        for (MultipartFile file : files) {
-            UUID uuidCode = UUID.randomUUID();
-            Image image = new Image();
-            image.setImageName(uuidCode.toString());
-            image.setPosts(newPost);
-            file.transferTo(new File(rootPath + "/" + uuidCode+".png"));
-            imageService.saveImage(image);
-        }
+        Post newPost = postService.savePost(post, user, detailMotor, ownershipSelect, files);
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }

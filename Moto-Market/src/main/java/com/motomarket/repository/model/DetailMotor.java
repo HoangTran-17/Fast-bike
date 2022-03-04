@@ -21,7 +21,6 @@ public class DetailMotor {
     @Column(name = "detail_motor_id", nullable = false)
     private Long detailMotorId;
 
-
 // One to many - Many to one
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
