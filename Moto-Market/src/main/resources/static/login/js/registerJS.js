@@ -29,27 +29,43 @@
         }
         if (check) {
             event.preventDefault();
-            // let email =  $("#email-input").val();
             let email = $("input[type = 'email']").val();
-            $("#exampleModalLongTitle").text("Verify Your Email: " + email)
-            $('#verifyEmailModal').modal('show');
             $.ajax({
                 type: "GET",
                 headers: {
                     "Content-Type": "text/html",
                     "Accept": "text/html"
                 },
-                url: "/api/verify-mail/" + email,
+                url: "/api/existemail/" + email,
             }).done(function (data) {
-            }).fail(function () {
-                alert("error")
+                if (data == "true") {
+                    $.Toast("Email Đã Tồn Tại Hãy Thử Đăng Kí Bằng Email Khác", {
+                        'position': 'top',
+                        'class': 'alert',
+                        'duration': 1500
+                    });
+                } else {
+                    $("#exampleModalLongTitle").text("Verify Your Email: " + email)
+                    $('#verifyEmailModal').modal('show');
+                    $.ajax({
+                        type: "GET",
+                        headers: {
+                            "Content-Type": "text/html",
+                            "Accept": "text/html"
+                        },
+                        url: "/api/verify-mail/" + email,
+                    }).done(function (data) {
+                    }).fail(function () {
+                        alert("error")
+                    })
+                }
             })
         }
         return check;
     });
 
     $("#verify-btn").on("click", function () {
-       let code = $("#code-input").val();
+        let code = $("#code-input").val();
         $.ajax({
             type: "GET",
             headers: {
@@ -58,17 +74,25 @@
             },
             url: "/api/verify-code/" + code,
         }).done(function (data) {
-            if (data === "true"){
+            if (data === "true") {
                 $('#verifyEmailModal').modal('hide');
                 // $.Toast('Mã PIN đúng, đăng kí thành công, hãy đăng nhập để tiếp tục', {'position': 'top','class': 'success', 'duration': 3000});
                 $("#register-form").submit();
             } else {
-                $.Toast("Mã PIN không đúng, hãy kiểm tra lại!!", {'position': 'top','class': 'alert', 'duration': 1500});
+                $.Toast("Mã PIN không đúng, hãy kiểm tra lại!!", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500
+                });
             }
         }).fail(function () {
             alert("error")
         })
     });
+
+    function checkEmailExist(email) {
+
+    }
 
 
     $('.validate-form .input100').each(function () {
