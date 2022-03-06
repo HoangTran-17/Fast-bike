@@ -36,7 +36,7 @@ public class AdminController {
 //        User user = userRepository.getById(2L);
 //        detailMotors.forEach(detailMotor -> {
 //            Post post = new Post();
-//            post.setStatusPost(StatusPost.PUBLIC);
+//            post.setStatusPost(StatusPost.WAITING);
 //            String modelMotor = detailMotor.getBrandMotor().getBrandName() + " " +
 //                    detailMotor.getSeriesMotor().getSeriesName() + " " +
 //                    modelYear.getModelYearName() + " " +
@@ -46,7 +46,7 @@ public class AdminController {
 //            post.setModelMotor(modelMotor);
 //            post.setKilometerCount("Dưới 30,000km");
 //            post.setDescription("Xe còn mới, đang sử dụng");
-//            post.setPrice(5000000.0);
+//            post.setPrice(4800000.0);
 //            post.setSellerName(user.getUserName());
 //            post.setSellerPhoneNumber(user.getPhoneNumber());
 //            post.setProvince("Hà Nội");
@@ -59,24 +59,25 @@ public class AdminController {
 //            postRepository.save(post);
 //        });
 //
-//        System.out.println("ddd");
+//        System.out.println("Success");
 //    }
 
 
 
-//
+
 //    @Autowired
 //    private IPostService postService;
-//
-//    @Autowired
-//    private IPostRepository postRepository;
-//    @GetMapping("/get")
-//    public void get() {
+
+    @Autowired
+    private IPostRepository postRepository;
+    @GetMapping("/get")
+    public void get() {
 //                Page<Post> posts = postRepository.findAll(Pageable.ofSize(20));
 //        System.out.println(posts);
-////        List<PostDTO> postDTOList = postService.findTop12ByOrderByPostIdDesc();
-////        System.out.println(postDTOList);
-//    }
+        List<Post> postList = postRepository.findTop12ByOrderByPostIdDesc();
+        System.out.println(postList);
+    }
+
 
     @GetMapping("motor-management")
     public ModelAndView motorManagement() {

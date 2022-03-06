@@ -1,6 +1,7 @@
 package com.motomarket.repository;
 
 import com.motomarket.repository.model.Post;
+import com.motomarket.repository.model.StatusPost;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
 
 //    List 12 records latest - Trang chủ
     List<Post> findTop12ByOrderByPostIdDesc();
+
+    List<Post> findTop18ByOrderByPostIdDescStatusPost(StatusPost statusPost);
 
     Page<Post> findAllByModelMotorBefore(Pageable pageable, String modelMotor);
 
