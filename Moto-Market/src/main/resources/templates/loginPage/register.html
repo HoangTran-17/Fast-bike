@@ -49,6 +49,7 @@
 					<div class="wrap-input100 validate-input" data-validate="Username is required">
 						<input class="input100" type="text" name="username"  th:field="*{userName}">
 						<span class="focus-input100" data-placeholder="Username"></span>
+						<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Name Error</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Phone Number not valid">
 						<input class="input100" type="text" name="phoneNumber" th:field="*{phoneNumber}">
@@ -64,6 +65,7 @@
 						</span>
 						<input class="input100" type="password" name="pass" th:field="*{password}">
 						<span class="focus-input100" data-placeholder="Password"></span>
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
 					</div>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
@@ -86,7 +88,14 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="verifyEmailModal" tabindex="-1" role="dialog" aria-labelledby="verifyEmailModal" aria-hidden="true">
+<!--	<div class="warning" th:if="${#fields.hasErrors('user.*')}"-->
+<!--		 style="color:red;font-style:italic; z-index: 999999; top: 20px; right: 20px; position: fixed">-->
+<!--		<ul>-->
+<!--			<li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" th:class="errorLi" />-->
+<!--		</ul>-->
+<!--	</div>-->
+
+	<div class="modal fade" id="verifyEmailModal" tabindex="-1" role="dialog" aria-labelledby="verifyEmailModal" aria-hidden="true"  data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content">
 			<div class="modal-header">

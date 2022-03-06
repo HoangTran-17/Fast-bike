@@ -4,6 +4,7 @@ import com.motomarket.repository.model.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class UserDTO {
 
     private Long userId;
 
+    @Column(unique = true)
     @NotNull(message = "Vui lòng nhập tên của bạn!")
     @Size(min = 2,max = 30,message = "Độ dài của tên trong khoảng từ 2 đến 30 ký tự!")
     private String userName;

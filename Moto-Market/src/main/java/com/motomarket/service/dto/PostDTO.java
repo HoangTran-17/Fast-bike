@@ -68,8 +68,6 @@ public class PostDTO {
     public static PostDTO parsePostDTO(Post post) {
         UserDTO userDTO = UserDTO.parseUserDTO(post.getUser());
         DetailMotorDTO detailMotorDTO = DetailMotorDTO.parseDetailMotorDTO(post.getDetailMotor());
-
-
         return new PostDTO(post.getPostId(), post.getStatusPost(), post.getTitle(), post.getModelMotor(),
                 post.getKilometerCount(), post.getDescription(), post.getPrice(),
                 post.getSellerName(), post.getSellerPhoneNumber(), post.getProvince(), post.getDistrict(), post.getPostDate(), post.getOwnership(),
