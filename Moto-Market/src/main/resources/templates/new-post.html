@@ -50,9 +50,8 @@
 
     <link rel="manifest" href="https://www.webike.vn/manifest.json?152472729920200827">
 
-    <script type="text/javascript">
-        deferscript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
-    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" type="text/css"
           href="/frontend/moto-v2/pc/css/vendor/trumbowyg/trumbowyg.min.css?160015879020200827">
     <link rel="stylesheet" type="text/css" href="/v1/vendor/select2/css/select2.min.css?152472729920200827"
@@ -96,9 +95,10 @@
 
 <!-- End Google Tag Manager -->
 <div id="main">
-    <div th:replace="~{fragments/header :: header}"></div>
+    <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
+
     <section class="wrapper create-product">
-        <form method="POST"  accept-charset="UTF-8" name="signup_form" id="product-editor" th:action="@{/post}" th:object="${post}" enctype="multipart/form-data">
+        <form method="POST"  accept-charset="UTF-8" name="signup_form" id="product-editor" th:action="@{/post/newpost}" th:object="${post}" enctype="multipart/form-data">
             <div class="container">
                 <section>
                     <ul class="breadcrumb">
