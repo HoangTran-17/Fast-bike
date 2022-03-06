@@ -49,7 +49,7 @@ public class ImageService implements IImageService {
     @Override
     public List<ImageDTO> findAllByPostDTO(PostDTO postDTO) {
         Post post = new Post();
-        post.setPostId(post.getPostId());
+        post.setPostId(postDTO.getPostId());
         List<ImageDTO> imageDTOList = new ArrayList<>();
         imageRepository.findAllByPosts(post).forEach(image -> {
             imageDTOList.add(ImageDTO.parseImageDTO(image));
