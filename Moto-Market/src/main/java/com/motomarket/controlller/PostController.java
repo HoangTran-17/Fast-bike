@@ -54,8 +54,7 @@ public class PostController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-<<<<<<< HEAD
-=======
+
 
     @GetMapping("/detailpost/{postId}")
     public ModelAndView viewDetailPost(@PathVariable Long postId){
@@ -68,5 +67,4 @@ public class PostController {
     }
 
 
->>>>>>> tien-dev
 }

@@ -65,17 +65,27 @@ public class AdminController {
 
 
 
-//    @Autowired
-//    private IPostService postService;
-
     @Autowired
     private IPostRepository postRepository;
+
+    @Autowired
+    private IPostService postService;
+
+
     @GetMapping("/get")
     public void get() {
-//                Page<Post> posts = postRepository.findAll(Pageable.ofSize(20));
+
+        String modelMotor = "Honda Future 125";
+        List<PostDTO> postList1 = postService.findTopByModelMotorIsLike(modelMotor);
+        System.out.println(postList1);
+
+
+        //                Page<Post> posts = postRepository.findAll(Pageable.ofSize(20));
 //        System.out.println(posts);
-        List<Post> postList = postRepository.findTop12ByOrderByPostIdDesc();
-        System.out.println(postList);
+
+//        List<Post> postList = postRepository.findTopByStatusPost(StatusPost.PUBLIC, Pageable.ofSize(18));
+//        System.out.println(postList);
+
     }
 
 

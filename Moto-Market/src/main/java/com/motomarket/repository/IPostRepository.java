@@ -5,6 +5,8 @@ import com.motomarket.repository.model.StatusPost;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,15 +24,13 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Override
     Page<Post> findAll(Pageable pageable);
 
-//    List 12 records latest - Trang chủ
-    List<Post> findTop12ByOrderByPostIdDesc();
 
-    List<Post> findTop18ByOrderByPostIdDescStatusPost(StatusPost statusPost);
+//    Trang chủ - List post mới nhất có yêu cầu về statusPost và số lượng post truyền vào từ Service.
+    @Query("select p from Post p where p.statusPost = :statusPost order by p.postDate DESC")
+    List<Post> findTopByStatusPost(StatusPost statusPost, Pageable pageable);
 
-    Page<Post> findAllByModelMotorBefore(Pageable pageable, String modelMotor);
-
-
-
-
+//  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
+    @Query("select p from Post p where p.statusPost = :statusPost and p.modelMotor like :modelMotor% order by p.postDate DESC")
+    Page<Post> findTopByModelMotorIsLike(Pageable pageable,@Param("modelMotor") String modelMotor,@Param("statusPost") StatusPost statusPost);
 }
 

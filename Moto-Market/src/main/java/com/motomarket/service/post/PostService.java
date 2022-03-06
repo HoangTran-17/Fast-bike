@@ -103,13 +103,23 @@ public class PostService implements IPostService {
 
     }
 
+
     @Override
-    public List<PostDTO> findTop12ByOrderByPostIdDesc() {
+    public List<PostDTO> findTop18ByOrderByPostIdDescAndStatusPostIsPublic() {
         List<PostDTO> postDTOList = new ArrayList<>();
-        postRepository.findTop12ByOrderByPostIdDesc().forEach(post -> {
+        postRepository.findTopByStatusPost(StatusPost.PUBLIC, Pageable.ofSize(18)).forEach(post -> {
             postDTOList.add(PostDTO.parsePostDTO(post));
         });
         return postDTOList;
+    }
+
+    @Override
+    public List<PostDTO> findTopByModelMotorIsLike(String modelMotor) {
+        List<PostDTO> postDTOList1 = new ArrayList<>();
+        postRepository.findTopByModelMotorIsLike(Pageable.ofSize(20), modelMotor, StatusPost.PUBLIC).forEach(post -> {
+            postDTOList1.add(PostDTO.parsePostDTO(post));
+        });
+        return postDTOList1;
     }
 }
 ;
