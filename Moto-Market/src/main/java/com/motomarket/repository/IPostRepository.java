@@ -21,7 +21,7 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Override
     Page<Post> findAll(Pageable pageable);
 
-//    List 12 records latest
+//    List 12 records latest - Trang chủ
     List<Post> findTop12ByOrderByPostIdDesc();
 
     Page<Post> findAllByModelMotorBefore(Pageable pageable, String modelMotor);

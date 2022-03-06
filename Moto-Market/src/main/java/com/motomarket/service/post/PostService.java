@@ -10,6 +10,8 @@ import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class PostService implements IPostService{
+public class PostService implements IPostService {
     @Value("${server.rootPath}")
     private String rootPath;
 
@@ -52,12 +54,12 @@ public class PostService implements IPostService{
     @Override
     public PostDTO save(PostDTO postDTO) {
         Post post = parsePost(postDTO);
-        PostDTO newPostDTO = PostDTO.parsePostDTO( postRepository.save(post));
+        PostDTO newPostDTO = PostDTO.parsePostDTO(postRepository.save(post));
         return newPostDTO;
     }
 
     @Override
-    public PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files)  {
+    public PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files) {
         Date date = new Date();
         post.setStatusPost(StatusPost.WAITING);
         post.setPostDate(date);
@@ -75,9 +77,9 @@ public class PostService implements IPostService{
             image.setImageName(uuid);
             image.setPostId(newPost.getPostId());
             try {
-                file.transferTo(new File(rootPath + "/" + uuid+".png"));
+                file.transferTo(new File(rootPath + "/" + uuid + ".png"));
             } catch (IOException e) {
-                throw  new IllegalArgumentException(e);
+                throw new IllegalArgumentException(e);
             }
             imageService.save(image);
         }
@@ -93,7 +95,7 @@ public class PostService implements IPostService{
                 postDTO.getModelMotor(), postDTO.getKilometerCount(), postDTO.getDescription(),
                 postDTO.getPrice(), postDTO.getSellerName(), postDTO.getSellerPhoneNumber(),
                 postDTO.getProvince(), postDTO.getDistrict(),
-                postDTO.getPostDate(), postDTO.getOwnership(),user,detailMotor);
+                postDTO.getPostDate(), postDTO.getOwnership(), user, detailMotor);
     }
 
     @Override
@@ -110,3 +112,4 @@ public class PostService implements IPostService{
         return postDTOList;
     }
 }
+;

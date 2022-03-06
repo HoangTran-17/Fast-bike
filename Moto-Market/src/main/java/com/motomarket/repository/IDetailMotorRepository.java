@@ -4,6 +4,8 @@ import com.motomarket.repository.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IDetailMotorRepository extends JpaRepository<DetailMotor, Long> {
 
@@ -15,6 +17,8 @@ public interface IDetailMotorRepository extends JpaRepository<DetailMotor, Long>
 
 
     DetailMotor getByModelYearAndColorMotor(ModelYear modelYear, ColorMotor colorMotor);
+
+    List<DetailMotor> findAllByModelYear(ModelYear modelYear);
 
     void deleteAllBySeriesMotor(SeriesMotor seriesMotor);
 }

@@ -46,5 +46,4 @@ public class PostController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-
 }
