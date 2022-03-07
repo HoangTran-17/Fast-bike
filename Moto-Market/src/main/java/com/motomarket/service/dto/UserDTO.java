@@ -39,10 +39,14 @@ public class UserDTO {
     @Size(min = 6, max = 12, message = "Mật khẩu từ 6 đến 12 ký tự!")
     private String password;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean deleted;
+
     @NotNull(message = "Vui lòng nhập số điện thoại của bạn!")
     @Pattern(regexp = "(0[3|5|7|8|9])+([0-9]{8})",message = "Vui lòng nhập đúng số điện thoại, VD: 0987654321")
     private String phoneNumber;
 
+    private Integer numberOfPost;
 
     public UserDTO(Long userId) {
         this.userId = userId;
@@ -52,7 +56,7 @@ public class UserDTO {
     public static UserDTO parseUserDTO(User user) {
         return new UserDTO(user.getUserId(), user.getUserName(),
                 user.getEmail(), user.getRole(), user.getUserStatus(),
-                user.getPassword(), user.getPhoneNumber());
+                user.getPassword(), user.isDeleted(),user.getPhoneNumber(),user.getPostList().size());
     }
 }
 

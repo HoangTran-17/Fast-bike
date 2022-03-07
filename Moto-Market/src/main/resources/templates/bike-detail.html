@@ -60,17 +60,16 @@
             <!--                    <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?">-->
             <!--                        Đen Đỏ</a>-->
             <!--                    </li>-->
-            <!--                    <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?loc=45">B&agrave; Rịa-Vũng-->
-            <!--                        T&agrave;u</a></li>-->
+            <!--                    <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?loc=45">Bà Rịa-Vũng-->
+            <!--                        Tàu</a></li>-->
             <!--                </ul>-->
             <!--            </div>-->
 
-            <div id="center" class="product_detail">
+            <div id="center" class="product_detail"  >
                 <div id="content">
                     <article class="product" id="product-123">
                         <h1 class="module_title">
-                            <span class="bottom_redline">
-                                Cần bán HONDA Wave Alpha 2005 m&agrave;u đen đỏ
+                            <span class="bottom_redline" th:utext="${post.title}">
                             </span>
                             <label class="i-condition p-new"> Xe cũ</label>
                         </h1>
@@ -82,32 +81,19 @@
                                     <div>
                                         <div class="slider-inner">
                                             <ul>
-                                                <li><a class="ns-img" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a></li>
-                                                <li><a class="ns-img" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a></li>
-                                                <li><a class="ns-img" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a></li>
-                                                <li><a class="ns-img" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a></li>
-                                                <li><a class="ns-img" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a></li>
-
+                                                <th:block th:each="image : ${images}">
+                                                    <li><a class="ns-img" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a></li>
+                                                </th:block>
                                             </ul>
                                         </div>
                                         <div id="thumbnail-slider">
                                             <div class="inner">
                                                 <ul>
-                                                    <li>
-                                                        <a class="thumb" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="thumb" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="thumb" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="thumb" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="thumb" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsr99d1JV5TXcOAbkzCUao6FrVQzaEfAcnog&usqp=CAU"></a>
-                                                    </li>
+                                                    <th:block th:each="image : ${images}">
+                                                        <li>
+                                                            <a class="thumb" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a>
+                                                        </li>
+                                                    </th:block>
                                                 </ul>
                                             </div>
                                         </div>
@@ -115,9 +101,8 @@
                                 </div>
                             </aside>
                             <div class="module_body">
-
                                 <strong>
-                                    <big class="price">13.000.000 đ</big>
+                                    <big class="price" <p th:text="${price}"></p>đ</big>
                                     <!-- End Group button action -->
                                     <a class="report-product" href="#report-product">
                                         <em class="icon report"></em> Báo cáo vi phạm
@@ -126,24 +111,24 @@
                                     <div id="report-product" class="hidden">
                                         <form action="" method="post">
                                             <h3>
-                                                <span>Tin n&agrave;y c&oacute; vấn đề g&igrave;?</span>
+                                                <span>Tin này có vấn đề gì?</span>
                                             </h3>
                                             <ul>
                                                 <li>
-                                                    <label><input type="checkbox" name="chk_report" value="2">C&oacute;
+                                                    <label><input type="checkbox" name="chk_report" value="2">Có
                                                         dấu hiệu lừa đảo</label>
                                                 </li>
                                                 <li>
                                                     <label><input type="checkbox" name="chk_report"
-                                                                  value="3">H&agrave;ng đ&atilde; bán.</label>
+                                                                  value="3">Hàng đã bán.</label>
                                                 </li>
                                                 <li>
                                                     <label><input type="checkbox" name="chk_report"
-                                                                  value="4">Kh&ocirc;ng li&ecirc;n lạc được.</label>
+                                                                  value="4">Không liên lạc được.</label>
                                                 </li>
                                                 <li>
                                                     <label><input type="checkbox" name="chk_report"
-                                                                  value="5">Th&ocirc;ng tin kh&ocirc;ng đ&uacute;ng thực
+                                                                  value="5">Thông tin không đ&uacute;ng thực
                                                         tế</label>
                                                 </li>
                                                 <li>
@@ -171,108 +156,101 @@
                                 <table>
                                     <tr>
                                         <td width="18%">
-                                            <label title="">D&ograve;ng xe</label>
+                                            <label title="">Dòng xe</label>
                                         </td>
-                                        <td width="30%">
-                                            HONDA Wave Alpha 2005
+                                        <td width="30%" th:utext="${post.modelMotor}">
                                         </td>
                                         <td width="15%">
-                                            <label title="Đ&atilde; đi">Đ&atilde; đi</label>
+                                            <label title="Đã đi">Đã đi</label>
                                         </td>
-                                        <td width="47%">
-                                            -
+                                        <td width="47%" th:utext="${post.kilometerCount}">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <label title="Xuất xứ">Xuất xứ</label>
-                                        </td>
-                                        <td>
-                                            -
-                                        </td>
                                         <td>
                                             <label title="Đời xe">Đời xe</label>
                                         </td>
-                                        <td>
-                                            2005
+                                        <td  th:utext="${detail.modelYear.modelYearName}">
                                         </td>
+                                        <td>
+                                            <label title="Sở hữu">Sở Hữu</label>
+                                        </td>
+                                        <th:block  th:switch="${post.ownership}">
+                                            <td th:case="${T(com.motomarket.repository.model.Ownership).OWNERSHIP}">
+                                                Chính Chủ
+                                            </td>
+                                            <td th:case="${T(com.motomarket.repository.model.Ownership).NO_OWNERSHIP}">
+                                                 Không Chính Chủ
+                                            </td>
+                                        </th:block>
+
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label title="Ph&acirc;n khối">Ph&acirc;n khối</label>
+                                            <label title="Phân khối">Phân khối</label>
                                         </td>
-                                        <td>
-                                            100 cc
+                                        <td  th:utext="${detail.seriesMotor.capacity} + ' cc'">
+
                                         </td>
                                         <td>
                                             <label title="Loại xe">Loại xe</label>
                                         </td>
-                                        <td>
-                                            Xe số
+                                        <td th:utext="${detail.typeMotor.typeMotorName}">
+
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label title="M&agrave;u">M&agrave;u</label>
+                                            <label title="Màu">Màu</label>
                                         </td>
-                                        <td>
-                                            Đen Đỏ
+                                        <td th:utext="${detail.colorMotor.colorName}">
+
                                         </td>
                                         <td>
                                             <label title="Địa điểm">Địa điểm</label>
                                         </td>
                                         <td>
-                                            Vũng T&agrave;u ,
-                                            B&agrave; Rịa-Vũng T&agrave;u
+                                          <span th:utext="${post.district}"></span>, <span th:utext="${post.province}"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label title="Ng&agrave;y đăng">Ng&agrave;y đăng</label>
+                                            <label title="Ngày đăng">Ngày đăng</label>
                                         </td>
                                         <td>
-                                            <time>1 ng&agrave;y trước</time>
+                                            <time th:utext="${timePost}"></time>
                                         </td>
                                         <td colspan="2">
                                             <a target="_blank"
                                                href="https://www.webike.vn/cho-xe-may/series/wave-alpha-395.html">
-                                                Xem thống kê xe <b>Wave Alpha</b> khác
+                                                Xem thống kê xe <b th:utext="${detail.seriesMotor.seriesName}"></b> khác
                                             </a>
                                         </td>
                                     </tr>
                                 </table>
-
                                 <!-- process customer info -->
-
-
                                 <!-- end - process customer info -->
                                 <div class="customer_info" id="right-shop-info">
                                     <p class="name">
-                                        Li&ecirc;n hệ mua xe:
+                                        Liên hệ mua xe:
                                         <a target="_blank" href="https://www.webike.vn/cho-xe-may/user/262813">
-                                            <b>0927700305</b>
+                                            <b th:utext="${post.sellerName}"></b>
                                         </a>
                                     </p>
                                     <div class="action">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a aria-hidden="true" href="javascript:void(0);"
+                                                    <a aria-hidden="true" id="showPhone-btn" href="javascript:void(0);"
                                                        class="btn-show-address show-address">
                                                         <em class="icon phone"></em>
-                                                        Bấm xem số điện thoại
+                                                        <span id="phoneShowBox">Bấm để xem số điện thoại</span>
                                                     </a>
-                                                    <address class="show-phone-top">
-                                                        <p>
-                                                            <em class="icon phone"></em>
-                                                            <img src="https://www.webike.vn/phone/1902547.png"
-                                                                 alt="0927700305"/>
-                                                        </p>
-                                                    </address>
+                                                    <input type="hidden" id="phoneNumber" th:value="${post.sellerPhoneNumber}">
                                                 </td>
                                                 <td>
-                                                    <p class="note_contact">* Vui l&ograve;ng cho người bán biết
-                                                        bạn đ&atilde; t&igrave;m thấy xe của họ tại Webike</p>
+                                                    <p class="note_contact">* Vui lòng cho người bán biết
+                                                        bạn đã tìm thấy xe của họ tại Webike</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -282,7 +260,7 @@
                                 <div class="safety-buy">
                                     <h3 class="module_title line_bottom">
                                         <span class="title">
-                                            Mua xe an to&agrave;n
+                                            Mua xe an toàn
                                         </span>
                                     </h3>
                                     <ul class="content">
@@ -298,7 +276,6 @@
                             </div>
                         </section>
 
-
                         <section class="module middle" id="module_middle">
                             <div class="in_left">
                                 <div class="product_info tabs">
@@ -306,25 +283,25 @@
                                         <ul class="tab_links">
                                             <li class="item selected">
                                                 <a href="#tab-description">
-                                                    M&ocirc; tả xe
+                                                    Mô tả xe
                                                 </a>
                                             </li>
                                             <li class="item tab-spec">
-                                                <span class="tooltip-spec">Th&ocirc;ng số kỹ thuật được cập nhật từ
-                                                    nh&agrave; sản xuất</span>
+                                                <span class="tooltip-spec">Thông số kỹ thuật được cập nhật từ
+                                                    nhà sản xuất</span>
                                                 <a href="#tab-spec">
-                                                    Th&ocirc;ng số kỹ thuật
+                                                    Thông số kỹ thuật
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="tab_contents">
                                         <div class="show" id="tab-description">
-                                            <div>Xe bãi sau bà rịa vũng tàu lh trực tiếp</div>
+                                            <div th:utext="${post.description}" ></div>
                                         </div>
                                         <div class="" id="tab-spec">
                                             <section class="detail">
-                                                <h2>Th&ocirc;ng số kỹ thuật của &quot;Wave Alpha 2019&quot;</h2>
+                                                <h2>Thông số kỹ thuật của &quot;Wave Alpha 2019&quot;</h2>
                                                 <table border="0">
                                                     <tbody>
                                                     <tr>
@@ -337,15 +314,15 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Tỷ số n&eacute;n</th>
+                                                        <th>Tỷ số nén</th>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Hệ thống l&agrave;m mát</th>
+                                                        <th>Hệ thống làm mát</th>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Ph&acirc;n khối</th>
+                                                        <th>Phân khối</th>
                                                         <td> (cm3/cc)</td>
                                                     </tr>
                                                     <tr>
@@ -353,11 +330,11 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Đường k&iacute;nh x H&agrave;nh tr&igrave;nh piston</th>
+                                                        <th>Đường kính x Hành trình piston</th>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>C&ocirc;ng suất cực đại</th>
+                                                        <th>Công suất cực đại</th>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
@@ -365,15 +342,15 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>K&iacute;ch thước</th>
+                                                        <th>Kích thước</th>
                                                         <td> (mm)</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Chiều d&agrave;i 2 trục bánh xe</th>
+                                                        <th>Chiều dài 2 trục bánh xe</th>
                                                         <td> (mm)</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Chiều cao y&ecirc;n</th>
+                                                        <th>Chiều cao yên</th>
                                                         <td> (mm)</td>
                                                     </tr>
                                                     <tr>
@@ -381,7 +358,7 @@
                                                         <td> (mm)</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Dung t&iacute;ch b&igrave;nh xăng</th>
+                                                        <th>Dung tích bình xăng</th>
                                                         <td> (Lít)</td>
                                                     </tr>
                                                     <tr>
@@ -393,11 +370,11 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>K&iacute;ch thước lốp trước</th>
+                                                        <th>Kích thước lốp trước</th>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>K&iacute;ch thước lốp sau</th>
+                                                        <th>Kích thước lốp sau</th>
                                                         <td></td>
                                                     </tr>
                                                     </tbody>
@@ -416,7 +393,6 @@
                                             }
                                         </style>
                                         <div class="module" id="bottom-recommendation">
-
                                             <h3 class="module_title line_bottom">
                                                 <span class="title">
                                                     <a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
@@ -446,7 +422,7 @@
                                                                 </div>
                                                                 <label>
                                                                     Cần bán HARLEY-DAVIDSON Softail Slim 2020
-                                                                    m&agrave;u đen trắng
+                                                                    màu đen trắng
                                                                 </label>
                                                                 <span class="price">135.000.000 đ
                                                                     <i class="old">Xe cũ</i>
@@ -472,10 +448,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <label>
-                                                                    Cần bán YAMAHA Exciter 135 GP 2012 m&agrave;u
+                                                                    Cần bán YAMAHA Exciter 135 GP 2012 màu
                                                                     xanh biển
                                                                 </label>
-                                                                <span class="price">Li&ecirc;n hệ
+                                                                <span class="price">Liên hệ
                                                                     <i class="old">Xe cũ</i>
                                                                 </span>
                                                                 <address></address>
@@ -499,7 +475,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <label>
-                                                                    Cần bán HONDA Wave Alpha 2005 m&agrave;u đen
+                                                                    Cần bán HONDA Wave Alpha 2005 màu đen
                                                                     đỏ
                                                                 </label>
                                                                 <span class="price">13.000.000 đ
@@ -580,7 +556,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <label>
-                                                                    Cần bán SUZUKI GSX R150 2020 m&agrave;u xanh
+                                                                    Cần bán SUZUKI GSX R150 2020 màu xanh
                                                                     biển đen
                                                                 </label>
                                                                 <span class="price">43.000.000 đ
@@ -634,9 +610,9 @@
                                                                 </div>
                                                                 <label>
                                                                     Cần bán YAMAHA Exciter 150 mxking 2018
-                                                                    m&agrave;u đen đỏ
+                                                                    màu đen đỏ
                                                                 </label>
-                                                                <span class="price">Li&ecirc;n hệ
+                                                                <span class="price">Liên hệ
                                                                     <i class="old">Xe cũ</i>
                                                                 </span>
                                                                 <address></address>
@@ -662,7 +638,7 @@
                                                                 <label>
                                                                     HONDA Winner X Đen Đỏ - 2022 chua bam bien
                                                                 </label>
-                                                                <span class="price">Li&ecirc;n hệ
+                                                                <span class="price">Liên hệ
                                                                     <i class="old">Xe cũ</i>
                                                                 </span>
                                                                 <address></address>
@@ -686,10 +662,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <label>
-                                                                    Cần bán HONDA Airblade 125 Fi 2017 m&agrave;u
+                                                                    Cần bán HONDA Airblade 125 Fi 2017 màu
                                                                     đen xanh biển
                                                                 </label>
-                                                                <span class="price">Li&ecirc;n hệ
+                                                                <span class="price">Liên hệ
                                                                     <i class="old">Xe cũ</i>
                                                                 </span>
                                                                 <address></address>
@@ -715,10 +691,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <label>
-                                                                    Cần bán YAMAHA Sirius RC 2014 m&agrave;u đen
+                                                                    Cần bán YAMAHA Sirius RC 2014 màu đen
                                                                     trắng
                                                                 </label>
-                                                                <span class="price">Li&ecirc;n hệ
+                                                                <span class="price">Liên hệ
                                                                     <i class="old">Xe cũ</i>
                                                                 </span>
                                                                 <address></address>
@@ -743,7 +719,7 @@
                                                                 </div>
                                                                 <label>
                                                                     Cần bán HARLEY-DAVIDSON Fat Boy 114 2019
-                                                                    m&agrave;u đen xanh da trời
+                                                                    màu đen xanh da trời
                                                                 </label>
                                                                 <span class="price">150.000.000 đ
                                                                     <i class="old">Xe cũ</i>
@@ -755,7 +731,7 @@
                                                     <div class="center">
                                                         <a class="module-btn btn-style2"
                                                            href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            Xem th&ecirc;m
+                                                            Xem thêm
                                                         </a>
                                                     </div>
                                                 </div>
@@ -790,7 +766,7 @@
                                     <h3 class="module_title line_bottom">
                                         <span class="title">
                                             <a href="https://www.webike.vn/cho-xe-may/bike-list/honda/wave-alpha.html">
-                                                C&oacute; thể bạn quan t&acirc;m
+                                                Có thể bạn quan tâm
                                             </a>
                                         </span>
                                     </h3>
@@ -831,7 +807,7 @@
                                                     <p class="product-title">
                                                         <a
                                                                 href="https://www.webike.vn/cho-xe-may/bike-detail/wave-apha-2016-hang-ton-dk-lan-dau-082017-qua-moi-1903710.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            Wave apha 2016 h&agrave;ng tồn đk lần đầu 08/2017 qua mới
+                                                            Wave apha 2016 hàng tồn đk lần đầu 08/2017 qua mới
                                                         </a>
                                                     </p>
                                                     <p class="price">17.500.000 đ</p>
@@ -852,7 +828,7 @@
                                                     <p class="product-title">
                                                         <a
                                                                 href="https://www.webike.vn/cho-xe-may/bike-detail/wave-a-2017-xe-zin-dep-bstp-chinh-chu-1903460.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            wave a 2017. xe zin đẹp bstp ch&iacute;nh chủ
+                                                            wave a 2017. xe zin đẹp bstp chính chủ
                                                         </a>
                                                     </p>
                                                     <p class="price">13.800.000 đ</p>
@@ -873,7 +849,7 @@
                                                     <p class="product-title">
                                                         <a
                                                                 href="https://www.webike.vn/cho-xe-may/bike-detail/honda-wave-a2017-bs63-may-zin-em-nguyen-thuy-1903370.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            Honda wave a2017 bs63 máy zin &ecirc;m nguy&ecirc;n
+                                                            Honda wave a2017 bs63 máy zin êm nguyên
                                                             thuỷ
                                                         </a>
                                                     </p>
@@ -895,7 +871,7 @@
                                                     <p class="product-title">
                                                         <a
                                                                 href="https://www.webike.vn/cho-xe-may/bike-detail/wave-hon-da-ld-mau-trang-it-su-dung-1903015.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            Wave hon da ld m&agrave;u trắng &iacute;t sử dụng
+                                                            Wave hon da ld màu trắng ít sử dụng
                                                         </a>
                                                     </p>
                                                     <p class="price">5.600.000 đ</p>
@@ -906,7 +882,7 @@
                                             <li class="see_more">
                                                 <a target="_blank"
                                                    href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?sc=395&amp;utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=related">
-                                                    Xem th&ecirc;m
+                                                    Xem thêm
                                                 </a>
                                             </li>
                                         </ul>
@@ -931,8 +907,8 @@
                                                 </a>
                                                 <p class="media_title">
                                                     <a href="https://news.webike.vn/ys-gear-va-akrapovic-ra-mat-ong-xa-chuyen-dung-cho-mt-07-mt-09-va-tracer-9.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=news&amp;utm_content=lastest"
-                                                       target="_blank">Y&#8217;S GEAR v&agrave; Akrapovic ra mắt ống xả
-                                                        chuy&ecirc;n dụng cho MT-07, MT-09 v&agrave; TRACER 9</a>
+                                                       target="_blank">Y&#8217;S GEAR và Akrapovic ra mắt ống xả
+                                                        chuyên dụng cho MT-07, MT-09 và TRACER 9</a>
                                                 </p>
                                                 <span class="pubDate">
                                                     <p class="pub_date">01/01/1970</p>
@@ -950,12 +926,12 @@
                                             </li>
                                             <li>
                                                 <a href="https://news.webike.vn/phu-tung-phu-kien-cho-dong-xe-honda-nsr50-nhap-khau-tu-nhat.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=news&amp;utm_content=lastest"
-                                                   target="_blank">Phụ t&ugrave;ng phụ kiện cho d&ograve;ng xe Honda
+                                                   target="_blank">Phụ t&ugrave;ng phụ kiện cho dòng xe Honda
                                                     NSR50 nhập khẩu từ Nhật</a>
                                             </li>
                                             <li>
                                                 <a href="https://news.webike.vn/honda-vario-160-moi-co-the-sanh-ngang-voi-yamaha-aerox-155.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=news&amp;utm_content=lastest"
-                                                   target="_blank">Honda Vario 160 mới c&oacute; thể sánh ngang
+                                                   target="_blank">Honda Vario 160 mới có thể sánh ngang
                                                     với Yamaha Aerox 155?</a>
                                             </li>
                                             <li>
@@ -965,7 +941,7 @@
                                             </li>
                                             <li class="see_more">
                                                 <a href="https://news.webike.vn/" target="_blank">
-                                                    Xem th&ecirc;m</a>
+                                                    Xem thêm</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -986,15 +962,15 @@
 
         <!-- Popup show phone -->
         <div id="popup_show_phone" class="hidden">
-            <h2 class="module_title">Li&ecirc;n hệ người bán</h2>
+            <h2 class="module_title">Liên hệ người bán</h2>
             <div class="module_body bordered full">
                 <div class="show_phone">
                     <img src="https://www.webike.vn/phone/1902547.png" alt="0927700305"/>
                 </div>
                 <div class="show_info_wvn">
-                    <h4>Mẹo nhỏ khi li&ecirc;n hệ với người bán tr&ecirc;n Webike</h4>
-                    <p><em class="icon"></em>H&atilde;y đề cập đến Webike để nhận được những ưu đ&atilde;i tốt hơn.</p>
-                    <p><em class="icon"></em>Để đảm bảo an to&agrave;n h&atilde;y gặp trực tiếp chủ xe để thực hiện
+                    <h4>Mẹo nhỏ khi liên hệ với người bán trên Webike</h4>
+                    <p><em class="icon"></em>Hãy đề cập đến Webike để nhận được những ưu đãi tốt hơn.</p>
+                    <p><em class="icon"></em>Để đảm bảo an toàn hãy gặp trực tiếp chủ xe để thực hiện
                         các giao dịch.</p>
                 </div>
             </div>
@@ -1009,15 +985,15 @@
             <div class="menu">
                 <div class="container clearfix">
                     <div class="about">
-                        <p class="title">Th&ocirc;ng tin li&ecirc;n hệ</p>
+                        <p class="title">Thông tin liên hệ</p>
                         <ul class="basic-info">
                             <li>
-                                <address>Lầu 20, t&ograve;a nh&agrave; Havana, số 132 H&agrave;m Nghi, P. Bến
-                                    Th&agrave;nh, Q.1, TP. HCM.
+                                <address>Lầu 20, tòa nhà Havana, số 132 Hàm Nghi, P. Bến
+                                    Thành, Q.1, TP. HCM.
                                 </address>
                             </li>
                             <li>
-                                <time>Giờ l&agrave;m việc: Thứ 2 - 6: 8h00 - 17h00</time>
+                                <time>Giờ làm việc: Thứ 2 - 6: 8h00 - 17h00</time>
 
                             </li>
                             <li>
@@ -1027,12 +1003,12 @@
                             </li>
                             <li>
                                 <p class="phone">
-                                    Số b&agrave;n: <a href="tel:028 3821 0587">028 3821 0587</a>
+                                    Số bàn: <a href="tel:028 3821 0587">028 3821 0587</a>
                                 </p>
                             </li>
                             <li>
                                 <p class="phone">
-                                    Đường d&acirc;y n&oacute;ng: <a class="hotline" href="tel:0932 979 060">0932 979
+                                    Đường dây nóng: <a class="hotline" href="tel:0932 979 060">0932 979
                                     060</a> - <a class="hotline" href="tel:0932 858 030">0932 858 030</a> <br>
                                 </p>
                             </li>
@@ -1275,14 +1251,14 @@
                         </div>
                     </div>
                     <div class="accessary">
-                        <p class="title">Si&ecirc;u thị phụ t&ugrave;ng</p>
+                        <p class="title">Siêu thị phụ t&ugrave;ng</p>
                         <ul>
-                            <li><a title="D&ograve;ng xe" target="_blank"
-                                   href="https://shop.webike.vn/Moto/">D&ograve;ng xe</a></li>
-                            <li><a title="H&atilde;ng xe" target="_blank"
-                                   href="https://shop.webike.vn/brd/list/">H&atilde;ng xe</a></li>
-                            <li><a title="Ch&iacute;nh h&atilde;ng" target="_blank"
-                                   href="https://shop.webike.vn/oem_parts/">Ch&iacute;nh h&atilde;ng</a></li>
+                            <li><a title="Dòng xe" target="_blank"
+                                   href="https://shop.webike.vn/Moto/">Dòng xe</a></li>
+                            <li><a title="Hãng xe" target="_blank"
+                                   href="https://shop.webike.vn/brd/list/">Hãng xe</a></li>
+                            <li><a title="Chính hãng" target="_blank"
+                                   href="https://shop.webike.vn/oem_parts/">Chính hãng</a></li>
                             <li><a title="Phụ t&ugrave;ng" target="_blank"
                                    href="https://shop.webike.vn/bm/top/phu-tung-xe-may/1000/">Phụ t&ugrave;ng</a></li>
                             <li><a title="Đồ bảo hộ" target="_blank"
@@ -1292,33 +1268,33 @@
                                    href="https://shop.webike.vn/bm/top/mu-bao-hiem/3001/">Mũ bảo hiểm</a></li>
                             <li><a title="Phụ kiện" target="_blank"
                                    href="https://shop.webike.vn/bm/top/dung-cu-biker-phuot/3000/">Phụ kiện</a></li>
-                            <li><a title="Th&agrave;nh vi&ecirc;n" target="_blank"
-                                   href="https://shop.webike.vn/custom-bike/">Th&agrave;nh vi&ecirc;n</a></li>
+                            <li><a title="Thành viên" target="_blank"
+                                   href="https://shop.webike.vn/custom-bike/">Thành viên</a></li>
                         </ul>
                     </div>
                     <div class="motor-market">
                         <p class="title">Chợ Xe Máy</p>
                         <ul>
-                            <li><a title="Ph&acirc;n khối lớn" target="_blank"
-                                   href="https://www.webike.vn/cho-xe-may/xe-phan-khoi-lon.html">Ph&acirc;n khối
+                            <li><a title="Phân khối lớn" target="_blank"
+                                   href="https://www.webike.vn/cho-xe-may/xe-phan-khoi-lon.html">Phân khối
                                 lớn</a></li>
-                            <li><a title="H&atilde;ng xe" target="_blank"
-                                   href="https://www.webike.vn/cho-xe-may/hang-xe.html">H&atilde;ng xe</a></li>
-                            <li><a title="Ph&acirc;n khối" target="_blank"
-                                   href="https://www.webike.vn/cho-xe-may/theo-phan-khoi.html">Ph&acirc;n khối</a></li>
+                            <li><a title="Hãng xe" target="_blank"
+                                   href="https://www.webike.vn/cho-xe-may/hang-xe.html">Hãng xe</a></li>
+                            <li><a title="Phân khối" target="_blank"
+                                   href="https://www.webike.vn/cho-xe-may/theo-phan-khoi.html">Phân khối</a></li>
                             <li><a title="Loại xe" target="_blank"
                                    href="https://www.webike.vn/cho-xe-may/theo-loai-xe.html">Loại xe</a></li>
-                            <li><a title="Tỉnh th&agrave;nh" target="_blank"
-                                   href="https://www.webike.vn/cho-xe-may/theo-tinh-thanh.html">Tỉnh th&agrave;nh</a>
+                            <li><a title="Tỉnh thành" target="_blank"
+                                   href="https://www.webike.vn/cho-xe-may/theo-tinh-thanh.html">Tỉnh thành</a>
                             </li>
-                            <li><a title="Cửa h&agrave;ng" target="_blank"
-                                   href="https://www.webike.vn/cho-xe-may/shop-list.html">Cửa h&agrave;ng</a></li>
-                            <li><a title="Tiện &iacute;ch" target="_blank"
-                                   href="https://www.webike.vn/tien-ich.html">Tiện &iacute;ch</a></li>
+                            <li><a title="Cửa hàng" target="_blank"
+                                   href="https://www.webike.vn/cho-xe-may/shop-list.html">Cửa hàng</a></li>
+                            <li><a title="Tiện ích" target="_blank"
+                                   href="https://www.webike.vn/tien-ich.html">Tiện ích</a></li>
                         </ul>
                     </div>
                     <div class="">
-                        <p class="title">Th&ocirc;ng tin khác</p>
+                        <p class="title">Thông tin khác</p>
                         <ul>
                             <li>
                                 <a title="Quy chế hoạt động" href="https://www.webike.vn/quy-che-hoat-dong.html"
@@ -1327,9 +1303,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="Ch&iacute;nh sách bảo mật"
+                                <a title="Chính sách bảo mật"
                                    href="https://www.webike.vn/chinh-sach-bao-mat.html" target="_blank">
-                                    Ch&iacute;nh sách bảo mật
+                                    Chính sách bảo mật
                                 </a>
                             </li>
                             <li>
@@ -1338,9 +1314,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="Hỗ trợ khách h&agrave;ng" href="https://www.webike.vn/ho-tro.html"
+                                <a title="Hỗ trợ khách hàng" href="https://www.webike.vn/ho-tro.html"
                                    target="_blank">
-                                    Hỗ trợ khách h&agrave;ng
+                                    Hỗ trợ khách hàng
                                 </a>
                             </li>
                             <li>
@@ -1349,8 +1325,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="Li&ecirc;n hệ" href="https://www.webike.vn/contact.html" target="_blank">
-                                    Li&ecirc;n hệ
+                                <a title="Liên hệ" href="https://www.webike.vn/contact.html" target="_blank">
+                                    Liên hệ
                                 </a>
                             </li>
                         </ul>
@@ -1370,9 +1346,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="Th&ocirc;ng tin xe máy" target="_blank"
+                                <a title="Thông tin xe máy" target="_blank"
                                    href="https://news.webike.vn/thong-tin-xe-may">
-                                    Th&ocirc;ng tin xe máy
+                                    Thông tin xe máy
                                 </a>
                             </li>
                             <li>
@@ -1386,9 +1362,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="Video giải tr&iacute; " target="_blank"
+                                <a title="Video giải trí " target="_blank"
                                    href="https://news.webike.vn/giai-tri">
-                                    Video giải tr&iacute;
+                                    Video giải trí
                                 </a>
                             </li>
                         </ul>
@@ -1535,75 +1511,18 @@
     <script src="/frontend/js/products/package.js?154288030920200827"></script>
     <script src="/v1/pc/js/comment.js?154996577520200827"></script>
 
-
-    <img class="tracking-product" src="https://www.webike.vn/api/tracking-product/1902547.html" alt="tracking product"
-         width="1" height="1"/>
-
-
     <script type="text/javascript" src="/frontend/js/elevatezoom.js?152472729920200827"></script>
     <script type="text/javascript" src="/frontend/js/products/detail.js?152472729920200827"></script>
     <script type="text/javascript" src="/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827"></script>
 
     <script type="text/javascript" src="/frontend/js/products/comments_product.js?159833824020200827"></script>
 
-
-    <style>
-        /* The Modal (background) */
-        #salePopup {
-            display: none;
-            text-align: center;
-            position: fixed;
-            /* Stay in place */
-            z-index: 999;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
-
-        /* Modal Content/Box */
-        #salePopup .popup-content {
-            /*background-color: #fefefe;*/
-            margin: 10% auto;
-            /* 15% from the top and centered */
-            padding: 20px;
-            /*border: 1px solid #888;*/
-            /*width: 80%;  Could be more or less, depending on screen size */
-            max-width: 600px;
-            /* Could be more or less, depending on screen size */
-        }
-
-        #salePopup img {
-            max-width: 500px;
-        }
-
-        /* The Close Button */
-        #salePopup .close {
-            color: #fff;
-            float: right;
-            font-size: 70px;
-            /*font-weight: bold;*/
-            position: absolute;
-            right: 285px;
-            top: 120px;
-        }
-
-        #salePopup .close:hover,
-        #salePopup .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <script>
+        $( "#showPhone-btn" ).click(function() {
+            let phone = $('#phoneNumber').val();
+            $("#phoneShowBox").text(phone)
+        });
+    </script>
     </body>
 
 </html>

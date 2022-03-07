@@ -62,10 +62,17 @@ public class UserService implements IUserService{
         }
         return UserDTO.parseUserDTO(user);
     }
-
+    @Override
+    public List<UserDTO> findAllByDeletedIsFalse() {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        userRepository.findAllByDeletedIsFalse().forEach(user -> {
+            userDTOList.add(UserDTO.parseUserDTO(user));
+        });
+        return userDTOList;
+    }
     private User parseUser(UserDTO userDTO) {
         return new User(userDTO.getUserId(), userDTO.getUserName(), userDTO.getEmail(),
-                userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword(),
-                userDTO.getPhoneNumber(), null);
+                userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword()
+               ,userDTO.isDeleted(), userDTO.getPhoneNumber(), null);
     }
 }
