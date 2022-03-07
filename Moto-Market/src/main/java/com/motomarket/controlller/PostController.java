@@ -59,6 +59,7 @@ public class PostController {
         return modelAndView;
     }
 
+
     @GetMapping("/detailpost/{postId}")
     public ModelAndView viewDetailPost(@PathVariable Long postId){
         PostDTO postDTO = postService.getById(postId);
