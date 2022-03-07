@@ -24,19 +24,19 @@ public class DetailMotorService implements IDetailMotorService{
     private IColorMotorRepository colorMotorRepository;
 
 
-    @Override
-    public DetailMotorDTO getByModelYearAndColorMotor(Long modelYearId, Long colorId) {
-        ModelYear modelYear = modelYearRepository.getById(modelYearId);
-        ColorMotor colorMotor = colorMotorRepository.getById(colorId);
-
-        DetailMotor detailMotor = detailMotorRepository.getByModelYearAndColorMotor(modelYear, colorMotor);
-
-        if (detailMotor == null) {
-//            DetailMotor detailMotor1 = new DetailMotor();
-//            detailMotorRepository.save(detailMotor1);
-        }
-        return new DetailMotorDTO(detailMotor.getDetailMotorId());
-    }
+//    @Override
+//    public DetailMotorDTO getByModelYearAndColorMotor(Long modelYearId, Long colorId) {
+//        ModelYear modelYear = modelYearRepository.getById(modelYearId);
+//        ColorMotor colorMotor = colorMotorRepository.getById(colorId);
+//
+//        DetailMotor detailMotor = detailMotorRepository.getByModelYearAndColorMotor(modelYear, colorMotor);
+//
+//        if (detailMotor == null) {
+////            DetailMotor detailMotor1 = new DetailMotor();
+////            detailMotorRepository.save(detailMotor1);
+//        }
+//        return new DetailMotorDTO(detailMotor.getDetailMotorId());
+//    }
     @Override
     public List<DetailMotorDTO> findAll() {
         return null;
@@ -44,6 +44,11 @@ public class DetailMotorService implements IDetailMotorService{
 
     @Override
     public DetailMotorDTO getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public DetailMotorDTO getByModelYearAndColorMotor(Long modelYearId, Long colorId) {
         return null;
     }
 
