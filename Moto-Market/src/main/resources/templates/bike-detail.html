@@ -102,7 +102,14 @@
                             </aside>
                             <div class="module_body">
                                 <strong>
-                                    <big class="price" <p th:text="${price}"></p>đ</big>
+                                    <th:block th:if="${post.price}">
+                                        <big class="price" <p th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p></big>
+                                        <!-- Other code -->
+                                    </th:block>
+                                    <th:block th:unless="${post.price}">
+                                        <big class="price" <p>Liên hệ</p></big>
+                                        <!-- Other code -->
+                                    </th:block>
                                     <!-- End Group button action -->
                                     <a class="report-product" href="#report-product">
                                         <em class="icon report"></em> Báo cáo vi phạm
@@ -403,7 +410,7 @@
                                             <div class="module_body">
                                                 <div id="bottom-recommendation-container" class="product-grid">
                                                     <div class="page">
-                                                        <div class="item">
+                                                        <div class="item" >
                                                             <a
                                                                     href="https://www.webike.vn/cho-xe-may/bike-detail/can-ban-harley-davidson-softail-slim-2020-mau-den-trang-1815871.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
                                                                 <div class="thumbnail">
@@ -772,27 +779,31 @@
                                     </h3>
                                     <div class="module_body">
                                         <ul class="recently-motor-body">
-                                            <li>
-                                                <a
-                                                        href="https://www.webike.vn/cho-xe-may/bike-detail/ban-xe-wave-alpha-zin-nguoi-dung-1903746.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=related">
-                                                    <div>
-                                                        <img class="lazy"
-                                                             src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
-                                                             data-src="https://imgwebikevn-8743.kxcdn.com/YFuavn3dJsXRVYrSJcWWm-aouYU=/100x77/product/2022/02/18/1903746/wvn.0620f3f3e7780d1.45551222.jpg"
-                                                             alt="Ban xe HONDA Wave Alpha 2017 cu o TPHCM gia 11.909999tr">
+
+                                            <th:block th:each="post : ${postsRelated}">
+                                                <li>
+                                                    <a
+                                                            th:href="@{/post/detailpost/{id} (id=${post.postId})}">
+                                                        <div>
+                                                            <img class="lazy" th:src="@{/api/image/load/{idImage}(idImage=${post.})}"
+                                                                 src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
+                                                                 alt="Ban xe HONDA Wave Alpha 2017 cu o TPHCM gia 11.909999tr">
+                                                        </div>
+                                                    </a>
+                                                    <div class="recently-motor-info">
+                                                        <p class="product-title">
+                                                            <a
+                                                                    href="https://www.webike.vn/cho-xe-may/bike-detail/ban-xe-wave-alpha-zin-nguoi-dung-1903746.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
+                                                                Bán xe wave alpha zin (người d&ugrave;ng)
+                                                            </a>
+                                                        </p>
+                                                        <p class="price">11.909.999 đ</p>
+                                                        <p class="address"></p>
                                                     </div>
-                                                </a>
-                                                <div class="recently-motor-info">
-                                                    <p class="product-title">
-                                                        <a
-                                                                href="https://www.webike.vn/cho-xe-may/bike-detail/ban-xe-wave-alpha-zin-nguoi-dung-1903746.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
-                                                            Bán xe wave alpha zin (người d&ugrave;ng)
-                                                        </a>
-                                                    </p>
-                                                    <p class="price">11.909.999 đ</p>
-                                                    <p class="address"></p>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            </th:block>
+
+
                                             <li>
                                                 <a
                                                         href="https://www.webike.vn/cho-xe-may/bike-detail/wave-apha-2016-hang-ton-dk-lan-dau-082017-qua-moi-1903710.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=related">

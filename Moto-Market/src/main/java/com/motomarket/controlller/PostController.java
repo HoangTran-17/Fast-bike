@@ -13,6 +13,7 @@ import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,6 +42,9 @@ public class PostController {
 
     @Autowired
     private IModelYearService modelYearService;
+
+    @Autowired
+    private IPostRepository postRepository;
 
     @GetMapping("/newpost")
     public ModelAndView toPostPage() {
@@ -71,13 +75,14 @@ public class PostController {
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());
         String timeFormat = time.substring(0, 1).toUpperCase() + time.substring(1);
-        Locale locale = new Locale("vi", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String seriesName = detailMotor.getBrandMotor().getBrandName() + detailMotor.getSeriesMotor().getSeriesName();
+        List<Post> relatedPostList = postRepository.findTopBySeriesMotor(Pageable.ofSize(8),detailMotor.getBrandMotor().getBrandName() +" "+ detailMotor.getSeriesMotor().getSeriesName(), StatusPost.WAITING);
         modelAndView.addObject("post", postDTO);
         modelAndView.addObject("images", imageList);
         modelAndView.addObject("detail", detailMotor);
         modelAndView.addObject("timePost", timeFormat);
-        modelAndView.addObject("price", currencyFormatter.format(postDTO.getPrice()));
+
+        modelAndView.addObject("postsRelated", relatedPostList);
         return modelAndView;
     }
 
