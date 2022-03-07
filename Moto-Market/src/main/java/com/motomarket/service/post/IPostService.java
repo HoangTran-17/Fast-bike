@@ -1,7 +1,5 @@
 package com.motomarket.service.post;
 
-import com.motomarket.repository.model.Post;
-import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.PostDTO;
@@ -20,7 +18,16 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
 
     //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
-    List<PostDTO> findTopByModelMotorIsLike(String modelMotor);
+    Page<PostDTO> findTopByModelMotorIsLike(String modelMotor);
+
+    Page<PostDTO> findTopByProvince(String province);
+
+    Page<PostDTO> findTopByTypeMotor(String typemotor);
+
+    Page<PostDTO> findTopByCapacity(int min, int max);
+
+    //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
+    Page<PostDTO> findTopByFilters(String modelMotor, String province, String typeMotor, int min, int max);
 
 //    Post savePost(Post post);
 }
