@@ -160,9 +160,21 @@ public class PostService implements IPostService {
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     @Override
-    public Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,String province,String typeMotor,int capacityMin, int capacityMax) {
-        Page<Post> posts = postRepository.findTopByModelMotorIsLikeAAndProvinceAndTypeMotorAndCapacity(Pageable.ofSize(pageSize),
-                modelMotor,province,typeMotor, capacityMin, capacityMax, StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,int modelYearMin, int modelYearMax,
+                                          String province,String typeMotor,int capacityMin, int capacityMax,
+                                          Double priceMin, Double priceMax,String kilometerCount, String colorMotor) {
+        Page<Post> posts = postRepository.findTopByFilters(Pageable.ofSize(pageSize),
+                modelMotor, modelYearMin,modelYearMax,province,typeMotor, capacityMin, capacityMax,
+                priceMin,priceMax,kilometerCount,colorMotor,StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 }
+//Pageable pageable,@Param("modelMotor") String modelMotor,
+//                    @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,
+//                    @Param("province") String province,
+//                    @Param("typeMotor") String typeMotor,
+//                    @Param("capacityMin") Integer capacityMin, @Param("capacityMax") Integer capacityMax,
+//                    @Param("priceMin") Double priceMin, @Param("priceMax") Double priceMax,
+//                    @Param("km") String kilometerCount,
+//                    @Param("color") String colorMotor,
+//                    @Param("statusPost") StatusPost statusPost);

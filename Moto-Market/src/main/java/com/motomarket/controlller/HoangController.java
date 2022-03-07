@@ -76,7 +76,10 @@ public class HoangController {
         List<PostDTO> postServiceListOfLatestPosts = postService.findListOfLatestPosts(15);
         System.out.println(postServiceListOfLatestPosts);
 
-        Page<PostDTO> postServiceTopByFilters = postService.findTopByFilters(11,null, null, null, 110, 150);
+//        int pageSize,String modelMotor,int modelYearMin, int modelYearMax,
+//                                          String province,String typeMotor,int capacityMin, int capacityMax,
+//                                          Double priceMin, Double priceMax,String kilometerCount, String colorMotor
+        Page<PostDTO> postServiceTopByFilters = postService.findTopByFilters(11,null,2008,2020, null, null, 110, 150,10000000.0,60000000.0,null,"trắng");
         System.out.println(postServiceTopByFilters);
 //
         Page<PostDTO> postServiceTopByProvince = postService.findTopByProvince(12,"Hà Nội");
