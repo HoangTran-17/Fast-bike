@@ -27,11 +27,12 @@
                     <h1 class="page-header-title">Users</h1>
                 </div>
 
-                <!-- <div class="col-sm-auto">
-                  <a class="btn btn-primary" href="users-add-user.html">
-                    <i class="tio-user-add mr-1"></i> Add user
-                  </a>
-                </div> -->
+
+                <div class="col-sm-auto" th:if="${adminLogin.role =='SUPER_ADMIN'}">
+                    <a class="btn btn-primary" href="users-add-user.html">
+                        <i class="tio-user-add mr-1"></i> Add new admin
+                    </a>
+                </div>
             </div>
             <!-- End Row -->
         </div>
@@ -179,14 +180,14 @@
                     <tr th:each="user:${users}">
                         <td class="table-column-pr-0">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" th:id="${'usersDataCheck'+user.userId}">
+                                <input type="checkbox" class="custom-control-input" th:id="${'usersDataCheck'+user.userId}" >
                                 <label class="custom-control-label" th:for="${'usersDataCheck'+user.userId}"></label>
                             </div>
                         </td>
                         <td class="table-column-pl-0">
                             <a class="d-flex align-items-center" href="#">
                                 <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fvietnamnet.vn%2Fvn%2Fcong-nghe%2Fcong-dong-mang%2Fdan-mang-du-trend-facebook-doi-avatar-thanh-mat-trang-626404.html&psig=AOvVaw0JhMnToPaREchNkzUDkPWT&ust=1646708505349000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKi0v66Bs_YCFQAAAAAdAAAAABAD" alt="Image Description">
+                                    <img class="avatar-img" src="https://icdn.dantri.com.vn/thumb_w/640/2017/1-1510967806416.jpg" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
                                     <span class="d-block h5 text-hover-primary mb-0" th:text="${user.userName}"> <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
