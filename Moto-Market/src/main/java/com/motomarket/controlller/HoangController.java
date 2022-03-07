@@ -1,10 +1,14 @@
 package com.motomarket.controlller;
 
 import com.motomarket.repository.IPostRepository;
+import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.post.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 //////Trang test của Hoàng, anh em cứ để vậy nha
 @Controller
@@ -65,24 +69,24 @@ public class HoangController {
     @GetMapping("/get")
     public void get() {
 
-//        String modelMotor = "Honda Future 125";
-//        List<PostDTO> postList1 = postService.findTopByModelMotorIsLike(modelMotor);
-//        System.out.println(postList1);
+        String modelMotor = "Honda Future 125";
+        List<PostDTO> postServiceTopBySeriesMotor = postService.findTopBySeriesMotor(10,modelMotor);
+        System.out.println(postServiceTopBySeriesMotor);
 
-//        Page<PostDTO> posts = postService.findTopByFilters("", null, null, 110, 150);
-//        System.out.println(posts);
+        List<PostDTO> postServiceListOfLatestPosts = postService.findListOfLatestPosts(15);
+        System.out.println(postServiceListOfLatestPosts);
 
-//        Page<PostDTO> posts = postService.findTopByProvince("Hà Nội");
-//        System.out.println(posts);
+        Page<PostDTO> postServiceTopByFilters = postService.findTopByFilters(11,null, null, null, 110, 150);
+        System.out.println(postServiceTopByFilters);
+//
+        Page<PostDTO> postServiceTopByProvince = postService.findTopByProvince(12,"Hà Nội");
+        System.out.println(postServiceTopByProvince);
 
-//        TypeMotor typeMotor = new TypeMotor();
-//        typeMotor.setTypeMotorName("Xe tay ga");
-//        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(20), "Xe tay ga", StatusPost.PUBLIC);
-//        System.out.println(posts);
-
-//        List<Post> postList = postRepository.findTopByStatusPost(StatusPost.PUBLIC, Pageable.ofSize(18));
-//        System.out.println(postList);
-
+        Page<PostDTO> postServiceTopByModelMotorIsLike = postService.findTopByModelMotorIsLike(20, "Honda");
+        System.out.println(postServiceTopByModelMotorIsLike);
+//
+        Page<PostDTO> postServiceTopByCapacity= postService.findTopByCapacity(4, 120, 150);
+        System.out.println(postServiceTopByCapacity);
     }
 
 

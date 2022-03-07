@@ -102,21 +102,30 @@ public class PostService implements IPostService {
     public void remove(Long id) {
 
     }
-
-
+//    List bài viết mới nhất
     @Override
-    public List<PostDTO> findTop18ByOrderByPostIdDescAndStatusPostIsPublic() {
+    public List<PostDTO> findListOfLatestPosts(int listSize) {
         List<PostDTO> postDTOList = new ArrayList<>();
-        postRepository.findTopByStatusPost(StatusPost.PUBLIC, Pageable.ofSize(18)).forEach(post -> {
+        postRepository.findTopByStatusPost(StatusPost.PUBLIC, Pageable.ofSize(listSize)).forEach(post -> {
             postDTOList.add(PostDTO.parsePostDTO(post));
         });
         return postDTOList;
     }
 
-//  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
+    //  List bài viết mới nhất, tìm kiếm theo seriesMotor -"Honda Future 125"
     @Override
-    public Page<PostDTO> findTopByModelMotorIsLike(String modelMotor) {
-        Page<Post> posts = postRepository.findTopByModelMotorIsLike(Pageable.ofSize(20), modelMotor, StatusPost.PUBLIC);
+    public List<PostDTO> findTopBySeriesMotor(int listSize, String seriesMotor) {
+        List<PostDTO> postDTOList = new ArrayList<>();
+        postRepository.findTopBySeriesMotor(Pageable.ofSize(listSize),seriesMotor,StatusPost.PUBLIC).forEach(post -> {
+            postDTOList.add(PostDTO.parsePostDTO(post));
+        });
+        return postDTOList;
+    }
+
+    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
+    @Override
+    public Page<PostDTO> findTopByModelMotorIsLike(int pageSize,String modelMotor) {
+        Page<Post> posts = postRepository.findTopByModelMotorIsLike(Pageable.ofSize(pageSize), modelMotor, StatusPost.PUBLIC);
         Page<PostDTO> postDTOS = posts.map(post -> {
             return PostDTO.parsePostDTO(post);
         });
@@ -126,8 +135,8 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
     @Override
-    public Page<PostDTO> findTopByProvince(String province) {
-        Page<Post> posts = postRepository.findTopByProvince(Pageable.ofSize(20),province,StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByProvince(int pageSize,String province) {
+        Page<Post> posts = postRepository.findTopByProvince(Pageable.ofSize(pageSize),province,StatusPost.PUBLIC);
         Page<PostDTO> postDTOS = posts.map(post -> {
             return PostDTO.parsePostDTO(post);
         });
@@ -137,26 +146,23 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo typeMotor -"Xe tay ga"
     @Override
-    public Page<PostDTO> findTopByTypeMotor(String typeMotor) {
-        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(20),typeMotor,StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByTypeMotor(int pageSize,String typeMotor) {
+        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(pageSize),typeMotor,StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
     //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
     @Override
-    public Page<PostDTO> findTopByCapacity(int min, int max) {
-        Page<Post> posts = postRepository.findTopByCapacity(Pageable.ofSize(20), min, max, StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax) {
+        Page<Post> posts = postRepository.findTopByCapacity(Pageable.ofSize(pageSize), capacityMin, capacityMax, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     @Override
-    public Page<PostDTO> findTopByFilters(String modelMotor,String province,String typeMotor,int min, int max) {
-        Page<Post> posts = postRepository.findTopByModelMotorIsLikeAAndProvinceAndTypeMotorAndCapacity(Pageable.ofSize(20),
-                modelMotor,province,typeMotor, min, max, StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,String province,String typeMotor,int capacityMin, int capacityMax) {
+        Page<Post> posts = postRepository.findTopByModelMotorIsLikeAAndProvinceAndTypeMotorAndCapacity(Pageable.ofSize(pageSize),
+                modelMotor,province,typeMotor, capacityMin, capacityMax, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
-
-
-
 }

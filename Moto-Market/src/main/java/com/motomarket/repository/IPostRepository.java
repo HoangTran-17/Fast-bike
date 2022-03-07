@@ -31,7 +31,13 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.statusPost = :statusPost order by p.postDate DESC")
     List<Post> findTopByStatusPost(StatusPost statusPost, Pageable pageable);
 
-//  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
+
+    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125"
+    @Query("select p from Post p where p.statusPost = :statusPost and p.modelMotor like :modelMotor% order by p.postDate DESC")
+    List<Post> findTopBySeriesMotor(Pageable pageable,@Param("modelMotor") String modelMotor,@Param("statusPost") StatusPost statusPost);
+
+
+    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
     @Query("select p from Post p where p.statusPost = :statusPost and p.modelMotor like :modelMotor% order by p.postDate DESC")
     Page<Post> findTopByModelMotorIsLike(Pageable pageable,@Param("modelMotor") String modelMotor,@Param("statusPost") StatusPost statusPost);
 
@@ -44,7 +50,7 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     Page<Post> findTopByTypeMotor(Pageable pageable, @Param("typeMotor") String typeMotor, @Param("statusPost") StatusPost statusPost);
 
     //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
-    @Query("select p from Post p where p.statusPost = :statusPost and ((:min is null and :max is null) or (p.detailMotor.seriesMotor.capacity between :min and :max)) order by p.postDate DESC")
+    @Query("select p from Post p where p.statusPost = :statusPost and (p.detailMotor.seriesMotor.capacity between :min and :max) order by p.postDate DESC")
     Page<Post> findTopByCapacity(Pageable pageable, @Param("min") int min, @Param("max") int max, @Param("statusPost") StatusPost statusPost);
 
 //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
