@@ -1,24 +1,14 @@
 package com.motomarket.controlller;
 
-import com.motomarket.repository.IDetailMotorRepository;
-import com.motomarket.repository.IModelYearRepository;
 import com.motomarket.repository.IPostRepository;
-import com.motomarket.repository.IUserRepository;
-import com.motomarket.repository.model.*;
-import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.post.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.List;
 //////Trang test của Hoàng, anh em cứ để vậy nha
 @Controller
-public class AdminController {
+public class HoangController {
 
 //    @Autowired
 //    private IModelYearRepository modelYearRepository;
@@ -96,12 +86,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("motor-management")
-    public ModelAndView motorManagement() {
 
-        ModelAndView modelAndView = new ModelAndView("/admin/motor-management");
-        return modelAndView;
-    }
 
 
 }
