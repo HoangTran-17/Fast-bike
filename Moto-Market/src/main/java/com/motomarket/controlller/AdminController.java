@@ -35,6 +35,7 @@ public class AdminController {
                 return modelAndView;
             } else {
                 modelAndView.setViewName("admin/users");
+                System.out.println(adminLogin.getRole());
                 modelAndView.addObject("adminLogin", adminLogin);
                 modelAndView.addObject("users", getAllByRoleUser(adminLogin));
             }
@@ -67,6 +68,7 @@ public class AdminController {
             cookie.setMaxAge(24 * 60 * 60 * 30);
             response.addCookie(cookie);
             modelAndView.addObject("users", getAllByRoleUser(adminDTO));
+            System.out.println(adminDTO.getRole());
             modelAndView.addObject("adminLogin", adminDTO);
             return modelAndView;
         }
@@ -81,5 +83,13 @@ public class AdminController {
         }
 
         return userDTOS;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView doLogout(HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/login");
+        Cookie cookie = new Cookie("loginAdmin", "0");
+        response.addCookie(cookie);
+        return modelAndView;
     }
 }

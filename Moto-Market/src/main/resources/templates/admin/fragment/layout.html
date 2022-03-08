@@ -605,8 +605,8 @@
                             <img class="avatar-img" src="/admin/assets/img/160x160/img6.jpg" alt="Image Description">
                           </div>
                           <div class="media-body">
-                            <span class="card-title h5">Mark Williams</span>
-                            <span class="card-text">mark@example.com</span>
+                            <span class="card-title h5" th:text="${adminLogin.userName}"></span>
+                            <span class="card-text" th:text="${adminLogin.email}"></span>
                           </div>
                         </div>
                       </div>
@@ -700,7 +700,7 @@
 
                       <div class="dropdown-divider"></div>
 
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" th:href="@{/admin/logout}">
                         <span class="text-truncate pr-2" title="Sign out">Sign out</span>
                       </a>
                     </div>
