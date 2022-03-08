@@ -46,9 +46,6 @@
           href="/frontend/moto-v2/pc/css/pages/suggest_bike_menu.css?160162130020200827">
 
 
-
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-
 </head>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="15" style="padding-bottom:0px !important">
@@ -58,17 +55,7 @@
 <div class="wrapper">
     <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
     <div class="container-page container-series">
-        <section id="banner-topmoto">
-            <!--banner-->
-            <figure>
-                <a href='/gallery/www/delivery/ck.php?oaparams=2__bannerid=14__zoneid=14__cb=b5fc93116a__oadest=https%3A%2F%2Fwww.webike.vn%2Fcho-xe-may.html'
-                   target='_blank'><img src='http://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2019/06/29045541/23.4.png' width='1900'
-                                        height='282' alt='Webike Việt Nam' title='Webike Việt Nam' border='0'/></a>
-                <div id='beacon_b5fc93116a' style='position: absolute; left: 0px; top: 0px; visibility: hidden;'><img
-                        src='http://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2019/06/29045541/23.4.png'
-                        width='0' height='0' alt='' style='width: 0px; height: 0px;'/></div>
-            </figure>
-        </section>
+
         <section class="container-topmoto">
             <div class="container">
                 <div class="search-topmoto">
@@ -77,20 +64,6 @@
                         <a class="btn-see-all pull-right" href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
                             Xem tất cả (221.558 xe)
                         </a>
-                        <ul class="pull-left">
-                            <li>
-                                <label class="container-checkbox">
-                                    Xe cũ
-                                    <input type="checkbox" checked="checked" id="condition_new">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container-checkbox">
-                                    Xe mới
-                                    <input type="checkbox" checked="checked" id="condition_used">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                        </ul>
                     </div>
                     <form action="https://www.webike.vn/cho-xe-may/danh-sach-xe.html" id="advanced_search" method="get"
                           data-url="https://www.webike.vn/motomarket.html">

@@ -1,0 +1,560 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="vi"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="vi"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="vi"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="vi" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Cần bán HONDA Wave Alpha 2005 màu đen đỏ ở Bà Rịa-Vũng Tàu giá 13tr MSP #1902547</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1050">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/frontend/css/font.css?152877481320200827">
+    <link rel="stylesheet" href="/frontend/css/desktop.css?159852541620200827">
+    <link rel="stylesheet" href="/frontend/css/main.css?158348098520200827">
+    <link rel="stylesheet" href="/frontend/css/app.css?153922337620200827" media="none" onload="media='all'">
+    <link rel="stylesheet" href="/frontend/css/basic.css?152472729920200827">
+    <link rel="stylesheet" href="/frontend/css/libs.css?152472729920200827" media="none" onload="media='all'">
+    <link rel="stylesheet" href="/frontend/css/message.css?153691258420200827"/>
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto_market_footer.css?159852541620200827">
+    <script type="text/javascript" src="/v1/vendor/yall/yall-2.1.0.min.js?154996577520200827"></script>
+    <link rel="shortcut icon" href="/favicon.png?152472729920200827" type="image/png">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto_market_header.css?159852541620200827">
+    <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827">
+    <link rel="stylesheet" href="/frontend/css/bike_detail.css?159852541620200827">
+
+    <link href="/frontend/slider/thumbnail-slider.css" rel="stylesheet" type="text/css" />
+    <link href="/frontend/slider/ninja-slider.css" rel="stylesheet" type="text/css" />
+    <script src="/frontend/slider/thumbnail-slider.js" type="text/javascript"></script>
+    <script src="/frontend/slider/ninja-slider.js" type="text/javascript"></script>
+
+    <div class="wrapper" style="padding-bottom:0px !important">
+        <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
+        <div id="wrapper" class="container right-column">
+            <!--            <div id="breadcrumbs">-->
+            <!--                <ul>-->
+            <!--                    <li><a href="https://www.webike.vn/cho-xe-may.html">Chợ xe máy</a></li>-->
+            <!--                    <li>-->
+            <!--                        <a href="https://www.webike.vn/cho-xe-may/hang-xe/honda-1.html">-->
+            <!--                            HONDA-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <a href="https://www.webike.vn/cho-xe-may/series/wave-alpha-395.html">-->
+            <!--                            Wave Alpha-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?year_from=2005&amp;year_to=2005">-->
+            <!--                            2005-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?">-->
+            <!--                        Đen Đỏ</a>-->
+            <!--                    </li>-->
+            <!--                    <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?loc=45">Bà Rịa-Vũng-->
+            <!--                        Tàu</a></li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
+
+            <div id="center" class="product_detail"  >
+                <div id="content">
+                    <article class="product" id="product-123">
+                        <h1 class="module_title">
+                            <span class="bottom_redline" th:utext="${post.title}">
+                            </span>
+                            <label class="i-condition p-new"> Xe cũ</label>
+                        </h1>
+
+
+                        <section class="module specifications">
+                            <aside class="figure">
+                                <div id='ninja-slider'>
+                                    <div>
+                                        <div class="slider-inner">
+                                            <ul>
+                                                <th:block th:each="image : ${images}">
+                                                    <li><a class="ns-img" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a></li>
+                                                </th:block>
+                                            </ul>
+                                        </div>
+                                        <div id="thumbnail-slider">
+                                            <div class="inner">
+                                                <ul>
+                                                    <th:block th:each="image : ${images}">
+                                                        <li>
+                                                            <a class="thumb" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a>
+                                                        </li>
+                                                    </th:block>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="module_body">
+                                <strong>
+                                    <th:block th:if="${post.price}">
+                                        <big class="price" <p th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p></big>
+                                        <!-- Other code -->
+                                    </th:block>
+                                    <th:block th:unless="${post.price}">
+                                        <big class="price" <p>Liên hệ</p></big>
+                                        <!-- Other code -->
+                                    </th:block>
+                                    <!-- End Group button action -->
+                                    <a class="report-product" href="#report-product">
+                                        <em class="icon report"></em> Báo cáo vi phạm
+                                    </a>
+                                    <!--endif-->
+                                    <div id="report-product" class="hidden">
+                                        <form action="" method="post">
+                                            <h3>
+                                                <span>Tin này có vấn đề gì?</span>
+                                            </h3>
+                                            <ul>
+                                                <li>
+                                                    <label><input type="checkbox" name="chk_report" value="2">Có
+                                                        dấu hiệu lừa đảo</label>
+                                                </li>
+                                                <li>
+                                                    <label><input type="checkbox" name="chk_report"
+                                                                  value="3">Hàng đã bán.</label>
+                                                </li>
+                                                <li>
+                                                    <label><input type="checkbox" name="chk_report"
+                                                                  value="4">Không liên lạc được.</label>
+                                                </li>
+                                                <li>
+                                                    <label><input type="checkbox" name="chk_report"
+                                                                  value="5">Thông tin không đ&uacute;ng thực
+                                                        tế</label>
+                                                </li>
+                                                <li>
+                                                    <label><input type="checkbox" name="chk_report"
+                                                                  value="1">Khác</label>
+                                                    <br>
+                                                    <textarea disabled="true" rows="1" cols="1" name="other_report"
+                                                              placeholder="Nhập nội dung"
+                                                              class="other_report"></textarea>
+                                                </li>
+                                                <li>
+                                                    <a class="btn-bordered btn-report-product" data-pid="1902547">Gửi
+                                                        báo cáo</a>
+                                                </li>
+                                            </ul>
+                                        </form>
+
+                                        <a class="fancybox-close" href="javascript:;" onclick="$.fancybox.close();"></a>
+                                    </div>
+                                </strong>
+
+                                <!-- show expired info -->
+                                <!-- show expired info -->
+
+                                <table>
+                                    <tr>
+                                        <td width="18%">
+                                            <label title="">Dòng xe</label>
+                                        </td>
+                                        <td width="30%" th:utext="${post.modelMotor}">
+                                        </td>
+                                        <td width="15%">
+                                            <label title="Đã đi">Đã đi</label>
+                                        </td>
+                                        <td width="47%" th:utext="${post.kilometerCount}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label title="Đời xe">Đời xe</label>
+                                        </td>
+                                        <td  th:utext="${detail.modelYear.modelYearName}">
+                                        </td>
+                                        <td>
+                                            <label title="Sở hữu">Sở Hữu</label>
+                                        </td>
+                                        <th:block  th:switch="${post.ownership}">
+                                            <td th:case="${T(com.motomarket.repository.model.Ownership).OWNERSHIP}">
+                                                Chính Chủ
+                                            </td>
+                                            <td th:case="${T(com.motomarket.repository.model.Ownership).NO_OWNERSHIP}">
+                                                 Không Chính Chủ
+                                            </td>
+                                        </th:block>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label title="Phân khối">Phân khối</label>
+                                        </td>
+                                        <td  th:utext="${detail.seriesMotor.capacity} + ' cc'">
+
+                                        </td>
+                                        <td>
+                                            <label title="Loại xe">Loại xe</label>
+                                        </td>
+                                        <td th:utext="${detail.typeMotor.typeMotorName}">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label title="Màu">Màu</label>
+                                        </td>
+                                        <td th:utext="${detail.colorMotor.colorName}">
+
+                                        </td>
+                                        <td>
+                                            <label title="Địa điểm">Địa điểm</label>
+                                        </td>
+                                        <td>
+                                          <span th:utext="${post.district}"></span>, <span th:utext="${post.province}"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label title="Ngày đăng">Ngày đăng</label>
+                                        </td>
+                                        <td>
+                                            <time th:utext="${timePost}"></time>
+                                        </td>
+                                        <td colspan="2">
+                                            <a target="_blank"
+                                               href="https://www.webike.vn/cho-xe-may/series/wave-alpha-395.html">
+                                                Xem thống kê xe <b th:utext="${detail.seriesMotor.seriesName}"></b> khác
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- process customer info -->
+                                <!-- end - process customer info -->
+                                <div class="customer_info" id="right-shop-info">
+                                    <p class="name">
+                                        Liên hệ mua xe:
+                                        <a target="_blank" href="https://www.webike.vn/cho-xe-may/user/262813">
+                                            <b th:utext="${post.sellerName}"></b>
+                                        </a>
+                                    </p>
+                                    <div class="action">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a aria-hidden="true" id="showPhone-btn" href="javascript:void(0);"
+                                                       class="btn-show-address show-address">
+                                                        <em class="icon phone"></em>
+                                                        <span id="phoneShowBox">Bấm để xem số điện thoại</span>
+                                                    </a>
+                                                    <input type="hidden" id="phoneNumber" th:value="${post.sellerPhoneNumber}">
+                                                </td>
+                                                <td>
+                                                    <p class="note_contact">* Vui lòng cho người bán biết
+                                                        bạn đã tìm thấy xe của họ tại Fastbike</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="safety-buy">
+                                    <h3 class="module_title line_bottom">
+                                        <span class="title">
+                                            Mua xe an toàn
+                                        </span>
+                                    </h3>
+                                    <ul class="content">
+                                        <li><span style="color:red">KHÔNG ĐẶT CỌC, CHUYỂN KHOẢN trước khi nhận
+                                                xe.</span></li>
+                                        <li>Nhờ người có chuyên môn kiểm tra xe, tránh mua xe bị thay thế phụ tùng kém
+                                            chất lượng, không rõ nguồn gốc, xe gian...
+                                        </li>
+                                        <li>Kiểm tra kỹ giấy tờ xe và các giấy tờ mua bán liên quan.</li>
+                                        <li>Hẹn gặp, giao dịch ở nơi an toàn.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="module middle" id="module_middle">
+                            <div class="in_left">
+                                <div class="product_info tabs">
+                                    <div class="tabslet">
+                                        <ul class="tab_links">
+                                            <li class="item selected">
+                                                <a href="#tab-description">
+                                                    Mô tả xe
+                                                </a>
+                                            </li>
+                                            <li class="item tab-spec">
+                                                <span class="tooltip-spec">Thông số kỹ thuật được cập nhật từ
+                                                    nh&agrave; sản xuất</span>
+                                                <a href="#tab-spec">
+                                                    Thông số kỹ thuật
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab_contents">
+                                        <div class="show">
+                                            <p th:utext="${post.description}"></p>
+                                        </div>
+                                        <div class="" id="tab-spec">
+                                            <section class="detail">
+                                                <h2>Thông số kỹ thuật của &quot;Wave Alpha 2019&quot;</h2>
+                                                <table border="0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>Động cơ</th>
+                                                        <td>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Hệ thống khởi động</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tỷ số n&eacute;n</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Hệ thống l&agrave;m m&aacute;t</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Ph&acirc;n khối</th>
+                                                        <td> (cm3/cc)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Hộp số</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Đường k&iacute;nh x H&agrave;nh tr&igrave;nh piston</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Công suất cực đại</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Momen xoắn cực đại</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>K&iacute;ch thước</th>
+                                                        <td> (mm)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Chiều d&agrave;i 2 trục b&aacute;nh xe</th>
+                                                        <td> (mm)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Chiều cao y&ecirc;n</th>
+                                                        <td> (mm)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Khoảng s&aacute;ng gầm xe</th>
+                                                        <td> (mm)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dung t&iacute;ch b&igrave;nh xăng</th>
+                                                        <td> (Lít)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Trọng lượng</th>
+                                                        <td> (kg)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Phanh</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>K&iacute;ch thước lốp trước</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>K&iacute;ch thước lốp sau</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <section class="module" style="float:left; margin-top:25px">
+                                    <div class="mar30">
+                                        <style media="screen">
+                                            .package {
+                                                left: 5px !important;
+                                            }
+                                        </style>
+                                        <div class="module" id="bottom-recommendation">
+                                            <h3 class="module_title line_bottom">
+                                                <span class="title">
+                                                    <a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
+                                                        Danh sách mua bán xe máy
+                                                    </a>
+                                                </span>
+                                            </h3>
+                                            <div class="module_body">
+                                                <div id="bottom-recommendation-container" class="product-grid">
+                                                    <div class="page">
+                                                        <th:block th:each="newPost : ${newPosts}">
+                                                            <div class="item" style="max-height: 182px;">
+                                                                <a th:href="@{/post/detailpost/{id} (id=${newPost.postId})}">
+                                                                <div class="thumbnail">
+                                                                        <img class="lazy" width="155px" height="116px"
+                                                                             th:src="@{/api/image/load/{idImage}(idImage=${newPost.getImageDTOList().get(0).getImageName()})}">
+
+                                                                    </div>
+                                                                    <label th:utext="${newPost.title}">
+                                                                    </label>
+                                                                    <th:block th:if="${newPost.price}">
+                                                                        <span class="price" th:text="${#numbers.formatDecimal(newPost.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'" ></span>
+                                                                        <i style="font-size: 10px" class="old">Xe cũ</i>
+                                                                    </th:block>
+                                                                    <th:block th:unless="${newPost.price}">
+                                                                        <p class="price">Liên hệ</p>
+                                                                        <i style="font-size: 10px" class="old">Xe cũ</i>
+                                                                    </th:block>
+                                                                    </span>
+                                                                    <address style="font-size: 11px" th:utext="${newPost.district}+', ' + ${newPost.province}"></address>
+                                                                </a>
+                                                            </div>
+                                                        </th:block>
+
+                                                    </div>
+                                                    <div class="center">
+                                                        <a class="module-btn btn-style2"
+                                                           href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
+                                                            Xem thêm
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <style>
+                                            .info-moto {
+                                                position: absolute;
+                                                bottom: 70px;
+                                                right: 15px;
+                                                float: left
+                                            }
+
+                                            .info-moto .count-img {
+                                                margin: 0 0 0 5px;
+                                                padding: 1px 5px;
+                                                color: #fff;
+                                                font-weight: 700;
+                                                float: left;
+                                                background-color: rgba(0, 0, 0, .5);
+                                                border-radius: 2px;
+                                                line-height: 16.8px
+                                            }
+                                        </style>
+                                    </div>
+                                </section>
+
+                            </div>
+
+                            <div class="in_right">
+                                <section class="module recently-motor">
+                                    <h3 class="module_title line_bottom">
+                                        <span class="title">
+                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/honda/wave-alpha.html">
+                                                Có thể bạn quan tâm
+                                            </a>
+                                        </span>
+                                    </h3>
+                                    <div class="module_body">
+                                        <ul class="recently-motor-body">
+
+                                            <th:block th:each="post : ${postsRelated}">
+                                                <li>
+                                                    <a
+                                                            th:href="@{/post/detailpost/{id} (id=${post.postId})}">
+                                                        <div>
+                                                            <img th:src="@{/api/image/load/{idImage}(idImage=${post.getImageDTOList().get(0).getImageName()})}">
+                                                        </div>
+                                                    </a>
+                                                    <div class="recently-motor-info">
+                                                        <p class="product-title">
+                                                            <a
+                                                                    th:href="@{/post/detailpost/{id} (id=${post.postId})}">
+                                                               <span th:utext="${post.title}"></span>
+                                                            </a>
+                                                        </p>
+                                                        <th:block th:if="${post.price}">
+                                                            <p class="price" th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
+                                                        </th:block>
+                                                        <th:block th:unless="${post.price}">
+                                                            <p class="price">Liên hệ</p>
+                                                        </th:block>
+                                                        <p class="address" th:utext="${post.district}+', ' + ${post.province}"></p>
+                                                    </div>
+                                                </li>
+                                            </th:block>
+
+                                            <li class="see_more">
+                                                <a target="_blank"
+                                                   href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?sc=395&amp;utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=related">
+                                                    Xem thêm
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </section>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- End Popup show phone -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+
+        <a id="gotop" href="#" rel="nofollow">TOP</a>
+    </div>
+
+
+    <script src="/frontend/js/jquery.js?152472729920200827"></script>
+    <script src="/frontend/js/jquery_libs.js?154442822520200827"></script>
+    <script src="/frontend/js/vendor.js?152472729920200827"></script>
+    <script src="/frontend/js/fancybox.js?152472729920200827"></script>
+    <script src="/frontend/js/select2.js?152472729920200827"></script>
+    <script src="/frontend/js/angular.js?152472729920200827"></script>
+    <script src="/frontend/js/app.js?159852541620200827"></script>
+    <script src="/frontend/js/shop/shop_message.js?154996577520200827"></script>
+    <script src="/frontend/js/products/package.js?154288030920200827"></script>
+    <script src="/v1/pc/js/comment.js?154996577520200827"></script>
+
+    <script type="text/javascript" src="/frontend/js/elevatezoom.js?152472729920200827"></script>
+    <script type="text/javascript" src="/frontend/js/products/detail.js?152472729920200827"></script>
+    <script type="text/javascript" src="/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827"></script>
+
+    <script type="text/javascript" src="/frontend/js/products/comments_product.js?159833824020200827"></script>
+
+    <script>
+        $( "#showPhone-btn" ).click(function() {
+            let phone = $('#phoneNumber').val();
+            $("#phoneShowBox").text(phone)
+        });
+    </script>
+    </body>
+
+</html>
