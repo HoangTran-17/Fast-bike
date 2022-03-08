@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "image")
-@ToString
+//@ToString
 public class Image {
 
     @Id
