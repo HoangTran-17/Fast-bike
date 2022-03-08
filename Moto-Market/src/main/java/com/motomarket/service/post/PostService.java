@@ -175,6 +175,8 @@ public class PostService implements IPostService {
                 priceMin,priceMax,kilometerCount,colorMotor,StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
+
+
 }
 //Pageable pageable,@Param("modelMotor") String modelMotor,
 //                    @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,

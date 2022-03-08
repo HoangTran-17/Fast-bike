@@ -47,8 +47,10 @@ public class PostController {
 
     @GetMapping("/newpost")
     public ModelAndView toPostPage() {
+        UserDTO userLogin =  userService.getById(1L);
         ModelAndView modelAndView = new ModelAndView("new-post");
         modelAndView.addObject("post", new PostDTO());
+        modelAndView.addObject("userLogin",userLogin);
         return modelAndView;
     }
 
@@ -66,10 +68,21 @@ public class PostController {
     @GetMapping("/detailpost/{postId}")
     public ModelAndView viewDetailPost(@PathVariable Long postId){
         PostDTO postDTO = postService.getById(postId);
-        System.out.println(postDTO);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
+<<<<<<< HEAD
+=======
+
+        DetailMotor detailMotor = detailMotorService.getDetailMotorById(postDTO.getDetailMotorDTO().getDetailMotorId());
+//        DetailMotorDTO detailMotor = detailMotorService.getById(postDTO.getDetailMotorDTO().getDetailMotorId());
+
+>>>>>>> huu-dev
         DetailMotorDTO detailMotorDTO =postDTO.getDetailMotorDTO();
+
         ModelAndView modelAndView = new ModelAndView("moto-detail");
+<<<<<<< HEAD
+=======
+
+>>>>>>> huu-dev
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());
@@ -81,9 +94,9 @@ public class PostController {
         modelAndView.addObject("images", imageList);
         modelAndView.addObject("detail", detailMotorDTO);
         modelAndView.addObject("timePost", timeFormat);
-
         modelAndView.addObject("postsRelated", relatedPostDTO);
         modelAndView.addObject("newPosts",newPostList);
+        modelAndView.addObject("postOwner", userDTO);
         return modelAndView;
     }
 
