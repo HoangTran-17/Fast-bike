@@ -239,9 +239,14 @@
                                 <!-- end - process customer info -->
                                 <div class="customer_info" id="right-shop-info">
                                     <p class="name">
-                                        Liên hệ mua xe:
-                                        <a target="_blank" href="https://www.webike.vn/cho-xe-may/user/262813">
+                                        Họ tên chủ xe:
+                                        <strong>
                                             <b th:utext="${post.sellerName}"></b>
+                                        </strong>
+                                        <br>
+                                        Liên hệ người đăng:
+                                        <a target="_blank" href="#">
+                                            <b th:utext="${postOwner.userName}"></b>
                                         </a>
                                     </p>
                                     <div class="action">
@@ -415,7 +420,7 @@
                                                                 <a th:href="@{/post/detailpost/{id} (id=${newPost.postId})}">
                                                                 <div class="thumbnail">
                                                                         <img class="lazy" width="155px" height="116px"
-                                                                             th:src="@{/api/image/load/{idImage}(idImage=${newPost.getImageDTOList().get(0).getImageName()})}">
+                                                                             th:src="@{/api/image/load/{idImage}(idImage=${newPost.imageDTOList.get(0).imageName})}">
 
                                                                     </div>
                                                                     <label th:utext="${newPost.title}">
@@ -556,5 +561,4 @@
         });
     </script>
     </body>
-
 </html>
