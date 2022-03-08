@@ -394,7 +394,7 @@
                                     </div>
                                     <div class="item-center ">
                                         <div class="input-style1">
-                                            <input required="true" type="text" th:field="*{sellerName}"  name="contact_name" th:value="${userLogin.userName}" disabled>
+                                            <input required="true" type="text" id="sellerName"  name="sellerName" th:value="${userLogin.userName}" readonly>
                                         </div>
                                     </div>
                                     <div class="item-right"><label class="msg_warning hide"></label></div>
@@ -409,8 +409,8 @@
                                     </div>
                                     <div class="item-center ">
                                         <div class="input-style1">
-                                            <input required="true" type="text" name="contact_phone"
-                                                   id="contact_phone" value="" th:field="*{sellerPhoneNumber}" th:value="${userLogin.phoneNumber}" >
+                                            <input required="true" type="text" name="sellerPhoneNumber"
+                                                   id="sellerPhoneNumber" th:value="${userLogin.phoneNumber}" readonly >
                                         </div>
                                     </div>
                                 </div>
