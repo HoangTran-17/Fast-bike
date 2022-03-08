@@ -59,23 +59,24 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files) {
+    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files) {
         Date date = new Date();
-        post.setStatusPost(StatusPost.PUBLIC);
-        post.setPostDate(date);
+        postDTO.setStatusPost(StatusPost.PUBLIC);
+        postDTO.setPostDate(date);
         if (ownershipSelect == 0) {
-            post.setOwnership(Ownership.OWNERSHIP);
+            postDTO.setOwnership(Ownership.OWNERSHIP);
         } else {
-            post.setOwnership(Ownership.NO_OWNERSHIP);
+            postDTO.setOwnership(Ownership.NO_OWNERSHIP);
         }
-        post.setUserDTO(user);
-        post.setDetailMotorDTO(detailMotor);
-        PostDTO newPost = save(post);
+        postDTO.setUserDTO(user);
+        postDTO.setDetailMotorDTO(detailMotor);
+        Post post = parsePost(postDTO);
+        Long postId = saveAndGetPostId(post);  //
         for (MultipartFile file : files) {
             String uuid = UUID.randomUUID().toString();
             ImageDTO image = new ImageDTO();
             image.setImageName(uuid);
-            image.setPostId(newPost.getPostId());
+            image.setPostId(postId);
             try {
                 file.transferTo(new File(rootPath + "/" + uuid + ".png"));
             } catch (IOException e) {
@@ -83,7 +84,13 @@ public class PostService implements IPostService {
             }
             imageService.save(image);
         }
-        return newPost;
+        Post newPost = postRepository.getById(postId);
+        return PostDTO.parsePostDTO(newPost);
+    }
+
+    private Long saveAndGetPostId(Post post) {
+        Post newPost = postRepository.save(post);
+        return newPost.getPostId();
     }
 
     private Post parsePost(PostDTO postDTO) {
