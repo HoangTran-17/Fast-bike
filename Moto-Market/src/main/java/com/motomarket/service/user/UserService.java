@@ -62,6 +62,12 @@ public class UserService implements IUserService{
         }
         return UserDTO.parseUserDTO(user);
     }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
     @Override
     public List<UserDTO> findAllByDeletedIsFalse() {
         List<UserDTO> userDTOList = new ArrayList<>();
