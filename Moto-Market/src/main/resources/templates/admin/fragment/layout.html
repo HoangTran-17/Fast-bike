@@ -827,14 +827,19 @@
 
                     <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                       <li class="nav-item">
-                        <a class="nav-link " href="new-post.html" title="New Posts">
+                        <a class="nav-link " th:href="@{/admin/all-post}" title="New Posts">
                           <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">New</span>
+                          <span class="text-truncate">All</span>
                         </a>
                       </li>
-
                       <li class="nav-item">
-                        <a class="nav-link " href="hidden-posts.html" title="Hidden Posts">
+                        <a class="nav-link " href="waiting-post.html" title="New Posts">
+                          <span class="tio-circle nav-indicator-icon"></span>
+                          <span class="text-truncate">Waiting</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link " href="hidden-post.html" title="Hidden Posts">
                           <span class="tio-circle nav-indicator-icon"></span>
                           <span class="text-truncate">Hidden</span>
                         </a>

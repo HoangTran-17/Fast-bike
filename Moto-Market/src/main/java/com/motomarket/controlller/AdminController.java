@@ -1,7 +1,10 @@
 package com.motomarket.controlller;
 
 import com.motomarket.repository.model.Role;
+import com.motomarket.repository.model.StatusPost;
+import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,9 @@ public class AdminController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IPostService postService;
 
     @GetMapping("/login")
     public ModelAndView toAdminLoginPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin) {
@@ -91,5 +97,23 @@ public class AdminController {
         Cookie cookie = new Cookie("loginAdmin", "0");
         response.addCookie(cookie);
         return modelAndView;
+    }
+
+    @GetMapping("/all-post")
+    public ModelAndView toAllPostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/all-post");
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            List<PostDTO> allPost = postService.findAll();
+            allPost.removeIf(postDTO -> postDTO.getStatusPost().equals(StatusPost.DELETE));
+            modelAndView.addObject("allPost",allPost);
+            modelAndView.addObject("adminLogin",adminLogin);
+            return modelAndView;
+        }
+
     }
 }

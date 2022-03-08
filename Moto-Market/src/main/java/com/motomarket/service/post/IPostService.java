@@ -1,5 +1,6 @@
 package com.motomarket.service.post;
 
+import com.motomarket.repository.model.Post;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.PostDTO;
@@ -37,6 +38,5 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province,String typeMotor,int capacityMin, int capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
-//    Post savePost(Post post);
 }
 
