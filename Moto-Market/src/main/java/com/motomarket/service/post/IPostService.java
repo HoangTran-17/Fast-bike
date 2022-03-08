@@ -13,21 +13,29 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files);
 
-    //    Trang chủ - List 18 post mới nhất có statusPost là Public.
-    List<PostDTO> findTop18ByOrderByPostIdDescAndStatusPostIsPublic();
 
+    //    List bài viết mới nhất
+    List<PostDTO> findListOfLatestPosts(int listSize);
 
-    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
-    Page<PostDTO> findTopByModelMotorIsLike(String modelMotor);
+    //  List bài viết mới nhất, tìm kiếm theo seriesMotor -"Honda Future 125"
+    List<PostDTO> findTopBySeriesMotor(int listSize, String seriesMotor);
 
-    Page<PostDTO> findTopByProvince(String province);
+    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 "
+    Page<PostDTO> findTopByModelMotorIsLike(int pageSize,String modelMotor);
 
-    Page<PostDTO> findTopByTypeMotor(String typemotor);
+    //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
+    Page<PostDTO> findTopByProvince(int pageSize,String province);
 
-    Page<PostDTO> findTopByCapacity(int min, int max);
+    //  List bài viết mới nhất, tìm kiếm theo typeMotor -"Xe tay ga"
+    Page<PostDTO> findTopByTypeMotor(int pageSize,String typeMotor);
+
+    //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
+    Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax);
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
-    Page<PostDTO> findTopByFilters(String modelMotor, String province, String typeMotor, int min, int max);
+    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,int modelYearMin, int modelYearMax,
+                                   String province,String typeMotor,int capacityMin, int capacityMax,
+                                   Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
 //    Post savePost(Post post);
 }

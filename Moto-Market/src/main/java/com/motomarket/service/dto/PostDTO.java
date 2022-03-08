@@ -8,7 +8,9 @@ import javax.persistence.Column;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -65,13 +67,21 @@ public class PostDTO {
     @NotBlank
     private DetailMotorDTO detailMotorDTO;
 
+    private List<ImageDTO> imageDTOList;
+
     public static PostDTO parsePostDTO(Post post) {
         UserDTO userDTO = UserDTO.parseUserDTO(post.getUser());
         DetailMotorDTO detailMotorDTO = DetailMotorDTO.parseDetailMotorDTO(post.getDetailMotor());
+
+        List<ImageDTO> imageDTOList = new ArrayList<>();
+        post.getImageList().forEach(image -> {
+            imageDTOList.add(ImageDTO.parseImageDTO(image));
+        });
+
         return new PostDTO(post.getPostId(), post.getStatusPost(), post.getTitle(), post.getModelMotor(),
                 post.getKilometerCount(), post.getDescription(), post.getPrice(),
                 post.getSellerName(), post.getSellerPhoneNumber(), post.getProvince(), post.getDistrict(), post.getPostDate(), post.getOwnership(),
-                userDTO,detailMotorDTO);
+                userDTO,detailMotorDTO,imageDTOList);
     }
 
 }

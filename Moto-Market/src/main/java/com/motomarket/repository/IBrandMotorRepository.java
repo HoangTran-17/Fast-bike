@@ -17,6 +17,6 @@ public interface IBrandMotorRepository extends JpaRepository<BrandMotor, Long> {
 //            "where w.id = :id")
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
-
+    BrandMotor getByBrandName(String brandName);
 }
 

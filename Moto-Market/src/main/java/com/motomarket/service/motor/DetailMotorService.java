@@ -1,27 +1,33 @@
 package com.motomarket.service.motor;
 
-import com.motomarket.repository.IColorMotorRepository;
-import com.motomarket.repository.IDetailMotorRepository;
-import com.motomarket.repository.IModelYearRepository;
-import com.motomarket.repository.model.ColorMotor;
-import com.motomarket.repository.model.DetailMotor;
-import com.motomarket.repository.model.ModelYear;
+import com.motomarket.repository.*;
+import com.motomarket.repository.model.*;
 import com.motomarket.service.dto.ColorMotorDTO;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.ModelYearDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DetailMotorService implements IDetailMotorService{
+    @Autowired
+    private IBrandMotorRepository brandMotorRepository;
     @Autowired
     private IDetailMotorRepository detailMotorRepository;
     @Autowired
     private IModelYearRepository modelYearRepository;
     @Autowired
     private IColorMotorRepository colorMotorRepository;
+    @Autowired
+    private ISeriesMotorRepository seriesMotorRepository;
+    @Autowired
+    private IModelYearService modelYearService;
+    @Autowired
+    private IColorMotorService colorMotorService;
+
 
 
     @Override
@@ -32,19 +38,28 @@ public class DetailMotorService implements IDetailMotorService{
         DetailMotor detailMotor = detailMotorRepository.getByModelYearAndColorMotor(modelYear, colorMotor);
 
         if (detailMotor == null) {
-//            DetailMotor detailMotor1 = new DetailMotor();
-//            detailMotorRepository.save(detailMotor1);
+            detailMotor.setBrandMotor(modelYear.getSeriesMotor().getBrandMotor());
+            detailMotor.setSeriesMotor(modelYear.getSeriesMotor());
+            detailMotor.setColorMotor(colorMotor);
+            detailMotor.setModelYear(modelYear);
+            detailMotor.setTypeMotor(modelYear.getSeriesMotor().getTypeMotor());
+            detailMotorRepository.save(detailMotor);
         }
-        return new DetailMotorDTO(detailMotor.getDetailMotorId());
+
+        return DetailMotorDTO.parseDetailMotorDTO(detailMotor);
     }
     @Override
     public List<DetailMotorDTO> findAll() {
-        return null;
+        List<DetailMotorDTO> list = new ArrayList<>();
+        detailMotorRepository.findAll().forEach(detailMotor -> {
+            list.add(DetailMotorDTO.parseDetailMotorDTO(detailMotor));
+        });
+        return list;
     }
 
     @Override
     public DetailMotorDTO getById(Long id) {
-        return null;
+        return DetailMotorDTO.parseDetailMotorDTO(detailMotorRepository.getById(id));
     }
 
     @Override
@@ -54,6 +69,13 @@ public class DetailMotorService implements IDetailMotorService{
 
     @Override
     public DetailMotorDTO save(DetailMotorDTO detailMotorDTO) {
+//        DetailMotor newDetailMotor = new DetailMotor();
+//        BrandMotor brandMotor = brandMotorRepository.getByBrandName(detailMotorDTO.getBrandMotor().getBrandName());
+//
+//        SeriesMotor seriesMotor = seriesMotorRepository.getById(detailMotorDTO.getSeriesMotor().getSeriesId());
+//        ColorMotor colorMotor = colorMotorRepository.getById(detailMotorDTO.getColorMotor().getColorId());
+//
+
         return null;
     }
 

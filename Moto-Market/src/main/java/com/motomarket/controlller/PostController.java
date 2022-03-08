@@ -13,13 +13,13 @@ import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,6 +41,9 @@ public class PostController {
 
     @Autowired
     private IModelYearService modelYearService;
+
+    @Autowired
+    private IPostRepository postRepository;
 
     @GetMapping("/newpost")
     public ModelAndView toPostPage() {
@@ -65,19 +68,28 @@ public class PostController {
         PostDTO postDTO = postService.getById(postId);
         System.out.println(postDTO);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
+<<<<<<< HEAD
         DetailMotor detailMotor = detailMotorService.getDetailMotorById(postDTO.getDetailMotorDTO().getDetailMotorId());
+//        DetailMotorDTO detailMotor = detailMotorService.getById(postDTO.getDetailMotorDTO().getDetailMotorId());
         ModelAndView modelAndView = new ModelAndView("bike-detail");
+=======
+        DetailMotorDTO detailMotorDTO =postDTO.getDetailMotorDTO();
+        ModelAndView modelAndView = new ModelAndView("moto-detail");
+>>>>>>> tien-dev
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());
         String timeFormat = time.substring(0, 1).toUpperCase() + time.substring(1);
-        Locale locale = new Locale("vi", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String seriesName = detailMotorDTO.getBrandMotor().getBrandName() +" "+ detailMotorDTO.getSeriesMotor().getSeriesName();
+        List<PostDTO> relatedPostDTO = postService.findTopBySeriesMotor(8, seriesName);
+        List<PostDTO> newPostList = postService.findListOfLatestPosts(15);
         modelAndView.addObject("post", postDTO);
         modelAndView.addObject("images", imageList);
-        modelAndView.addObject("detail", detailMotor);
+        modelAndView.addObject("detail", detailMotorDTO);
         modelAndView.addObject("timePost", timeFormat);
-        modelAndView.addObject("price", currencyFormatter.format(postDTO.getPrice()));
+
+        modelAndView.addObject("postsRelated", relatedPostDTO);
+        modelAndView.addObject("newPosts",newPostList);
         return modelAndView;
     }
 
