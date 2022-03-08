@@ -70,6 +70,7 @@ public class PostController {
         System.out.println(postDTO);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
         DetailMotor detailMotor = detailMotorService.getDetailMotorById(postDTO.getDetailMotorDTO().getDetailMotorId());
+//        DetailMotorDTO detailMotor = detailMotorService.getById(postDTO.getDetailMotorDTO().getDetailMotorId());
         ModelAndView modelAndView = new ModelAndView("bike-detail");
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));

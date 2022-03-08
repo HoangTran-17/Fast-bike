@@ -35,4 +35,8 @@ public class BrandMotor {
         this.brandId = brandId;
         this.brandName = brandName;
     }
+
+    public BrandMotor(String brandName) {
+        this.brandName = brandName;
+    }
 }
