@@ -118,8 +118,8 @@
                     <i class="tio-user-add mr-1"></i> Add user
                   </a>
                 </div> -->
-                <div class="col-sm-auto" th:if="${adminLogin.role=='DBA'}">
-                    <a class="btn btn-primary" href="users-add-user.html">
+                <div class="col-sm-auto" th:with="Role=${T(com.motomarket.repository.model.Role)}" >
+                    <a class="btn btn-primary" th:if="${adminLogin.role==Role.DBA}" href="#">
                         <i class="tio-user-add mr-1"></i> Add new admin
                     </a>
                 </div>
@@ -233,7 +233,7 @@
 
             <!-- Table -->
             <div class="table-responsive datatable-custom">
-                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+                    <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
                      "columnDefs": [{
                         "targets": [0, 7],
                         "orderable": false
@@ -244,7 +244,7 @@
                      },
                      "search": "#datatableSearch",
                      "entries": "#datatableEntries",
-                     "pageLength": 15,
+                     "pageLength": 5,
                      "isResponsive": false,
                      "isShowPaging": false,
                      "pagination": "datatablePagination"
@@ -262,13 +262,13 @@
                         <th>Province</th>
                         <th>Status</th>
                         <th>Role</th>
-                        <th>Number of posts</th>
+                        <th>Posts</th>
                         <th></th>
                     </tr>
                     </thead>
 
                     <tbody id="users-tbody">
-                    <tr th:each="user:${users}">
+                    <tr th:each="user:${users}" th:id="${'tr_'+ user.userId}">
                         <td class="table-column-pr-0">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input select-checkbox-id" th:value="${user.userId}"
@@ -316,12 +316,18 @@
                             </div>
                         </td>
                         <td th:text="${user.numberOfPost}"></td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal"
-                               data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
+                        <th:block th:with="Status=${T(com.motomarket.repository.model.StatusUser)}">
+                            <td  th:if="${user.userStatus == Status.ACTIVATE}">
+                                <a class="btn btn-sm btn-white bg-warning w-100 btn-edit-status-user" th:data-id="${user.userId}">
+                                    <i class="tio-lock"></i> Block
+                                </a>
+                            </td>
+                            <td th:if="${user.userStatus == Status.BLOCK}">
+                                <a class="btn btn-sm btn-white bg-success w-100 btn-edit-status-user" th:data-id="${user.userId}">
+                                    <i class="tio-lock-opened"></i> Active
+                                </a>
+                            </td>
+                        </th:block>
                     </tr>
 
 
@@ -345,8 +351,8 @@
                             "dropdownAutoWidth": true,
                             "width": true
                           }'>
-                                <option value="10">10</option>
-                                <option value="15" selected="">15</option>
+                                <option value="5" selected="">5</option>
+                                <option value="10" >10</option>
                                 <option value="20">20</option>
                             </select>
                             <!-- End Select -->
@@ -440,24 +446,29 @@
 </main>
 <th:block th:include="/admin/fragment/script::script"/>
 <script>
-    $("#deleteUserConfirm").on("click",function () {
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "DELETE",
-            url: "/admin/delete",
-            data: JSON.stringify(listIdDelete())
-
-        }).done(function (data) {
-            console.log(data);
-           App.showSuccessAlert("Success");
-        }).fail(function () {
-            alert("Sorry")
-        })
-        location.reload(true);
+    $(document).ready(function () {
+        deleteUser();
+        changeStatusUser();
     })
+    function deleteUser() {
+        $("#deleteUserConfirm").on("click",function () {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "DELETE",
+                url: "/admin/delete",
+                data: JSON.stringify(listIdDelete())
+
+            }).done(function (data) {
+              location.reload(true)
+            }).fail(function () {
+                alert("Don't success ")
+            })
+        })
+    }
+
     function listIdDelete() {
         let arrayId = [];
         let checkbox = document.getElementsByClassName("select-checkbox-id");
@@ -467,6 +478,123 @@
             }
         }
         return arrayId;
+    }
+    function changeStatusUser() {
+        $(".btn-edit-status-user").on("click",function () {
+            let id = $(this).data("id");
+            $.ajax({
+                type: "PUT",
+                url: "/admin/edit-status/"+id
+            }).done(function (data) {
+                console.log(data);
+                let str ='' ;
+                if (data.userStatus ==='BLOCK') {
+                    str += `
+             <tr  id="${'tr_'+ data.userId}">
+                        <td class="table-column-pr-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input select-checkbox-id" value="${data.userId}"
+                                       id="${'usersDataCheck'+data.userId}">
+                                <label class="custom-control-label" for="${'usersDataCheck'+data.userId}"></label>
+                            </div>
+                        </td>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="user-profile.html">
+                                <div class="avatar avatar-circle">
+                                    <img class="avatar-img"
+                                         src="https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg"
+                                         alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span class="d-block h5 text-hover-primary mb-0" > <i
+                                            class="tio-verified text-primary" data-toggle="tooltip" data-placement="top"
+                                            title="Top endorsed"></i> ${data.userName}</span>
+                                    <span class="d-block font-size-sm text-body" >${data.email}</span>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <span class="d-block h5 mb-0" >${data.phoneNumber}</span>
+
+                        </td>
+                        <td>Huế
+
+                        </td>
+                            <td >
+                                <span class="legend-indicator bg-warning" ></span>Block
+                            </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                ${data.role}
+                            </div>
+                        </td>
+                        <td >  ${data.numberOfPost}</td>
+                            <td >
+                                <a class="btn btn-sm btn-white bg-success w-100 btn-edit-status-user" data-id="${data.userId}">
+                                    <i class="tio-lock-opened"></i> Active
+                                </a>
+                            </td>
+                    </tr>
+            `
+                } else {
+                    str += `
+             <tr  id="${'tr_'+ data.userId}">
+                        <td class="table-column-pr-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input select-checkbox-id" value="${data.userId}"
+                                       id="${'usersDataCheck'+data.userId}">
+                                <label class="custom-control-label" for="${'usersDataCheck'+data.userId}"></label>
+                            </div>
+                        </td>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="user-profile.html">
+                                <div class="avatar avatar-circle">
+                                    <img class="avatar-img"
+                                         src="https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg"
+                                         alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span class="d-block h5 text-hover-primary mb-0" > <i
+                                            class="tio-verified text-primary" data-toggle="tooltip" data-placement="top"
+                                            title="Top endorsed"></i> ${data.userName}</span>
+                                    <span class="d-block font-size-sm text-body" >${data.email}</span>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <span class="d-block h5 mb-0" >${data.phoneNumber}</span>
+
+                        </td>
+                        <td>Huế
+
+                        </td>
+                            <td >
+                                <span class="legend-indicator bg-success" ></span>Activate
+                            </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                ${data.role}
+                            </div>
+                        </td>
+                        <td >  ${data.numberOfPost}</td>
+                            <td >
+                                <a class="btn btn-sm btn-white bg-warning w-100 btn-edit-status-user" data-id="${data.userId}">
+                                    <i class="tio-lock"></i> Block
+                                </a>
+                            </td>
+                    </tr>
+            `
+                }
+
+                $("#tr_"+id).replaceWith(str);
+                deleteUser();
+                changeStatusUser();
+
+            }).fail(function (e) {
+                console.log(e);
+            })
+
+        })
     }
 
 
