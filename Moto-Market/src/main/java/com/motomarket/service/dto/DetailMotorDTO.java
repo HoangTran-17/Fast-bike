@@ -22,7 +22,7 @@ public class DetailMotorDTO {
 
     private TypeMotorDTO typeMotor;
 
-    private ModelYearDTO modeYear;
+    private ModelYearDTO modelYear;
 
     private ColorMotorDTO colorMotor;
 

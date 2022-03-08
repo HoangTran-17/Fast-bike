@@ -1,8 +1,10 @@
 <header id="header" th:fragment="header (userLogin)"  xmlns:th="http://www.thymeleaf.org">
     <div class="container">
             <figure >
-                <img style="width: 260px; height: 160px;margin-left: -100px; padding: 0" src="/frontend/moto-v2/pc/img/loglast.png"
-                      alt="Logo">
+                <a href="/">
+                    <img style="width: 340px;height: 113px;margin-left: -90px;max-width: 500%; padding: 0" src="/frontend/moto-v2/pc/img/loglast.png"
+                         alt="Logo">
+                </a>
             </figure>
         <div class="header-content">
             <div class="top">
@@ -10,8 +12,9 @@
                         <th:block th:if="${userLogin}">
                             <ul class="account dropdown logged">
                                 <li>
-                                    <a href="#" class="btn-sign-in dotted-line-1" th:text="${userLogin.userName}">
-                                        <i class='far fa-user-circle' style='font-size:18px'></i>
+                                    <a href="#" class="btn-sign-in dotted-line-1" >
+                                        <i class='far fa-user-circle' style='font-size:20px'></i>
+                                        <span th:text="${userLogin.userName}"></span>
                                     </a>
                                 </li>
                                 <ul class="dropdown-menu">

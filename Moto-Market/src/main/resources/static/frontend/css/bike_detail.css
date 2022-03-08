@@ -621,7 +621,9 @@ h3.module_title.line_bottom span.title{
 }
 .in_left #bottom-recommendation .product-grid .item{
   width: 165px !important;
-  margin-right: 10px !important;
+}
+.item{
+	margin-bottom: 50px;
 }
 #bottom-recommendation .product-grid .item:last-child{
 	margin-right: 0px;
