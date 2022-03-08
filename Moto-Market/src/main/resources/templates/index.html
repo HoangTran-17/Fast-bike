@@ -69,19 +69,11 @@
                           data-url="https://www.webike.vn/motomarket.html">
                         <input type="hidden" id="search_condition" name="new"/>
                         <div class="row">
-                            <script type="text/javascript">
-                                var url_search_series = 'https://www.webike.vn/filter-series';
-                                var label_used = 'Xe cũ';
-                                var label_brand = 'H&atilde;ng xe';
-                                var label_capacity = 'Ph&acirc;n khối';
-                                var label_series = 'D&ograve;ng xe';
-                                var label_province = 'Tỉnh th&agrave;nh';
-                            </script>
                             <ul class="box-search-topmoto">
                                 <li class="col-xs-2">
-                                    <select autocomplete placeholder="H&atilde;ng Xe" tabindex="1" name="mc"
+                                    <select autocomplete placeholder="Hãng Xe" tabindex="1" name="mc"
                                             id="search_brand" class="select-box">
-                                        <option value="-1">H&atilde;ng xe</option>
+                                        <option value="-1">Hãng xe</option>
                                         <option value="1">HONDA</option>
                                         <option value="2">YAMAHA</option>
                                         <option value="9">PIAGGIO</option>
@@ -120,9 +112,9 @@
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete data-hide-search placeholder="Ph&acirc;n khối" tabindex="2"
+                                    <select autocomplete data-hide-search placeholder="Phân khối" tabindex="2"
                                             name="cc" id="search_capacity" class="select-box">
-                                        <option value="-1">Ph&acirc;n khối</option>
+                                        <option value="-1">Phân khối</option>
                                         <option value="0-50">-50cc</option>
                                         <option value="51-174">51cc-174cc</option>
                                         <option value="175-400">175cc-400cc</option>
@@ -133,13 +125,13 @@
                                 </li>
                                 <li class="col-xs-2">
                                     <select autocomplete tabindex="3" name="sc" id="search_series"
-                                            placeholder="D&ograve;ng xe" class="select-box" disabled>
+                                            placeholder="Dòng xe" class="select-box" disabled>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
                                     <select autocomplete tabindex="6" name="price_to" id="search_price_to"
                                             class="form-control align-right">
-                                        <option value="">Đến gi&aacute;</option>
+                                        <option value="">Đến giá</option>
                                         <option value="0">0 VND</option>
                                         <option value="10000000">10,000,000 VND</option>
                                         <option value="50000000">50,000,000 VND</option>
@@ -154,69 +146,69 @@
                                     <select autocomplete tabindex="7" name="loc" id="search_province"
                                             placeholder="Khu Vực"
                                             class="select-box">
-                                        <option value="-1">Tỉnh th&agrave;nh</option>
+                                        <option value="-1">Tỉnh thành</option>
                                         <option value="50">Hồ Ch&iacute; Minh</option>
-                                        <option value="18">H&agrave; Nội</option>
+                                        <option value="18">Hà Nội</option>
                                         <option value="46">Bình Dương</option>
-                                        <option value="34">Đ&agrave; Nẵng</option>
+                                        <option value="34">Đà Nẵng</option>
                                         <option value="48">Đồng Nai</option>
                                         <option value="55">Cần Thơ</option>
                                         <option value="51">An Giang</option>
-                                        <option value="20">Hải Ph&ograve;ng</option>
+                                        <option value="20">Hải Phòng</option>
                                         <option value="40">Đắk Lắk</option>
-                                        <option value="45">B&agrave; Rịa-Vũng T&agrave;u</option>
+                                        <option value="45">Bà Rịa-Vũng Tàu</option>
                                         <option value="63">Vĩnh Long</option>
                                         <option value="31">Thừa Thi&ecirc;n Huế</option>
                                         <option value="58">Ki&ecirc;n Giang</option>
                                         <option value="53">Bến Tre</option>
-                                        <option value="56">Đồng Th&aacute;p</option>
+                                        <option value="56">Đồng Tháp</option>
                                         <option value="59">Long An</option>
                                         <option value="61">Tiền Giang</option>
                                         <option value="60">S&oacute;c Trăng</option>
-                                        <option value="49">T&acirc;y Ninh</option>
+                                        <option value="49">Tây Ninh</option>
                                         <option value="57">Hậu Giang</option>
-                                        <option value="44">L&acirc;m Đồng</option>
+                                        <option value="44">Lâm Đồng</option>
                                         <option value="38">Quảng Nam</option>
                                         <option value="47">Bình Phước</option>
                                         <option value="16">Bắc Ninh</option>
-                                        <option value="35">Kh&aacute;nh H&ograve;a</option>
-                                        <option value="62">Tr&agrave; Vinh</option>
-                                        <option value="54">C&agrave; Mau</option>
+                                        <option value="35">Khánh Hòa</option>
+                                        <option value="62">Trà Vinh</option>
+                                        <option value="54">Cà Mau</option>
                                         <option value="22">Nam Định</option>
                                         <option value="42">Gia Lai</option>
                                         <option value="30">Thanh H&oacute;a</option>
                                         <option value="27">Nghệ An</option>
                                         <option value="33">Bình Thuận</option>
                                         <option value="32">Bình Định</option>
-                                        <option value="24">Th&aacute;i Bình</option>
+                                        <option value="24">Thái Bình</option>
                                         <option value="41">Đắk N&ocirc;ng</option>
                                         <option value="19">Hải Dương</option>
                                         <option value="52">Bạc Li&ecirc;u</option>
-                                        <option value="39">Quảng Ng&atilde;i</option>
-                                        <option value="17">H&agrave; Nam</option>
+                                        <option value="39">Quảng Ngãi</option>
+                                        <option value="17">Hà Nam</option>
                                         <option value="1">Bắc Giang</option>
                                         <option value="43">Kon Tum</option>
                                         <option value="25">Vĩnh Ph&uacute;c</option>
                                         <option value="21">Hưng Y&ecirc;n</option>
                                         <option value="10">Ph&uacute; Thọ</option>
-                                        <option value="26">H&agrave; Tĩnh</option>
+                                        <option value="26">Hà Tĩnh</option>
                                         <option value="36">Ninh Thuận</option>
-                                        <option value="13">Th&aacute;i Nguy&ecirc;n</option>
+                                        <option value="13">Thái Nguy&ecirc;n</option>
                                         <option value="28">Quảng Bình</option>
                                         <option value="23">Ninh Bình</option>
                                         <option value="37">Ph&uacute; Y&ecirc;n</option>
                                         <option value="11">Quảng Ninh</option>
                                         <option value="29">Quảng Trị</option>
-                                        <option value="6">H&ograve;a Bình</option>
+                                        <option value="6">Hòa Bình</option>
                                         <option value="14">Tuy&ecirc;n Quang</option>
                                         <option value="8">Lạng Sơn</option>
                                         <option value="12">Sơn La</option>
-                                        <option value="5">H&agrave; Giang</option>
-                                        <option value="9">L&agrave;o Cai</option>
-                                        <option value="15">Y&ecirc;n B&aacute;i</option>
+                                        <option value="5">Hà Giang</option>
+                                        <option value="9">Lào Cai</option>
+                                        <option value="15">Y&ecirc;n Bái</option>
                                         <option value="2">Bắc Kạn</option>
                                         <option value="4">Điện Bi&ecirc;n</option>
-                                        <option value="7">Lai Ch&acirc;u</option>
+                                        <option value="7">Lai Châu</option>
                                         <option value="3">Cao Bằng</option>
                                     </select>
                                 </li>
@@ -234,7 +226,7 @@
                 <div class="search-brand-type">
                     <div class="ct-brand">
                         <div class="title-second">
-                            <h3 class="name">H&atilde;ng xe</h3>
+                            <h3 class="name">Hãng xe</h3>
                             <a class="btn-see-all pull-right" href="https://www.webike.vn/cho-xe-may/hang-xe.html">
                                 Xem tất cả
                             </a>
@@ -361,7 +353,7 @@
                                          alt="Ban xe HARLEY-DAVIDSON Softail Slim 2020 cu gia 135tr">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n HARLEY-DAVIDSON Softail Slim 2020 m&agrave;u
+                                    <h3 class="title dotted-text2">Cần bán HARLEY-DAVIDSON Softail Slim 2020 màu
                                         đen trắng</h3>
                                     <div class="price">
                                         135.000.000 <u>đ</u>
@@ -395,7 +387,7 @@
                                          alt="Ban xe YAMAHA Exciter 135 GP 2012 cu gia lien he">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n YAMAHA Exciter 135 GP 2012 m&agrave;u
+                                    <h3 class="title dotted-text2">Cần bán YAMAHA Exciter 135 GP 2012 màu
                                         xanh biển</h3>
                                     <div class="price">
                                         Li&ecirc;n hệ
@@ -411,7 +403,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Cầu Giấy, H&agrave; Nội
+                                        Cầu Giấy, Hà Nội
                                     </address>
                                 </div>
                             </a>
@@ -429,7 +421,7 @@
                                          alt="Ban xe HONDA Wave Alpha 2005 moi gia 13tr">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n HONDA Wave Alpha 2005 m&agrave;u đen
+                                    <h3 class="title dotted-text2">Cần bán HONDA Wave Alpha 2005 màu đen
                                         đỏ</h3>
                                     <div class="price">
                                         13.000.000 <u>đ</u>
@@ -445,7 +437,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Vũng T&agrave;u, B&agrave; Rịa-Vũng T&agrave;u
+                                        Vũng Tàu, Bà Rịa-Vũng Tàu
                                     </address>
                                 </div>
                             </a>
@@ -478,7 +470,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Bi&ecirc;n H&ograve;a, Đồng Nai
+                                        Bi&ecirc;n Hòa, Đồng Nai
                                     </address>
                                 </div>
                             </a>
@@ -529,7 +521,7 @@
                                          alt="Ban xe SUZUKI GSX R150 2020 cu gia 43tr">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n SUZUKI GSX R150 2020 m&agrave;u xanh
+                                    <h3 class="title dotted-text2">Cần bán SUZUKI GSX R150 2020 màu xanh
                                         biển đen</h3>
                                     <div class="price">
                                         43.000.000 <u>đ</u>
@@ -545,7 +537,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Bến C&aacute;t, Bình Dương
+                                        Bến Cát, Bình Dương
                                     </address>
                                 </div>
                             </a>
@@ -578,7 +570,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Cầu Giấy, H&agrave; Nội
+                                        Cầu Giấy, Hà Nội
                                     </address>
                                 </div>
                             </a>
@@ -596,7 +588,7 @@
                                          alt="Ban xe YAMAHA Exciter 150 2018 cu gia lien he">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n YAMAHA Exciter 150 mxking 2018 m&agrave;u
+                                    <h3 class="title dotted-text2">Cần bán YAMAHA Exciter 150 mxking 2018 màu
                                         đen đỏ</h3>
                                     <div class="price">
                                         Li&ecirc;n hệ
@@ -612,7 +604,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        G&ograve; Dầu, T&acirc;y Ninh
+                                        Gò Dầu, Tây Ninh
                                     </address>
                                 </div>
                             </a>
@@ -663,7 +655,7 @@
                                          alt="Ban xe HONDA Airblade 125 Fi 2017 cu gia lien he">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n HONDA Airblade 125 Fi 2017 m&agrave;u
+                                    <h3 class="title dotted-text2">Cần bán HONDA Airblade 125 Fi 2017 màu
                                         đen xanh biển</h3>
                                     <div class="price">
                                         Li&ecirc;n hệ
@@ -679,7 +671,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Cầu Giấy, H&agrave; Nội
+                                        Cầu Giấy, Hà Nội
                                     </address>
                                 </div>
                             </a>
@@ -697,7 +689,7 @@
                                          alt="Ban xe YAMAHA Sirius RC 2014 cu gia lien he">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n YAMAHA Sirius RC 2014 m&agrave;u đen
+                                    <h3 class="title dotted-text2">Cần bán YAMAHA Sirius RC 2014 màu đen
                                         trắng</h3>
                                     <div class="price">
                                         Li&ecirc;n hệ
@@ -713,7 +705,7 @@
                                 </span>
                                     </div>
                                     <address class="addresslist">
-                                        Bình T&acirc;n, Hồ Ch&iacute; Minh
+                                        Bình Tân, Hồ Ch&iacute; Minh
                                     </address>
                                 </div>
                             </a>
@@ -731,7 +723,7 @@
                                          alt="Ban xe HARLEY-DAVIDSON Fat Boy 114 2019 cu gia 150tr">
                                 </figure>
                                 <div class="list-info">
-                                    <h3 class="title dotted-text2">Cần b&aacute;n HARLEY-DAVIDSON Fat Boy 114 2019 m&agrave;u
+                                    <h3 class="title dotted-text2">Cần bán HARLEY-DAVIDSON Fat Boy 114 2019 màu
                                         đen xanh da trời</h3>
                                     <div class="price">
                                         150.000.000 <u>đ</u>
@@ -773,7 +765,7 @@
             <section id="model-series-topmoto">
                 <div class="container">
                     <div class="title-second">
-                        <h3 class="name">D&ograve;ng xe được xem nhiều nhất</h3>
+                        <h3 class="name">Dòng xe được xem nhiều nhất</h3>
                         <a class="btn-see-all pull-right"
                            href="https://www.webike.vn/cho-xe-may/dong-xe-duoc-xem-nhieu.html">
                             Xem tất cả
