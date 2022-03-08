@@ -11,7 +11,7 @@ public interface IUserService extends IGeneralService<UserDTO> {
     UserDTO getByUserName(String userName);
 
     UserDTO findUserByEmail(String email);
-
+    User save(User user);
     User getUserById(Long id);
     List<UserDTO> findAllByDeletedIsFalse() ;
 }
