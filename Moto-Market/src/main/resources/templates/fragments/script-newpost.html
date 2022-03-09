@@ -1,0 +1,353 @@
+<script th:fragment="custom_script">
+
+    getAllBrand();
+    let brand;
+    let series;
+    let year;
+
+    // Ajax and function handler select Moto
+    function getAllBrand() {
+        $.ajax({
+            type: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            url: "/api/moto/getAllBrand",
+        }).done(function (data) {
+            $.each(data, (index, item) => {
+                $('#filter-brand-list').append(`<li><label>
+                                                        <input type="radio" name="manufacturer_code" >
+                                                        <span data-id="${item.brandId}" class="span-brand">${item.brandName}</span>
+                                                    </label>
+                                                </li>`);
+            })
+            handlerClickBrand();
+        }).fail(function () {
+
+        })
+    }
+
+    handlerClickBrand();
+    handlerClickSeries();
+    handlerClickYear();
+    handlerClickColor();
+
+    function handlerClickBrand() {
+        $(".span-brand").on("click", function () {
+            $("#list-brand-filter").prop('required', false)
+            $("#list-series-filter").prop('required', true)
+            $("#list-year-filter").prop('required', true)
+            $("#list-color-filter").prop('required', true)
+            var dataId = $(this).attr('data-id')
+            brand = $(this).text();
+            $("#temp_description").val(brand);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getSeries/" + dataId,
+            }).done(function (data) {
+                let str = "";
+                $.each(data, (index, item) => {
+                    str += `<li><label> <input type="radio" name="manufacturer_code">
+                                        <span data-id="${item.seriesId}" class="span-series">${item.seriesName}</span>
+                                 </label> </li>`
+                })
+                $('#filter-series-list').html(str);
+                $('#filter-year-list').html(` `);
+                $('#filter-color-list').html(` `);
+                handlerClickSeries();
+            }).fail(function () {
+
+            })
+        });
+    }
+
+    function handlerClickSeries() {
+        $(".span-series").on("click", function () {
+            $("#list-series-filter").prop('required', false)
+            $("#list-year-filter").prop('required', true)
+            $("#list-color-filter").prop('required', true)
+            var dataId = $(this).attr('data-id')
+            series = $(this).text();
+            $("#temp_description").val(brand + " " + series);
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getModelYears/" + dataId,
+            }).done(function (data) {
+                console.log(data);
+                let str = "";
+                $.each(data, (index, item) => {
+                    str += `<li><label> <input type="radio" name="manufacturer_code">
+                                        <span data-id="${item.modelYearId}" class="span-year">${item.modelYearName}</span>
+                                 </label> </li>`
+                })
+                $('#filter-year-list').html(str);
+                handlerClickYear();
+            }).fail(function () {
+
+            })
+
+        })
+    }
+
+
+    function handlerClickYear() {
+        $(".span-year").on("click", function () {
+            $("#list-year-filter").prop('required', false)
+            $("#list-color-filter").prop('required', true)
+            var dataId = $(this).attr('data-id')
+            $("#moder-year-id").val(dataId);
+            year = $(this).text();
+            $("#temp_description").val(brand + " " + series + " " + year);
+
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getColors",
+            }).done(function (data) {
+                console.log(data);
+                let str = "";
+                $.each(data, (index, item) => {
+                    str += `<li><label> <input type="radio" name="manufacturer_code">
+                                        <span data-id="${item.colorId}" class="span-color">${item.colorName}</span>
+                                 </label> </li>`
+                })
+                $('#filter-color-list').html(str);
+                handlerClickColor();
+            }).fail(function () {
+
+            })
+        })
+    }
+
+
+    function handlerClickColor() {
+        $(".span-color").on("click", function () {
+            $("#list-color-filter").prop('required', false)
+            var dataId = $(this).attr('data-id')
+            $("#color-id").val(dataId);
+            let color = $(this).text();
+            $("#temp_description").val(brand + " " + series + " " + year + " " + color);
+            let nameMoto = $("#temp_description").val();
+            $("#title-post").val(nameMoto);
+        })
+    }
+
+    //-------------------------- API Province and handler change province
+
+    $("#province_code").on("click", function () {
+        $.ajax({
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province",
+        }).done(function (data) {
+            $.each(data.results, (index, item) => {
+                $('#province_code').append(` <option value="${item.province_name}" data-id="${item.province_id} ">${item.province_name}</option>`);
+            })
+            hanlderOnchangeProvince()
+        }).fail(function () {
+        })
+    })
+
+
+    function hanlderOnchangeProvince() {
+        $('#province_code').change(function(){
+            let provinceId = $(this).find(':selected').attr('data-id')
+            let str = "";
+            $.ajax({
+                type: "GET",
+                url: "https://vapi.vnappmob.com/api/province/district/" + provinceId,
+            }).done(function (data) {
+                $.each(data.results, (index, item) => {
+                    str += `<option value="${item.district_name}">${item.district_name}</option>`
+                })
+                $('#district_code').html(str);
+            }).fail(function () {
+            })
+        });
+
+    }
+
+    //--------------------------------- Filter select Moto
+    $("#list-brand-filter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#filter-brand-list li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    $("#list-series-filter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#filter-series-list li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $("#list-year-filter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#filter-year-list li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $("#list-color-filter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#filter-color-list li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    //  --------------------------  Upload image and preview JS
+    var filesBuffer = new DataTransfer();
+    let allFile = filesBuffer.items;
+
+    function addFile() {
+        var newFile = document.getElementById("ip-upload-multi").files;
+        allFile.add(newFile[newFile.length - 1]);
+        document.getElementById("ip-upload-multi").files = filesBuffer.files;
+        previewImages();
+    }
+
+    function previewImages() {
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+        function readAndPreview(file) {
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else..
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+                let src = this.result;
+                addFile();
+                let length = document.getElementById("ip-upload-multi").files.length;
+                $('#preview-img').append(`<div class="item-photo item-img"  data-id="${length - 1}" data-index="0">
+                                           <label class="upload has-photo">
+                                            <figure class="thumbnail placeholder loaded">
+                                           <img src="${src}" class="static"   rel="nofollow">
+                                            </figure>
+                                        </label>
+                                        <a href="javascript:void(0)" onclick="removeImage(${length - 1})"   class="remove-img-btn" >Xóa hình</a>
+                                    </div>`)
+                console.log(length)
+            });
+            reader.readAsDataURL(file);
+        }
+    }
+
+    document.querySelector('#ip-upload-multi').addEventListener("change", previewImages);
+
+    // document.querySelector('#ip-upload-multi').addEventListener("change",addFile);
+    function removeImage(id) {
+        $('.item-photo').filter("[data-id='" + id + "']").remove();
+        removeFile(Number(id))
+        var els = document.getElementsByClassName("remove-img-btn");
+        let itemimg = document.getElementsByClassName("item-img");
+
+        for (var i = id; i < els.length; i++) {
+            // let ids = i-1;
+            $(els[i]).attr("onclick", "removeImage(" + i + ")");
+            $(itemimg[i]).attr("data-id", "" + i + "");
+        }
+    }
+
+
+    function removeFile(index) {
+        let attachments = document.getElementById("ip-upload-multi").files;
+        let fileBuffer = new DataTransfer();
+        for (let i = 0; i < attachments.length; i++) {
+            if (index !== i) {
+                fileBuffer.items.add(attachments[i]);
+            }
+        }
+        for (let i = 0; i < attachments.length; i++) {
+            if (index == i) {
+                allFile.remove(i);
+            }
+        }
+        document.getElementById("ip-upload-multi").files = fileBuffer.files;
+        let length = document.getElementById("ip-upload-multi").files.length;
+        if (length === 0) {
+            fileBuffer.items.clear()
+            filesBuffer.items.clear()
+        }
+    }
+
+    //    Hanlder Click Check contact price
+    $("#contact_price").change(function() {
+        if(this.checked) {
+            $("#product_price_tmp").prop('disabled', true);
+            $("#product_price_tmp").val(" ");
+        }else {
+            $("#product_price_tmp").prop('disabled', false);
+        }
+    });
+
+
+    //    Select OwnershipEvent
+    $('#ownershipSelect').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        if (valueSelected==0){
+            let sellerNameHide = $("#hide-userNameLG").val();
+            let sellerPhoneNumberHide = $("#hide-phoneLG").val();
+            $("#sellerName").val(sellerNameHide);
+            $("#sellerPhoneNumber").val(sellerPhoneNumberHide);
+            $("#sellerName").attr("readonly", true);
+            $("#sellerPhoneNumber").attr("readonly", true);
+        } else{
+            if (valueSelected == 1){
+                $("#sellerName").val(" ");
+                $("#sellerPhoneNumber").val(" ");
+                $("#sellerName").attr("readonly", false);
+                $("#sellerPhoneNumber").attr("readonly", false);
+            }
+        }
+    });
+
+    //    Format Input Currency
+    function formatNumber(n) {
+        // format number 1000000 to 1,234,567
+        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+    $("#product_price_tmp").on({
+        keyup: function() {
+            formatCurrency($(this));
+        }
+    });
+
+    function formatCurrency(input) {
+        var input_val = input.val();
+        if (input_val === "") { return; }
+        var original_len = input_val.length;
+        var caret_pos = input.prop("selectionStart");
+        if (input_val.indexOf(".") >= 0) {
+            var decimal_pos = input_val.indexOf(".");
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+            left_side = formatNumber(left_side);
+            right_side = formatNumber(right_side);
+            right_side = right_side.substring(0, 2);
+            input_val =left_side + "." + right_side;
+        } else {
+            input_val = formatNumber(input_val);
+        }
+        input.val(input_val);
+        var updated_len = input_val.length;
+        caret_pos = updated_len - original_len + caret_pos;
+        input[0].setSelectionRange(caret_pos, caret_pos);
+    }
+
+</script>

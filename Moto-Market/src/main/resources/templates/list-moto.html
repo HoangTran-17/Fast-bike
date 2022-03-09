@@ -1,236 +1,36 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tìm kiếm các loại xe tại Webike Việt Nam</title>
-    <link rel="shortcut icon" href="https://www.webike.vn/favicon.png?152472729920200827" type="image/x-icon">
-    <link rel="dns-prefetch" href="https://www.webike.vn" />
-    <link rel="preconnect" href="https://www.webike.vn" />
-
-    <link rel="dns-prefetch" href="https://imgwebikevn-8743.kxcdn.com" />
-    <link rel="preconnect" href="https://imgwebikevn-8743.kxcdn.com" crossorigin />
-
-    <link rel="dns-prefetch" href="https://webikevn-8743.kxcdn.com/" />
-    <link rel="preconnect" href="https://webikevn-8743.kxcdn.com/" crossorigin />
-
-    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-    <link rel="preconnect" href="//www.googletagmanager.com" crossorigin />
-
-    <link rel="dns-prefetch" href="//www.google-analytics.com" />
-    <link rel="preconnect" href="//www.google-analytics.com" crossorigin />
-
-    <link rel="dns-prefetch" href="//stats.g.doubleclick.net" />
-    <link rel="dns-prefetch" href="//www.googletagservices.com" />
-    <link rel="dns-prefetch" href="//adservice.google.com" />
-    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+    <title>Tìm kiếm các loại xe tại FastBile Việt Nam</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto-market.css?160015907620200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/moto-market-layout.css?159169869320200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/common.css?159833824020200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/maker-detail-custom.css?159368123420200827">
-    <meta name="keywords" content="" />
-    <meta name="description"
-        content="Danh sách mua bán xe máy cũ mới giá tốt, giấy tờ đầy đủ.  Mua bán xe máy, xe môtô uy tín, đảm bảo tại chợ xe máy Webike Việt Nam | webike.vn" />
-    <meta name="thumbnail" content="/frontend/img/common/og_image.jpg?152472729920200827" />
-    <meta property="al:ios:url" content="https://itunes.apple.com/app/id1347053088?mt=8&f=webiketop" />
-    <meta property="al:ios:app_store_id" content="737423636393565" />
-    <meta property="al:ios:app_name" content="Webike - Chợ Xe Máy" />
-    <meta property="og:url" content="https://www.webike.vn/cho-xe-may/danh-sach-xe.html" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Tìm kiếm các loại xe tại Webike Việt Nam" />
-    <meta property="og:description"
-        content="Danh sách mua bán xe máy cũ mới giá tốt, giấy tờ đầy đủ.  Mua bán xe máy, xe môtô uy tín, đảm bảo tại chợ xe máy Webike Việt Nam | webike.vn" />
-    <meta property="og:image" content="/frontend/img/common/og_image.jpg?152472729920200827" />
-
-    <link rel="alternate" href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html" hreflang="x-default" />
-    <link rel="canonical" href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html" />
-
-    <script type="application/ld+json">
-        {
-            "@context": "http:\/\/schema.org",
-            "@type": "ListItem",
-            "name": "Ch\u1ee3 xe m\u00e1y",
-            "url": "https:\/\/www.webike.vn\/cho-xe-may\/danh-sach-xe.html"
-        }
-    </script>
-
-
-    <link rel="next" href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=2">
-
-
-    <script type="text/javascript">
-        var BASE = 'https://www.webike.vn/';
-        var BASE_LANGUAGE = 'https://www.webike.vn/';
-        var BASE_SHOPPING = 'https://shop.webike.vn/';
-        var SHOPPING_API_PERSONAL_COOKIES = 'https://shop.webike.vn/cookie_write_api.php';
-        var FB_APP_ID = '737423636393565';
-        var FB_ACK_VER = 'v1.1';
-        var ASSOCIATE_URL = 'https://www.webike.vn/associate-with-motomarket.html';
-        window._q = [];
-        window.$ = function (f) {
-            _q.push(f)
-        }
-    </script>
-
-    <script type="application/ld+json">
-        {
-            "@context": "http:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Webike Vietnam",
-            "url": "https:\/\/www.webike.vn",
-            "logo": "https:\/\/www.webike.vn\/frontend\/img\/common\/logo.png",
-            "sameAs": "https:\/\/www.facebook.com\/webike.vn?fref=ts",
-            "@id": "https:\/\/www.webike.vn\/#Organization",
-            "contactPoint": [{
-                "@type": "ContactPoint",
-                "telephone": "+842838210587",
-                "url": "https:\/\/www.webike.vn\/contact.html",
-                "contactType": "customer service"
-            }]
-        }
-    </script>
-
-    <script type="application/ld+json">
-        {
-            "@context": "http:\/\/schema.org",
-            "@type": "WebSite",
-            "url": "https:\/\/www.webike.vn",
-            "name": "Webike Vietnam",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https:\/\/www.webike.vn\/cho-xe-may\/danh-sach-xe.html?q={q}",
-                "query-input": "required name=q"
-            }
-        }
-    </script>
-
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <script>
-        var OneSignal = OneSignal || [];
-        var allow = true;
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: '60d277cf-0d52-424f-a188-7ed12b4a77fa',
-                autoRegister: true,
-                notifyButton: {
-                    enable: true,
-                },
-                welcomeNotification: {
-                    "title": "Webike Việt Nam",
-                    "message": "Cám ơn bạn đã đăng ký nhận tin.",
-                    // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
-                }
-            });
-
-            OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-                if (isEnabled) {
-                    console.log("Push notifications are enabled!");
-                    OneSignal.getUserId(function (userId) {
-                        $.ajax({
-                            'url': 'https://www.webike.vn/app/addDevice',
-                            'type': 'POST',
-                            'dataType': 'JSON',
-                            'data': {
-                                param_request: '{"czt":"","device_id":"' + userId +
-                                    '","device_token":"' + userId + '"}'
-                            },
-                            'success': function (data) {}
-                        });
-                        $('#m_code').val(userId);
-                    });
-                } else
-                    console.log("Push notifications are not enabled yet.");
-            });
-        });
-    </script>
-    <meta property="fb:app_id" content="737423636393565" />
-    <script src="/frontend/moto-v2/pc/js/defer_plus.min.js?158926651620200827"></script>
-
-    <script type="text/javascript">
-        // This will lzay-load FontAwesome icons
-        deferstyle(
-            'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i,900,900i&display=swap&subset=vietnamese',
-            'roboto-css', 50);
-    </script>
-
-    <link rel="manifest" href="https://www.webike.vn/manifest.json?152472729920200827">
-
-    <script type="text/javascript">
-        deferscript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
-    </script>
     <link rel="stylesheet" type="text/css" href="/v1/vendor/select2/css/select2.min.css?152472729920200827"
-        media="screen" onload="media='screen'">
+          media="screen" onload="media='screen'">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/bike-list.css?159833824020200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/common.css?159833824020200827">
     <link rel="stylesheet" type="text/css" href="/v1/vendor/font-awesome/css/font-awesome.min.css?152472729920200827"
-        media="screen" onload="media='screen'">
+          media="screen" onload="media='screen'">
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/internal_link.css?159650535020200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/suggest_bike_menu.css?160162130020200827">
-</head>
-
-<body>
-    <script type="text/javascript">
-        var FB_APP_ID = '737423636393565';
-    </script>
-
-    <script>
-        deferscript('https://connect.facebook.net/en_US/sdk.js');
-        defer(function () {
-            FB.init({
-                appId: FB_APP_ID,
-                autoLogAppEvents: true,
-                xfbml: true,
-                version: 'v7.0'
-            });
-        }, 1000);
-    </script>
-    <!-- Google Tag Manager -->
-    <noscript><iframe data-ignore title="ga" src="https://www.googletagmanager.com/ns.html?id=GTM-K4KD8N" height="0"
-            width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script data-ignore type="text/javascript">
-        window.ga = window.ga || function () {
-            (ga.q = ga.q || []).push(arguments)
-        }, ga.l = +new Date, defer(function () {
-            ! function (e, t, a, n, g) {
-                e[n] = e[n] || [], e[n].push({
-                    "gtm.start": (new Date).getTime(),
-                    event: "gtm.js"
-                });
-                var o = t.getElementsByTagName(a)[0],
-                    r = t.createElement(a);
-                r.async = !0, r.src = "//www.googletagmanager.com/gtm.js?id=GTM-K4KD8N", o.parentNode
-                    .insertBefore(r, o)
-            }(window, document, "script", "dataLayer")
-        }, 1e3);
-    </script>
-    <!-- End Google Tag Manager -->
     <div id="main">
-        <div th:replace="~{fragments/header :: header}"></div>
+        <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
         <section class="wrapper moto_page" id="bike-list">
             <div id="contents" class="container">
-                <ul class="breadcrumb">
-                    <li><a href="https://www.webike.vn">Trang chủ</a></li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may.html" title="Chợ xe m&aacute;y" property="item"
-                            typeof="WebPage">Chợ xe m&aacute;y</a>
-                        <meta property="position" content="1">
-                    </li>
-                    <li property="itemListElement" typeof="ListItem">
-                        <span property="name">Danh sách xe</span>
-                        <meta property="position" content="2">
-                    </li>
-
-                </ul>
-
+                
                 <div class="column-left">
                     <form id="left-filters" method="get" action="https://www.webike.vn/cho-xe-may/danh-sach-xe.html"
                         autocomplete="off">
                         <ul class="list-filters">
                             <li>
                                 <div class="module-title">
-                                    H&atilde;ng xe
+                                    Hãng xe
                                 </div>
                                 <div class="module-body">
                                     <label class="filter-box">
@@ -1118,7 +918,7 @@
 
                             <li>
                                 <div class="module-title">
-                                    <a class="btn-module-title" href="javascript:void(0)">Đ&atilde; đi</a>
+                                    <a class="btn-module-title" href="javascript:void(0)">Đã đi</a>
                                 </div>
                                 <div class="module-body">
                                     <div id="filter-km-list">
@@ -1501,7 +1301,7 @@
                                             <label class="checkbox filter-checkbox">
                                                 <a
                                                     href="https://www.webike.vn/cho-xe-may/bike-list/quang-ngai-p39.html">Quảng
-                                                    Ng&atilde;i</a>
+                                                    Ngãi</a>
                                                 <span class="count">(179)</span>
                                                 <input type="checkbox" name="city[]" value="39" />
                                                 <span class="checkmark"></span>
@@ -2184,7 +1984,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>&gt; 100 000 km
+                                                    <li><label class="spec-label">Đã đi</label>&gt; 100 000 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2020</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -2293,7 +2093,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>20 000 - 24 999 km
+                                                    <li><label class="spec-label">Đã đi</label>20 000 - 24 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2019</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -2423,7 +2223,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>5 000 - 9 999 km
+                                                    <li><label class="spec-label">Đã đi</label>5 000 - 9 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2009</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe số</li>
@@ -2540,7 +2340,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>50 000 - 59 999 km
+                                                    <li><label class="spec-label">Đã đi</label>50 000 - 59 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
@@ -2670,7 +2470,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>0 - 4 999 km</li>
+                                                    <li><label class="spec-label">Đã đi</label>0 - 4 999 km</li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
                                                 </ul>
@@ -2800,7 +2600,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>15 000 - 19 999 km
+                                                    <li><label class="spec-label">Đã đi</label>15 000 - 19 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2013</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -2908,7 +2708,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>5 000 - 9 999 km
+                                                    <li><label class="spec-label">Đã đi</label>5 000 - 9 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
@@ -3012,7 +2812,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>10 000 - 14 999 km
+                                                    <li><label class="spec-label">Đã đi</label>10 000 - 14 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
@@ -3139,7 +2939,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>10 000 - 14 999 km
+                                                    <li><label class="spec-label">Đã đi</label>10 000 - 14 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2018</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Sport bike</li>
@@ -3259,7 +3059,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>&gt; 100 000 km
+                                                    <li><label class="spec-label">Đã đi</label>&gt; 100 000 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
@@ -3386,7 +3186,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>35 000 - 39 999 km
+                                                    <li><label class="spec-label">Đã đi</label>35 000 - 39 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
@@ -3505,7 +3305,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>20 000 - 24 999 km
+                                                    <li><label class="spec-label">Đã đi</label>20 000 - 24 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2018</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -3627,7 +3427,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>15 000 - 19 999 km
+                                                    <li><label class="spec-label">Đã đi</label>15 000 - 19 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2016</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe c&ocirc;n tay</li>
@@ -3758,7 +3558,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>20 000 - 24 999 km
+                                                    <li><label class="spec-label">Đã đi</label>20 000 - 24 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2016</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe c&ocirc;n tay</li>
@@ -3782,7 +3582,7 @@
 
                                                     <address class="address">
                                                         <i class="icon icon-location"></i>
-                                                        Ba Tơ, Quảng Ng&atilde;i
+                                                        Ba Tơ, Quảng Ngãi
                                                     </address>
                                                 </div>
                                             </div>
@@ -3889,7 +3689,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>35 000 - 39 999 km
+                                                    <li><label class="spec-label">Đã đi</label>35 000 - 39 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2008</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -3997,7 +3797,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>50 000 - 59 999 km
+                                                    <li><label class="spec-label">Đã đi</label>50 000 - 59 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2010</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -4128,7 +3928,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>-</li>
+                                                    <li><label class="spec-label">Đã đi</label>-</li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
                                                 </ul>
@@ -4258,7 +4058,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>0 - 4 999 km</li>
+                                                    <li><label class="spec-label">Đã đi</label>0 - 4 999 km</li>
                                                     <li><label class="spec-label">Đời xe</label>2016</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
                                                 </ul>
@@ -4376,7 +4176,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>30 000 - 34 999 km
+                                                    <li><label class="spec-label">Đã đi</label>30 000 - 34 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2010</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -4483,7 +4283,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>0 - 4 999 km</li>
+                                                    <li><label class="spec-label">Đã đi</label>0 - 4 999 km</li>
                                                     <li><label class="spec-label">Đời xe</label>2006</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
                                                 </ul>
@@ -4613,7 +4413,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>50 000 - 59 999 km
+                                                    <li><label class="spec-label">Đã đi</label>50 000 - 59 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2018</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -4731,7 +4531,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>15 000 - 19 999 km
+                                                    <li><label class="spec-label">Đã đi</label>15 000 - 19 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2010</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -4863,7 +4663,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>35 000 - 39 999 km
+                                                    <li><label class="spec-label">Đã đi</label>35 000 - 39 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2007</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe tay ga</li>
@@ -4993,7 +4793,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>-</li>
+                                                    <li><label class="spec-label">Đã đi</label>-</li>
                                                     <li><label class="spec-label">Đời xe</label>-</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Kh&aacute;c</li>
                                                 </ul>
@@ -5124,7 +4924,7 @@
 
                                                 <ul class="list-info-bike">
                                                     <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                    <li><label class="spec-label">Đ&atilde; đi</label>15 000 - 19 999 km
+                                                    <li><label class="spec-label">Đã đi</label>15 000 - 19 999 km
                                                     </li>
                                                     <li><label class="spec-label">Đời xe</label>2016</li>
                                                     <li><label class="spec-label">Kiểu xe</label>Xe c&ocirc;n tay</li>

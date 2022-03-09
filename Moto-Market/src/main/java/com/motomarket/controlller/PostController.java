@@ -55,13 +55,11 @@ public class PostController {
     }
 
     @PostMapping("/newpost")
-    public ModelAndView handlePost(@ModelAttribute PostDTO post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
+    public String handlePost(@ModelAttribute PostDTO post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
         UserDTO user = userService.getById(1L);
         DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId,colorId);
-        System.out.println(detailMotor);
         PostDTO newPost = postService.savePost(post, user, detailMotor, ownershipSelect, files);
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
+       return "redirect:/post/detailpost/" + newPost.getPostId();
     }
 
 
@@ -69,20 +67,8 @@ public class PostController {
     public ModelAndView viewDetailPost(@PathVariable Long postId){
         PostDTO postDTO = postService.getById(postId);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
-<<<<<<< HEAD
-=======
-
-        DetailMotor detailMotor = detailMotorService.getDetailMotorById(postDTO.getDetailMotorDTO().getDetailMotorId());
-//        DetailMotorDTO detailMotor = detailMotorService.getById(postDTO.getDetailMotorDTO().getDetailMotorId());
-
->>>>>>> huu-dev
         DetailMotorDTO detailMotorDTO =postDTO.getDetailMotorDTO();
-
         ModelAndView modelAndView = new ModelAndView("moto-detail");
-<<<<<<< HEAD
-=======
-
->>>>>>> huu-dev
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());

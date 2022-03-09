@@ -1,0 +1,289 @@
+.user_profile .user_info,
+.user_profile .list_bike,
+.user_profile .list_more{
+    background-color: #fff;
+    padding: 20px;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.user_profile .user_info .left_info,
+.user_profile .user_info .right_info{
+    width: 50%;
+    float: left;
+    overflow: hidden;
+}
+.user_profile .user_info .left_info{
+    
+}
+.user_profile .user_info .left_info .avatar{
+    height: 100px !important;
+    height: auto;
+    float: left;
+    overflow: hidden;
+    border-radius: 100%;
+}
+.user_profile .user_info .left_info .avatar img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.user_profile .user_info .left_info .info_name{
+    height: auto;
+    float: left;
+    overflow: hidden;
+    padding: 0 15px;
+    width: 500px;
+}
+.user_profile .user_info .left_info .username,
+.user_profile .user_info .left_info .rating,
+.user_profile .user_info .left_info .follow,
+.user_profile .user_info .left_info .event_follow{
+    display: block;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.user_profile .user_info .left_info .username{
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 140%;
+    color: #000;
+    display: flex;
+    align-items: center;
+}
+span.bg-blue-tick{
+    background-color: #2F80ED;
+    border-radius: 100%;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-bottom: 4px;
+}
+.blue-tick {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 6px;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.user_profile .user_info .left_info .rating .icon{
+    margin-right: 5px;
+    border-radius: 100%;
+}
+.user_profile .user_info .left_info .rating .icon-king{
+    background-position: -154px -88px;
+}
+.user_profile .user_info .left_info .rating .icon-bike{
+    background-position: -132px -88px;
+    color: #F2F2F2;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.user_profile .user_info .icon-edit{
+    background-position: -88px -110px;
+}
+.user_profile .user_info .left_info .rating .icon-bike span{
+    vertical-align: -webkit-baseline-middle;
+}
+.user_profile .user_info .left_info .follow p{
+    float: left;
+    padding-right: 10px;
+}
+.user_profile .user_info .left_info .follow strong{
+    font-weight: bold;
+}
+.user_profile .user_info .left_info .event_follow a{
+    float: left;
+    margin-right: 10px;
+}
+.user_profile .user_info .right_info .right_info_row{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.user_profile .user_info .right_info .right_info_row .col1{
+    width: 160px;
+    overflow: hidden;
+    float: left;
+}
+.user_profile .user_info .right_info .right_info_row .col2{
+    float: left;
+}
+.user_profile .user_info a.btn_follow,
+.user_profile .user_info a.btn_unfollow{
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+.user_profile .user_info a.btn_follow{
+    background-color: #F58220;
+    color: #fff;
+}
+.user_profile .user_info a.btn_unfollow{
+    background-color: #fff;
+    color: #F58220;
+    border: 1px solid #F58220;
+}
+.user_profile .user_info a.btn_follow .icon-follow{
+    background-position: -220px -68px;
+}
+.user_profile .user_info a.btn_unfollow .icon-follow{
+    background-position: -66px -110px;
+}
+.user_profile .user_info .icon-follow{
+    margin-right: 10px;
+}
+.user_profile .user_info a.btn_warning,
+.user_profile .user_info a.btn_link{
+    padding: 5px;
+    border-radius: 3px;
+}
+.user_profile .user_info a.btn_warning{
+    background-color: #E41E26;
+}
+.user_profile .user_info .icon-warning{
+    background-position: -198px -44px;
+}
+.user_profile .user_info a.btn_link{
+    background-color: #EFEFEF;
+}
+.user_profile .user_info .icon-link{
+    background-position: -44px -88px;
+}
+.user_profile .user_info .desc_info{
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    padding: 10px 0;
+    border-top: 1px solid #E0E0E0;
+    margin-top: 10px;
+}
+.user_profile .user_info .desc_info span{
+    width: 100%;
+    float: left;
+    display: block;
+    overflow: hidden;
+    line-height: 1.5;
+}
+.user_profile .user_info .right_info .col1 .icon{
+    margin-right: 10px;
+}
+.user_profile .user_info .right_info .icon-motor{
+    background-position: -220px -88px;
+}
+.user_profile .user_info .right_info .icon-review{
+    background-position: -44px -110px;
+}
+.user_profile .user_info .right_info .icon-calendar{
+    background-position: -220px -44px;
+}
+.user_profile .user_info .right_info .icon-loc{
+    background-position: -22px -88px;
+}
+.user_profile .user_info .right_info .icon-shield{
+    background-position: -22px -110px;
+}
+.color-orange{
+    color: #F58220;
+}
+.user_profile .user_info .right_info .icon-loc-red{
+    background-position: -110px -88px;
+}
+.user_profile .user_info .right_info .icon-face{
+    background-position: -88px -88px;
+}
+.user_profile .user_info .right_info .icon-phone{
+    background-position: -66px -88px;
+}
+
+.user_profile .list_bike .home_page .box-area{
+    border-top: 0px !important;
+    padding:  0px !important;
+}
+.user_profile .list_bike .heading-2.media{
+    padding: 0px;
+    margin-bottom: 0px !important;
+}
+.user_profile .list_more .item{
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.user_profile .list_more .item .imotor{
+    width: 35px;
+    float: left;
+}
+.user_profile .list_more .item .info{
+    float: left;
+}
+.user_profile .list_more .item .info strong{
+    font-weight: bold;
+}
+.user_profile .icon-motor{
+    background-position: -220px -88px;
+}
+.user_profile .list_more .subtitle{
+    height: 40px;
+}
+.user_profile .list_more .subtitle h2{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #000;
+}
+.right_filter .select-control {
+    width: 120px;
+    border: 1px solid #b8b8b8;
+    padding: 5px;
+    height: 28px;
+    font-size: 13px;
+}
+.user_profile .list_bike .comp_motors.grid .item {
+    width: 200px;
+    padding: 0;
+    margin: 6px;
+    margin-right: 2px;
+    display: inline-block;
+}
+.user_profile .list_bike .comp_motors .item figure img {
+    object-fit: cover !important;
+}
+.home_page .box-area{
+    margin-bottom: 10px !important;
+}
+.user_profile .list_bike .pagination{
+    margin-top: 15px;
+}
+
+.user_profile .list_bike .comp_motors .item .follow {
+    left: 4px;
+    background: rgba(0,0,0,.6);
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: 8px;
+    color: #fff;
+}
+.user_profile .list_bike .icon.icon-heart{
+    background-position: -132px 0px;
+}
+.user_profile .list_bike .icon.icon-heart-orange{
+    background-position: 0px -110px;
+}
+
+.bggrey{
+    transition: opacity .2s linear,filter .2s linear;
+    -webkit-filter: grayscale(100%) opacity(.6);
+    filter: grayscale(100%) opacity(.6);
+}
