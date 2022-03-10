@@ -14,5 +14,7 @@ public interface IUserService extends IGeneralService<UserDTO> {
     User save(User user);
     User getUserById(Long id);
     List<UserDTO> findAllByDeletedIsFalse() ;
+
+
 }
 

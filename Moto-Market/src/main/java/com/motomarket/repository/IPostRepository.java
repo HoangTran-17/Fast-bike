@@ -63,6 +63,7 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             "and (:color is null or p.detailMotor.colorMotor.colorName = :color) " +
             "order by p.postDate DESC")
     Page<Post> findTopByFilters(
+<<<<<<< HEAD
             Pageable pageable, @Param("modelMotor") String modelMotor,
             @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,
             @Param("province") String province,
@@ -72,5 +73,39 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             @Param("km") String kilometerCount,
             @Param("color") String colorMotor,
             @Param("statusPost") StatusPost statusPost);
+=======
+                    Pageable pageable,@Param("modelMotor") String modelMotor,
+                    @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,
+                    @Param("province") String province,
+                    @Param("typeMotor") String typeMotor,
+                    @Param("capacityMin") Integer capacityMin, @Param("capacityMax") Integer capacityMax,
+                    @Param("priceMin") Double priceMin, @Param("priceMax") Double priceMax,
+                    @Param("km") String kilometerCount,
+                    @Param("color") String colorMotor,
+                    @Param("statusPost") StatusPost statusPost);
+
+//    Mr Hữu
+    @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
+    Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate DESC ")
+    Page<Post> findPostWaitingOrderByDate(Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.title LIKE %?1%"
+            + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
+            + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
+            + " OR p.detailMotor.colorMotor.colorName LIKE %?1%"
+            + " OR CONCAT(p.detailMotor.modelYear.modelYearName,'') LIKE %?1%"
+            + " OR p.detailMotor.typeMotor.typeMotorName LIKE %?1%"
+            + " OR p.user.userName LIKE %?1%"
+            + " OR CONCAT(p.statusPost, '') LIKE %?1%"
+            + " OR p.kilometerCount LIKE %?1%"
+            + " OR CONCAT(p.price, '') LIKE %?1%"
+            + " OR p.district LIKE %?1%"
+            + " OR CONCAT(p.postDate, '') LIKE %?1%"
+            + " OR CONCAT(p.ownership, '') LIKE %?1%")
+    Page<Post> findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key,Pageable pageable);
+>>>>>>> huu-dev
 }
+
+
+
 
