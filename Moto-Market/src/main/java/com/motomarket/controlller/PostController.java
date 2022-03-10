@@ -67,21 +67,8 @@ public class PostController {
     public ModelAndView viewDetailPost(@PathVariable Long postId){
         PostDTO postDTO = postService.getById(postId);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
-<<<<<<< HEAD
-=======
-
-
-        DetailMotor detailMotor = detailMotorService.getDetailMotorById(postDTO.getDetailMotorDTO().getDetailMotorId());
-//        DetailMotorDTO detailMotor = detailMotorService.getById(postDTO.getDetailMotorDTO().getDetailMotorId());
-
-
->>>>>>> huu-dev
         DetailMotorDTO detailMotorDTO =postDTO.getDetailMotorDTO();
         ModelAndView modelAndView = new ModelAndView("moto-detail");
-<<<<<<< HEAD
-=======
-
->>>>>>> huu-dev
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());
