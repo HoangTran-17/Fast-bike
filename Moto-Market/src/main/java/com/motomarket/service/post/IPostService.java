@@ -41,5 +41,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
 //    Mr Hữu
     PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize);
+    PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize);
+    PostResponse findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key,Integer pageNo, Integer pageSize);
 }
 

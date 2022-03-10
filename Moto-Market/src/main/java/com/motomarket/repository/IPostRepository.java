@@ -81,6 +81,22 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
 //    Mr Hữu
     @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
     Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate DESC ")
+    Page<Post> findPostWaitingOrderByDate(Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.title LIKE %?1%"
+            + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
+            + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
+            + " OR p.detailMotor.colorMotor.colorName LIKE %?1%"
+            + " OR CONCAT(p.detailMotor.modelYear.modelYearName,'') LIKE %?1%"
+            + " OR p.detailMotor.typeMotor.typeMotorName LIKE %?1%"
+            + " OR p.user.userName LIKE %?1%"
+            + " OR CONCAT(p.statusPost, '') LIKE %?1%"
+            + " OR p.kilometerCount LIKE %?1%"
+            + " OR CONCAT(p.price, '') LIKE %?1%"
+            + " OR p.district LIKE %?1%"
+            + " OR CONCAT(p.postDate, '') LIKE %?1%"
+            + " OR CONCAT(p.ownership, '') LIKE %?1%")
+    Page<Post> findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key,Pageable pageable);
 }
 
 

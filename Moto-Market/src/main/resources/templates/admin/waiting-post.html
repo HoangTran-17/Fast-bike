@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>All Posts | Front - Admin &amp; Dashboard Template</title>
+    <title>Waiting Posts | Front - Admin &amp; Dashboard Template</title>
     <th:block th:include="/admin/fragment/head::head"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -65,6 +65,7 @@
                             <!-- End Search -->
                         </form>
                     </div>
+
 
                 </div>
                 <!-- End Row -->
@@ -379,58 +380,34 @@
         $("#tbody").html(str);
     }
 
-    function getAllPost(pageNo, pageSize) {
-        $.ajax({
-            type: "GET",
-            url: "/admin/all-post?pageNo=" + pageNo + "&pageSize=" + pageSize
-        }).done(function (data) {
-            drawEntriesToTable(data);
-            $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
-            if (data.totalPages <= 1) {
-                $("#datatablePagination").css("display", "none");
-            } else {
-                let pagination = drawPaginationEntries(data);
-                $("#datatable_paginate").append(drawPaginationPrevAndNext());
-                $("#datatable_pagination li:first").after(pagination);
-                $("#datatableWithPaginationInfoTotalQty").text(data.totalElements)
-                $("#datatablePagination").css("display", "");
-                // $(".paginate_item").removeClass("disabled");
-                changeQtyEntries();
-                changePageEntries();
-                doPrevPage();
-                doNextPage(Number(data.totalPages-1));
-                searchEntries();
-            }
-        })
-    }
 
     $(document).ready(function () {
-        getAllPost(0, getQtyEntries());
+        getWaitingPost(0,getQtyEntries());
         changeQtyEntries();
         changePageEntries();
         doPrevPage();
         searchEntries();
     })
     function getQtyEntries() {
-      return $("#datatableEntries option:selected").val();
+        return $("#datatableEntries option:selected").val();
     }
 
     function changeQtyEntries() {
         $("#datatableEntries").on("change",function () {
-            getAllPost(0,getQtyEntries())
+            getWaitingPost(0,getQtyEntries())
         })
     }
     function changePageEntries() {
         $(".paginate_button").on("click",function () {
             let pageNo = $(this).data("id");
-            getAllPost(pageNo,getQtyEntries())
+            getWaitingPost(pageNo,getQtyEntries())
         })
     }
     function doPrevPage() {
         $("#datatable_previous").on("click",function () {
             let pageNo = $("#datatable_pagination li.active a").data("id");
             if (pageNo>0) {
-                getAllPost(pageNo-1,getQtyEntries());
+                getWaitingPost(pageNo-1,getQtyEntries());
             }
         })
     }
@@ -438,7 +415,7 @@
         $("#datatable_next").on("click",function () {
             let pageNo = $("#datatable_pagination li.active a").data("id");
             if (pageNo<data) {
-                getAllPost(pageNo+1,getQtyEntries());
+                getWaitingPost(pageNo+1,getQtyEntries());
             }
         })
     }
@@ -460,7 +437,7 @@
         $("#submit_search").on('click',function () {
             let key =  $("#datatableSearch").val();
             if (key==="") {
-                getAllPost(0,getQtyEntries());
+                getWaitingPost(0,getQtyEntries());
             } else {
                 getAllPostByKeySearch(key,0,getQtyEntries());
             }
@@ -490,9 +467,31 @@
             }
         })
     }
+    function getWaitingPost(pageNo, pageSize) {
+        $.ajax({
+            type: "GET",
+            url: "/admin/all-post/waiting?pageNo=" + pageNo + "&pageSize=" + pageSize
+        }).done(function (data) {
+            console.log(data)
+            drawEntriesToTable(data);
+            $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
+            if (data.totalPages <= 1) {
+                $("#datatablePagination").css("display", "none");
+            } else {
+                let pagination = drawPaginationEntries(data);
+                $("#datatable_paginate").append(drawPaginationPrevAndNext());
+                $("#datatable_pagination li:first").after(pagination);
+                $("#datatableWithPaginationInfoTotalQty").text(data.totalElements)
+                $("#datatablePagination").css("display", "");
+                changeQtyEntries();
+                changePageEntries();
+                doPrevPage();
+                doNextPage(Number(data.totalPages - 1));
+                searchEntries();
+            }
+        })
 
-
-
+    }
 </script>
 <th:block th:include="/admin/fragment/script::script"/>
 </html>

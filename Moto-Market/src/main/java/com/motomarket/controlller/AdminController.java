@@ -136,4 +136,19 @@ public class AdminController {
         }
 
     }
+
+    @GetMapping("/post/waiting")
+    public ModelAndView toWaitingPostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/waiting-post");
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            modelAndView.addObject("adminLogin",adminLogin);
+            return modelAndView;
+        }
+
+    }
 }

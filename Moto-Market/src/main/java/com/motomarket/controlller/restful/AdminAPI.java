@@ -1,6 +1,7 @@
 package com.motomarket.controlller.restful;
 
 import com.motomarket.repository.model.Post;
+import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.StatusUser;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.PostDTO;
@@ -56,5 +57,18 @@ public class AdminAPI {
     {
        return postService.findPostDeletedIsFalseOrderByDate(pageNo,pageSize);
 
+    }
+    @GetMapping("/all-post/waiting")
+    public PostResponse getAllPostAndWaitingWithPageable(@RequestParam(defaultValue = "0") Integer pageNo,
+                                               @RequestParam(defaultValue = "5") Integer pageSize)
+    {
+        return postService.findPostWaitingOrderByDate(pageNo,pageSize);
+
+    }
+
+    @GetMapping("/post/search/{key}")
+    public PostResponse getAllPostByKeySearch(@PathVariable String key,@RequestParam(defaultValue = "0") Integer pageNo,
+                                              @RequestParam(defaultValue = "5") Integer pageSize) {
+        return postService.findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(key, pageNo, pageSize);
     }
 }
