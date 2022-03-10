@@ -8,9 +8,11 @@ import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.ImageDTO;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.response.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService implements IPostService {
@@ -169,7 +172,23 @@ public class PostService implements IPostService {
         return posts.map(PostDTO::parsePostDTO);
     }
 
+//    Mr Hữu
+    @Override
+    public PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<Post> posts = postRepository.findPostDeletedIsFalseOrderByDate(pageable);
+        List<Post> listOfPosts = posts.getContent();
+        List<PostDTO> content= listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(content);
+        postResponse.setPageNo(posts.getNumber());
+        postResponse.setPageSize(posts.getSize());
+        postResponse.setTotalElements(posts.getTotalElements());
+        postResponse.setTotalPages(posts.getTotalPages());
+        postResponse.setLast(posts.isLast());
 
+        return postResponse;
+    }
 }
 //Pageable pageable,@Param("modelMotor") String modelMotor,
 //                    @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,

@@ -78,5 +78,12 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
                     @Param("km") String kilometerCount,
                     @Param("color") String colorMotor,
                     @Param("statusPost") StatusPost statusPost);
+
+//    Mr Hữu
+    @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
+    Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
 }
+
+
+
 
