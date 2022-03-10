@@ -47,33 +47,33 @@ public class PostController {
 
     @GetMapping("/newpost")
     public ModelAndView toPostPage() {
-        UserDTO userLogin =  userService.getById(1L);
+        UserDTO userLogin = userService.getById(1L);
         ModelAndView modelAndView = new ModelAndView("new-post");
         modelAndView.addObject("post", new PostDTO());
-        modelAndView.addObject("userLogin",userLogin);
+        modelAndView.addObject("userLogin", userLogin);
         return modelAndView;
     }
 
     @PostMapping("/newpost")
-    public String handlePost(@ModelAttribute PostDTO post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
+    public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
         UserDTO user = userService.getById(1L);
-        DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId,colorId);
-        PostDTO newPost = postService.savePost(post, user, detailMotor, ownershipSelect, files);
-       return "redirect:/post/detailpost/" + newPost.getPostId();
+        DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId, colorId);
+        PostDTO newPost = postService.savePost(post, user, detailMotor, files);
+        return "redirect:/post/detailpost/" + newPost.getPostId();
     }
 
 
     @GetMapping("/detailpost/{postId}")
-    public ModelAndView viewDetailPost(@PathVariable Long postId){
+    public ModelAndView viewDetailPost(@PathVariable Long postId) {
         PostDTO postDTO = postService.getById(postId);
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
-        DetailMotorDTO detailMotorDTO =postDTO.getDetailMotorDTO();
+        DetailMotorDTO detailMotorDTO = postDTO.getDetailMotorDTO();
         ModelAndView modelAndView = new ModelAndView("moto-detail");
         UserDTO userDTO = postDTO.getUserDTO();
         PrettyTime p = new PrettyTime(new Locale("vi"));
         String time = p.format(postDTO.getPostDate());
         String timeFormat = time.substring(0, 1).toUpperCase() + time.substring(1);
-        String seriesName = detailMotorDTO.getBrandMotor().getBrandName() +" "+ detailMotorDTO.getSeriesMotor().getSeriesName();
+        String seriesName = detailMotorDTO.getBrandMotor().getBrandName() + " " + detailMotorDTO.getSeriesMotor().getSeriesName();
         List<PostDTO> relatedPostDTO = postService.findTopBySeriesMotor(8, seriesName);
         List<PostDTO> newPostList = postService.findListOfLatestPosts(15);
         modelAndView.addObject("post", postDTO);
@@ -81,10 +81,26 @@ public class PostController {
         modelAndView.addObject("detail", detailMotorDTO);
         modelAndView.addObject("timePost", timeFormat);
         modelAndView.addObject("postsRelated", relatedPostDTO);
-        modelAndView.addObject("newPosts",newPostList);
+        modelAndView.addObject("newPosts", newPostList);
         modelAndView.addObject("postOwner", userDTO);
         return modelAndView;
     }
 
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditPost(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("edit-post");
+        PostDTO postDTO = postService.getById(id);
+        UserDTO userLogin = userService.getById(1L);
+        modelAndView.addObject("userLogin", userLogin);
+        modelAndView.addObject("post", postDTO);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView hanlderEditPost(@ModelAttribute PostDTO post) {
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
 
 }
