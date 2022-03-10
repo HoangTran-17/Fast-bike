@@ -1,9 +1,6 @@
 package com.motomarket.controlller;
 
-<<<<<<< HEAD
-=======
 import com.motomarket.repository.model.Post;
->>>>>>> tien-dev
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.post.IPostService;
@@ -42,16 +39,16 @@ public class HomeController {
     @PostMapping("/search-moto-home")
     public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv) {
         ModelAndView modelAndView = new ModelAndView("list-moto");
-       Double ccMin = null;
-       Double ccMax = null;
+       Integer ccMin = null;
+       Integer ccMax = null;
         if (br.equals("-1")){
             br = "";
         }
         if (cc.equals("-1")){
             cc = null;
         } else{
-             ccMin = Double.valueOf(cc.substring( 0, cc.indexOf("-")));
-             ccMax = Double.valueOf(cc.substring(cc.indexOf("-")+1,cc.length()));
+             ccMin = Integer.valueOf(cc.substring( 0, cc.indexOf("-")));
+             ccMax = Integer.valueOf(cc.substring(cc.indexOf("-")+1,cc.length()));
 
         }
         if (sr.equals("-1")){
@@ -64,7 +61,8 @@ public class HomeController {
             pv = null;
         }
         String modelMotor = br + " " + sr;
-//        Page<PostDTO> postDTOPage = postService.findTopByFilters(20,modelMotor,null,null,pv,null)
+        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, 0.0,pr,null,null);
+        System.out.println(postDTOPage.getContent());
         return modelAndView;
     }
 

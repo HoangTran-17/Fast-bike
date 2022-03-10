@@ -550,35 +550,33 @@
 <script type="text/javascript" src="/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827"></script>
 <script type="text/javascript" src="/v1/pc/js/top/topmoto.js?159125667020200827"></script>
 <script type="text/javascript" src="/v1/pc/js/top/search_moto_v2.js?159177960820200827"></script>
-<<<<<<< HEAD
-<script type="text/javascript">
-    WVN.initAdvancedSearch('#advanced_search');
-</script>
+
 <script>
 
     getListOfLatestPosts();
 
     function getListOfLatestPosts() {
-        $.ajax({
-            type: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            url: "/api/post/getListOfLatestPosts",
-        }).done(function (data) {
-            console.log(data);
-                $.each(data, (index, item) => {
-                    let price;
-                    if (item.price == 0) {
-                        price = "Liên hệ";
-                    } else {
-                        price = Intl.NumberFormat('en-US').format(item.price) + "đ";
-                    }
-                    console.log(price);
-                    let address = item.district + ', ' + item.province;
-                    console.log(address);
-                    $('#latest-post-list').append(`
+    }
+    $.ajax({
+        type: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        url: "/api/post/getListOfLatestPosts",
+    }).done(function (data) {
+        console.log(data);
+        $.each(data, (index, item) => {
+            let price;
+            if (item.price == 0) {
+                price = "Liên hệ";
+            } else {
+                price = Intl.NumberFormat('en-US').format(item.price) + "đ";
+            }
+            console.log(price);
+            let address = item.district + ', ' + item.province;
+            console.log(address);
+            $('#latest-post-list').append(`
                         <li class="col-xs-2">
                             <a href="/post/detailpost/${item.postId}">
                                 <figure class="thumbnail-cover zoom-image">
@@ -603,18 +601,13 @@
                             </a>
                         </li>
                     `);
-                })
-        }).fail(function () {
-=======
-<!--<script type="text/javascript">-->
-<!--    WVN.initAdvancedSearch('#advanced_search');-->
-<!--</script>-->
-<div th:replace="~{fragments/script-index :: custom_script}"></div>
->>>>>>> tien-dev
-
         })
-    }
+    }).fail(function () {
+
+    })
 </script>
+
+<div th:replace="~{fragments/script-index :: custom_script}"></div>
 
 </body>
 </html>
