@@ -53,7 +53,6 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.statusPost = :statusPost and (p.detailMotor.seriesMotor.capacity between :min and :max) order by p.postDate DESC")
     Page<Post> findTopByCapacity(Pageable pageable, @Param("min") int min, @Param("max") int max, @Param("statusPost") StatusPost statusPost);
 
-//    khoảng giá - đời xe - km - màu sắc
 //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, modelYear, province, typeMotor, Capacity,price, kilometerCount và colorMotor .
     @Query("select p from Post p where p.statusPost = :statusPost " +
             "and (:modelMotor is null or p.modelMotor like :modelMotor%) " +

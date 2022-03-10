@@ -72,6 +72,14 @@ public class HoangController {
     @GetMapping("/get")
     public void get() {
 
+        List<PostDTO> postList1 = postService.findListOfLatestPosts(5);
+        System.out.println(postList1);
+
+        Long id = 110L;
+        Post post = postRepository.getById(id);
+        System.out.println(post);
+
+
         String modelMotor = "HONDA SH 150i";
         List<PostDTO> postServiceTopBySeriesMotor = postService.findTopBySeriesMotor(10,modelMotor);
         System.out.println(postServiceTopBySeriesMotor);
