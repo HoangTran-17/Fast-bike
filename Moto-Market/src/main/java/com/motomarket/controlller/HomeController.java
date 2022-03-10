@@ -1,6 +1,9 @@
 package com.motomarket.controlller;
 
+<<<<<<< HEAD
+=======
 import com.motomarket.repository.model.Post;
+>>>>>>> tien-dev
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.post.IPostService;

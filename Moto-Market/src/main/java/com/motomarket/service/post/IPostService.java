@@ -36,8 +36,8 @@ public interface IPostService extends IGeneralService<PostDTO> {
     Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax);
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
-    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,int modelYearMin, int modelYearMax,
-                                   String province,String typeMotor,int capacityMin, int capacityMax,
+    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,Integer modelYearMin, Integer modelYearMax,
+                                   String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
 }

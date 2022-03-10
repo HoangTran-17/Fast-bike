@@ -13,54 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-//////Trang test của Hoàng, anh em cứ để vậy nha
 @Controller
 public class HoangController {
-
-//    @Autowired
-//    private IModelYearRepository modelYearRepository;
-//    @Autowired
-//    private IDetailMotorRepository detailMotorRepository;
-//    @Autowired
-//    private IPostRepository postRepository;
-//    @Autowired
-//    private IUserRepository userRepository;
-//
-//    @GetMapping("/insert")
-//    public void insert() {
-//        ModelYear modelYear = modelYearRepository.getById(63L);
-//        List<DetailMotor> detailMotors = detailMotorRepository.findAllByModelYear(modelYear);
-//        User user = userRepository.getById(2L);
-//        detailMotors.forEach(detailMotor -> {
-//            Post post = new Post();
-//            post.setStatusPost(StatusPost.WAITING);
-//            String modelMotor = detailMotor.getBrandMotor().getBrandName() + " " +
-//                    detailMotor.getSeriesMotor().getSeriesName() + " " +
-//                    modelYear.getModelYearName() + " " +
-//                    detailMotor.getColorMotor().getColorName();
-//                    ;
-//            post.setTitle("Bán xe " + modelMotor);
-//            post.setModelMotor(modelMotor);
-//            post.setKilometerCount("Dưới 30,000km");
-//            post.setDescription("Xe còn mới, đang sử dụng");
-//            post.setPrice(4800000.0);
-//            post.setSellerName(user.getUserName());
-//            post.setSellerPhoneNumber(user.getPhoneNumber());
-//            post.setProvince("Hà Nội");
-//            post.setDistrict("Thanh Xuân");
-//            post.setPostDate(new Date());
-//            post.setOwnership(Ownership.OWNERSHIP);
-//            post.setUser(user);
-//            post.setDetailMotor(detailMotor);
-//
-//            postRepository.save(post);
-//        });
-//
-//        System.out.println("Success");
-//    }
-
-
-
 
     @Autowired
     private IPostRepository postRepository;
@@ -89,9 +43,6 @@ public class HoangController {
 //        List<PostDTO> postServiceListOfLatestPosts = postService.findListOfLatestPosts(15);
 //        System.out.println(postServiceListOfLatestPosts);
 
-//        int pageSize,String modelMotor,int modelYearMin, int modelYearMax,
-//                                          String province,String typeMotor,int capacityMin, int capacityMax,
-//                                          Double priceMin, Double priceMax,String kilometerCount, String colorMotor
 //        Page<PostDTO> postServiceTopByFilters = postService.findTopByFilters(11,null,2008,2020, null, null, 110, 150,10000000.0,60000000.0,null,"trắng");
 //        System.out.println(postServiceTopByFilters);
 //

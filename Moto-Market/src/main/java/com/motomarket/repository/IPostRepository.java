@@ -14,13 +14,6 @@ import java.util.List;
 @Repository
 public interface IPostRepository extends JpaRepository<Post, Long> {
 
-//    @Query("SELECT u " +
-//            "from User u " +
-//            "JOIN u.workspaces w " +
-//            "where w.id = :id")
-//    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
-
-
     @Override
     Page<Post> findAll(Pageable pageable);
 

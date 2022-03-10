@@ -19,11 +19,6 @@ public class BrandMotorService implements IBrandMotorService {
     @Override
     public List<BrandMotorDTO> findAll() {
         List<BrandMotorDTO> brandMotors = new ArrayList<>();
-//        List<BrandMotor> list = brandMotorRepository.findAll();
-//        for (BrandMotor brandMotor:list) {
-//            brandMotors.add( BrandMotorDTO.parseBrandMotorDTO(brandMotor));
-//
-//        }
         brandMotorRepository.findAll().forEach(brandMotor -> {
             brandMotors.add(BrandMotorDTO.parseBrandMotorDTO(brandMotor));
         });
