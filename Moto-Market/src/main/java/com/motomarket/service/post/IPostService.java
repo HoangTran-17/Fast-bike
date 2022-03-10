@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface IPostService extends IGeneralService<PostDTO> {
 
+    Long getCountPost();
+
     PostDTO savePost(PostDTO post, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files);
 
 

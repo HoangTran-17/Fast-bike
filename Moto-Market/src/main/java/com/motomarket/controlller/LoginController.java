@@ -1,6 +1,8 @@
 package com.motomarket.controlller;
 
+import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.model.Role;
+import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.StatusUser;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.user.IUserService;
@@ -23,6 +25,9 @@ public class LoginController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IPostRepository postRepository;
 
 
     @GetMapping("/signin")
@@ -88,15 +93,30 @@ public class LoginController {
         return modelAndView;
     }
 
-//    @GetMapping("/test")
-//    public ModelAndView testController(){
-//        final String uri = "https://vapi.vnappmob.com/api/province/district/44";
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-//        System.out.println(result);
-//        ModelAndView modelAndView = new ModelAndView("index");
-//        return modelAndView;
-//    }
+    @GetMapping("/test")
+    public ModelAndView testController(){
+        ModelAndView modelAndView = new ModelAndView("list-moto");
+        return modelAndView;
+    }
+
+    @GetMapping("/test2")
+    public ModelAndView testController2(){
+        ModelAndView modelAndView = new ModelAndView("edit-post");
+        return modelAndView;
+    }
+
+    @GetMapping("/test3")
+    public ModelAndView testController3(){
+        ModelAndView modelAndView = new ModelAndView("moto-manager");
+        return modelAndView;
+    }
+
+    @GetMapping("/test4")
+    public ModelAndView testController4(){
+        ModelAndView modelAndView = new ModelAndView("profile-view");
+        return modelAndView;
+    }
+
 
 
 }

@@ -47,6 +47,11 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public Long getCountPost(){
+        return postRepository.getCountPost(StatusPost.PUBLIC);
+    }
+
+    @Override
     public PostDTO getById(Long id) {
         return PostDTO.parsePostDTO(postRepository.getById(id));
     }
@@ -61,7 +66,7 @@ public class PostService implements IPostService {
     @Override
     public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files) {
         Date date = new Date();
-        postDTO.setStatusPost(StatusPost.PUBLIC);
+        postDTO.setStatusPost(StatusPost.WAITING);
         postDTO.setPostDate(date);
         if (ownershipSelect == 0) {
             postDTO.setOwnership(Ownership.OWNERSHIP);

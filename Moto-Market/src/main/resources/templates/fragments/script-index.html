@@ -1,0 +1,62 @@
+<script th:fragment="custom_script">
+
+    getAllBrand()
+    getProvinces()
+    function getAllBrand() {
+        $.ajax({
+            type: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            url: "/api/moto/getAllBrand",
+        }).done(function (data) {
+            $.each(data, (index, item) => {
+                $('#ip_search_brand').append(`<option class="op-brand" data-id="${item.brandId}" value="${item.brandName}">${item.brandName}</option>`);
+            })
+        }).fail(function () {
+
+        })
+    }
+
+    $('#ip_search_brand').on('change', function (e) {
+        let brandId = $(this).find(':selected').attr('data-id')
+        if (brandId == -1){
+            $('#ip_search_series').val("-1").change();
+            $('#ip_search_series').prop("disabled", true);
+        } else {
+            $('#ip_search_series').prop("disabled", false);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                url: "/api/moto/getSeries/" + brandId,
+            }).done(function (data) {
+                let str = "<option value='-1' selected>Dòng xe</option>";
+                $.each(data, (index, item) => {
+                    str += `<option value="${item.seriesName}" class="op-series">${item.seriesName}</option> `
+                })
+                $('#ip_search_series').html(str);
+            }).fail(function () {
+
+            })
+        }
+    });
+
+//    Province Ajax
+    function getProvinces() {
+        $.ajax({
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province",
+        }).done(function (data) {
+            $.each(data.results, (index, item) => {
+                $('#ip_search_province').append(` <option value="${item.province_name}" >${item.province_name}</option>`);
+            })
+        }).fail(function () {
+        })
+    }
+
+
+</script>

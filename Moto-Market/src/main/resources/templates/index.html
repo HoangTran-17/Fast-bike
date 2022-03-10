@@ -62,58 +62,22 @@
                     <div class="title-second">
                         <h3 class="name">Tìm kiếm xe</h3>
                         <a class="btn-see-all pull-right" href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
-                            Xem tất cả (221.558 xe)
+                            Xem tất cả (<span th:utext="${count}"></span>)
                         </a>
                     </div>
-                    <form action="https://www.webike.vn/cho-xe-may/danh-sach-xe.html" id="advanced_search" method="get"
-                          data-url="https://www.webike.vn/motomarket.html">
+                    <form th:action="@{/search-moto-home}" id="advanced_search" method="post">
                         <input type="hidden" id="search_condition" name="new"/>
                         <div class="row">
                             <ul class="box-search-topmoto">
                                 <li class="col-xs-2">
-                                    <select autocomplete placeholder="Hãng Xe" tabindex="1" name="mc"
-                                            id="search_brand" class="select-box">
-                                        <option value="-1">Hãng xe</option>
-                                        <option value="1">HONDA</option>
-                                        <option value="2">YAMAHA</option>
-                                        <option value="9">PIAGGIO</option>
-                                        <option value="20">SYM</option>
-                                        <option value="4">SUZUKI</option>
-                                        <option value="3">Kawasaki</option>
-                                        <option value="5">DUCATI</option>
-                                        <option value="11">HARLEY-DAVIDSON</option>
-                                        <option value="6">Benelli</option>
-                                        <option value="16">BMW</option>
-                                        <option value="15">KTM</option>
-                                        <option value="21">DAELIM</option>
-                                        <option value="13">TRIUMPH</option>
-                                        <option value="19">KYMCO</option>
-                                        <option value="28">Royal Enfield</option>
-                                        <option value="37">Brixton</option>
-                                        <option value="25">VISITOR</option>
-                                        <option value="8">MV AGUSTA</option>
-                                        <option value="41">GPX</option>
-                                        <option value="24">REBEL USA</option>
-                                        <option value="17">SACHS</option>
-                                        <option value="27">Bajaj Pulsar</option>
-                                        <option value="36">Moto Guzzi</option>
-                                        <option value="22">DAEHAN</option>
-                                        <option value="30">Kengo</option>
-                                        <option value="40">CFMoto</option>
-                                        <option value="33">Bosscity</option>
-                                        <option value="12">aprilia</option>
-                                        <option value="42">Lifan</option>
-                                        <option value="7">Lambretta</option>
-                                        <option value="34">Vento</option>
-                                        <option value="29">Hyosung</option>
-                                        <option value="32">Minsk</option>
-                                        <option value="23">KEEWAY</option>
-                                        <option value="18">MOBYLETTE</option>
+                                    <select autocomplete placeholder="Hãng Xe" tabindex="1"
+                                            id="ip_search_brand" name="br" class="select-box">
+                                        <option value="-1" selected>Hãng xe</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete data-hide-search placeholder="Phân khối" tabindex="2"
-                                            name="cc" id="search_capacity" class="select-box">
+                                    <select autocomplete  placeholder="Phân khối" tabindex="2"
+                                            name="cc" id="ip_search_capacity" class="select-box">
                                         <option value="-1">Phân khối</option>
                                         <option value="0-50">-50cc</option>
                                         <option value="51-174">51cc-174cc</option>
@@ -124,14 +88,15 @@
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete tabindex="3" name="sc" id="search_series"
+                                    <select autocomplete tabindex="3" name="sr" id="ip_search_series"
                                             placeholder="Dòng xe" class="select-box" disabled>
+                                        <option value="-1" selected>Dòng xe</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete tabindex="6" name="price_to" id="search_price_to"
+                                    <select autocomplete tabindex="6" name="pr" id="search_price_to"
                                             class="form-control align-right">
-                                        <option value="">Đến giá</option>
+                                        <option value="-1">Đến giá</option>
                                         <option value="0">0 VND</option>
                                         <option value="10000000">10,000,000 VND</option>
                                         <option value="50000000">50,000,000 VND</option>
@@ -143,77 +108,13 @@
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete tabindex="7" name="loc" id="search_province"
-                                            placeholder="Khu Vực"
+                                    <select autocomplete tabindex="7" name="pv"  id="ip_search_province"
                                             class="select-box">
-                                        <option value="-1">Tỉnh thành</option>
-                                        <option value="50">Hồ Ch&iacute; Minh</option>
-                                        <option value="18">Hà Nội</option>
-                                        <option value="46">Bình Dương</option>
-                                        <option value="34">Đà Nẵng</option>
-                                        <option value="48">Đồng Nai</option>
-                                        <option value="55">Cần Thơ</option>
-                                        <option value="51">An Giang</option>
-                                        <option value="20">Hải Phòng</option>
-                                        <option value="40">Đắk Lắk</option>
-                                        <option value="45">Bà Rịa-Vũng Tàu</option>
-                                        <option value="63">Vĩnh Long</option>
-                                        <option value="31">Thừa Thi&ecirc;n Huế</option>
-                                        <option value="58">Ki&ecirc;n Giang</option>
-                                        <option value="53">Bến Tre</option>
-                                        <option value="56">Đồng Tháp</option>
-                                        <option value="59">Long An</option>
-                                        <option value="61">Tiền Giang</option>
-                                        <option value="60">S&oacute;c Trăng</option>
-                                        <option value="49">Tây Ninh</option>
-                                        <option value="57">Hậu Giang</option>
-                                        <option value="44">Lâm Đồng</option>
-                                        <option value="38">Quảng Nam</option>
-                                        <option value="47">Bình Phước</option>
-                                        <option value="16">Bắc Ninh</option>
-                                        <option value="35">Khánh Hòa</option>
-                                        <option value="62">Trà Vinh</option>
-                                        <option value="54">Cà Mau</option>
-                                        <option value="22">Nam Định</option>
-                                        <option value="42">Gia Lai</option>
-                                        <option value="30">Thanh H&oacute;a</option>
-                                        <option value="27">Nghệ An</option>
-                                        <option value="33">Bình Thuận</option>
-                                        <option value="32">Bình Định</option>
-                                        <option value="24">Thái Bình</option>
-                                        <option value="41">Đắk N&ocirc;ng</option>
-                                        <option value="19">Hải Dương</option>
-                                        <option value="52">Bạc Li&ecirc;u</option>
-                                        <option value="39">Quảng Ngãi</option>
-                                        <option value="17">Hà Nam</option>
-                                        <option value="1">Bắc Giang</option>
-                                        <option value="43">Kon Tum</option>
-                                        <option value="25">Vĩnh Ph&uacute;c</option>
-                                        <option value="21">Hưng Y&ecirc;n</option>
-                                        <option value="10">Ph&uacute; Thọ</option>
-                                        <option value="26">Hà Tĩnh</option>
-                                        <option value="36">Ninh Thuận</option>
-                                        <option value="13">Thái Nguy&ecirc;n</option>
-                                        <option value="28">Quảng Bình</option>
-                                        <option value="23">Ninh Bình</option>
-                                        <option value="37">Ph&uacute; Y&ecirc;n</option>
-                                        <option value="11">Quảng Ninh</option>
-                                        <option value="29">Quảng Trị</option>
-                                        <option value="6">Hòa Bình</option>
-                                        <option value="14">Tuy&ecirc;n Quang</option>
-                                        <option value="8">Lạng Sơn</option>
-                                        <option value="12">Sơn La</option>
-                                        <option value="5">Hà Giang</option>
-                                        <option value="9">Lào Cai</option>
-                                        <option value="15">Y&ecirc;n Bái</option>
-                                        <option value="2">Bắc Kạn</option>
-                                        <option value="4">Điện Bi&ecirc;n</option>
-                                        <option value="7">Lai Châu</option>
-                                        <option value="3">Cao Bằng</option>
+                                        <option value="-1" selected>Tỉnh thành</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <button class="btn btn-danger" href="javascript:void(0)" id="btnAdvanceSearch"
+                                    <button class="btn btn-danger"  type="submit" id="btnAdvanceSearch"
                                             style="width: 100%">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                         Tìm kiếm
@@ -227,14 +128,10 @@
                     <div class="ct-brand">
                         <div class="title-second">
                             <h3 class="name">Hãng xe</h3>
-                            <a class="btn-see-all pull-right" href="https://www.webike.vn/cho-xe-may/hang-xe.html">
-                                Xem tất cả
-                            </a>
                         </div>
                         <div class="row">
                             <ul class="list-brand">
                                 <li>
-
                                     <a href="https://www.webike.vn/cho-xe-may/hang-xe/honda-1.html">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
@@ -653,6 +550,7 @@
 <script type="text/javascript" src="/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827"></script>
 <script type="text/javascript" src="/v1/pc/js/top/topmoto.js?159125667020200827"></script>
 <script type="text/javascript" src="/v1/pc/js/top/search_moto_v2.js?159177960820200827"></script>
+<<<<<<< HEAD
 <script type="text/javascript">
     WVN.initAdvancedSearch('#advanced_search');
 </script>
@@ -707,6 +605,12 @@
                     `);
                 })
         }).fail(function () {
+=======
+<!--<script type="text/javascript">-->
+<!--    WVN.initAdvancedSearch('#advanced_search');-->
+<!--</script>-->
+<div th:replace="~{fragments/script-index :: custom_script}"></div>
+>>>>>>> tien-dev
 
         })
     }

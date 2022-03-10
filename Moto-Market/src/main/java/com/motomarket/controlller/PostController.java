@@ -55,13 +55,11 @@ public class PostController {
     }
 
     @PostMapping("/newpost")
-    public ModelAndView handlePost(@ModelAttribute PostDTO post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
+    public String handlePost(@ModelAttribute PostDTO post, @RequestParam Long ownershipSelect, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
         UserDTO user = userService.getById(1L);
         DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId,colorId);
-        System.out.println(detailMotor);
         PostDTO newPost = postService.savePost(post, user, detailMotor, ownershipSelect, files);
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
+       return "redirect:/post/detailpost/" + newPost.getPostId();
     }
 
 

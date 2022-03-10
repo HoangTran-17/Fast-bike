@@ -69,6 +69,12 @@
                 <div id="content">
                     <article class="product" id="product-123">
                         <h1 class="module_title">
+                            <th:block  th:switch="${post.statusPost}">
+                                    <p class="msg_publish_prouduct" th:case="${T(com.motomarket.repository.model.StatusPost).WAITING}">
+                                        Bài đăng đang được ban quản trị kiểm duyệt vui lòng chờ chúng tôi xử lí.
+                                    </p>
+                            </th:block>
+
                             <span class="bottom_redline" th:utext="${post.title}">
                             </span>
                             <label class="i-condition p-new"> Xe cũ</label>
@@ -237,37 +243,39 @@
                                 </table>
                                 <!-- process customer info -->
                                 <!-- end - process customer info -->
-                                <div class="customer_info" id="right-shop-info">
-                                    <p class="name">
-                                        Họ tên chủ xe:
-                                        <strong>
-                                            <b th:utext="${post.sellerName}"></b>
-                                        </strong>
-                                        <br>
-                                        Liên hệ người đăng:
-                                        <a target="_blank" href="#">
-                                            <b th:utext="${postOwner.userName}"></b>
-                                        </a>
-                                    </p>
-                                    <div class="action">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <a aria-hidden="true" id="showPhone-btn" href="javascript:void(0);"
-                                                       class="btn-show-address show-address">
-                                                        <em class="icon phone"></em>
-                                                        <span id="phoneShowBox">Bấm để xem số điện thoại</span>
-                                                    </a>
-                                                    <input type="hidden" id="phoneNumber" th:value="${post.sellerPhoneNumber}">
-                                                </td>
-                                                <td>
-                                                    <p class="note_contact">* Vui lòng cho người bán biết
-                                                        bạn đã tìm thấy xe của họ tại Fastbike</p>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                <th:block  th:switch="${post.statusPost}">
+                                    <div class="customer_info" id="right-shop-info" th:case="${T(com.motomarket.repository.model.StatusPost).PUBLIC}">
+                                        <p class="name">
+                                            Họ tên chủ xe:
+                                            <strong>
+                                                <b th:utext="${post.sellerName}"></b>
+                                            </strong>
+                                            <br>
+                                            Liên hệ người đăng:
+                                            <a target="_blank" href="#">
+                                                <b th:utext="${postOwner.userName}"></b>
+                                            </a>
+                                        </p>
+                                        <div class="action">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <a aria-hidden="true" id="showPhone-btn" href="javascript:void(0);"
+                                                           class="btn-show-address show-address">
+                                                            <em class="icon phone"></em>
+                                                            <span id="phoneShowBox">Bấm để xem số điện thoại</span>
+                                                        </a>
+                                                        <input type="hidden" id="phoneNumber" th:value="${post.sellerPhoneNumber}">
+                                                    </td>
+                                                    <td>
+                                                        <p class="note_contact">* Vui lòng cho người bán biết
+                                                            bạn đã tìm thấy xe của họ tại Fastbike</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                </th:block>
 
                                 <div class="safety-buy">
                                     <h3 class="module_title line_bottom">
@@ -309,7 +317,7 @@
                                     </div>
                                     <div class="tab_contents">
                                         <div class="show">
-                                            <p th:utext="${post.description}"></p>
+                                            <div th:utext="${post.description}"></div>
                                         </div>
                                         <div class="" id="tab-spec">
                                             <section class="detail">
