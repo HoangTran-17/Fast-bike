@@ -1,5 +1,6 @@
 package com.motomarket.controlller;
 
+import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

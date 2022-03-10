@@ -15,17 +15,9 @@ import java.util.List;
 @Repository
 public interface IPostRepository extends JpaRepository<Post, Long> {
 
-//    @Query("SELECT u " +
-//            "from User u " +
-//            "JOIN u.workspaces w " +
-//            "where w.id = :id")
-//    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
-
-
     @Override
     Page<Post> findAll(Pageable pageable);
 
-//    phân khối - tỉnh - hãng - loại xe
 
 //    Trang chủ - List post mới nhất có yêu cầu về statusPost và số lượng post truyền vào từ Service.
     @Query("select p from Post p where p.statusPost = :statusPost order by p.postDate DESC")
