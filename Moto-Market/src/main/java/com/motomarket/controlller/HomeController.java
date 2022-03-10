@@ -44,6 +44,7 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("list-moto");
        Integer ccMin = null;
        Integer ccMax = null;
+       Double prMin = 0.0;
         if (br.equals("-1")){
             br = "";
         }
@@ -59,12 +60,13 @@ public class HomeController {
         }
         if (pr == -1){
             pr = null;
+            prMin = null;
         }
         if (pv.equals("-1")){
             pv = null;
         }
         String modelMotor = br + " " + sr;
-        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, 0.0,pr,null,null);
+        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, prMin,pr,null,null);
         System.out.println(postDTOPage.getContent());
         return modelAndView;
     }
