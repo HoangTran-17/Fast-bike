@@ -4,6 +4,10 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,6 +80,8 @@ public class UserService implements IUserService{
         });
         return userDTOList;
     }
+
+
     private User parseUser(UserDTO userDTO) {
         return new User(userDTO.getUserId(), userDTO.getUserName(), userDTO.getEmail(),
                 userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword()

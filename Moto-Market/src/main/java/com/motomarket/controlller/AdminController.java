@@ -51,7 +51,7 @@ public class AdminController {
 
     }
 
-    @PostMapping("/process")
+    @PostMapping("/success")
     public ModelAndView processLoginAdminPage(@ModelAttribute UserDTO admin, HttpServletResponse response, HttpServletRequest request) {
         UserDTO adminDTO = userService.findUserByEmail(admin.getEmail());
         ModelAndView modelAndView = new ModelAndView("admin/login");
@@ -98,8 +98,31 @@ public class AdminController {
         response.addCookie(cookie);
         return modelAndView;
     }
+    @GetMapping("/list-user")
+    public ModelAndView toListUserPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            System.out.println(adminLogin.getEmail());
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+                return modelAndView;
+            } else {
+                modelAndView.setViewName("admin/users");
+                System.out.println(adminLogin.getRole());
+                modelAndView.addObject("adminLogin", adminLogin);
+                modelAndView.addObject("users", getAllByRoleUser(adminLogin));
+            }
 
-    @GetMapping("/all-post")
+        }
+        return modelAndView;
+
+    }
+    @GetMapping("/post")
     public ModelAndView toAllPostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView("admin/all-post");
         if (loginAdmin.equals("0")) {
@@ -108,9 +131,21 @@ public class AdminController {
             return modelAndView;
         } else {
             UserDTO adminLogin = userService.getByUserName(loginAdmin);
-            List<PostDTO> allPost = postService.findAll();
-            allPost.removeIf(postDTO -> postDTO.getStatusPost().equals(StatusPost.DELETE));
-            modelAndView.addObject("allPost",allPost);
+            modelAndView.addObject("adminLogin",adminLogin);
+            return modelAndView;
+        }
+
+    }
+
+    @GetMapping("/post/waiting")
+    public ModelAndView toWaitingPostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/waiting-post");
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
             modelAndView.addObject("adminLogin",adminLogin);
             return modelAndView;
         }

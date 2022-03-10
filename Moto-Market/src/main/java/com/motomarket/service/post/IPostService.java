@@ -5,6 +5,7 @@ import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.response.PostResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,5 +41,9 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
+//    Mr Hữu
+    PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize);
+    PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize);
+    PostResponse findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key,Integer pageNo, Integer pageSize);
 }
 

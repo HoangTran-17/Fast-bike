@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e3853bc-1530-4dba-b5a8-da7bd40efd48" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Moto-Market/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Moto-Market/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moto-Market/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Moto-Market/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moto-Market/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Moto-Market/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moto-Market/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/Moto-Market/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moto-Market/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Moto-Market/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="5e3853bc-1530-4dba-b5a8-da7bd40efd48" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,6 +117,7 @@
       <updated>1645973140073</updated>
       <workItem from="1645973141343" duration="6139000" />
       <workItem from="1646121958250" duration="48000" />
+      <workItem from="1646902803577" duration="80000" />
     </task>
     <servers />
   </component>
