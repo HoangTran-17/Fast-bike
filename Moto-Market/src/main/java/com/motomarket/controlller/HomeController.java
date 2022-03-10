@@ -61,7 +61,7 @@ public class HomeController {
             pv = null;
         }
         String modelMotor = br + " " + sr;
-        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, 0.0,pr,null,null);
+        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, null,pr,null,null);
         System.out.println(postDTOPage.getContent());
         return modelAndView;
     }
