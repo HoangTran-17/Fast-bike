@@ -1,0 +1,9 @@
+diff a/Moto-Market/src/main/java/com/motomarket/controlller/HomeController.java b/Moto-Market/src/main/java/com/motomarket/controlller/HomeController.java	(rejected hunks)
+@@ -41,6 +41,7 @@
+         ModelAndView modelAndView = new ModelAndView("list-moto");
+        Integer ccMin = null;
+        Integer ccMax = null;
++       Double prMin = 0.0;
+         if (br.equals("-1")){
+             br = "";
+         }
