@@ -67,15 +67,10 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, Long ownershipSelect, MultipartFile[] files) {
+    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor,  MultipartFile[] files) {
         Date date = new Date();
         postDTO.setStatusPost(StatusPost.WAITING);
         postDTO.setPostDate(date);
-        if (ownershipSelect == 0) {
-            postDTO.setOwnership(Ownership.OWNERSHIP);
-        } else {
-            postDTO.setOwnership(Ownership.NO_OWNERSHIP);
-        }
         postDTO.setUserDTO(user);
         postDTO.setDetailMotorDTO(detailMotor);
         Post post = parsePost(postDTO);

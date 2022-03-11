@@ -159,9 +159,9 @@
                                             <span class="require">*</span>
                                         </label>
                                     </div>
-                                    <select name="ownershipSelect" id="ownershipSelect" style="border: 1px solid #e0e0e0">
-                                        <option value="0">Chính chủ</option>
-                                        <option value="1">Không Chính chủ</option>
+                                    <select name="ownershipSelect" id="ownershipSelect"  th:field="*{ownership}" style="border: 1px solid #e0e0e0">
+                                        <option value="OWNERSHIP">Chính chủ</option>
+                                        <option value="NO_OWNERSHIP">Không Chính chủ</option>
                                     </select>
                                 </div>
                                 <div class="items">

@@ -30,20 +30,28 @@ public class LoginController {
     private IPostRepository postRepository;
 
 
+    @ModelAttribute("userLogin")
+    public UserDTO getUserLoginFromCookie(@CookieValue(value = "loginUser", defaultValue = "0") String loginUsername) {
+        UserDTO userLogin = null;
+        if (!loginUsername.equals("0")) {
+            userLogin = userService.getByUserName(loginUsername);
+        }
+        return userLogin;
+    }
+
+
     @GetMapping("/signin")
-    public ModelAndView toLoginView(@CookieValue(value = "loginUser", defaultValue = "0") String loginUsername) {
+    public ModelAndView toLoginView(@ModelAttribute("userLogin") UserDTO userLogin) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println(loginUsername);
-        if (loginUsername.equals("0")) {
+        if (userLogin==null){
             modelAndView.setViewName("/loginPage/login");
-            modelAndView.addObject("user", new UserDTO());
+            modelAndView.addObject("userLogin",new UserDTO());
         } else {
-            UserDTO userLogin = userService.getByUserName(loginUsername);
             modelAndView.addObject("userLogin", userLogin);
             modelAndView.setViewName("index");
         }
         return modelAndView;
-    }
+}
 
 
     @GetMapping("/signup")
@@ -94,29 +102,29 @@ public class LoginController {
     }
 
     @GetMapping("/test")
-    public ModelAndView testController(){
+    public ModelAndView testController() {
         ModelAndView modelAndView = new ModelAndView("list-moto");
         return modelAndView;
     }
 
     @GetMapping("/test2")
-    public ModelAndView testController2(){
+    public ModelAndView testController2(@ModelAttribute("userLogin") UserDTO userLogin) {
         ModelAndView modelAndView = new ModelAndView("edit-post");
+
         return modelAndView;
     }
 
     @GetMapping("/test3")
-    public ModelAndView testController3(){
+    public ModelAndView testController3() {
         ModelAndView modelAndView = new ModelAndView("moto-manager");
         return modelAndView;
     }
 
     @GetMapping("/test4")
-    public ModelAndView testController4(){
+    public ModelAndView testController4() {
         ModelAndView modelAndView = new ModelAndView("profile-view");
         return modelAndView;
     }
-
 
 
 }
