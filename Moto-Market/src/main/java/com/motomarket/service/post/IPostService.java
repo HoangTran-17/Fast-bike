@@ -41,7 +41,23 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
-//    Mr Hữu
+    //    List bài viết đang chờ (WAITING) của 1 user
+    Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId);
+
+    //    List bài viết đang hiển thị (PUBLIC) của 1 user
+    Page<PostDTO> findPublicListByUserId(int pageSize, Long userId);
+
+    //    List bài viết đang bị ẩn (HIDE) của 1 user
+    Page<PostDTO> findHideListByUserId(int pageSize, Long userId);
+
+    //    List bài viết về xe đã bán (SOLD) của 1 user
+    Page<PostDTO> findSoldListByUserId(int pageSize, Long userId);
+
+    //    List tất cả bài viết của 1 user - trừ StatusPost.DELETE
+    Page<PostDTO> findAllByUserId(int pageSize, Long userId);
+
+
+    //    Mr Hữu
     PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize);
     PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize);
     PostResponse findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key,Integer pageNo, Integer pageSize);

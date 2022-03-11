@@ -184,7 +184,48 @@ public class PostService implements IPostService {
         return posts.map(PostDTO::parsePostDTO);
     }
 
-//    Mr Hữu
+    //    List bài viết đang chờ (WAITING) của 1 user
+    @Override
+    public Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId) {
+        User user = userRepository.getById(userId);
+        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.WAITING);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+    //    List bài viết đang hiển thị (PUBLIC) của 1 user
+    @Override
+    public Page<PostDTO> findPublicListByUserId(int pageSize, Long userId) {
+        User user = userRepository.getById(userId);
+        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.PUBLIC);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+    //    List bài viết đang bị ẩn (HIDE) của 1 user
+    @Override
+    public Page<PostDTO> findHideListByUserId(int pageSize, Long userId) {
+        User user = userRepository.getById(userId);
+        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.HIDE);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+    //    List bài viết về xe đã bán (SOLD) của 1 user
+    @Override
+    public Page<PostDTO> findSoldListByUserId(int pageSize, Long userId) {
+        User user = userRepository.getById(userId);
+        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.SOLD);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+    //    List tất cả bài viết của 1 user - trừ StatusPost.DELETE
+    @Override
+    public Page<PostDTO> findAllByUserId(int pageSize, Long userId) {
+        User user = userRepository.getById(userId);
+        Page<Post> posts = postRepository.findTopByUserAndStatusPostNot(Pageable.ofSize(pageSize), user, StatusPost.DELETE);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+
+    //    Mr Hữu
     @Override
     public PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo,pageSize);

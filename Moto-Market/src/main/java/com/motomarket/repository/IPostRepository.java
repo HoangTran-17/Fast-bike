@@ -2,6 +2,7 @@ package com.motomarket.repository;
 
 import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.StatusPost;
+import com.motomarket.repository.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -73,7 +74,21 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             @Param("color") String colorMotor,
             @Param("statusPost") StatusPost statusPost);
 
-//    Mr Hữu
+
+    @Query("select p from Post p where p.user = :user " +
+            "and (:statusPost is null or p.statusPost = :statusPost) " +
+            "order by p.postDate desc ")
+    Page<Post> findTopByUser(Pageable pageable,@Param("user") User user,
+                             @Param("statusPost") StatusPost statusPost);
+
+
+    @Query("select p from Post p where p.user = :user " +
+            "and  p.statusPost <> :statusPost " +
+            "order by p.postDate desc ")
+    Page<Post> findTopByUserAndStatusPostNot(Pageable pageable,@Param("user") User user,
+                             @Param("statusPost") StatusPost statusPost);
+
+    //    Mr Hữu
     @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
     Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
     @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate DESC ")
