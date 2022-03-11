@@ -46,6 +46,7 @@ public class User {
 
 
 
+
 // One to many - Many to one
     @OneToMany(mappedBy = "user")
     private List<Post> postList;

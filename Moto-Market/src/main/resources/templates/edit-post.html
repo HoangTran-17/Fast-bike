@@ -49,6 +49,7 @@
                         </div>
                         <form method="POST" accept-charset="UTF-8" name="signup_form" id="product-editor"
                               th:action="@{/post/edit}" th:object="${post}" enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{postId}">
 
                             <div class="info-bike">
                                 <div class="items">
@@ -194,58 +195,23 @@
                                     <span>Hình ảnh</span>
                                 </div>
                                 <div class="info-bike" id="photo_holder" data-max-photos="9">
-                                    <div class="item-photo" data-index="0">
-                                        <label class="upload has-photo">
-                                            <figure class="thumbnail">
-                                                <img src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
-                                                     data-src="https://imgwebikevn-8743.kxcdn.com/ZHvjo7P9-EdtnnQTd10G1F1gjak=/fit-in/370x278/filters:fill(f4f4f4,true):watermark(https://www.webike.vn/watermark_small.png,center,center,70)/product/2022/03/09/4f631e3cebcffeb031bd3992c2db6207.jpeg"
-                                                     class="static lazy">
-                                            </figure>
-                                            <a href="#delete" data-select="Chọn hình"
-                                               data-remove="Xóa hình">
-                                                Xóa hình
-                                            </a>
-                                        </label>
+
+                                    <div id="preview-img">
+                                        <th:block th:each="image,state  : ${post.imageDTOList}"  >
+                                            <div class="item-photo item-img"  th:img-id="${image.imageId}" >
+                                                <label class="upload has-photo">
+                                                    <figure class="thumbnail">
+                                                        <img  th:src="@{/api/image/load/{idImage}(idImage=${image.imageName})}"
+                                                             class="static lazy image-post">
+                                                    </figure>
+                                                </label>
+                                                <a href="javascript:void(0)"  th:img-id="${image.imageId}"
+                                                   class="delete-img-btn" >Xóa hình</a>
+                                            </div>
+                                        </th:block>
+
                                     </div>
-                                    <div class="item-photo" data-index="1">
-                                        <label class="upload has-photo">
-                                            <figure class="thumbnail">
-                                                <img src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
-                                                     data-src="https://imgwebikevn-8743.kxcdn.com/eRR4HYiynlembQcE2BlkdCl1KQU=/fit-in/370x278/filters:fill(f4f4f4,true):watermark(https://www.webike.vn/watermark_small.png,center,center,70)/product/2022/03/09/a0efa1c8259374c4a8661b0c50fe9336.jpeg"
-                                                     class="static lazy">
-                                            </figure>
-                                            <a href="#delete" data-select="Chọn hình"
-                                               data-remove="Xóa hình">
-                                                Xóa hình
-                                            </a>
-                                        </label>
-                                    </div>
-                                    <div class="item-photo" data-index="2">
-                                        <label class="upload has-photo">
-                                            <figure class="thumbnail">
-                                                <img src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
-                                                     data-src="https://imgwebikevn-8743.kxcdn.com/7dLplxtVvAP8_FtULQUMMyZ37Sc=/fit-in/370x278/filters:fill(f4f4f4,true):watermark(https://www.webike.vn/watermark_small.png,center,center,70)/product/2022/03/09/37cc15950cdf2c9cf94fe34910a8c6db.jpeg"
-                                                     class="static lazy">
-                                            </figure>
-                                            <a href="#delete" data-select="Chọn hình"
-                                               data-remove="Xóa hình">
-                                                Xóa hình
-                                            </a>
-                                        </label>
-                                    </div>
-                                    <div class="item-photo" data-index="3">
-                                        <label class="upload has-photo">
-                                            <figure class="thumbnail">
-                                                <img src="https://www.webike.vn/frontend/img/common/l_no_img.jpg?158440972220200827"
-                                                     data-src="https://imgwebikevn-8743.kxcdn.com/TqrPY-D1X8h5OQxX-8OdHWftMtg=/fit-in/370x278/filters:fill(f4f4f4,true):watermark(https://www.webike.vn/watermark_small.png,center,center,70)/product/2022/03/09/6d662a81cfb14971b1f400231f7d130e.jpeg"
-                                                     class="static lazy">
-                                            </figure>
-                                            <a href="#delete" data-select="Chọn hình"
-                                               data-remove="Xóa hình">
-                                                Xóa hình
-                                            </a>
-                                        </label>
-                                    </div>
+
 
                                     <div class="item-photo add_more" data-index="">
                                         <label class="upload">
@@ -256,7 +222,7 @@
                                             <a href="#" data-select="Chọn hình" data-remove="Xóa hình">
                                                 Thêm ảnh
                                             </a>
-                                            <input class="" type="file" multiple accept="image/*">
+                                            <input class="" type="file" id="ip-upload-multi"  accept="image/*">
                                         </label>
                                         <p class="errmsg help-block small error_photo_0"></p>
                                     </div>
@@ -541,23 +507,95 @@
         }
     });
 
-    // let ownerShipValue = $("#ownershipSelect").val()
-    // if (ownerShipValue)
+    // handler Image
+
+    var filesBuffer = new DataTransfer();
+    let allFile = filesBuffer.items;
+    let lengthFile = imagePost = document.getElementsByClassName("image-post").length;
 
 
-    // function setValueOwnerShipSl() {
-    //     let ownerValue = $("#ownership_hile").val();
-    //     if (ownerValue=="NO_OWNERSHIP"){
-    //         $('#ownershipSelect').val("1").change();
-    //     } else {
-    //         $('#ownershipSelect').val("0").change();
-    //     }
-    // }
+    function addFile() {
+        var newFile = document.getElementById("ip-upload-multi").files;
+        allFile.add(newFile[newFile.length - 1]);
+        document.getElementById("ip-upload-multi").files = filesBuffer.files;
+        previewImages();
+    }
 
-    // function setValueProvinceSl() {
-    //     let provinceValue  = $("#province-hide").val();
-    //     $('#province').val(provinceValue).change();
-    // }
+    function previewImages() {
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+        function readAndPreview(file) {
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else..
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+                let src = this.result;
+                addFile();
+                let length = document.getElementById("ip-upload-multi").files.length;
+                $('#preview-img').append(`<div class="item-photo item-img"  data-id="${length - 1}" data-index="0">
+                                           <label class="upload has-photo">
+                                            <figure class="thumbnail placeholder loaded">
+                                           <img src="${src}" class="static"   rel="nofollow">
+                                            </figure>
+                                        </label>
+                                        <a href="javascript:void(0)" onclick="removeImage(${length - 1})"   class="remove-img-btn" >Xóa hình</a>
+                                    </div>`)
+                console.log(length)
+            });
+            reader.readAsDataURL(file);
+        }
+    }
+
+    document.querySelector('#ip-upload-multi').addEventListener("change", previewImages);
+
+    // document.querySelector('#ip-upload-multi').addEventListener("change",addFile);
+    function removeImage(id) {
+        $('.item-photo').filter("[data-id='" + id + "']").remove();
+        removeFile(Number(id))
+        var els = document.getElementsByClassName("remove-img-btn");
+        let itemimg = document.getElementsByClassName("item-img");
+
+        for (var i = id; i < els.length; i++) {
+            // let ids = i-1;
+            $(els[i]).attr("onclick", "removeImage(" + i + ")");
+            $(itemimg[i]).attr("data-id", "" + i + "");
+        }
+    }
+
+
+    function removeFile(index) {
+        let attachments = document.getElementById("ip-upload-multi").files;
+        let fileBuffer = new DataTransfer();
+        for (let i = 0; i < attachments.length; i++) {
+            if (index !== i) {
+                fileBuffer.items.add(attachments[i]);
+            }
+        }
+        for (let i = 0; i < attachments.length; i++) {
+            if (index == i) {
+                allFile.remove(i);
+            }
+        }
+        document.getElementById("ip-upload-multi").files = fileBuffer.files;
+        let length = document.getElementById("ip-upload-multi").files.length;
+        if (length === 0) {
+            fileBuffer.items.clear()
+            filesBuffer.items.clear()
+        }
+    }
+
+//    Delete post image old
+    $('.delete-img-btn').on("click", function () {
+        var imageId = $(this).attr('img-id');
+        $('.item-photo').filter("[img-id='" + imageId + "']").remove();
+
+
+    })
+
+
 </script>
 </body>
 
