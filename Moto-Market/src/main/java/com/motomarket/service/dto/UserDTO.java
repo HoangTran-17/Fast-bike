@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @Getter
@@ -21,6 +22,8 @@ public class UserDTO {
 
     private Long userId;
 
+    private String avatar;
+
     @Column(unique = true)
     @NotNull(message = "Vui lòng nhập tên của bạn!")
     @Size(min = 2,max = 30,message = "Độ dài của tên trong khoảng từ 2 đến 30 ký tự!")
@@ -33,6 +36,9 @@ public class UserDTO {
     private Role role;
 
     private StatusUser userStatus;
+
+    private Date created;
+
 
     @NotNull(message = "Vui lòng nhập mật khẩu!")
     @Pattern(regexp = "^[A-Za-z0-9]$", message = "Chỉ sử dụng chữ cái in thường, in HOA và chữ số!")
@@ -54,8 +60,8 @@ public class UserDTO {
 
 
     public static UserDTO parseUserDTO(User user) {
-        return new UserDTO(user.getUserId(), user.getUserName(),
-                user.getEmail(), user.getRole(), user.getUserStatus(),
+        return new UserDTO(user.getUserId(), user.getAvatar(), user.getUserName(),
+                user.getEmail(), user.getRole(), user.getUserStatus(), user.getCreated(),
                 user.getPassword(), user.isDeleted(),user.getPhoneNumber(),user.getPostList().size());
     }
 }

@@ -83,8 +83,8 @@ public class UserService implements IUserService{
 
 
     private User parseUser(UserDTO userDTO) {
-        return new User(userDTO.getUserId(), userDTO.getUserName(), userDTO.getEmail(),
-                userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword()
+        return new User(userDTO.getUserId(), userDTO.getAvatar(), userDTO.getUserName(), userDTO.getEmail(),
+                userDTO.getRole(), userDTO.getUserStatus(),userDTO.getCreated(), userDTO.getPassword()
                ,userDTO.isDeleted(), userDTO.getPhoneNumber(), null);
     }
 }
