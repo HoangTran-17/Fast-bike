@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:utext="|Trang cá nhân của ${user.userName} - FastBike|"></title>
+
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto-market.css?160015907620200827">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/moto-market-layout.css?159169869320200827">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/common.css?159833824020200827">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/maker-detail-custom.css?159368123420200827">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/v1/vendor/select2/css/select2.min.css?152472729920200827"
+          media="screen" onload="media='screen'">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/common.css?159833824020200827">
+    <link rel="stylesheet" type="text/css" href="/v1/vendor/font-awesome/css/font-awesome.min.css?152472729920200827"
+          media="screen" onload="media='screen'">
+    <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/pages/bike-list.css?159833824020200827">
+    <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/pages/user_profile.css?159823768920200827">
+    <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/internal_link.css?159650535020200827">
+    <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/top.css?159125667020200827">
+</head>
+
+<body>
+
+
+<div id="main">
+    <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
+
+    <section class="wrapper user_profile">
+        <input type="hidden" name="customer_id" id="customer_id" value="24120">
+        <div class="container">
+            <section>
+                <ul class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li>
+                        <span property="name" th:utext="${user.userName}"></span>
+                        <meta property="position" content="1">
+                    </li>
+                </ul>
+            </section>
+            <div class="user_info">
+                <div class="left_info">
+                    <div class="avatar">
+                        <img th:src="@{/api/image/load/{avatar}(avatar=${user.avatar})}">
+                    </div>
+                    <div class="info_name">
+                        <h2>
+                            <p class="username" th:utext="${user.userName}" ></p>
+                        </h2>
+                        <div>
+                            <span><i class="fas fa-calendar-alt"></i> Ngày đăng ký:</span>
+                            <span class="color-orange" th:utext="${#dates.format(user.created,'dd/MM/yyyy')}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right_info">
+                    <div class="right_info_row">
+                        <div class="col1">
+                            <span><i class="icon icon-motor"></i> Xe đang bán</span>
+                        </div>
+                        <div class="col2">
+                            <span class="color-orange" th:utext="${user.countPublicPost}"></span>
+                        </div>
+                    </div>
+
+                    <div class="right_info_row">
+                        <div class="col1">
+                            <span><i class="icon icon-motor"></i> Xe đã bán</span>
+                        </div>
+                        <div class="col2">
+                            <span class="color-orange" th:utext="${user.countSoldPost}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc_info">
+                    <span class="short_desc" th:utext="|${user.userName} là thành viên Fast Bike trong ${user.timePeriod} .
+                    Đang bán ${user.countPublicPost} xe. Đã bán được ${user.countSoldPost} xe.|"></span>
+                </div>
+            </div>
+
+            <div class="list_bike">
+                <section class="wrapper home_page" id="bike-list">
+                    <input type="hidden" id="route_user_profile" value="https://www.webike.vn/cho-xe-may/user/24120">
+                    <div class="container">
+                        <div class="box-area motor-maket">
+                            <div class="heading-2 media">
+                                <div class="media-body">
+                                    <span><h2>Xe đang bán</h2></span>
+                                </div>
+                                <div class="right_filter">
+                                    <select id="product-order" name="order" class="select-control">
+                                        <option value="">Sắp xếp</option>
+                                        <option value="newest_desc">
+                                            Mới nhất
+                                        </option>
+                                        <option value="priceoder_asc">
+                                            Gá thấp
+                                        </option>
+                                        <option value="priceoder_desc">
+                                            Gá cao
+                                        </option>
+                                        <option value="odor_asc">
+                                            ODO thấp
+                                        </option>
+                                        <option value="odor_desc">
+                                            ODO cao
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="comp_motors grid">
+                                <th:block th:each="post: ${publicList}">
+                                    <div class="item">
+                                        <a th:href="@{/post/detailpost/{id}(id=${post.postId})}">
+                                            <figure>
+                                                <img
+                                                        width="194"
+                                                        height="155"
+                                                        class="lazy"
+                                                        th:src="@{/api/image/load/{name}(name=${post.imageDTOList[0].imageName})}"
+                                                        th:alt="${post.title}"
+                                                />
+                                                <div class="follow hide">
+                                                    <i class="icon icon-heart"></i>
+                                                </div>
+
+
+                                            </figure>
+                                            <div class="motor-info">
+
+                                                <p class="title dotted-line-2" th:utext="${post.title}"></p>
+                                                <p class="status">
+                                                    <span th:utext="${post.district}"></span><br>
+                                                    <span th:utext="${post.province}"></span>
+                                                </p>
+                                                <p class="price" th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
+                                                <p class="date" th:utext="|${post.timePeriod} trước|"></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </th:block>
+
+                            </div>
+
+                            <div class="list_bike_paging">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="list_more">
+                <div class="subtitle">
+                    <span><h2>Xe đã bán</h2></span>
+                </div>
+                <th:block th:each="post: ${soldList}">
+                    <div class="item">
+                        <div class="imotor">
+                            <i class="icon icon-motor"></i>
+                        </div>
+                        <div class="info">
+                            <p th:utext="|Bán thành công ${post.modelMotor}|"></p>
+                            <p th:utext="|${post.timePeriod} trước|"></p>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+
+        <section id="internal_link">
+            <div class="container">
+                <label class="title">Các từ khóa phổ biến</label>
+                <ul>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/series/winner-x-1390.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Honda Winner X">Honda Winner X</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/series/exciter-150-858.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Exciter 150">Exciter 150</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/series/z1000-25.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Kawasaki Z1000">Kawasaki Z1000</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/series/yzf-r6-581.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Yamaha R6">Yamaha R6</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/honda.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe HONDA">Xe HONDA</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/yamaha.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe YAMAHA">Xe YAMAHA</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/piaggio.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe PIAGGIO">Xe PIAGGIO</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/sym.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe SYM">Xe SYM</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/suzuki.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe SUZUKI">Xe SUZUKI</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kawasaki.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Kawasaki">Xe Kawasaki</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/ducati.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe DUCATI">Xe DUCATI</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/harley-davidson.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe HARLEY-DAVIDSON">Xe HARLEY-DAVIDSON</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/benelli.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Benelli">Xe Benelli</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bmw.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe BMW">Xe BMW</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/ktm.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe KTM">Xe KTM</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/daelim.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe DAELIM">Xe DAELIM</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/triumph.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe TRIUMPH">Xe TRIUMPH</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kymco.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe KYMCO">Xe KYMCO</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/royal-enfield.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Royal Enfield">Xe Royal Enfield</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/visitor.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe VISITOR">Xe VISITOR</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/brixton.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Brixton">Xe Brixton</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/sachs.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe SACHS">Xe SACHS</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/mv-agusta.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe MV AGUSTA">Xe MV AGUSTA</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/gpx.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe GPX">Xe GPX</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/rebel-usa.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe REBEL USA">Xe REBEL USA</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bajaj-pulsar.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Bajaj Pulsar">Xe Bajaj Pulsar</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/moto-guzzi.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Moto Guzzi">Xe Moto Guzzi</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/daehan.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe DAEHAN">Xe DAEHAN</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kengo.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Kengo">Xe Kengo</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/cfmoto.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe CFMoto">Xe CFMoto</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bosscity.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Bosscity">Xe Bosscity</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/aprilia.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe aprilia">Xe aprilia</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/lifan.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Lifan">Xe Lifan</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/lambretta.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Lambretta">Xe Lambretta</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/vento.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Vento">Xe Vento</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/hyosung.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Hyosung">Xe Hyosung</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/minsk.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe Minsk">Xe Minsk</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/keeway.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe KEEWAY">Xe KEEWAY</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/mobylette.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe MOBYLETTE">Xe MOBYLETTE</a>
+                    </li>
+                    <li>
+                        <a href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-ga.html?priceoder=asc?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
+                           title="Xe tay ga gá rẻ">Xe tay ga gá rẻ</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </section>
+    <button type="button" id="back-to-top">PAGE TOP</button>
+
+    <button type="button" id="btn-back-to-top">
+        Page top
+    </button>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.motomarket.service.dto;
 
 import com.motomarket.repository.model.*;
+import com.motomarket.service.user.UserService;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -69,6 +70,8 @@ public class PostDTO {
 
     private List<ImageDTO> imageDTOList;
 
+    private String timePeriod;
+
     public static PostDTO parsePostDTO(Post post) {
         UserDTO userDTO = UserDTO.parseUserDTO(post.getUser());
         DetailMotorDTO detailMotorDTO = DetailMotorDTO.parseDetailMotorDTO(post.getDetailMotor());
@@ -77,11 +80,37 @@ public class PostDTO {
         post.getImageList().forEach(image -> {
             imageDTOList.add(ImageDTO.parseImageDTO(image));
         });
+        String timePeriod = calculateTheElapsedTime(post.getPostDate());
 
         return new PostDTO(post.getPostId(), post.getStatusPost(), post.getTitle(), post.getModelMotor(),
                 post.getKilometerCount(), post.getDescription(), post.getPrice(),
                 post.getSellerName(), post.getSellerPhoneNumber(), post.getProvince(), post.getDistrict(), post.getPostDate(), post.getOwnership(),
-                userDTO,detailMotorDTO,imageDTOList);
+                userDTO,detailMotorDTO,imageDTOList,timePeriod);
+    }
+
+    private static String calculateTheElapsedTime(Date created) {
+        Long untilNow = new Date().getTime() - created.getTime();
+
+        Long SECOND = 1000L;
+        Long MINUTE = 60 * SECOND;
+        Long HOUR = 60 * MINUTE;
+        Long DAY = 24 * HOUR;
+        Long WEEK = 7 * DAY;
+        Long MONTH = 30 * DAY;
+        Long YEAR = 365 * DAY;
+        Long[] list1 = {YEAR, MONTH, WEEK, DAY, HOUR, MINUTE};
+        String[] list2 = {"năm", "tháng", "tuần", "ngày", "giờ", "phút"};
+
+        int count = 0;
+        String timePeriod = "";
+        for (int i = 0; count == 0; ++i) {
+            count = Math.round(untilNow / list1[i]) ;
+            if (count > 0) {
+                timePeriod = count + " " + list2[i];
+                break;
+            }
+        }
+        return timePeriod;
     }
 
 }

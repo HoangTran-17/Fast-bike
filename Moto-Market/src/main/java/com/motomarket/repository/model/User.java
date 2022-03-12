@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -16,11 +17,12 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
-//avatar	Blob
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    private String avatar;
 
     @Column(name = "user_name", unique = true)
     private String userName;
@@ -32,6 +34,8 @@ public class User {
     @Column(name = "user_status")
     private StatusUser userStatus;
 
+    private Date created;
+
     private String password;
 
     @Column(columnDefinition = "boolean default false")
@@ -39,6 +43,7 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
 
 
 
