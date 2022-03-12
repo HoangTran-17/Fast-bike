@@ -3,21 +3,33 @@ package com.motomarket.service.user;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
+<<<<<<< HEAD
 import com.motomarket.service.response.UserResponse;
+=======
+import com.motomarket.service.dto.UserView;
+import com.motomarket.service.post.IPostService;
+>>>>>>> hoang-dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.time.Instant.*;
 
 @Service
 public class UserService implements IUserService{
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IPostService postService;
 
     @Override
     public List<UserDTO> findAll() {
@@ -80,6 +92,45 @@ public class UserService implements IUserService{
             userDTOList.add(UserDTO.parseUserDTO(user));
         });
         return userDTOList;
+    }
+
+    @Override
+    public UserView getUserViewById(Long id) {
+        User user = userRepository.getById(id);
+        UserView userView = UserView.parseUserView(user);
+
+        String timePeriod = calculateTheElapsedTime(userView.getCreated());
+        userView.setTimePeriod(timePeriod);
+        int countPublicPost = postService.getCountPublicPostByUser(user);
+        userView.setCountPublicPost(countPublicPost);
+        int countSoldPost = postService.getCountSoldPostByUser(user);
+        userView.setCountSoldPost(countSoldPost);
+        return userView;
+    }
+
+    private String calculateTheElapsedTime(Date created) {
+        Long untilNow = new Date().getTime() - created.getTime();
+        
+        Long SECOND = 1000L;
+        Long MINUTE = 60 * SECOND;
+        Long HOUR = 60 * MINUTE;
+        Long DAY = 24 * HOUR;
+        Long WEEK = 7 * DAY;
+        Long MONTH = 30 * DAY;
+        Long YEAR = 365 * DAY;
+        Long[] list1 = {YEAR, MONTH, WEEK, DAY, HOUR, MINUTE};
+        String[] list2 = {"năm", "tháng", "tuần", "ngày", "giờ", "phút"};
+
+        int count = 0;
+        String timePeriod = "";
+        for (int i = 0; count == 0; ++i) {
+            count = Math.round(untilNow / list1[i]) ;
+            if (count > 0) {
+                timePeriod = count + " " + list2[i];
+                break;
+            }
+        }
+        return timePeriod;
     }
 
 

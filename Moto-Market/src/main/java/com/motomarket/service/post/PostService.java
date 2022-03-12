@@ -217,6 +217,13 @@ public class PostService implements IPostService {
         return posts.map(PostDTO::parsePostDTO);
     }
 
+    //     Số lượng bài viết đang hiển thị (Public) của 1 user
+    @Override
+    public int getCountPublicPostByUser(User user) {
+        return postRepository.countPostByStatusPostAndUser(user, StatusPost.PUBLIC);
+    }
+
+
     //    List bài viết đang bị ẩn (HIDE) của 1 user
     @Override
     public Page<PostDTO> findHideListByUserId(int pageSize, Long userId) {
@@ -231,6 +238,12 @@ public class PostService implements IPostService {
         User user = userRepository.getById(userId);
         Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.SOLD);
         return posts.map(PostDTO::parsePostDTO);
+    }
+
+    //     Số lượng bài viết về xe đã bán (SOLD) của 1 user
+    @Override
+    public int getCountSoldPostByUser(User user) {
+        return postRepository.countPostByStatusPostAndUser(user, StatusPost.SOLD);
     }
 
     //    List tất cả bài viết của 1 user - trừ StatusPost.DELETE

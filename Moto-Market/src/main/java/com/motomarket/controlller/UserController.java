@@ -1,8 +1,12 @@
 package com.motomarket.controlller;
 
+import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.dto.UserView;
+import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +21,20 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/prolife/{id}")
-    public ModelAndView showProlifeUser(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("profile-view");
-        UserDTO userDTO = userService.getById(id);
-        modelAndView.addObject("user", userDTO);
+    @Autowired
+    private IPostService postService;
+
+
+    @GetMapping("/view/{id}")
+    public ModelAndView showUserView(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        UserView userView = userService.getUserViewById(id);
+        Page<PostDTO> publicList = postService.findPublicListByUserId(12, id);
+        Page<PostDTO> soldList = postService.findSoldListByUserId(10, id);
+        modelAndView.setViewName("user-view");
+        modelAndView.addObject("user", userView);
+        modelAndView.addObject("publicList", publicList);
+        modelAndView.addObject("soldList", soldList);
         return modelAndView;
     }
 }

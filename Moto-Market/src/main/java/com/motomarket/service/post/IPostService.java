@@ -1,6 +1,7 @@
 package com.motomarket.service.post;
 
 import com.motomarket.repository.model.Post;
+import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.PostDTO;
@@ -49,11 +50,17 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //    List bài viết đang hiển thị (PUBLIC) của 1 user
     Page<PostDTO> findPublicListByUserId(int pageSize, Long userId);
 
+    //     Số lượng bài viết đang hiển thị (Public) của 1 user
+    int getCountPublicPostByUser(User user);
+
     //    List bài viết đang bị ẩn (HIDE) của 1 user
     Page<PostDTO> findHideListByUserId(int pageSize, Long userId);
 
     //    List bài viết về xe đã bán (SOLD) của 1 user
     Page<PostDTO> findSoldListByUserId(int pageSize, Long userId);
+
+    //     Số lượng bài viết về xe đã bán (SOLD) của 1 user
+    int getCountSoldPostByUser(User user);
 
     //    List tất cả bài viết của 1 user - trừ StatusPost.DELETE
     Page<PostDTO> findAllByUserId(int pageSize, Long userId);
