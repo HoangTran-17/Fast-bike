@@ -50,7 +50,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Long getCountPost(){
+    public Long getCountPost() {
         return postRepository.getCountPost(StatusPost.PUBLIC);
     }
 
@@ -67,7 +67,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor,  MultipartFile[] files) {
+    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files) {
         Date date = new Date();
         postDTO.setStatusPost(StatusPost.WAITING);
         postDTO.setPostDate(date);
@@ -110,13 +110,13 @@ public class PostService implements IPostService {
 
     @Override
     public void remove(Long id) {
-      Post post =  postRepository.getById(id);
-      post.setStatusPost(StatusPost.DELETE);
-      postRepository.save(post);
+        Post post = postRepository.getById(id);
+        post.setStatusPost(StatusPost.DELETE);
+        postRepository.save(post);
     }
 
     @Override
-    public void update(PostDTO postDTO, MultipartFile[] files){
+    public void update(PostDTO postDTO, MultipartFile[] files) {
         for (MultipartFile file : files) {
             String uuid = UUID.randomUUID().toString();
             ImageDTO image = new ImageDTO();
@@ -130,11 +130,17 @@ public class PostService implements IPostService {
             imageService.save(image);
         }
         postDTO.setStatusPost(StatusPost.WAITING);
-
-        save(postDTO);
-
+        Post post = postRepository.getById(postDTO.getPostId());
+       post.setStatusPost(postDTO.getStatusPost());
+//       , postDTO.getTitle(),
+//                postDTO.getModelMotor(), postDTO.getKilometerCount(), postDTO.getDescription(),
+//                postDTO.getPrice(), postDTO.getSellerName(), postDTO.getSellerPhoneNumber(),
+//                postDTO.getProvince(), postDTO.getDistrict(),
+//                postDTO.getPostDate(), postDTO.getOwnership());
+        postRepository.save(post);
     }
-//    List bài viết mới nhất
+
+    //    List bài viết mới nhất
     @Override
     public List<PostDTO> findListOfLatestPosts(int listSize) {
         List<PostDTO> postDTOList = new ArrayList<>();
@@ -148,7 +154,7 @@ public class PostService implements IPostService {
     @Override
     public List<PostDTO> findTopBySeriesMotor(int listSize, String seriesMotor) {
         List<PostDTO> postDTOList = new ArrayList<>();
-        postRepository.findTopBySeriesMotor(Pageable.ofSize(listSize),seriesMotor,StatusPost.PUBLIC).forEach(post -> {
+        postRepository.findTopBySeriesMotor(Pageable.ofSize(listSize), seriesMotor, StatusPost.PUBLIC).forEach(post -> {
             postDTOList.add(PostDTO.parsePostDTO(post));
         });
         return postDTOList;
@@ -156,7 +162,7 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
     @Override
-    public Page<PostDTO> findTopByModelMotorIsLike(int pageSize,String modelMotor) {
+    public Page<PostDTO> findTopByModelMotorIsLike(int pageSize, String modelMotor) {
         Page<Post> posts = postRepository.findTopByModelMotorIsLike(Pageable.ofSize(pageSize), modelMotor, StatusPost.PUBLIC);
         Page<PostDTO> postDTOS = posts.map(post -> {
             return PostDTO.parsePostDTO(post);
@@ -167,8 +173,8 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
     @Override
-    public Page<PostDTO> findTopByProvince(int pageSize,String province) {
-        Page<Post> posts = postRepository.findTopByProvince(Pageable.ofSize(pageSize),province,StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByProvince(int pageSize, String province) {
+        Page<Post> posts = postRepository.findTopByProvince(Pageable.ofSize(pageSize), province, StatusPost.PUBLIC);
         Page<PostDTO> postDTOS = posts.map(post -> {
             return PostDTO.parsePostDTO(post);
         });
@@ -178,26 +184,26 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo typeMotor -"Xe tay ga"
     @Override
-    public Page<PostDTO> findTopByTypeMotor(int pageSize,String typeMotor) {
-        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(pageSize),typeMotor,StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByTypeMotor(int pageSize, String typeMotor) {
+        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(pageSize), typeMotor, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
     //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
     @Override
-    public Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax) {
+    public Page<PostDTO> findTopByCapacity(int pageSize, int capacityMin, int capacityMax) {
         Page<Post> posts = postRepository.findTopByCapacity(Pageable.ofSize(pageSize), capacityMin, capacityMax, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     @Override
-    public Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,Integer modelYearMin, Integer modelYearMax,
-                                          String province,String typeMotor,Integer capacityMin, Integer capacityMax,
-                                          Double priceMin, Double priceMax,String kilometerCount, String colorMotor) {
+    public Page<PostDTO> findTopByFilters(int pageSize, String modelMotor, Integer modelYearMin, Integer modelYearMax,
+                                          String province, String typeMotor, Integer capacityMin, Integer capacityMax,
+                                          Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
         Page<Post> posts = postRepository.findTopByFilters(Pageable.ofSize(pageSize),
-                modelMotor, modelYearMin,modelYearMax,province,typeMotor, capacityMin, capacityMax,
-                priceMin,priceMax,kilometerCount,colorMotor,StatusPost.PUBLIC);
+                modelMotor, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
+                priceMin, priceMax, kilometerCount, colorMotor, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
@@ -258,21 +264,21 @@ public class PostService implements IPostService {
     //    Mr Hữu
     @Override
     public PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> posts = postRepository.findPostDeletedIsFalseOrderByDate(pageable);
         return getPostResponse(posts);
     }
 
     @Override
     public PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> posts = postRepository.findPostWaitingOrderByDate(pageable);
         return getPostResponse(posts);
     }
 
     @Override
     public PostResponse findPostHideOrderByDate(Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> posts = postRepository.findPostHideOrderByDate(pageable);
         return getPostResponse(posts);
     }
@@ -280,37 +286,36 @@ public class PostService implements IPostService {
     @Override
     public PostResponse findPostByKeySearch(String key, Integer pageNo, Integer pageSize) {
 
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
-        Page<Post> posts = postRepository.findPostByKeySearch(key,pageable);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> posts = postRepository.findPostByKeySearch(key, pageable);
         return getPostResponse(posts);
     }
 
 
-
     @Override
     public PostResponse findWaitingPostByKeySearch(String key, Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
-        Page<Post> posts = postRepository.findWaitingPostByKeySearch(key,pageable);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> posts = postRepository.findWaitingPostByKeySearch(key, pageable);
         return getPostResponse(posts);
     }
 
     @Override
     public PostResponse findHidePostByKeySearch(String key, Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
-        Page<Post> posts = postRepository.findHidePostByKeySearch(key,pageable);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> posts = postRepository.findHidePostByKeySearch(key, pageable);
         return getPostResponse(posts);
     }
 
     @Override
     public void hide(Long id) {
-        Post post =  postRepository.getById(id);
+        Post post = postRepository.getById(id);
         post.setStatusPost(StatusPost.HIDE);
         postRepository.save(post);
     }
 
     @Override
     public void publicPost(Long id) {
-        Post post =  postRepository.getById(id);
+        Post post = postRepository.getById(id);
         post.setStatusPost(StatusPost.PUBLIC);
         postRepository.save(post);
     }
