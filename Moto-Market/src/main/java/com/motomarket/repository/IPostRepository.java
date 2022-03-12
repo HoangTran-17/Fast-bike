@@ -77,7 +77,7 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
     Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate DESC ")
+    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate ASC ")
     Page<Post> findPostWaitingOrderByDate(Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE p.statusPost = 2  ORDER BY p.postDate DESC ")

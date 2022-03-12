@@ -222,28 +222,32 @@
     function drawEntriesToTable(data) {
         let str = ""
         $.each(data.content, function (key, value) {
-            // let price = Intl.NumberFormat('en-US').format(value.price) + "đ";
-            let price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            let price;
+            if (value.price==null) {
+                price = "Liên hệ"
+            } else {
+                price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            }
             let date = formatDate(value.postDate);
             let img;
 
-            if (value.imageDTOList.length===0) {
+            if (value.imageDTOList.length === 0) {
                 img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
             } else {
-                img=value.imageDTOList[0].imageName;
+                img ='/api/image/load/'+ value.imageDTOList[0].imageName;
             }
             str += ` <tr  id="${'tr_' + value.postId}">
                         <td class="table-column-pr-0">
 
                         </td>
                         <td class="table-column-pl-0">
-                             <a class="d-flex align-items-center" href="${'/admin/post-detail/'+value.postId}">
+                            <a class="d-flex align-items-center" href="${'/admin/post-detail/'+value.postId}">
                                 <div class="avatar avatar-circle">
 
                                     <img class="avatar-img" src="${img}" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0 text-overflow" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.title}</span>
+                                    <span <span  class="d-block h5 text-hover-primary mb-0 text-overflow" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.title}</span>
                                     <span class="d-block font-size-sm text-body" >${value.modelMotor}</span>
                                 </div>
                             </a>

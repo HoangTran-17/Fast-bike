@@ -292,15 +292,19 @@
     function drawEntriesToTable(data) {
         let str = ""
         $.each(data.content, function (key, value) {
-            // let price = Intl.NumberFormat('en-US').format(value.price) + "đ";
-            let price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            let price;
+            if (value.price==null) {
+                price = "Liên hệ"
+            } else {
+                price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            }
             let date = formatDate(value.postDate);
             let img;
 
             if (value.imageDTOList.length === 0) {
                 img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
             } else {
-                img = value.imageDTOList[0].imageName;
+                img ='/api/image/load/'+ value.imageDTOList[0].imageName;
             }
             str += ` <tr  id="${'tr_' + value.postId}">
                         <td class="table-column-pr-0">
