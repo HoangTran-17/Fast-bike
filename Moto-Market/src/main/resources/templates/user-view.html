@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang cá nhân của 0977770420 - FastBike</title>
+    <title th:utext="|Trang cá nhân của ${user.userName} - FastBike|"></title>
 
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto-market.css?160015907620200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/moto-market-layout.css?159169869320200827">
@@ -34,15 +34,9 @@
         <div class="container">
             <section>
                 <ul class="breadcrumb">
-                    <li><a href="https://www.webike.vn">Trang chủ</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li>
-                        <a href="https://www.webike.vn/cho-xe-may.html" title="Chợ xe máy" property="item"
-                           typeof="WebPage">Chợ xe máy</a>
-                        <meta property="position" content="1">
-                    </li>
-
-                    <li>
-                        <span property="name">Trang cá nhân của 0977770420</span>
+                        <span property="name" th:utext="${user.userName}"></span>
                         <meta property="position" content="1">
                     </li>
                 </ul>
@@ -50,59 +44,41 @@
             <div class="user_info">
                 <div class="left_info">
                     <div class="avatar">
-                        <img src="https://imgwebikevn-8743.kxcdn.com/S0jy2g6ATvmmthAgE0YZLKtrtFk=/115x115/profile/https://graph.facebook.com/623392461454368/picture?type=large">
+                        <img th:src="@{/api/image/load/{avatar}(avatar=${user.avatar})}">
                     </div>
                     <div class="info_name">
-                        <h1>
-                            <p class="username" th:utext="${user.userName}" >
-
-                                <span class="bg-blue-tick hide"><i class="blue-tick"></i></span>
-                            </p>
-                        </h1>
-                        <span class="follow">
-                            <p class="cntfollow"><strong>0</strong> Người theo dõi</p>
-                            <p><strong>0</strong> Đang theo dõi</p>
-                        </span>
-                        <span class="event_follow">
-                                                        <a class="btn_follow " id="btn_follow"
-                                                           href="javascript:void(0);">
-                                <i class="icon icon-follow"></i>Theo dõi
-                            </a>
-                            <a class="btn_unfollow hide" id="btn_unfollow" href="javascript:void(0);">
-                                <i class="icon icon-follow"></i>Đang theo dõi
-                            </a>
-                            <a class="btn_warning hide" href="javascript:void(0);"><i class="icon icon-warning"></i></a>
-                            <a class="btn_link" id="copyClipboard" href="javascript:void(0)"><i
-                                    class="icon icon-link"></i></a>
-                        </span>
+                        <h2>
+                            <p class="username" th:utext="${user.userName}" ></p>
+                        </h2>
+                        <div>
+                            <span><i class="fas fa-calendar-alt"></i> Ngày đăng ký:</span>
+                            <span class="color-orange" th:utext="${#dates.format(user.created,'dd/MM/yyyy')}"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="right_info">
                     <div class="right_info_row">
                         <div class="col1">
-                            <span><i class="icon icon-motor"></i> Xe đã bán</span>
+                            <span><i class="icon icon-motor"></i> Xe đang bán</span>
                         </div>
                         <div class="col2">
-                            <span class="color-orange">3</span>
+                            <span class="color-orange" th:utext="${user.countPublicPost}"></span>
                         </div>
                     </div>
-
-
 
                     <div class="right_info_row">
                         <div class="col1">
-                            <span><i class="icon icon-loc"></i> Địa chỉ</span>
+                            <span><i class="icon icon-motor"></i> Xe đã bán</span>
                         </div>
-                        <div class="col2"><span class="color-orange">-</span></div>
+                        <div class="col2">
+                            <span class="color-orange" th:utext="${user.countSoldPost}"></span>
+                        </div>
                     </div>
-
-
                 </div>
 
                 <div class="desc_info">
-                    <span class="short_desc">
-         0977770420 l&agrave; th&agrave;nh vi&ecirc;n Webike trong 35 tháng . Đang bán 1 xe. Đ&atilde; bán được 3 xe.
-        </span>
+                    <span class="short_desc" th:utext="|${user.userName} là thành viên Fast Bike trong ${user.timePeriod} .
+                    Đang bán ${user.countPublicPost} xe. Đã bán được ${user.countSoldPost} xe.|"></span>
                 </div>
             </div>
 
@@ -138,42 +114,37 @@
                             </div>
 
                             <div class="comp_motors grid">
-                                <div class="item">
-                                    <a href="https://www.webike.vn/cho-xe-may/bike-detail/can-ban-yamaha-nvx-155-2017-den-trang-xe-cu-1922891.html?utm_campaign=wvn&amp;utm_source=404page&amp;utm_medium=suggest_bike&amp;utm_content=bottom">
-                                        <figure>
-                                            <img
-                                                    width="194"
-                                                    height="155"
-                                                    class="lazy"
-                                                    src="https://www.webike.vn/frontend/img/common/m_no_img.jpg?158440972220200827"
-                                                    data-src="https://imgwebikevn-8743.kxcdn.com/L-jRokTZBpRkCmwImcTCgx2V2AI=/178x134/product/2022/03/08/ad3bab1c5243ea9b38637ab3b5660d69.jpg"
-                                                    alt="Ban xe YAMAHA NVX 155 2017 cu o An Giang gia 23tr"
-                                            />
-                                            <div class="follow hide">
-                                                <i class="icon icon-heart"></i>
-                                            </div>
+                                <th:block th:each="post: ${publicList}">
+                                    <div class="item">
+                                        <a th:href="@{/post/detailpost/{id}(id=${post.postId})}">
+                                            <figure>
+                                                <img
+                                                        width="194"
+                                                        height="155"
+                                                        class="lazy"
+                                                        th:src="@{/api/image/load/{name}(name=${post.imageDTOList[0].imageName})}"
+                                                        th:alt="${post.title}"
+                                                />
+                                                <div class="follow hide">
+                                                    <i class="icon icon-heart"></i>
+                                                </div>
 
-                                            <div class="view">
-                                                <i class="icon icon-eye-white"></i>
-                                                <span>13</span>
+
+                                            </figure>
+                                            <div class="motor-info">
+
+                                                <p class="title dotted-line-2" th:utext="${post.title}"></p>
+                                                <p class="status">
+                                                    <span th:utext="${post.district}"></span><br>
+                                                    <span th:utext="${post.province}"></span>
+                                                </p>
+                                                <p class="price" th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
+                                                <p class="date" th:utext="|${post.timePeriod} trước|"></p>
                                             </div>
-                                        </figure>
-                                        <div class="motor-info">
-                                            <ul class="tag-state">
-                                                <li class="old-tag">Cũ</li>
-                                            </ul>
-                                            <p class="title dotted-line-2">Cần bán YAMAHA NVX 155 2017 Đen Trắng
-                                                Xe Cũ1922891</p>
-                                            <p class="status">
-                                                Long Xuy&ecirc;n / An Giang
-                                            </p>
-                                            <p class="price"><span>23.000.000 VNĐ</span></p>
-                                            <p class="date">
-                                                6 giờ trước
-                                            </p>
-                                        </div>
-                                    </a>
-                                </div>
+                                        </a>
+                                    </div>
+                                </th:block>
+
                             </div>
 
                             <div class="list_bike_paging">
@@ -187,33 +158,18 @@
                 <div class="subtitle">
                     <span><h2>Xe đã bán</h2></span>
                 </div>
-                <div class="item">
-                    <div class="imotor">
-                        <i class="icon icon-motor"></i>
+                <th:block th:each="post: ${soldList}">
+                    <div class="item">
+                        <div class="imotor">
+                            <i class="icon icon-motor"></i>
+                        </div>
+                        <div class="info">
+                            <p th:utext="|Bán thành công ${post.modelMotor}|"></p>
+                            <p th:utext="|${post.timePeriod} trước|"></p>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p>Bán thành công <strong>Yamaha Mio Classico độ Honda Scoopy</strong></p>
-                        <p>8 tháng trước</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="imotor">
-                        <i class="icon icon-motor"></i>
-                    </div>
-                    <div class="info">
-                        <p>Bán thành công <strong>Yamaha Cuxi fi 100cc</strong></p>
-                        <p>12 tháng trước</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="imotor">
-                        <i class="icon icon-motor"></i>
-                    </div>
-                    <div class="info">
-                        <p>Bán thành công <strong>Yamaha Cuxi 100cc fi</strong></p>
-                        <p>17 tháng trước</p>
-                    </div>
-                </div>
+                </th:block>
+
             </div>
         </div>
 

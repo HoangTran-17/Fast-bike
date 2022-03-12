@@ -81,6 +81,10 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     Page<Post> findTopByUser(Pageable pageable,@Param("user") User user,
                              @Param("statusPost") StatusPost statusPost);
 
+    @Query("select count(p) from Post p where p.user = :user and p.statusPost = :statusPost")
+    Integer countPostByStatusPostAndUser(@Param("user") User user,
+                                         @Param("statusPost") StatusPost statusPost);
+
 
     @Query("select p from Post p where p.user = :user " +
             "and  p.statusPost <> :statusPost " +

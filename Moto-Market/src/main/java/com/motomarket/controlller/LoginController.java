@@ -2,7 +2,6 @@ package com.motomarket.controlller;
 
 import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.model.Role;
-import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.StatusUser;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.user.IUserService;
@@ -122,7 +121,7 @@ public class LoginController {
 
     @GetMapping("/test4")
     public ModelAndView testController4() {
-        ModelAndView modelAndView = new ModelAndView("profile-view");
+        ModelAndView modelAndView = new ModelAndView("user-view");
         return modelAndView;
     }
 
