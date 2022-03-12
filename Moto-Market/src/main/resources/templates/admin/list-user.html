@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>All Posts | Front - Admin &amp; Dashboard Template</title>
+    <title>List User | Front - Admin &amp; Dashboard Template</title>
     <th:block th:include="/admin/fragment/head::head"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -234,19 +234,19 @@
     function drawEntriesToTable(data) {
         let str = ""
         $.each(data.content, function (key, value) {
-            let img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+            let img ;
 
-            // if (value.filePath === null) {
-            //     img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
-            // } else {
-            //     img = value.filePath;
-            // }
+            if (value.avatar === null) {
+                img = "https://st.quantrimang.com/photos/image/072015/22/avatar.jpg";
+            } else {
+                img = '/api/image/load/'+value.avatar;
+            }
             str += ` <tr  id="${'tr_' + value.postId}">
                         <td class="table-column-pr-0">
 
                         </td>
                         <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="${'/admin/user-detail/'+value.userId}">
+                            <a class="d-flex align-items-center" href="${'/user/view/'+value.userId}">
                                 <div class="avatar avatar-circle">
 
                                     <img class="avatar-img" src="${img}" alt="Image Description">

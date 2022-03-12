@@ -232,6 +232,13 @@
             } else {
                 img ='/api/image/load/'+ value.imageDTOList[0].imageName;
             }
+
+            let avatar;
+            if (value.userDTO.avatar === null) {
+                avatar = "https://st.quantrimang.com/photos/image/072015/22/avatar.jpg";
+            } else {
+                avatar = '/api/image/load/'+value.userDTO.avatar;
+            }
             str += ` <tr  id="${'tr_' + value.postId}">
                         <td class="table-column-pr-0">
 
@@ -249,10 +256,10 @@
                             </a>
                         </td>
                         <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="#">
+                            <a class="d-flex align-items-center" href="${'/user/view/'+value.userDTO.userId}">
                                 <div class="avatar avatar-circle">
 
-                                    <img class="avatar-img" src="${img}" alt="Image Description">
+                                    <img class="avatar-img" src="${avatar}" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
                                     <span class="d-block h5 text-hover-primary mb-0 w-50" > ${value.userDTO.userName}</span>

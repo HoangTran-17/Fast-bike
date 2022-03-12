@@ -82,5 +82,6 @@ public interface IPostService extends IGeneralService<PostDTO> {
     void hide(Long id);
 
     void publicPost(Long id);
+    void blockPost(Long id);
 }
 

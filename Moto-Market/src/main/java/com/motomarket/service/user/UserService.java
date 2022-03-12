@@ -3,12 +3,12 @@ package com.motomarket.service.user;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
-<<<<<<< HEAD
+
 import com.motomarket.service.response.UserResponse;
-=======
+
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
->>>>>>> hoang-dev
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -137,7 +137,7 @@ public class UserService implements IUserService{
     private User parseUser(UserDTO userDTO) {
         return new User(userDTO.getUserId(), userDTO.getAvatar(), userDTO.getUserName(), userDTO.getEmail(),
                 userDTO.getRole(), userDTO.getUserStatus(),userDTO.getCreated(), userDTO.getPassword()
-               ,userDTO.isDeleted(), userDTO.getPhoneNumber(), null);
+              , userDTO.getPhoneNumber(), null);
     }
 
     @Override

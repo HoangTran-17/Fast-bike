@@ -465,7 +465,7 @@ function deletePost() {
                 createAlert('','Success!','This post has been made public!','success',true,true,'pageMessages');
                 viewImage();
             }).fail(function () {
-                createAlert('Opps!','Something went wrong','Please try again!','danger',true,false,'pageMessages');
+                createAlert('Opps!','User has been blocked','Post cannot be made public!','danger',true,false,'pageMessages');
                 viewImage();
             })
         })
