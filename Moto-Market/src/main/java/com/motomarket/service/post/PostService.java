@@ -112,6 +112,26 @@ public class PostService implements IPostService {
     public void remove(Long id) {
 
     }
+
+    @Override
+    public void update(PostDTO postDTO, MultipartFile[] files){
+        for (MultipartFile file : files) {
+            String uuid = UUID.randomUUID().toString();
+            ImageDTO image = new ImageDTO();
+            image.setImageName(uuid);
+            image.setPostId(postDTO.getPostId());
+            try {
+                file.transferTo(new File(rootPath + "/" + uuid + ".png"));
+            } catch (IOException e) {
+                throw new IllegalArgumentException(e);
+            }
+            imageService.save(image);
+        }
+        postDTO.setStatusPost(StatusPost.WAITING);
+
+        save(postDTO);
+
+    }
 //    List bài viết mới nhất
     @Override
     public List<PostDTO> findListOfLatestPosts(int listSize) {

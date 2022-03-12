@@ -1,7 +1,6 @@
 package com.motomarket.controlller;
 
 import com.motomarket.repository.IPostRepository;
-import com.motomarket.repository.model.*;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.ImageDTO;
 import com.motomarket.service.dto.PostDTO;
@@ -13,7 +12,6 @@ import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -98,9 +96,9 @@ public class PostController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView hanlderEditPost(@ModelAttribute PostDTO post) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
+    public String hanlderEditPost(@ModelAttribute PostDTO post,  @RequestParam("ip-upload-multi") MultipartFile[] files) {
+        postService.update(post,files);
+        return "redirect:/post/detailpost/" + post.getPostId();
     }
 
 }
