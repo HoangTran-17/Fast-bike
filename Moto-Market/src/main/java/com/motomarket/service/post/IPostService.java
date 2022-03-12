@@ -18,6 +18,8 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files);
 
+    void update(PostDTO postDTO, MultipartFile[] files);
+
     //    List bài viết mới nhất
     List<PostDTO> findListOfLatestPosts(int listSize);
 
