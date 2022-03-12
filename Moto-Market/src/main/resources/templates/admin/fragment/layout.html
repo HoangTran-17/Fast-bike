@@ -84,7 +84,7 @@
           <div class="navbar-nav-wrap">
             <div class="navbar-brand-wrapper">
               <!-- Logo -->
-              <a class="navbar-brand" href="index.html" aria-label="Front">
+              <a class="navbar-brand" href="#" aria-label="Front">
                 <img class="navbar-brand-logo" src="/admin/assets/svg/logos/logo.svg" alt="Logo">
                 <img class="navbar-brand-logo-mini" src="/admin/assets/svg/logos/logo-short.svg" alt="Logo">
               </a>
@@ -719,7 +719,7 @@
               <!-- Logo -->
 
 
-              <a class="navbar-brand" href="index.html" aria-label="Front">
+              <a class="navbar-brand" th:href="@{/admin/login}" aria-label="Front">
                 <img class="navbar-brand-logo" src="/admin/assets/svg/logos/logo.svg" alt="Logo">
               </a>
 
@@ -737,7 +737,7 @@
               <div class="navbar-nav-wrap">
                 <div class="navbar-brand-wrapper">
                   <!-- Logo -->
-                  <a class="navbar-brand" href="index.html" aria-label="Front">
+                  <a class="navbar-brand" th:href="@{/admin/login}" aria-label="Front">
                     <img class="navbar-brand-logo" src="/admin/assets/svg/logos/logo-white.svg" alt="Logo">
                   </a>
                   <!-- End Logo -->
@@ -755,7 +755,7 @@
                 <!-- Logo -->
 
 
-                <a class="navbar-brand" href="index.html" aria-label="Front">
+                <a class="navbar-brand" th:href="@{/admin/login}" aria-label="Front">
                   <img class="navbar-brand-logo" src="/admin/assets/svg/logos/logo.svg" alt="Logo">
                   <img class="navbar-brand-logo-mini" src="/admin/assets/svg/logos/logo-short.svg" alt="Logo">
                 </a>
@@ -793,20 +793,20 @@
                       <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Users</span>
                     </a>
 
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub" id="users_dashboard">
                       <li class="navbar-vertical-aside-has-menu ">
-                        <a class="js-navbar-vertical-aside-menu-link nav-link" th:href="@{/admin/list-user}" title="List User">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link" id="a_users" th:href="@{/admin/list-user}" title="List User">
                           <span class="tio-circle nav-indicator-icon"></span>
                           <span class="text-truncate">List User</span>
                         </a>
                       </li>
 
-                      <li class="navbar-vertical-aside-has-menu ">
-                        <a class="js-navbar-vertical-aside-menu-link nav-link " href="mail-box.html" title="Mail box">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Mail box</span>
-                        </a>
-                      </li>
+<!--                      <li class="navbar-vertical-aside-has-menu ">-->
+<!--                        <a class="js-navbar-vertical-aside-menu-link nav-link " href="mail-box.html" title="Mail box">-->
+<!--                          <span class="tio-circle nav-indicator-icon"></span>-->
+<!--                          <span class="text-truncate">Mail box</span>-->
+<!--                        </a>-->
+<!--                      </li>-->
 
                       <li class="navbar-vertical-aside-has-menu ">
                         <a class="js-navbar-vertical-aside-menu-link nav-link " href="my-profile.html" title="My Profile">
@@ -825,23 +825,23 @@
                       <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Posts </span>
                     </a>
 
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub" id="posts_dashboard">
                       <li class="nav-item">
-                        <a class="nav-link " th:href="@{/admin/post}" title="All Posts">
+                        <a class="nav-link " id="a_all_post" th:href="@{/admin/post}" title="All Posts">
                           <span class="tio-circle nav-indicator-icon"></span>
                           <span class="text-truncate">All</span>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link " th:href="@{/admin/post/waiting}" title="Waiting Posts">
+                        <a class="nav-link " id="a_waiting_post" th:href="@{/admin/post/waiting}" title="Waiting Posts">
                           <span class="tio-circle nav-indicator-icon"></span>
                           <span class="text-truncate">Waiting</span>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link " href="hidden-post.html" title="Hidden Posts">
+                        <a class="nav-link " id="a_hide_post" th:href="@{/admin/post/hide}" title="Hidden Posts">
                           <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Hidden</span>
+                          <span class="text-truncate">Hide</span>
                         </a>
                       </li>
                     </ul>
@@ -877,7 +877,7 @@
               <!-- Logo -->
 
 
-              <a class="navbar-brand" href="index.html" aria-label="Front">
+              <a class="navbar-brand" th:href="@{/admin/login}" aria-label="Front">
                 <img class="navbar-brand-logo-short" src="/admin/assets/svg/logos/logo-short.svg" alt="Logo">
               </a>
 

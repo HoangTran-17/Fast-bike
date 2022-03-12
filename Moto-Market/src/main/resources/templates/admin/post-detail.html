@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>All Posts | Front - Admin &amp; Dashboard Template</title>
+    <th:block th:include="/admin/fragment/head::head"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <style>
+
+
+
+    </style>
+</head>
+<body class=" footer-offset">
+<div id="pageMessages">
+
+</div>
+<th:block th:include="/admin/fragment/layout::dashboard"/>
+
+<main id="content" role="main" class="main">
+
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-no-gutter">
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="ecommerce-products.html">Post</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Post details</li>
+                        </ol>
+                    </nav>
+
+                    <h1 class="page-header-title">Post details</h1>
+                </div>
+
+            </div>
+        </div>
+        <!-- End Page Header -->
+
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Card -->
+                <div class="card mb-3 mb-lg-5">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title" th:text="${post.title}"></h4>
+                        <th:block th:with="O=${T(com.motomarket.repository.model.Ownership)}">
+                            <div th:if="${post.ownership==O.OWNERSHIP}" style="width: 100px">
+                                <span class="legend-indicator bg-danger" ></span>Chính chủ
+                            </div>
+                            <div th:if="${post.ownership==O.NO_OWNERSHIP}" style="width: 150px">
+                                <span class="legend-indicator bg-light-orange" ></span>Không chính chủ
+                            </div>
+                        </th:block>
+
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="productNameLabel" class="input-label">Model Motor </label>
+
+                            <input type="text" disabled class="form-control" name="productName" id="productNameLabel"
+                                   placeholder="Shirt, t-shirts, etc." aria-label="Shirt, t-shirts, etc." th:value="${post.modelMotor}">
+                        </div>
+                        <!-- End Form Group -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label for="posted_by_name" class="input-label">Posted by </label>
+
+                                    <input type="text" class="form-control" disabled  id="posted_by_name"  th:value="${post.userDTO.userName}">
+                                </div>
+                                <!-- End Form Group -->
+                            </div>
+
+                            <div class="col-sm-6">
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <label for="posted_by_email" class="input-label">Email</label>
+
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" class="form-control"  id="posted_by_email"
+                                               aria-label="0.0" disabled th:value="${post.userDTO.email}">
+
+                                    </div>
+                                </div>
+                                <!-- End Form Group -->
+                            </div>
+                        </div>
+                        <!-- End Row -->
+
+                        <label class="input-label">Description </label>
+
+                        <!-- Quill -->
+                        <div class="quill-custom">
+                            <div class="js-quill" style="min-height: 15rem;" data-hs-quill-options='{
+                              "placeholder": "Type your description..."
+                             }'>
+                                <p th:text="${post.description}"></p>
+                                <p><br></p>
+                                <h3>Specifications</h3>
+                                <ul>
+                                    <li>Engine: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.engine}"></span></li>
+                                    <li>Boot System: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.bootSystem}"></span></li>
+                                    <li>Cooling System: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.coolingSystem}"></span></li>
+                                    <li>Capacity: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.capacity}"></span></li>
+                                    <li>GearBox: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.gearBox}"></span></li>
+                                    <li>Piston: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.piston}"></span></li>
+                                    <li>Max Wattage: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.maxWattage}"></span></li>
+                                    <li>Max Torque: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.maxTorque}"></span></li>
+                                    <li>Size: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.size}"></span></li>
+                                    <li>Length Wheel To Wheel: <span th:text="${post.detailMotorDTO.seriesMotor.specificationsDTO.lengthWheelToWheel}"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Quill -->
+                    </div>
+                    <!-- Body -->
+                </div>
+                <!-- End Card -->
+
+                <!-- Card -->
+                <div class="card mb-3 mb-lg-5">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title">Image</h4>
+                    </div>
+                    <!-- End Header -->
+                    <!--  Modal image-->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+
+                                        <div class="carousel-inner">
+                                            <div  class="carousel-item active">
+                                                <img id="display_image" class="d-block w-100"  th:alt="Slide">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End  Modal image-->
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Gallery -->
+                        <div id="gallery"  class="js-fancybox row justify-content-sm-center gx-2"  >
+                            <div class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5" th:each="img:${post.imageDTOList}">
+                                <!-- Card -->
+                                <div class="card card-sm">
+                                    <img class="card-img-top" style="max-width: 200px;height: 120px" th:src="${img.imageName}"
+                                         data-target="#carouselExample" th:data-slide-to="${img.imageId}" alt="Image Description">
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col">
+                                                <a class="js-fancybox-item text-body view_image" href="javascript:;"  th:data-src="${img.imageName}"
+                                                   data-caption="Image #03">
+                                                    <i class="tio-visible-outlined"></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <!-- End Row -->
+                                    </div>
+                                </div>
+
+
+
+                                <!-- End Card -->
+                            </div>
+                        </div>
+                        <!-- End Gallery -->
+
+                    </div>
+                    <!-- Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Card -->
+                <div class="card mb-3 mb-lg-5">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title">Pricing</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" disabled class="form-control" name="priceName" id="post_price" placeholder="0.00"
+                                       aria-label="0.00" th:value="${post.price}">
+
+                            </div>
+                        </div>
+                        <!-- End Form Group -->
+                    </div>
+                    <!-- Body -->
+                </div>
+                <!-- End Card -->
+                <!-- Card -->
+                <div class="card mb-3 mb-lg-5">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title">Kilometers traveled</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" disabled  id="post_kilometer"
+                              th:value="${post.kilometerCount +' km'}"  >
+
+                            </div>
+                        </div>
+                        <!-- End Form Group -->
+                    </div>
+                    <!-- Body -->
+                </div>
+                <!-- End Card -->
+                <!-- Card -->
+                <div class="card">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title">Model details</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="post_brand" class="input-label">Brand</label>
+
+                            <input type="text" class="form-control"  id="post_brand"
+                                    th:value="${post.detailMotorDTO.brandMotor.brandName}" disabled>
+                        </div>
+                        <!-- End Form Group -->
+
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="post_series" class="input-label">Series</label>
+
+                            <input type="text" class="form-control" name="vendor" id="post_series" disabled  th:value="${post.detailMotorDTO.seriesMotor.seriesName}">
+                        </div>
+                        <!-- Form Group -->
+
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="post_year" class="input-label">Year</label>
+
+                            <input type="text" class="form-control"  id="post_year" disabled th:value="${post.detailMotorDTO.modelYear.modelYearName}">
+
+                        </div>
+                        <!-- Form Group -->
+
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="post_color" class="input-label">Color</label>
+
+                            <input type="text" class="form-control" disabled id="post_color" th:value="${post.detailMotorDTO.colorMotor.colorName}">
+
+                        </div>
+                        <!-- Form Group -->
+
+                    </div>
+                    <!-- Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+        </div>
+        <!-- End Row -->
+
+        <div class="position-fixed bottom-0 content-centered-x w-100 z-index-99 mb-3" style="max-width: 40rem;">
+            <!-- Card -->
+            <div class="card card-sm bg-dark border-dark mx-2" id="set_status_post">
+                <div class="card-body">
+                    <div class="row justify-content-center justify-content-sm-between">
+                        <div class="col">
+                            <button type="button" id="btn_delete_post" th:data-id="${post.postId}" class="btn btn-ghost-danger">Delete</button>
+                        </div>
+                        <div class="col-auto">
+
+                            <th:block th:with="Status=${T(com.motomarket.repository.model.StatusPost)}">
+                                <button type="button" id="btn_hide_post" th:if="${post.statusPost != Status.HIDE}" th:data-id="${post.postId}" class="btn btn-ghost-light mr-2">Hide</button>
+                            </th:block>
+
+                            <th:block th:with="Status=${T(com.motomarket.repository.model.StatusPost)}">
+                                <button type="button" id="btn_public_post" th:if="${post.statusPost != Status.PUBLIC}" th:data-id="${post.postId}" class="btn btn-primary">Public</button>
+                            </th:block>
+                        </div>
+                    </div>
+                    <!-- End Row -->
+                </div>
+            </div>
+            <!-- End Card -->
+        </div>
+    </div>
+    <!-- End Content -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete this post? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancel</button>
+                    <button type="button" id="deletePostConfirm" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+    <div class="footer">
+        <div class="row justify-content-between align-items-center">
+            <div class="col">
+                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex justify-content-end">
+                    <!-- List Dot -->
+                    <ul class="list-inline list-separator">
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">FAQ</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">License</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <!-- Keyboard Shortcuts Toggle -->
+                            <div class="hs-unfold">
+                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                                   data-hs-unfold-options='{
+                                  "target": "#keyboardShortcutsSidebar",
+                                  "type": "css-animation",
+                                  "animationIn": "fadeInRight",
+                                  "animationOut": "fadeOutRight",
+                                  "hasOverlay": true,
+                                  "smartPositionOff": true
+                                 }'>
+                                    <i class="tio-command-key"></i>
+                                </a>
+                            </div>
+                            <!-- End Keyboard Shortcuts Toggle -->
+                        </li>
+                    </ul>
+                    <!-- End List Dot -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- End Footer -->
+</main>
+</body >
+<script>
+    $(document).ready(function () {
+        viewImage();
+        deletePost();
+        confirmDeletePost();
+        hidePost();
+        publicPost();
+    })
+    function viewImage() {
+        $(".view_image").on("click",function () {
+            let src = $(this).data("src");
+            $("#exampleModal").modal("show");
+            $("#display_image").prop("src",src);
+        })
+    }
+
+function deletePost() {
+    $("#btn_delete_post").on("click", function () {
+        let postId = $(this).data("id");
+        $("#myModal").modal("show");
+        $("#deletePostConfirm").data("id",postId);
+        // confirmDeletePost();
+    })
+}
+   function confirmDeletePost() {
+       $("#deletePostConfirm").on("click",function () {
+           let postId = $(this).data("id");
+           $.ajax({
+               type: "DELETE",
+               url: "/admin/post/delete/"+postId
+           }).done(function () {
+               $("#set_status_post").remove();
+               $("#myModal").modal("hide");
+               createAlert('','Success!','This post has been made deleted!','success',true,true,'pageMessages');
+               viewImage();
+           }).fail(function () {
+               $("#myModal").modal("hide");
+               createAlert('Opps!','Something went wrong','Please try again!','danger',true,false,'pageMessages');
+               viewImage();
+           })
+       })
+   }
+    function hidePost() {
+        $("#btn_hide_post").on("click", function () {
+            let postId = $(this).data("id");
+            $.ajax({
+                type: "PUT",
+                url: "/admin/post/hide/"+postId
+            }).done(function () {
+                $("#set_status_post").remove();
+                createAlert('','Success!','This post has been made hide!','success',true,true,'pageMessages');
+                viewImage();
+            }).fail(function () {
+                createAlert('Opps!','Something went wrong','Please try again!','danger',true,false,'pageMessages');
+                viewImage();
+            })
+        })
+    }
+
+    function publicPost() {
+        $("#btn_public_post").on("click", function () {
+            let postId = $(this).data("id");
+            $.ajax({
+                type: "PUT",
+                url: "/admin/post/public/"+postId
+            }).done(function () {
+                $("#set_status_post").remove();
+                createAlert('','Success!','This post has been made public!','success',true,true,'pageMessages');
+                viewImage();
+            }).fail(function () {
+                createAlert('Opps!','Something went wrong','Please try again!','danger',true,false,'pageMessages');
+                viewImage();
+            })
+        })
+    }
+
+function formatPrice(data) {
+    return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(data);
+}
+    $("#post_price").val(formatPrice($("#post_price").val()));
+
+    
+</script>
+<th:block th:include="/admin/fragment/script::script"/>
+</html>

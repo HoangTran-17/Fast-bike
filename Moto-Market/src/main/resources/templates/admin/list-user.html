@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>All Posts | Front - Admin &amp; Dashboard Template</title>
+    <th:block th:include="/admin/fragment/head::head"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</head>
+<body class=" footer-offset">
+<th:block th:include="/admin/fragment/layout::dashboard"/>
+<div id="pageMessages" >
+
+</div>
+<main id="content" role="main" class="main pointer-event">
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-no-gutter">
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">List User</li>
+                        </ol>
+                    </nav>
+
+                    <h1 class="page-header-title">List User</h1>
+                </div>
+
+                <div class="col-sm-auto" th:with="Role=${T(com.motomarket.repository.model.Role)}" >
+                    <a class="btn btn-primary" id="a_add_new_admin" data-role="DBA" th:if="${adminLogin.role==Role.DBA}" href="#">
+                        <i class="tio-user-add mr-1"></i> Add new admin
+                    </a>
+                </div>
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Page Header -->
+
+        <!-- Card -->
+        <div class="card">
+            <!-- Header -->
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center flex-grow-1">
+                    <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+                        <form>
+                            <!-- Search -->
+                            <div class="input-group input-group-merge input-group-flush">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="tio-search"></i>
+                                    </div>
+                                </div>
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Enter key" aria-label="Search posts">
+                                <a class="btn ml-10 btn-outline-primary" id="submit_search">Search</a>
+                            </div>
+                            <!-- End Search -->
+                        </form>
+                    </div>
+
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Header -->
+
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+                <table id="datatable_posts"
+                       class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="table-column-pr-0">
+
+                        </th>
+                        <th class="table-column-pl-0">Name</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Role</th>
+                        <th>Posts</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Table -->
+
+            <!-- Footer -->
+            <div class="card-footer">
+                <!-- Pagination -->
+                <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                    <div class="col-sm mb-2 mb-sm-0">
+                        <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                            <span class="mr-2">Showing:</span>
+
+                            <!-- Select -->
+                            <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "customClass": "custom-select custom-select-sm custom-select-borderless",
+                            "dropdownAutoWidth": true,
+                            "width": true
+                          }'>
+                                <option value="5">5</option>
+                                <option value="10" selected="">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                            <!-- End Select -->
+
+                            <span class="text-secondary mr-2">of</span>
+
+                            <!-- Pagination Quantity -->
+                            <span id="datatableWithPaginationInfoTotalQty"
+                            ></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-auto">
+                        <div class="d-flex justify-content-center justify-content-sm-end">
+                            <!-- Pagination -->
+                            <nav id="datatablePagination" aria-label="Activity pagination">
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Pagination -->
+            </div>
+            <!-- End Footer -->
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Content -->
+
+    <!-- Footer -->
+
+    <div class="footer">
+        <div class="row justify-content-between align-items-center">
+            <div class="col">
+                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex justify-content-end">
+                    <!-- List Dot -->
+                    <ul class="list-inline list-separator">
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">FAQ</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">License</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <!-- Keyboard Shortcuts Toggle -->
+                            <div class="hs-unfold">
+                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
+                              "target": "#keyboardShortcutsSidebar",
+                              "type": "css-animation",
+                              "animationIn": "fadeInRight",
+                              "animationOut": "fadeOutRight",
+                              "hasOverlay": true,
+                              "smartPositionOff": true
+                             }'>
+                                    <i class="tio-command-key"></i>
+                                </a>
+                            </div>
+                            <!-- End Keyboard Shortcuts Toggle -->
+                        </li>
+                    </ul>
+                    <!-- End List Dot -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="deleteUserConfirm" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Footer -->
+</main>
+</body >
+<script>
+    function drawPaginationEntries(data) {
+        let pagination = "";
+        for (let i = 0; i < data.totalPages; i++) {
+
+            if (data.pageNo === i) {
+                pagination += ` <li class="paginate_item page-item active"><a class="paginate_button page-link"
+                                                                                      aria-controls="datatable"
+                                                                                      data-id="${''+i}" tabindex="0">${i + 1}</a>
+                                        </li>`
+            } else {
+                pagination += ` <li class="paginate_item page-item "><a class="paginate_button page-link"
+                                                                                      aria-controls="datatable"
+                                                                                      data-id="${''+i}" tabindex="0">${i + 1}</a>
+                                        </li>`
+            }
+        }
+        return pagination;
+    }
+
+    function drawEntriesToTable(data) {
+        let str = ""
+        $.each(data.content, function (key, value) {
+            let img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+
+            // if (value.filePath === null) {
+            //     img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+            // } else {
+            //     img = value.filePath;
+            // }
+            str += ` <tr  id="${'tr_' + value.postId}">
+                        <td class="table-column-pr-0">
+
+                        </td>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="${'/admin/user-detail/'+value.userId}">
+                                <div class="avatar avatar-circle">
+
+                                    <img class="avatar-img" src="${img}" alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span <span  class="d-block h5 text-hover-primary mb-0 text-overflow" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.userName}</span>
+                                    <span class="d-block font-size-sm text-body" >${value.email}</span>
+                                </div>
+                            </a>
+                        </td>
+
+
+                        <td>
+                            <div class="d-flex align-items-center" >
+                                ${value.phoneNumber}
+                            </div>
+                        </td>
+
+                        `;
+            if (value.userStatus === "ACTIVATE") {
+                str += `
+                            <td class="bg-status-filter">
+                                <a class="btn btn-sm btn-outline-success w-100 btn-edit-status-user" data-id="${value.userId}">
+                                    <i class="tio-lock-opened"></i> Active
+                                </a>
+                            </td>`
+            } else if (value.userStatus === "BLOCK") {
+                str += `
+                            <td class="bg-status-filter">
+                                <a class="btn btn-sm btn-outline-warning w-100 btn-edit-status-user" data-id="${value.userId}">
+                                    <i class="tio-lock"></i> Block
+                                </a>
+                            </td>`
+            }
+            if (value.role === "USER") {
+                str += `
+                            <td class="bg-status-filter">
+                                User
+                            </td>
+
+                   `
+            } else {
+                str += `
+                            <td class="bg-status-filter">
+                                Admin
+                            </td>
+
+                `
+            }
+            str +=
+                `
+               <td class="bg-status-filter">
+                                ${value.numberOfPost}
+               </td>
+               <td>
+
+                                    <button  data-id="${value.userId}" class="btn btn-sm btn-outline-danger a_suspend_user" >
+                                        <i class="tio-delete-outlined"></i> Suspended
+                                    </button>
+               </td>
+               </tr>
+                `
+
+        });
+        $("#tbody").html(str);
+    }
+
+    function getAllUser(pageNo, pageSize) {
+        if ($('#a_add_new_admin').data("role")==='DBA') {
+            $.ajax({
+                type: "GET",
+                url: "/admin/api/users/dba?pageNo=" + pageNo + "&pageSize=" + pageSize
+            }).done(function (data) {
+                handlerGetUser(data);
+                doSuspendUser();
+                changeStatusUser();
+            })
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/admin/api/users?pageNo=" + pageNo + "&pageSize=" + pageSize
+            }).done(function (data) {
+                handlerGetUser(data);
+                doSuspendUser();
+                changeStatusUser();
+
+            })
+        }
+
+    }
+
+    $(document).ready(function () {
+        showDashboard();
+        getAllUser(0, getQtyEntries());
+        changeQtyEntries();
+        changePageEntries();
+        doPrevPage();
+        searchEntries();
+        doSuspendUser();
+        handlerSuspendUser();
+        changeStatusUser();
+    })
+    function getQtyEntries() {
+        return $("#datatableEntries option:selected").val();
+    }
+
+    function changeQtyEntries() {
+        $("#datatableEntries").on("change",function () {
+            let key = $("#datatableSearch").val();
+            if (key !== "") {
+                getAllUserByKeySearch(key, 0, getQtyEntries())
+            } else {
+                getAllUser(0, getQtyEntries())
+            }
+
+        })
+    }
+    function changePageEntries() {
+        $(".paginate_button").on("click",function () {
+            let pageNo = $(this).data("id");
+            let key = $("#datatableSearch").val();
+            if (key !== "") {
+                getAllUserByKeySearch(key, pageNo, getQtyEntries())
+            } else {
+                getAllUser(pageNo, getQtyEntries())
+            }
+        })
+    }
+    function doPrevPage() {
+        $("#datatable_previous").on("click",function () {
+            let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key = $("#datatableSearch").val();
+            if (pageNo>0) {
+                if (key !== "") {
+                    getAllUserByKeySearch(key, pageNo - 1, getQtyEntries())
+                } else {
+                    getAllUser(pageNo - 1, getQtyEntries());
+                }
+
+            }
+        })
+    }
+    function doNextPage(data) {
+        $("#datatable_next").on("click",function () {
+            let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key = $("#datatableSearch").val();
+            if (pageNo<data) {
+                if (key !== "") {
+                    getAllUserByKeySearch(key, pageNo + 1, getQtyEntries())
+                } else {
+                    getAllUser(pageNo + 1, getQtyEntries());
+                }
+            }
+        })
+    }
+    function drawPaginationPrevAndNext() {
+        $("#datatable_paginate ul").remove();
+        return `<ul id="datatable_pagination" class="pagination datatable-custom-pagination">
+                                        <li class="paginate_item page-item "><a
+                                                class="paginate_button previous page-link" aria-controls="datatable"
+                                                 tabindex="-1" id="datatable_previous"><span
+                                                aria-hidden="true">Prev</span></a></li>
+
+                                        <li class="paginate_item page-item"><a class="paginate_button next page-link"
+                                                                               aria-controls="datatable"
+                                                                               tabindex="0" id="datatable_next"><span
+                                                aria-hidden="true">Next</span></a></li>
+                                    </ul>`
+    }
+    function searchEntries() {
+        $("#submit_search").on('click',function () {
+            let key =  $("#datatableSearch").val();
+            if (key==="") {
+                getAllUser(0,getQtyEntries());
+            } else {
+                getAllUserByKeySearch(key,0,getQtyEntries());
+            }
+        })
+    }
+
+    function handlerGetUser(data) {
+        drawEntriesToTable(data);
+        $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
+        if (data.totalPages <= 1) {
+            $("#datatablePagination").css("display", "none");
+        } else {
+            let pagination = drawPaginationEntries(data);
+            $("#datatable_paginate").append(drawPaginationPrevAndNext());
+            $("#datatable_pagination li:first").after(pagination);
+            $("#datatableWithPaginationInfoTotalQty").text(data.totalElements)
+            $("#datatablePagination").css("display", "");
+            // $(".paginate_item").removeClass("disabled");
+            changeQtyEntries();
+            changePageEntries();
+            doPrevPage();
+            doNextPage(Number(data.totalPages - 1));
+            searchEntries();
+            doSuspendUser();
+            changeStatusUser();
+        }
+    }
+
+    function getAllUserByKeySearch(key, pageNo, pageSize) {
+        if ($('#a_add_new_admin').data("role")==='DBA') {
+            $.ajax({
+                type: "GET",
+                url: "/admin/users/search/dba/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+            }).done(function (data) {
+                handlerGetUser(data);
+                doSuspendUser();
+                changeStatusUser();
+            })
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/admin/users/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+            }).done(function (data) {
+                handlerGetUser(data);
+                doSuspendUser();
+                changeStatusUser();
+            })
+        }
+
+    }
+
+    function formatDate(date) {
+        let postDate = new Date(Date.parse(date));
+        let untilNow = new Date() - postDate;
+        let time = "";
+        const SECOND = 1000;
+        const MINUTE = 60 * SECOND;
+        const HOUR = 60 * MINUTE;
+        const DAY = 24 * HOUR;
+        const WEEK = 7 * DAY;
+        const MONTH = 30 * DAY;
+        const YEAR = 365 * DAY;
+
+        let arr = [YEAR, MONTH, WEEK, DAY, HOUR, MINUTE];
+        let arr2 = ["năm", "tháng", "tuần", "ngày", "giờ", "phút"];
+
+        let count = 0;
+
+        for (let i = 0; count == 0; ++i) {
+            count = (untilNow / arr[i]).toFixed();
+            if (count > 0) {
+                time = count + " " + arr2[i] + " trước";
+            }
+        }
+        return time;
+    }
+
+    function showDashboard() {
+        $("#users_dashboard").css("display","block");
+        $("#a_users").addClass("active");
+    }
+function doSuspendUser() {
+    $(".a_suspend_user").on("click",function () {
+        let userId = $(this).data("id");
+        $('#myModal').modal("show");
+        $('#deleteUserConfirm').data("id",userId);
+        // handlerSuspendUser();
+    })
+}
+    function handlerSuspendUser() {
+        $("#deleteUserConfirm").on("click",function () {
+            let id = $(this).data("id");
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "DELETE",
+                url: "/admin/delete",
+                data: JSON.stringify(id)
+
+            }).done(function (data) {
+                $('#myModal').modal("hide");
+                createAlert('','Success!','This user has been made suspended!','success',true,true,'pageMessages');
+                let key =  $("#datatableSearch").val();
+                if (key==="") {
+                    getAllUser(0,getQtyEntries());
+                } else {
+                    getAllUserByKeySearch(key,0,getQtyEntries());
+                }
+            }).fail(function () {
+                alert("Don't success ")
+            })
+        })
+    }
+
+    function changeStatusUser() {
+        $(".btn-edit-status-user").on("click",function () {
+            let id = $(this).data("id");
+            $.ajax({
+                type: "PUT",
+                url: "/admin/edit-status/" + id
+            }).done(function (data) {
+                let key =  $("#datatableSearch").val();
+                if (key==="") {
+                    getAllUser(0,getQtyEntries());
+                } else {
+                    getAllUserByKeySearch(key,0,getQtyEntries());
+                }
+            })
+        })
+
+        }
+</script>
+<th:block th:include="/admin/fragment/script::script"/>
+</html>

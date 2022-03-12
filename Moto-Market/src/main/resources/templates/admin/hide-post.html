@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Hide Posts | Front - Admin &amp; Dashboard Template</title>
+    <th:block th:include="/admin/fragment/head::head"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</head>
+<body class=" footer-offset">
+<th:block th:include="/admin/fragment/layout::dashboard"/>
+<main id="content" role="main" class="main pointer-event">
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-no-gutter">
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Posts</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Hide</li>
+                        </ol>
+                    </nav>
+
+                    <h1 class="page-header-title">Hide Posts</h1>
+                </div>
+
+                <!-- <div class="col-sm-auto">
+                  <a class="btn btn-primary" href="users-add-user.html">
+                    <i class="tio-user-add mr-1"></i> Add user
+                  </a>
+                </div> -->
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Page Header -->
+
+        <!-- Card -->
+        <div class="card">
+            <!-- Header -->
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center flex-grow-1">
+                    <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+                        <form>
+                            <!-- Search -->
+                            <div class="input-group input-group-merge input-group-flush">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="tio-search"></i>
+                                    </div>
+                                </div>
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Enter key" aria-label="Search posts">
+                                <a class="btn ml-10 btn-outline-primary" id="submit_search">Search</a>
+                            </div>
+                            <!-- End Search -->
+                        </form>
+                    </div>
+
+
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Header -->
+
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+                <table id="datatable_posts"
+                       class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="table-column-pr-0">
+                            <!--                            <div class="custom-control custom-checkbox">-->
+                            <!--                                <input id="datatableCheckAll" type="checkbox" class="custom-control-input">-->
+                            <!--                                <label class="custom-control-label" for="datatableCheckAll"></label>-->
+                            <!--                            </div>-->
+                        </th>
+                        <th class="table-column-pl-0">Title</th>
+                        <th>Posted by</th>
+                        <th>Status</th>
+                        <th>Price</th>
+                        <th>Province</th>
+                        <th>Date</th>
+                        <th>Owner ship</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Table -->
+
+            <!-- Footer -->
+            <div class="card-footer">
+                <!-- Pagination -->
+                <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                    <div class="col-sm mb-2 mb-sm-0">
+                        <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                            <span class="mr-2">Showing:</span>
+
+                            <!-- Select -->
+                            <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "customClass": "custom-select custom-select-sm custom-select-borderless",
+                            "dropdownAutoWidth": true,
+                            "width": true
+                          }'>
+                                <option value="5">5</option>
+                                <option value="10" selected="">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                            <!-- End Select -->
+
+                            <span class="text-secondary mr-2">of</span>
+
+                            <!-- Pagination Quantity -->
+                            <span id="datatableWithPaginationInfoTotalQty"
+                            ></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-auto">
+                        <div class="d-flex justify-content-center justify-content-sm-end">
+                            <!-- Pagination -->
+                            <nav id="datatablePagination" aria-label="Activity pagination">
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Pagination -->
+            </div>
+            <!-- End Footer -->
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Content -->
+
+    <!-- Footer -->
+
+    <div class="footer">
+        <div class="row justify-content-between align-items-center">
+            <div class="col">
+                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex justify-content-end">
+                    <!-- List Dot -->
+                    <ul class="list-inline list-separator">
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">FAQ</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">License</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <!-- Keyboard Shortcuts Toggle -->
+                            <div class="hs-unfold">
+                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
+                              "target": "#keyboardShortcutsSidebar",
+                              "type": "css-animation",
+                              "animationIn": "fadeInRight",
+                              "animationOut": "fadeOutRight",
+                              "hasOverlay": true,
+                              "smartPositionOff": true
+                             }'>
+                                    <i class="tio-command-key"></i>
+                                </a>
+                            </div>
+                            <!-- End Keyboard Shortcuts Toggle -->
+                        </li>
+                    </ul>
+                    <!-- End List Dot -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- End Footer -->
+</main>
+</body >
+<script>
+    function drawPaginationEntries(data) {
+        let pagination = "";
+        for (let i = 0; i < data.totalPages; i++) {
+
+            if (data.pageNo === i) {
+                pagination += ` <li class="paginate_item page-item active"><a class="paginate_button page-link"
+                                                                                      aria-controls="datatable"
+                                                                                      data-id="${''+i}" tabindex="0">${i + 1}</a>
+                                        </li>`
+            } else {
+                pagination += ` <li class="paginate_item page-item "><a class="paginate_button page-link"
+                                                                                      aria-controls="datatable"
+                                                                                      data-id="${''+i}" tabindex="0">${i + 1}</a>
+                                        </li>`
+            }
+        }
+        return pagination;
+    }
+
+    function drawEntriesToTable(data) {
+        let str = ""
+        $.each(data.content, function (key, value) {
+            // let price = Intl.NumberFormat('en-US').format(value.price) + "đ";
+            let price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            let date = formatDate(value.postDate);
+            let img;
+
+            if (value.imageDTOList.length===0) {
+                img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+            } else {
+                img=value.imageDTOList[0].imageName;
+            }
+            str += ` <tr  id="${'tr_' + value.postId}">
+                        <td class="table-column-pr-0">
+
+                        </td>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="${'/admin/post-detail/'+value.postId}">
+                                <div class="avatar avatar-circle">
+
+                                    <img class="avatar-img" src="${img}" alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span class="d-block h5 text-hover-primary mb-0 text-overflow" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.title}</span>
+                                    <span class="d-block font-size-sm text-body" >${value.modelMotor}</span>
+                                </div>
+                            </a>
+                        </td>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="#">
+                                <div class="avatar avatar-circle">
+
+                                    <img class="avatar-img" src="${img}" alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span class="d-block h5 text-hover-primary mb-0 w-50" > ${value.userDTO.userName}</span>
+                                    <span class="d-block font-size-sm text-body" >${value.userDTO.email}</span>
+                                </div>
+                            </a>
+                        </td>
+
+                        `;
+            if (value.statusPost === "WAITING") {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-warning" ></span>Waiting
+
+                            </td>`
+            } else if (value.statusPost === "PUBLIC") {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-success" ></span>Public
+
+                            </td>`
+            } else if (value.statusPost === "HIDE") {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-grey" ></span>Hide
+
+                            </td>`
+            }
+            str +=
+                `
+                        <td >${price}
+
+                        </td>
+
+                        <td>
+                            <div class="d-flex align-items-center" >
+                                ${value.province}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center" >
+                                ${date}
+                            </div>
+                        </td>
+
+                        `
+            if (value.ownership === "OWNERSHIP") {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-danger" ></span>Chính chủ
+
+                            </td>
+                    </tr>`
+            } else {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-light-orange" ></span>Không chính chủ
+
+                            </td>
+                </tr>`
+            }
+
+        });
+        $("#tbody").html(str);
+    }
+
+
+    $(document).ready(function () {
+        showDashboard();
+        getHidePost(0,getQtyEntries());
+        changeQtyEntries();
+        changePageEntries();
+        doPrevPage();
+        searchEntries();
+    })
+    function getQtyEntries() {
+        return $("#datatableEntries option:selected").val();
+    }
+
+    function changeQtyEntries() {
+        $("#datatableEntries").on("change",function () {
+            let key =$("#datatableSearch").val();
+            if (key!=="") {
+                getHidePostByKeySearch(key,0,getQtyEntries())
+            } else {
+                getHidePost(0,getQtyEntries())
+            }
+
+        })
+    }
+    function changePageEntries() {
+        $(".paginate_button").on("click",function () {
+            let pageNo = $(this).data("id");
+            let key =$("#datatableSearch").val();
+            if (key!=="") {
+                getHidePostByKeySearch(key,pageNo,getQtyEntries())
+            } else {
+                getHidePost(pageNo,getQtyEntries())
+            }
+        })
+    }
+    function doPrevPage() {
+        $("#datatable_previous").on("click",function () {
+            let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key =$("#datatableSearch").val();
+            if (pageNo>0) {
+                if (key!=="") {
+                    getHidePostByKeySearch(key,pageNo-1,getQtyEntries())
+                } else {
+                    getHidePost(pageNo-1,getQtyEntries());
+                }
+
+            }
+        })
+    }
+    function doNextPage(data) {
+        $("#datatable_next").on("click",function () {
+            let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key =$("#datatableSearch").val();
+            if (pageNo<data) {
+                if (key!=="") {
+                    getHidePostByKeySearch(key,pageNo+1,getQtyEntries())
+                } else {
+                    getHidePost(pageNo+1,getQtyEntries());
+                }
+            }
+        })
+    }
+    function drawPaginationPrevAndNext() {
+        $("#datatable_paginate ul").remove();
+        return `<ul id="datatable_pagination" class="pagination datatable-custom-pagination">
+                                        <li class="paginate_item page-item "><a
+                                                class="paginate_button previous page-link" aria-controls="datatable"
+                                                 tabindex="-1" id="datatable_previous"><span
+                                                aria-hidden="true">Prev</span></a></li>
+
+                                        <li class="paginate_item page-item"><a class="paginate_button next page-link"
+                                                                               aria-controls="datatable"
+                                                                               tabindex="0" id="datatable_next"><span
+                                                aria-hidden="true">Next</span></a></li>
+                                    </ul>`
+    }
+    function searchEntries() {
+        $("#submit_search").on('click',function () {
+            let key =  $("#datatableSearch").val();
+            if (key==="") {
+                getHidePost(0,getQtyEntries());
+            } else {
+                getHidePostByKeySearch(key,0,getQtyEntries());
+            }
+        })
+    }
+    function getHidePostByKeySearch(key, pageNo, pageSize) {
+        $.ajax({
+            type: "GET",
+            url: "/admin/hide-post/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+        }).done(function (data) {
+            drawEntriesToTable(data);
+            $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
+            if (data.totalPages <= 1) {
+                $("#datatablePagination").css("display", "none");
+            } else {
+                let pagination = drawPaginationEntries(data);
+                $("#datatable_paginate").append(drawPaginationPrevAndNext());
+                $("#datatable_pagination li:first").after(pagination);
+                $("#datatableWithPaginationInfoTotalQty").text(data.totalElements)
+                $("#datatablePagination").css("display", "");
+                // $(".paginate_item").removeClass("disabled");
+                changeQtyEntries();
+                changePageEntries();
+                doPrevPage();
+                doNextPage(Number(data.totalPages - 1));
+                searchEntries();
+            }
+        })
+    }
+    function getHidePost(pageNo, pageSize) {
+        $.ajax({
+            type: "GET",
+            url: "/admin/hide-post?pageNo=" + pageNo + "&pageSize=" + pageSize
+        }).done(function (data) {
+            console.log(data)
+            drawEntriesToTable(data);
+            $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
+            if (data.totalPages <= 1) {
+                $("#datatablePagination").css("display", "none");
+            } else {
+                let pagination = drawPaginationEntries(data);
+                $("#datatable_paginate").append(drawPaginationPrevAndNext());
+                $("#datatable_pagination li:first").after(pagination);
+                $("#datatableWithPaginationInfoTotalQty").text(data.totalElements)
+                $("#datatablePagination").css("display", "");
+                changeQtyEntries();
+                changePageEntries();
+                doPrevPage();
+                doNextPage(Number(data.totalPages - 1));
+                searchEntries();
+            }
+        })
+
+    }
+
+    function formatDate(date) {
+        let postDate = new Date(Date.parse(date));
+        let untilNow = new Date() - postDate;
+        let time = "";
+        const SECOND = 1000;
+        const MINUTE = 60 * SECOND;
+        const HOUR = 60 * MINUTE;
+        const DAY = 24 * HOUR;
+        const WEEK = 7 * DAY;
+        const MONTH = 30 * DAY;
+        const YEAR = 365 * DAY;
+
+        let arr = [YEAR, MONTH, WEEK, DAY, HOUR, MINUTE];
+        let arr2 = ["năm", "tháng", "tuần", "ngày", "giờ", "phút"];
+
+        let count = 0;
+
+        for (let i = 0; count == 0; ++i) {
+            count = (untilNow / arr[i]).toFixed();
+            if (count > 0) {
+                time = count + " " + arr2[i] + " trước";
+            }
+        }
+        return time;
+    }
+
+    function showDashboard() {
+        $("#posts_dashboard").css("display","block");
+        $("#a_hide_post").addClass("active");
+    }
+</script>
+<th:block th:include="/admin/fragment/script::script"/>
+</html>

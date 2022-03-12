@@ -3,15 +3,16 @@ package com.motomarket.service.user;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService{
@@ -87,4 +88,48 @@ public class UserService implements IUserService{
                 userDTO.getRole(), userDTO.getUserStatus(), userDTO.getPassword()
                ,userDTO.isDeleted(), userDTO.getPhoneNumber(), null);
     }
+
+    @Override
+    public UserResponse findUserByKeySearchByDBA(String key, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<User> users = userRepository.findUserByKeySearchByDBA(key,pageable);
+        return getUserResponse(users);
+    }
+
+    @Override
+    public UserResponse findUserByKeySearchByAdmin(String key, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<User> users = userRepository.findUserByKeySearchByAdmin(key,pageable);
+        return getUserResponse(users);
+    }
+
+    @Override
+    public UserResponse findAllUserByDeletedIsFalseByDBA(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<User> users = userRepository.findAllUserByDeletedIsFalseByDBA(pageable);
+        return getUserResponse(users);
+    }
+
+
+
+    @Override
+    public UserResponse findAllUserByDeletedIsFalseByAdmin(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<User> users = userRepository.findAllUserByDeletedIsFalseByAdmin(pageable);
+        return getUserResponse(users);
+    }
+
+    private UserResponse getUserResponse(Page<User> users) {
+        List<User> userList = users.getContent();
+        List<UserDTO> content = userList.stream().map(UserDTO::parseUserDTO).collect(Collectors.toList());
+        UserResponse userResponse = new UserResponse();
+        userResponse.setContent(content);
+        userResponse.setPageNo(users.getNumber());
+        userResponse.setPageSize(users.getSize());
+        userResponse.setTotalElements(users.getTotalElements());
+        userResponse.setTotalPages(users.getTotalPages());
+        userResponse.setLast(users.isLast());
+        return userResponse;
+    }
+
 }

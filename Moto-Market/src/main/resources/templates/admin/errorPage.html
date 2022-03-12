@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Title -->
+  <title>Error Page</title>
+  <th:block th:include="/admin/fragment/head::head"/>
+</head>
+<body class=" footer-offset">
+
+<div class="container-fluid text-center">
+  <br>
+  <h1 th:text="${errorMsg}"></h1>
+  <button  type="button" class="btn btn-secondary btn-lg" onclick="javascript:history.back()">
+    <i class="fas fa-step-backward"></i>
+    Turn Back
+  </button>
+</div>
+
+</body>
+</html>

@@ -447,6 +447,7 @@
 <th:block th:include="/admin/fragment/script::script"/>
 <script>
     $(document).ready(function () {
+        showDashboard();
         deleteUser();
         changeStatusUser();
     })
@@ -596,7 +597,10 @@
 
         })
     }
-
+function showDashboard() {
+    $("#users_dashboard").css("display","block");
+    $("#a_users").addClass("active");
+}
 
 </script>
 </body>

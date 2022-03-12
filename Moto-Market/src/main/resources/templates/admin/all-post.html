@@ -13,6 +13,7 @@
         .format-money:before {
             content: '$';
         }
+
     </style>
 </head>
 <body class=" footer-offset">
@@ -86,13 +87,10 @@
                         <th class="table-column-pl-0">Title</th>
                         <th>Posted by</th>
                         <th>Status</th>
-                        <th>Kilometer Count</th>
                         <th>Price</th>
                         <th>Province</th>
-                        <th>District</th>
                         <th>Date</th>
                         <th>Owner ship</th>
-                        <th></th>
                     </tr>
                     </thead>
 
@@ -294,29 +292,45 @@
     function drawEntriesToTable(data) {
         let str = ""
         $.each(data.content, function (key, value) {
+            // let price = Intl.NumberFormat('en-US').format(value.price) + "đ";
+            let price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+            let date = formatDate(value.postDate);
+            let img;
+
+            if (value.imageDTOList.length === 0) {
+                img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+            } else {
+                img = value.imageDTOList[0].imageName;
+            }
             str += ` <tr  id="${'tr_' + value.postId}">
                         <td class="table-column-pr-0">
 
                         </td>
                         <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="#">
+                            <a class="d-flex align-items-center" href="${'/admin/post-detail/'+value.postId}">
                                 <div class="avatar avatar-circle">
 
-
-                                    <img class="avatar-img" src="  https://icdn.dantri.com.vn/thumb_w/640/2017/1-1510967806416.jpg" alt="Image Description">
-
+                                    <img class="avatar-img" src="${img}" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0 w-50" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.title}</span>
+                                    <span <span  class="d-block h5 text-hover-primary mb-0 text-overflow" ><i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i> ${value.title}</span>
                                     <span class="d-block font-size-sm text-body" >${value.modelMotor}</span>
                                 </div>
                             </a>
                         </td>
-                        <td>
-                            <div class="d-flex align-items-center" >
-                                ${value.userDTO.userName}
-                            </div>
+                        <td class="table-column-pl-0">
+                            <a class="d-flex align-items-center" href="#">
+                                <div class="avatar avatar-circle">
+
+                                    <img class="avatar-img" src="${img}" alt="Image Description">
+                                </div>
+                                <div class="ml-3">
+                                    <span class="d-block h5 text-hover-primary mb-0 w-50" > ${value.userDTO.userName}</span>
+                                    <span class="d-block font-size-sm text-body" >${value.userDTO.email}</span>
+                                </div>
+                            </a>
                         </td>
+
                         `;
             if (value.statusPost === "WAITING") {
                 str += `
@@ -339,11 +353,7 @@
             }
             str +=
                 `
-                        <td>
-                            <span class="d-block  mb-0" >${value.kilometerCount}</span>
-
-                        </td>
-                        <td class="format-money" >${value.price}
+                        <td >${price}
 
                         </td>
 
@@ -353,28 +363,28 @@
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
-                                ${value.district}
-                            </div>
-                        </td>
-                        <td>
                             <div class="d-flex align-items-center" >
-                                ${value.postDate}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                ${value.ownership}
+                                ${date}
                             </div>
                         </td>
 
+                        `
+            if (value.ownership === "OWNERSHIP") {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-danger" ></span>Chính chủ
 
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>`;
+                            </td>
+                    </tr>`
+            } else {
+                str += `
+                            <td class="bg-status-filter">
+                                <span class="legend-indicator bg-light-orange" ></span>Không chính chủ
+
+                            </td>
+                </tr>`
+            }
+
         });
         $("#tbody").html(str);
     }
@@ -405,6 +415,7 @@
     }
 
     $(document).ready(function () {
+        showDashboard();
         getAllPost(0, getQtyEntries());
         changeQtyEntries();
         changePageEntries();
@@ -417,28 +428,50 @@
 
     function changeQtyEntries() {
         $("#datatableEntries").on("change",function () {
-            getAllPost(0,getQtyEntries())
+            let key = $("#datatableSearch").val();
+            if (key !== "") {
+                getAllPostByKeySearch(key, 0, getQtyEntries())
+            } else {
+                getAllPost(0, getQtyEntries())
+            }
+
         })
     }
     function changePageEntries() {
         $(".paginate_button").on("click",function () {
             let pageNo = $(this).data("id");
-            getAllPost(pageNo,getQtyEntries())
+            let key = $("#datatableSearch").val();
+            if (key !== "") {
+                getAllPostByKeySearch(key, pageNo, getQtyEntries())
+            } else {
+                getAllPost(pageNo, getQtyEntries())
+            }
         })
     }
     function doPrevPage() {
         $("#datatable_previous").on("click",function () {
             let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key = $("#datatableSearch").val();
             if (pageNo>0) {
-                getAllPost(pageNo-1,getQtyEntries());
+                if (key !== "") {
+                    getAllPostByKeySearch(key, pageNo - 1, getQtyEntries())
+                } else {
+                    getAllPost(pageNo - 1, getQtyEntries());
+                }
+
             }
         })
     }
     function doNextPage(data) {
         $("#datatable_next").on("click",function () {
             let pageNo = $("#datatable_pagination li.active a").data("id");
+            let key = $("#datatableSearch").val();
             if (pageNo<data) {
-                getAllPost(pageNo+1,getQtyEntries());
+                if (key !== "") {
+                    getAllPostByKeySearch(key, pageNo + 1, getQtyEntries())
+                } else {
+                    getAllPost(pageNo + 1, getQtyEntries());
+                }
             }
         })
     }
@@ -491,8 +524,36 @@
         })
     }
 
+    function formatDate(date) {
+        let postDate = new Date(Date.parse(date));
+        let untilNow = new Date() - postDate;
+        let time = "";
+        const SECOND = 1000;
+        const MINUTE = 60 * SECOND;
+        const HOUR = 60 * MINUTE;
+        const DAY = 24 * HOUR;
+        const WEEK = 7 * DAY;
+        const MONTH = 30 * DAY;
+        const YEAR = 365 * DAY;
 
+        let arr = [YEAR, MONTH, WEEK, DAY, HOUR, MINUTE];
+        let arr2 = ["năm", "tháng", "tuần", "ngày", "giờ", "phút"];
 
+        let count = 0;
+
+        for (let i = 0; count == 0; ++i) {
+            count = (untilNow / arr[i]).toFixed();
+            if (count > 0) {
+                time = count + " " + arr2[i] + " trước";
+            }
+        }
+        return time;
+    }
+
+    function showDashboard() {
+        $("#posts_dashboard").css("display","block");
+        $("#a_all_post").addClass("active");
+    }
 </script>
 <th:block th:include="/admin/fragment/script::script"/>
 </html>

@@ -290,6 +290,14 @@
     <script>
         if (/MSIE /d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="/admin/assets/vendor/babel-polyfill/polyfill.min.js"><//script>');
     </script>
+
+    <script>
+
+        $(".nav-link").on("click",function () {
+            $(this).addClass("active");
+            $(this).parent().parent().css("display","block");
+        })
+    </script>
 </th:block>
 </body>
 </html>

@@ -40,10 +40,8 @@ public class AdminController {
                 modelAndView.addObject("messages", "Access denied!");
                 return modelAndView;
             } else {
-                modelAndView.setViewName("admin/users");
-                System.out.println(adminLogin.getRole());
+                modelAndView.setViewName("admin/home");
                 modelAndView.addObject("adminLogin", adminLogin);
-                modelAndView.addObject("users", getAllByRoleUser(adminLogin));
             }
 
         }
@@ -68,7 +66,7 @@ public class AdminController {
             modelAndView.addObject("messages", "Access denied!");
             return modelAndView;
         } else {
-            modelAndView.setViewName("admin/users");
+            modelAndView.setViewName("admin/home");
             // create cookie and set it in response
             Cookie cookie = new Cookie("loginAdmin", adminDTO.getUserName());
             cookie.setMaxAge(24 * 60 * 60 * 30);
@@ -112,10 +110,9 @@ public class AdminController {
                 modelAndView.addObject("messages", "Access denied!");
                 return modelAndView;
             } else {
-                modelAndView.setViewName("admin/users");
-                System.out.println(adminLogin.getRole());
+                modelAndView.setViewName("admin/list-user");
                 modelAndView.addObject("adminLogin", adminLogin);
-                modelAndView.addObject("users", getAllByRoleUser(adminLogin));
+
             }
 
         }
@@ -151,4 +148,42 @@ public class AdminController {
         }
 
     }
+
+    @GetMapping("/post/hide")
+    public ModelAndView toHidePostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/hide-post");
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            modelAndView.addObject("adminLogin",adminLogin);
+            return modelAndView;
+        }
+
+    }
+
+    @GetMapping("/post-detail/{postId}")
+    public ModelAndView toPostDetailPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin,
+                                         HttpServletResponse response, @PathVariable Long postId) {
+        ModelAndView modelAndView = new ModelAndView("admin/post-detail");
+        PostDTO postDTO = postService.getById(postId);
+        UserDTO adminLogin = userService.getByUserName(loginAdmin);
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
+            return modelAndView;
+        } else if (!postDTO.getStatusPost().equals(StatusPost.DELETE)){
+            modelAndView.addObject("adminLogin",adminLogin);
+            modelAndView.addObject("post",postDTO);
+            return modelAndView;
+        } else {
+            modelAndView.setViewName("admin/all-post");
+            modelAndView.addObject("adminLogin",adminLogin);
+            return modelAndView;
+        }
+
+    }
+
 }
