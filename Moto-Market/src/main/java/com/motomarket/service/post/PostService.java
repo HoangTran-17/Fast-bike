@@ -110,7 +110,9 @@ public class PostService implements IPostService {
 
     @Override
     public void remove(Long id) {
-
+      Post post =  postRepository.getById(id);
+      post.setStatusPost(StatusPost.DELETE);
+      postRepository.save(post);
     }
 //    List bài viết mới nhất
     @Override
@@ -225,43 +227,64 @@ public class PostService implements IPostService {
     public PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo,pageSize);
         Page<Post> posts = postRepository.findPostDeletedIsFalseOrderByDate(pageable);
-        List<Post> listOfPosts = posts.getContent();
-        List<PostDTO> content= listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
-        PostResponse postResponse = new PostResponse();
-        postResponse.setContent(content);
-        postResponse.setPageNo(posts.getNumber());
-        postResponse.setPageSize(posts.getSize());
-        postResponse.setTotalElements(posts.getTotalElements());
-        postResponse.setTotalPages(posts.getTotalPages());
-        postResponse.setLast(posts.isLast());
-
-        return postResponse;
+        return getPostResponse(posts);
     }
 
     @Override
     public PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo,pageSize);
         Page<Post> posts = postRepository.findPostWaitingOrderByDate(pageable);
-        List<Post> listOfPosts = posts.getContent();
-        List<PostDTO> content= listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
-        PostResponse postResponse = new PostResponse();
-        postResponse.setContent(content);
-        postResponse.setPageNo(posts.getNumber());
-        postResponse.setPageSize(posts.getSize());
-        postResponse.setTotalElements(posts.getTotalElements());
-        postResponse.setTotalPages(posts.getTotalPages());
-        postResponse.setLast(posts.isLast());
-
-        return postResponse;
+        return getPostResponse(posts);
     }
 
     @Override
-    public PostResponse findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(String key, Integer pageNo, Integer pageSize) {
+    public PostResponse findPostHideOrderByDate(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<Post> posts = postRepository.findPostHideOrderByDate(pageable);
+        return getPostResponse(posts);
+    }
+
+    @Override
+    public PostResponse findPostByKeySearch(String key, Integer pageNo, Integer pageSize) {
 
         Pageable pageable = PageRequest.of(pageNo,pageSize);
-        Page<Post> posts = postRepository.findPostByTitleLikeOrDetailMotorLikeOrUserNameLikeOrStatusPostLikeOrKilometerCountLikeOrPriceLikeOrProvinceLikeOrDistrictLikeOrPostDateLikeOrOwnershipLike(key,pageable);
+        Page<Post> posts = postRepository.findPostByKeySearch(key,pageable);
+        return getPostResponse(posts);
+    }
+
+
+
+    @Override
+    public PostResponse findWaitingPostByKeySearch(String key, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<Post> posts = postRepository.findWaitingPostByKeySearch(key,pageable);
+        return getPostResponse(posts);
+    }
+
+    @Override
+    public PostResponse findHidePostByKeySearch(String key, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Page<Post> posts = postRepository.findHidePostByKeySearch(key,pageable);
+        return getPostResponse(posts);
+    }
+
+    @Override
+    public void hide(Long id) {
+        Post post =  postRepository.getById(id);
+        post.setStatusPost(StatusPost.HIDE);
+        postRepository.save(post);
+    }
+
+    @Override
+    public void publicPost(Long id) {
+        Post post =  postRepository.getById(id);
+        post.setStatusPost(StatusPost.PUBLIC);
+        postRepository.save(post);
+    }
+
+    private PostResponse getPostResponse(Page<Post> posts) {
         List<Post> listOfPosts = posts.getContent();
-        List<PostDTO> content= listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
+        List<PostDTO> content = listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
         PostResponse postResponse = new PostResponse();
         postResponse.setContent(content);
         postResponse.setPageNo(posts.getNumber());

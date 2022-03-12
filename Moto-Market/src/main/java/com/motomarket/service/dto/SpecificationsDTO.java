@@ -76,5 +76,7 @@ public class SpecificationsDTO {
                 specificationsDTO.getRearTire(),new SeriesMotor());
     }
 
+
+
 }
 
