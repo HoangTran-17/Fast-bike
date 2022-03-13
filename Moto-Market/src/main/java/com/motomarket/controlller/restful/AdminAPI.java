@@ -5,18 +5,19 @@ import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.response.PostResponse;
+import com.motomarket.service.response.UserDT0Errors;
 import com.motomarket.service.response.UserResponse;
 import com.motomarket.service.user.IUserService;
-
-import com.motomarket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,16 +29,23 @@ public class AdminAPI {
     private IPostService postService;
 
     @PostMapping("/api/add-new-admin")
-    public ResponseEntity<UserDTO> addNewAdmin(@RequestBody @Validated UserDTO userDTO, BindingResult bindingResult) {
+    public ResponseEntity<UserDT0Errors> addNewAdmin(@RequestBody @Validated UserDTO userDTO, BindingResult bindingResult) {
+        UserDT0Errors userDT0Errors = new UserDT0Errors(userDTO, new ArrayList<>());
         if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(userDTO,HttpStatus.BAD_REQUEST);
+            bindingResult.getAllErrors().forEach(objectError -> userDT0Errors.getAllErrors().add(objectError.getDefaultMessage()));
+            return new ResponseEntity<>(userDT0Errors, HttpStatus.NOT_FOUND);
         }
-        if (userService.findUserByEmail(userDTO.getEmail())!=null) {
-            return new ResponseEntity<>(userDTO,HttpStatus.IM_USED);
+        if (userService.findUserByEmail(userDTO.getEmail()) != null) {
+            String error = "Email already exist!";
+            userDT0Errors.getAllErrors().add(error);
+            return new ResponseEntity<>(userDT0Errors, HttpStatus.NOT_FOUND);
         }
         userDTO.setRole(Role.ADMIN);
-        userService.save(userDTO);
-        return new ResponseEntity<>(userDTO,HttpStatus.OK);
+        userDTO.setCreated(new Date());
+        userDTO.setUserStatus(StatusUser.ACTIVATE);
+        UserDTO save = userService.save(userDTO);
+        userDT0Errors.setUserDTO(save);
+        return new ResponseEntity<>(userDT0Errors, HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<UserDTO> deleteUserByAdmin(@RequestBody Long userId) {

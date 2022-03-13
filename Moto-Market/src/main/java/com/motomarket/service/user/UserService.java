@@ -4,21 +4,21 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
-<<<<<<< HEAD
+
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
-=======
+
 
 import com.motomarket.service.response.UserResponse;
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
->>>>>>> huu-dev
-=======
+
+
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
->>>>>>> tien-dev
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -167,7 +167,7 @@ public class UserService implements IUserService{
     private User parseUser(UserDTO userDTO) {
         return new User(userDTO.getUserId(), userDTO.getAvatar(), userDTO.getUserName(), userDTO.getEmail(),
                 userDTO.getRole(), userDTO.getUserStatus(),userDTO.getCreated(), userDTO.getPassword()
-              , userDTO.getPhoneNumber(), null);
+              , userDTO.getPhoneNumber(), new ArrayList<>());
     }
 
     @Override
@@ -212,5 +212,7 @@ public class UserService implements IUserService{
         userResponse.setLast(users.isLast());
         return userResponse;
     }
+
+//    Hữu
 
 }

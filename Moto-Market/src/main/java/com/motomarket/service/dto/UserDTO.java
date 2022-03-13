@@ -41,8 +41,8 @@ public class UserDTO {
 
 
     @NotNull(message = "Vui lòng nhập mật khẩu!")
-    @Pattern(regexp = "^[A-Za-z0-9]$", message = "Chỉ sử dụng chữ cái in thường, in HOA và chữ số!")
-    @Size(min = 6, max = 12, message = "Mật khẩu từ 6 đến 12 ký tự!")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", message = "Mật khẩu từ 6 đến 12 ký tự và chỉ sử dụng chữ cái in thường, in HOA và chữ số! ")
+//    @Size(min = 6, max = 12, message = "Mật khẩu từ 6 đến 12 ký tự!")
     private String password;
 
 

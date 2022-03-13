@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class=" footer-offset">
+<div id="pageMessages">
+
+</div>
 <th:block th:include="/admin/fragment/layout::dashboard"/>
 <main id="content" role="main" class="main pointer-event">
     <div class="content container-fluid">
@@ -131,16 +134,36 @@
 
     $('#btn_submit_form').on("click",function () {
         if ($('#addNewAdminFrm').valid()) {
+            let ts = new Date();
+            ts.setMinutes(ts.getMinutes() - ts.getTimezoneOffset());
+            let time = ts.toISOString().slice(0, 19).replace('T', ' ');
             let admin = {
                 userName: $('#userName').val(),
                 email: $("#signupSrEmail").val(),
-                phoneNumber: $("phoneNumber").val(),
-                password: $("#signupSrPassword").val(),
-                created: new Date()
+                phoneNumber: $("#phoneNumber").val(),
+                password: $("#signupSrPassword").val()
             }
             $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 type: "POST",
-                url:
+                url: "/admin/api/add-new-admin",
+                data : JSON.stringify(admin)
+            }) .done(function (data) {
+                $("#pageMessages ").children().remove();
+                createAlert('','Success!','Admin has been created successfully!','success',true,true,'pageMessages');
+                setTimeout(function(){
+                   let url = "/admin/list-user";
+                    $(location).attr("href", url);
+                },1000);
+
+            }).fail(function (data) {
+                $("#pageMessages ").children().remove();
+                $.each(data.responseJSON.allErrors, function (key,value) {
+                    createAlert('Opps!','Admin is not created',value,'danger',true,true,'pageMessages');
+                })
             })
         }
 
