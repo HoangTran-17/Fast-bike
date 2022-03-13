@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/top.css?159125667020200827">
 </head>
 
+
+
 <body>
 
 
@@ -44,7 +46,7 @@
             <div class="user_info">
                 <div class="left_info">
                     <div class="avatar">
-                        <img th:src="@{/api/image/load/{avatar}(avatar=${user.avatar})}">
+                        <img id="avatar" th:src="@{/api/image/load/{avatar}(avatar=${user.avatar})}">
                     </div>
                     <div class="info_name">
                         <h2>
@@ -84,7 +86,6 @@
 
             <div class="list_bike">
                 <section class="wrapper home_page" id="bike-list">
-                    <input type="hidden" id="route_user_profile" value="https://www.webike.vn/cho-xe-may/user/24120">
                     <div class="container">
                         <div class="box-area motor-maket">
                             <div class="heading-2 media">
@@ -347,7 +348,13 @@
         Page top
     </button>
     <div th:replace="~{fragments/footer :: footer}"></div>
-
+    <script>
+        const img = document.getElementById("avatar")
+        img.addEventListener("error", function(event) {
+            event.target.src = "/frontend/default/avatar_default.jpg"
+            event.onerror = null
+        })
+    </script>
 </div>
 
 </body>

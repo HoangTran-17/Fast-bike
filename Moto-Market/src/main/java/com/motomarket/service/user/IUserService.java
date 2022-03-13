@@ -3,9 +3,9 @@ package com.motomarket.service.user;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.UserDTO;
-<<<<<<< HEAD
 import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
+<<<<<<< HEAD
 import com.motomarket.service.dto.UserView;
 =======
 
@@ -15,12 +15,18 @@ import org.springframework.data.domain.Pageable;
 import com.motomarket.service.dto.UserView;
 
 >>>>>>> huu-dev
+=======
+import com.motomarket.service.dto.UserView;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> tien-dev
 
 import java.util.List;
 
 
 public interface IUserService extends IGeneralService<UserDTO> {
     UserDTO getByUserName(String userName);
+
+    void updateAvatar(MultipartFile[] files, UserDTO userDTO);
 
     UserDTO findUserByEmail(String email);
     User save(User user);
