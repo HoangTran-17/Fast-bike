@@ -1,8 +1,6 @@
 package com.motomarket.controlller.restful;
 
-import com.motomarket.repository.model.Role;
-import com.motomarket.repository.model.StatusUser;
-import com.motomarket.repository.model.User;
+import com.motomarket.repository.model.*;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.post.IPostService;
@@ -30,7 +28,8 @@ public class AdminAPI {
     public ResponseEntity<UserDTO> deleteUserByAdmin(@RequestBody Long userId) {
 
             User user = userService.getUserById(userId);
-            user.setDeleted(true);
+            user.setUserStatus(StatusUser.SUSPENDED);
+            user.getPostList().forEach(post -> postService.remove(post.getPostId()));
             User saveUser = userService.save(user);
             UserDTO userDTO =UserDTO.parseUserDTO(saveUser);
 
@@ -42,8 +41,22 @@ public class AdminAPI {
         User user = userService.getUserById(id);
         if (user.getUserStatus().equals(StatusUser.BLOCK)) {
             user.setUserStatus(StatusUser.ACTIVATE);
+            List<Post> posts = user.getPostList();
+            for (Post p: posts
+            ) {
+                if (p.getStatusPost().equals(StatusPost.BLOCKED)) {
+                    postService.publicPost(p.getPostId());
+                }
+            }
         } else {
             user.setUserStatus(StatusUser.BLOCK);
+         List<Post> posts = user.getPostList();
+            for (Post p: posts
+                 ) {
+                if (p.getStatusPost().equals(StatusPost.PUBLIC)) {
+                   postService.blockPost(p.getPostId());
+                }
+            }
         }
         userService.save(user);
         return new ResponseEntity<>(UserDTO.parseUserDTO(user), HttpStatus.OK);
@@ -104,6 +117,10 @@ public class AdminAPI {
 
     @PutMapping ("/post/public/{postId}")
     public PostDTO publicPost(@PathVariable Long postId) {
+        UserDTO user = postService.getById(postId).getUserDTO();
+        if (user.getUserStatus().equals(StatusUser.BLOCK)) {
+            throw new RuntimeException();
+        }
         postService.publicPost(postId);
         return postService.getById(postId);
     }

@@ -320,6 +320,13 @@ public class PostService implements IPostService {
         postRepository.save(post);
     }
 
+    @Override
+    public void blockPost(Long id) {
+        Post post = postRepository.getById(id);
+        post.setStatusPost(StatusPost.BLOCKED);
+        postRepository.save(post);
+    }
+
     private PostResponse getPostResponse(Page<Post> posts) {
         List<Post> listOfPosts = posts.getContent();
         List<PostDTO> content = listOfPosts.stream().map(PostDTO::parsePostDTO).collect(Collectors.toList());
