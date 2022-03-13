@@ -1,7 +1,5 @@
 package com.motomarket.controlller.restful;
 
-import com.motomarket.repository.model.ModelYear;
-import com.motomarket.repository.model.SeriesMotor;
 import com.motomarket.service.dto.BrandMotorDTO;
 import com.motomarket.service.dto.ColorMotorDTO;
 import com.motomarket.service.dto.ModelYearDTO;

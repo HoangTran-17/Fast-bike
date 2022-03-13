@@ -1,6 +1,5 @@
 package com.motomarket.service.post;
 
-import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
@@ -17,7 +16,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     Long getCountPost();
 
 
-    PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files);
+    Long savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files);
 
     void update(PostDTO postDTO, MultipartFile[] files);
 
