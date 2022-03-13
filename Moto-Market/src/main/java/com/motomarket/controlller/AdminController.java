@@ -55,13 +55,14 @@ public class AdminController {
         UserDTO adminDTO = userService.findUserByEmail(admin.getEmail());
         ModelAndView modelAndView = new ModelAndView("admin/login");
         if (adminDTO == null) {
-            modelAndView.addObject("messages", "Tài khoản không tồn tại!");
+            modelAndView.addObject("messages",
+                    "Account does not exist!");
             return modelAndView;
         } else if (!adminDTO.getUserStatus().equals(StatusUser.ACTIVATE)) {
-            modelAndView.addObject("messages", "Tài khoản đã bị khóa!");
+            modelAndView.addObject("messages", "Account has been locked!");
             return modelAndView;
         } else if (!admin.getPassword().equals(adminDTO.getPassword())) {
-            modelAndView.addObject("messages", "Tài khoản hoặc mật khẩu không chính xác!");
+            modelAndView.addObject("messages", "Incorrect account or password!");
             return modelAndView;
         } else if (adminDTO.getRole() == Role.USER) {
             modelAndView.addObject("messages", "Access denied!");
