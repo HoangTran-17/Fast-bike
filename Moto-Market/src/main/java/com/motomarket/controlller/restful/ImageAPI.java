@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +38,6 @@ public class ImageAPI {
     @DeleteMapping("/api/image/detele/{idImage}")
     public ResponseEntity<String> deleteImage(@PathVariable Long idImage){
         imageService.remove(idImage);
-        return (ResponseEntity<String>) ResponseEntity.ok();
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }
