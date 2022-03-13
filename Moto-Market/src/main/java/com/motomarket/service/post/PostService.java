@@ -227,9 +227,9 @@ public class PostService implements IPostService {
 
     //    List bài viết đang hiển thị (PUBLIC) của 1 user
     @Override
-    public Page<PostDTO> findPublicListByUserId(int pageSize, Long userId) {
+    public Page<PostDTO> findPublicListByUserId(Pageable pageable, Long userId) {
         User user = userRepository.getById(userId);
-        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.PUBLIC);
+        Page<Post> posts = postRepository.findTopByUser(pageable, user, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
@@ -250,9 +250,9 @@ public class PostService implements IPostService {
 
     //    List bài viết về xe đã bán (SOLD) của 1 user
     @Override
-    public Page<PostDTO> findSoldListByUserId(int pageSize, Long userId) {
+    public Page<PostDTO> findSoldListByUserId(Pageable pageable, Long userId) {
         User user = userRepository.getById(userId);
-        Page<Post> posts = postRepository.findTopByUser(Pageable.ofSize(pageSize), user, StatusPost.SOLD);
+        Page<Post> posts = postRepository.findTopByUser(pageable, user, StatusPost.SOLD);
         return posts.map(PostDTO::parsePostDTO);
     }
 
