@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=1050">
     <link rel="shortcut icon" href="https://www.webike.vn/favicon.png?152472729920200827" type="image/png">
     <script type="text/javascript" src="/v1/vendor/yall/yall-2.1.0.min.js?154996577520200827"></script>
-    <link rel="stylesheet" href="/v1/pc/css/template.min.css?155003157820200827">
+    <link rel="stylesheet" href="/v1/pc/css/template-custom.min.css?155003157820200827">
     <link rel="stylesheet" href="/v1/pc/css/sidemenuoverview.min.css?154996577520200827">
     <link rel="stylesheet" href="/v1/pc/css/delay.min.css?154996577520200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto_market_header.css?159852541620200827">
@@ -32,6 +32,8 @@
     </style>
     <link rel="stylesheet" href="/v1/pc/css/editprofile.min.css?159823768920200827">
     <script type="text/javascript" src="/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827"></script>
+    <link rel="stylesheet" type="text/css" href="/frontend/css/error.css">
+
 
     <!-- End Google Tag Manager -->
 
@@ -94,9 +96,13 @@
                 </div>
             </div>
         </div>
-    </section>
+        <div class="success" with="300px" th:if="${message}" th:utext="${message}"
+             style="color:red;font-style:italic; z-index: 999999; top: 20px; right: 20px; position: fixed">
 
+        </div>
+    </section>
     <div th:replace="~{fragments/footer :: footer}"></div>
+
 
 
     <script src="/v1/pc/js/common/jquery.js?152472729920200827"></script>

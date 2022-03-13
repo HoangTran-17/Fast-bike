@@ -5,19 +5,28 @@ import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
+<<<<<<< HEAD
 
 import com.motomarket.service.dto.UserView;
 
+=======
+import com.motomarket.service.dto.UserView;
+>>>>>>> tien-dev
 
 import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
 
 import com.motomarket.service.dto.UserView;
 
+<<<<<<< HEAD
 
 import com.motomarket.service.dto.UserView;
 import org.springframework.web.multipart.MultipartFile;
 
+=======
+import com.motomarket.service.dto.UserView;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> tien-dev
 
 import java.util.List;
 
