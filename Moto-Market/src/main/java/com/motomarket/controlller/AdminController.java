@@ -2,6 +2,7 @@ package com.motomarket.controlller;
 
 import com.motomarket.repository.model.Role;
 import com.motomarket.repository.model.StatusPost;
+import com.motomarket.repository.model.StatusUser;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.post.IPostService;
@@ -56,7 +57,7 @@ public class AdminController {
         if (adminDTO == null) {
             modelAndView.addObject("messages", "Tài khoản không tồn tại!");
             return modelAndView;
-        } else if (adminDTO.isDeleted()) {
+        } else if (!adminDTO.getUserStatus().equals(StatusUser.ACTIVATE)) {
             modelAndView.addObject("messages", "Tài khoản đã bị khóa!");
             return modelAndView;
         } else if (!admin.getPassword().equals(adminDTO.getPassword())) {

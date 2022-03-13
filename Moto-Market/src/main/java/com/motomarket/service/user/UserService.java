@@ -4,25 +4,44 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
+<<<<<<< HEAD
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
+=======
+
+import com.motomarket.service.response.UserResponse;
+
+import com.motomarket.service.dto.UserView;
+import com.motomarket.service.post.IPostService;
+
+>>>>>>> huu-dev
+=======
+import com.motomarket.service.dto.UserView;
+import com.motomarket.service.post.IPostService;
+>>>>>>> tien-dev
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.time.Instant.*;
 
 @Service
 public class UserService implements IUserService{
+
+    @Value("${server.rootPath}")
+    private String rootPath;
+
+
     @Autowired
     private IUserRepository userRepository;
     @Autowired
@@ -66,6 +85,20 @@ public class UserService implements IUserService{
             return null;
         }
         return UserDTO.parseUserDTO(user);
+    }
+
+    @Override
+    public void updateAvatar(MultipartFile[] files, UserDTO userDTO){
+        for (MultipartFile file : files) {
+            String uuid = UUID.randomUUID().toString();
+            userDTO.setAvatar(uuid);
+            try {
+                file.transferTo(new File(rootPath + "/" + uuid + ".png"));
+            } catch (IOException e) {
+                throw new IllegalArgumentException(e);
+            }
+        }
+        save(userDTO);
     }
 
     @Override
@@ -134,7 +167,7 @@ public class UserService implements IUserService{
     private User parseUser(UserDTO userDTO) {
         return new User(userDTO.getUserId(), userDTO.getAvatar(), userDTO.getUserName(), userDTO.getEmail(),
                 userDTO.getRole(), userDTO.getUserStatus(),userDTO.getCreated(), userDTO.getPassword()
-               ,userDTO.isDeleted(), userDTO.getPhoneNumber(), null);
+              , userDTO.getPhoneNumber(), null);
     }
 
     @Override

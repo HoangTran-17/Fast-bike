@@ -56,8 +56,8 @@ public class PostController {
     public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
         UserDTO user = userService.getById(1L);
         DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId, colorId);
-        PostDTO newPost = postService.savePost(post, user, detailMotor, files);
-        return "redirect:/post/detailpost/" + newPost.getPostId();
+        Long newPostId = postService.savePost(post, user, detailMotor, files);
+        return "redirect:/post/detailpost/" + newPostId;
     }
 
 
@@ -77,7 +77,7 @@ public class PostController {
         modelAndView.addObject("post", postDTO);
         modelAndView.addObject("images", imageList);
         modelAndView.addObject("detail", detailMotorDTO);
-        modelAndView.addObject("timePost", timeFormat);
+//        modelAndView.addObject("timePost", timeFormat);
         modelAndView.addObject("postsRelated", relatedPostDTO);
         modelAndView.addObject("newPosts", newPostList);
         modelAndView.addObject("postOwner", userDTO);

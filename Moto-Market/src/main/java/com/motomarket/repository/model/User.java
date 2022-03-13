@@ -39,8 +39,6 @@ public class User {
 
     private String password;
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean deleted;
 
     @Column(name = "phone_number")
     private String phoneNumber;

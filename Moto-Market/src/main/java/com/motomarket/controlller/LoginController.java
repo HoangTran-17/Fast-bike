@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 public class LoginController {
@@ -44,7 +45,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         if (userLogin==null){
             modelAndView.setViewName("/loginPage/login");
-            modelAndView.addObject("userLogin",new UserDTO());
+            modelAndView.addObject("user",new UserDTO());
         } else {
             modelAndView.addObject("userLogin", userLogin);
             modelAndView.setViewName("index");
@@ -61,14 +62,11 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView handleSignUp(@Valid @ModelAttribute UserDTO user, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            ModelAndView modelAndView1 = new ModelAndView("/loginPage/register");
-            modelAndView1.addObject("user", user);
-            return modelAndView1;
-        }
+    public ModelAndView handleSignUp(@ModelAttribute UserDTO user) {
+        Date date = new Date();
         user.setRole(Role.USER);
         user.setUserStatus(StatusUser.ACTIVATE);
+        user.setCreated(date);
         userService.save(user);
         ModelAndView modelAndView = new ModelAndView("/loginPage/login");
         return modelAndView;

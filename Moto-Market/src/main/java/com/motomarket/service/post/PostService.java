@@ -67,7 +67,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostDTO savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files) {
+    public Long savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files) {
         Date date = new Date();
         postDTO.setStatusPost(StatusPost.WAITING);
         postDTO.setPostDate(date);
@@ -87,8 +87,7 @@ public class PostService implements IPostService {
             }
             imageService.save(image);
         }
-        Post newPost = postRepository.getById(postId);
-        return PostDTO.parsePostDTO(newPost);
+     return postId;
     }
 
     private Long saveAndGetPostId(Post post) {
@@ -131,12 +130,16 @@ public class PostService implements IPostService {
         }
         postDTO.setStatusPost(StatusPost.WAITING);
         Post post = postRepository.getById(postDTO.getPostId());
-       post.setStatusPost(postDTO.getStatusPost());
-//       , postDTO.getTitle(),
-//                postDTO.getModelMotor(), postDTO.getKilometerCount(), postDTO.getDescription(),
-//                postDTO.getPrice(), postDTO.getSellerName(), postDTO.getSellerPhoneNumber(),
-//                postDTO.getProvince(), postDTO.getDistrict(),
-//                postDTO.getPostDate(), postDTO.getOwnership());
+        post.setStatusPost(postDTO.getStatusPost());
+        post.setOwnership(postDTO.getOwnership());
+        post.setTitle(postDTO.getTitle());
+        post.setDescription(postDTO.getDescription());
+        post.setKilometerCount(postDTO.getKilometerCount());
+        post.setPrice(postDTO.getPrice());
+        post.setSellerName(postDTO.getSellerName());
+        post.setSellerPhoneNumber(postDTO.getSellerPhoneNumber());
+        post.setProvince(postDTO.getProvince());
+        post.setDistrict(postDTO.getDistrict());
         postRepository.save(post);
     }
 
@@ -324,6 +327,13 @@ public class PostService implements IPostService {
     public void publicPost(Long id) {
         Post post = postRepository.getById(id);
         post.setStatusPost(StatusPost.PUBLIC);
+        postRepository.save(post);
+    }
+
+    @Override
+    public void blockPost(Long id) {
+        Post post = postRepository.getById(id);
+        post.setStatusPost(StatusPost.BLOCKED);
         postRepository.save(post);
     }
 

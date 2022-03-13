@@ -1,18 +1,24 @@
 package com.motomarket.controlller;
 
+import com.motomarket.service.dto.ImageDTO;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.dto.UserView;
+import com.motomarket.service.post.IImageService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -38,4 +44,28 @@ public class UserController {
         modelAndView.addObject("soldList", soldList);
         return modelAndView;
     }
+
+
+    @GetMapping("/my-account")
+    public ModelAndView showMyAccountView() {
+        UserDTO userDTO = userService.getById(1L);
+        ModelAndView modelAndView = new ModelAndView("info-account");
+        modelAndView.addObject("userLogin", userDTO);
+        return modelAndView;
+    }
+
+    @PostMapping("/update-profile")
+    public String updateProfile(@RequestParam("upLoadAvatar") MultipartFile[] files) {
+        UserDTO userDTO = userService.getById(1L);
+        userService.updateAvatar(files, userDTO);
+        return "redirect:/user/my-account";
+    }
+
+    @GetMapping("/moto-manager")
+    public ModelAndView showMotoManagerView() {
+        ModelAndView modelAndView = new ModelAndView("moto-manager");
+        return modelAndView;
+    }
+
+
 }

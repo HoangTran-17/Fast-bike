@@ -117,10 +117,10 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
                              @Param("statusPost") StatusPost statusPost);
 
     //    Mr Hữu
-    @Query("SELECT p FROM Post p WHERE p.statusPost <> 3  ORDER BY p.postDate DESC ")
+    @Query("SELECT p FROM Post p WHERE p.statusPost <> 3 AND p.statusPost <> 4 AND p.statusPost <> 5 ORDER BY p.postDate DESC ")
     Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate DESC ")
+    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate ASC ")
     Page<Post> findPostWaitingOrderByDate(Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE p.statusPost = 2  ORDER BY p.postDate DESC ")
@@ -141,6 +141,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             + " OR CONCAT(p.ownership, '') LIKE %?1%"
             +")"
             +" AND p.statusPost <> 3"
+            +" AND p.statusPost <> 4"
+            +" AND p.statusPost <> 5"
     )
     Page<Post> findPostByKeySearch(String key, Pageable pageable);
 

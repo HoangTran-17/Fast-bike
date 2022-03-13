@@ -172,12 +172,12 @@
                             <div class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5" th:each="img:${post.imageDTOList}">
                                 <!-- Card -->
                                 <div class="card card-sm">
-                                    <img class="card-img-top" style="max-width: 200px;height: 120px" th:src="${img.imageName}"
+                                    <img class="card-img-top" style="max-width: 200px;height: 120px" th:src="${'/api/image/load/'+img.imageName}"
                                          data-target="#carouselExample" th:data-slide-to="${img.imageId}" alt="Image Description">
                                     <div class="card-body">
                                         <div class="row text-center">
                                             <div class="col">
-                                                <a class="js-fancybox-item text-body view_image" href="javascript:;"  th:data-src="${img.imageName}"
+                                                <a class="js-fancybox-item text-body view_image" href="javascript:;"  th:data-src="${'/api/image/load/'+img.imageName}"
                                                    data-caption="Image #03">
                                                     <i class="tio-visible-outlined"></i>
                                                 </a>
@@ -465,7 +465,7 @@ function deletePost() {
                 createAlert('','Success!','This post has been made public!','success',true,true,'pageMessages');
                 viewImage();
             }).fail(function () {
-                createAlert('Opps!','Something went wrong','Please try again!','danger',true,false,'pageMessages');
+                createAlert('Opps!','User has been blocked','Post cannot be made public!','danger',true,false,'pageMessages');
                 viewImage();
             })
         })

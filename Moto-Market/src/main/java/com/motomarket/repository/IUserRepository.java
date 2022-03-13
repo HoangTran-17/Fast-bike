@@ -14,12 +14,13 @@ import java.util.List;
 public interface IUserRepository extends JpaRepository<User, Long> {
     User findUserByEmail(String email);
     User findUserByUserName(String userName);
+    @Query("SELECT u FROM User u WHERE u.userStatus <> 2  ")
     List<User> findAllByDeletedIsFalse();
 
-    @Query("SELECT u FROM User u WHERE u.role <> 2 AND u.deleted=false ")
+    @Query("SELECT u FROM User u WHERE u.role <> 2 AND u.userStatus <> 2 ")
     Page<User> findAllUserByDeletedIsFalseByDBA(Pageable pageable);
 
-    @Query("SELECT u FROM User u WHERE u.role <> 2 AND u.role <> 1 AND u.deleted=false")
+    @Query("SELECT u FROM User u WHERE u.role <> 2 AND u.role <> 1 AND u.userStatus <> 2")
     Page<User> findAllUserByDeletedIsFalseByAdmin(Pageable pageable);
 
     @Query("SELECT u FROM User u WHERE "+ "("
@@ -27,11 +28,10 @@ public interface IUserRepository extends JpaRepository<User, Long> {
             + " OR u.email LIKE %?1%"
             + " OR u.phoneNumber LIKE %?1%"
             + " OR CONCAT(u.postList.size, '') LIKE %?1%"
-            + " OR 'Active' LIKE %?1%"
-            + " OR 'Block' LIKE %?1%"
+            + " OR CONCAT(u.userStatus, '') LIKE %?1%"
             + " OR CONCAT(u.role, '') LIKE %?1%"
             +")"
-            +" AND u.deleted = false "
+            +" AND u.userStatus <> 2 "
             +" AND u.role <> 2 "
     )
     Page<User> findUserByKeySearchByDBA(String key, Pageable pageable);
@@ -41,11 +41,10 @@ public interface IUserRepository extends JpaRepository<User, Long> {
             + " OR u.email LIKE %?1%"
             + " OR u.phoneNumber LIKE %?1%"
             + " OR CONCAT(u.postList.size, '') LIKE %?1%"
-            + " OR 'Active' LIKE %?1%"
-            + " OR 'Block' LIKE %?1%"
+            + " OR CONCAT(u.userStatus, '') LIKE %?1%"
             + " OR CONCAT(u.role, '') LIKE %?1%"
             +")"
-            +" AND u.deleted = false "
+            +" AND u.userStatus <> 2 "
             +" AND u.role = 0 "
     )
     Page<User> findUserByKeySearchByAdmin(String key, Pageable pageable);
