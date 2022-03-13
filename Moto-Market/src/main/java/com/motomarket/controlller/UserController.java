@@ -54,10 +54,13 @@ public class UserController {
     }
 
     @PostMapping("/update-profile")
-    public String updateProfile(@RequestParam("upLoadAvatar") MultipartFile[] files) {
+    public ModelAndView updateProfile(@RequestParam("upLoadAvatar") MultipartFile[] files) {
         UserDTO userDTO = userService.getById(1L);
         userService.updateAvatar(files, userDTO);
-        return "redirect:/user/my-account";
+        ModelAndView modelAndView = new ModelAndView("info-account");
+        modelAndView.addObject("userLogin", userDTO);
+        modelAndView.addObject("message", "Cập nhật ảnh đại diện thành công!");
+        return modelAndView;
     }
 
     @GetMapping("/moto-manager")
