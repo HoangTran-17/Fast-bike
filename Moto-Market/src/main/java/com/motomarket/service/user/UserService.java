@@ -3,12 +3,9 @@ package com.motomarket.service.user;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
-<<<<<<< HEAD
 import com.motomarket.service.response.UserResponse;
-=======
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
->>>>>>> hoang-dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

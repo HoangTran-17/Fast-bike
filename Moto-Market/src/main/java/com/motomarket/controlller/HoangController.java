@@ -6,8 +6,11 @@ import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.PostDTO;
+import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
+import com.motomarket.service.user.IUserService;
+import com.motomarket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,9 @@ public class HoangController {
 
     @Autowired
     private IPostService postService;
+
+    @Autowired
+    private IUserService userService;
 
 
     @GetMapping("/get")
@@ -73,10 +79,9 @@ public class HoangController {
 
     @GetMapping("tests")
     public void test() {
-        User user = userRepository.getById(1L);
-        Long time = new Date().getTime() - user.getCreated().getTime();
-        System.out.println(time);
-
-        UserView userView = new UserView();
+        Post postDTO = postRepository.getById(120L);
+        User userDTO = userRepository.getById(4L);
+        postDTO.setUser(userDTO);
+        postRepository.save(postDTO);
     }
 }
