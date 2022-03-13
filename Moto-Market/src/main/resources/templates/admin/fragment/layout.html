@@ -807,13 +807,15 @@
 <!--                          <span class="text-truncate">Mail box</span>-->
 <!--                        </a>-->
 <!--                      </li>-->
+                    <th:block th:with="Role = ${T(com.motomarket.repository.model.Role)}">
+                      <li class="navbar-vertical-aside-has-menu " th:if="${adminLogin.role==Role.DBA}">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link " id="a_add_new_admin" th:href="@{/admin/add-new-admin}" title="Add New Admin">
+                          <span class="tio-circle nav-indicator-icon"></span>
+                          <span class="text-truncate">Add New Admin</span>
+                        </a>
+                      </li>
+                    </th:block>
 
-<!--                      <li class="navbar-vertical-aside-has-menu ">-->
-<!--                        <a class="js-navbar-vertical-aside-menu-link nav-link " href="my-profile.html" title="My Profile">-->
-<!--                          <span class="tio-circle nav-indicator-icon"></span>-->
-<!--                          <span class="text-truncate">My Profile</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
                     </ul>
                   </li>
                   <!-- End User management -->

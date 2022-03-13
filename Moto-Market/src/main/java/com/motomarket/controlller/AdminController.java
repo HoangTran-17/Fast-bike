@@ -120,6 +120,31 @@ public class AdminController {
         return modelAndView;
 
     }
+
+    @GetMapping("/add-new-admin")
+    public ModelAndView toAddNewAdminPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+            return modelAndView;
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            System.out.println(adminLogin.getEmail());
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+                return modelAndView;
+            } else {
+                modelAndView.setViewName("admin/add-new-admin");
+                modelAndView.addObject("adminLogin", adminLogin);
+
+            }
+
+        }
+        return modelAndView;
+
+    }
+
     @GetMapping("/post")
     public ModelAndView toAllPostPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView("admin/all-post");

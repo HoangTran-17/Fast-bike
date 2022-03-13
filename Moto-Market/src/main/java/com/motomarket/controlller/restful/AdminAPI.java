@@ -8,9 +8,12 @@ import com.motomarket.service.response.PostResponse;
 import com.motomarket.service.response.UserResponse;
 import com.motomarket.service.user.IUserService;
 
+import com.motomarket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,6 +27,18 @@ public class AdminAPI {
     @Autowired
     private IPostService postService;
 
+    @PostMapping("/api/add-new-admin")
+    public ResponseEntity<UserDTO> addNewAdmin(@RequestBody @Validated UserDTO userDTO, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(userDTO,HttpStatus.BAD_REQUEST);
+        }
+        if (userService.findUserByEmail(userDTO.getEmail())!=null) {
+            return new ResponseEntity<>(userDTO,HttpStatus.IM_USED);
+        }
+        userDTO.setRole(Role.ADMIN);
+        userService.save(userDTO);
+        return new ResponseEntity<>(userDTO,HttpStatus.OK);
+    }
     @DeleteMapping("/delete")
     public ResponseEntity<UserDTO> deleteUserByAdmin(@RequestBody Long userId) {
 

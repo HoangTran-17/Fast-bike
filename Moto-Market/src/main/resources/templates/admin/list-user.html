@@ -34,11 +34,6 @@
                     <h1 class="page-header-title">List User</h1>
                 </div>
 
-                <div class="col-sm-auto" th:with="Role=${T(com.motomarket.repository.model.Role)}" >
-                    <a class="btn btn-primary" id="a_add_new_admin" data-role="DBA" th:if="${adminLogin.role==Role.DBA}" href="#">
-                        <i class="tio-user-add mr-1"></i> Add new admin
-                    </a>
-                </div>
             </div>
             <!-- End Row -->
         </div>
