@@ -1,7 +1,11 @@
 package com.motomarket.controlller;
 
+import com.motomarket.service.dto.BrandMotorDTO;
 import com.motomarket.service.dto.PostDTO;
+import com.motomarket.service.dto.TypeMotorDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.motor.IBrandMotorService;
+import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -21,6 +28,12 @@ public class HomeController {
 
     @Autowired
     IPostService postService;
+
+    @Autowired
+    IBrandMotorService brandMotorService;
+
+    @Autowired
+    ITypeMotorService typeMotorService;
 
     @GetMapping("/")
     public ModelAndView toHomePage(@CookieValue(value = "loginUser", defaultValue = "0") String loginUsername) {
@@ -67,5 +80,41 @@ public class HomeController {
         return modelAndView;
     }
 
+    @GetMapping("/bike-list")
+    public ModelAndView showBikeList(String br) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("list-moto");
+        List<BrandMotorDTO> brandList = brandMotorService.findAll();
+        modelAndView.addObject("brandList", brandList);
+        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+        modelAndView.addObject("typeMotorList", typeMotorList);
 
+        String modelMotor = "";
+
+
+        List<String> brandMotorList = new ArrayList<>();
+        br = "1_2_4";
+        if (br == null) {
+            modelMotor = null;
+        } else {
+            for (String s : br.split("_")) {
+                for (int i = 0; i < brandList.size(); i++) {
+                    if (Long.parseLong(s) == brandList.get(i).getBrandId()) {
+                        brandMotorList.add(brandList.get(i).getBrandName());
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println(brandMotorList);
+
+        Page<PostDTO> postDTOS = postService.findTopByFilters1(25,brandMotorList,null,null,null,
+                null,null,null,null,null,null,null);
+        modelAndView.addObject("postList", postDTOS);
+
+        System.out.println(postDTOS);
+
+        return modelAndView;
+    }
 }

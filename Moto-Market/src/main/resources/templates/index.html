@@ -566,10 +566,6 @@
         }).done(function (data) {
             console.log(data);
             $.each(data, (index, item) => {
-                let title = item.title;
-                if (item.title.length > 40) {
-                    title = item.title.slice(0, 40) + "...";
-                }
 
                 let price;
                 if (item.price == null) {
@@ -609,7 +605,7 @@
                                              alt="${item.title}">
                                     </figure>
                                     <div class="list-info">
-                                        <h3 class="title dotted-text2" >${title}</h3>
+                                        <h3 class="title dotted-line-2" >${item.title}</h3>
                                             <p class="price">${price}</p>
                                         <div class="source">
                                             <span class="time">

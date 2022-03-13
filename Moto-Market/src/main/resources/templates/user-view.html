@@ -138,13 +138,25 @@
                                                     <span th:utext="${post.district}"></span><br>
                                                     <span th:utext="${post.province}"></span>
                                                 </p>
-                                                <p class="price" th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
+                                                <p class="price" th:utext="${post.price} ? ${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ' : 'Liên hệ'"></p>
+
                                                 <p class="date" th:utext="|${post.timePeriod} trước|"></p>
                                             </div>
                                         </a>
                                     </div>
                                 </th:block>
+                                <div class="list_bike_paging">
+                                    <ul class="pagination">
 
+                                        <li class="active"><a href="javascript:void(0);">1</a></li>
+                                        <li><a th:href="@{|/user/view/${user.userId}?page=${publicList.number - 1}|}" th:if="${publicList.hasPrevious()}">Previous</a></li>
+                                        <th:block th:each="page: ${publicList.totalPages}">
+                                            <li><a th:href="@{|/user/view/${user.userId}?page=${page}|}" th:utext="${page}"></a></li>
+                                        </th:block>
+                                        <li><a th:href="@{|/user/view/${user.userId}?page=${publicList.number + 1}|}" th:if="${publicList.hasNext()}">Next</a></li>
+                                    </ul>
+
+                                </div>
                             </div>
 
                             <div class="list_bike_paging">

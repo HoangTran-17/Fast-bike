@@ -207,6 +207,13 @@ public class PostService implements IPostService {
         return posts.map(PostDTO::parsePostDTO);
     }
 
+    @Override
+    public Page<PostDTO> findTopByFilters1(int pageSize, List<String> brandMotorList, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
+        Page<Post> posts = postRepository.findTopByFilters1(Pageable.ofSize(pageSize),
+                brandMotorList, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
+                priceMin, priceMax, kilometerCount, colorMotor, StatusPost.PUBLIC);
+        return posts.map(PostDTO::parsePostDTO);    }
+
     //    List bài viết đang chờ (WAITING) của 1 user
     @Override
     public Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId) {

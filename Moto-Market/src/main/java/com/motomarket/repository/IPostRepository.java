@@ -74,6 +74,30 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             @Param("color") String colorMotor,
             @Param("statusPost") StatusPost statusPost);
 
+    @Query("select p from Post p where p.statusPost = :statusPost " +
+            "and (p.detailMotor.brandMotor.brandName in :brandMotorList) " +
+            "and ((:modelYearMin is null and :modelYearMax is null) " +
+            "or (p.detailMotor.modelYear.modelYearName between :modelYearMin and :modelYearMax))" +
+            "and (p.province = :province or :province is null) " +
+            "and (:typeMotor is null or p.detailMotor.typeMotor.typeMotorName = :typeMotor)" +
+            "and ((:capacityMin is null and :capacityMax is null) " +
+            "or (p.detailMotor.seriesMotor.capacity between :capacityMin and :capacityMax))" +
+            "and ((:priceMin is null and :priceMax is null) " +
+            "or (p.price between :priceMin and :priceMax)) " +
+            "and (:km is null or p.kilometerCount = :km)" +
+            "and (:color is null or p.detailMotor.colorMotor.colorName = :color) " +
+            "order by p.postDate DESC")
+    Page<Post> findTopByFilters1(
+            Pageable pageable, @Param("brandMotorList") List<String> brandMotorList,
+            @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,
+            @Param("province") String province,
+            @Param("typeMotor") String typeMotor,
+            @Param("capacityMin") Integer capacityMin, @Param("capacityMax") Integer capacityMax,
+            @Param("priceMin") Double priceMin, @Param("priceMax") Double priceMax,
+            @Param("km") String kilometerCount,
+            @Param("color") String colorMotor,
+            @Param("statusPost") StatusPost statusPost);
+
 
     @Query("select p from Post p where p.user = :user " +
             "and (:statusPost is null or p.statusPost = :statusPost) " +

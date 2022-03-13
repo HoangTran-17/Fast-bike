@@ -44,6 +44,11 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
+    Page<PostDTO> findTopByFilters1(int pageSize,List<String> brandMotorList,Integer modelYearMin, Integer modelYearMax,
+                                   String province,String typeMotor,Integer capacityMin, Integer capacityMax,
+                                   Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
+
+
     //    List bài viết đang chờ (WAITING) của 1 user
     Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId);
 

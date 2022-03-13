@@ -102,8 +102,8 @@ public class PostDTO {
         String[] list2 = {"năm", "tháng", "tuần", "ngày", "giờ", "phút"};
 
         int count = 0;
-        String timePeriod = "";
-        for (int i = 0; count == 0; ++i) {
+        String timePeriod = "1 phút";
+        for (int i = 0; i < list1.length; ++i) {
             count = Math.round(untilNow / list1[i]) ;
             if (count > 0) {
                 timePeriod = count + " " + list2[i];

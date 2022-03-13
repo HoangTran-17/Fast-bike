@@ -7,6 +7,7 @@ import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ public class UserController {
 
 
     @GetMapping("/view/{id}")
-    public ModelAndView showUserView(@PathVariable Long id) {
+    public ModelAndView showUserView(@PathVariable Long id, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         UserView userView = userService.getUserViewById(id);
         Page<PostDTO> publicList = postService.findPublicListByUserId(12, id);
