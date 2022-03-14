@@ -4,31 +4,31 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
-<<<<<<< HEAD
+
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-=======
+
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
->>>>>>> tien-dev
+
 
 import com.motomarket.service.response.UserResponse;
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-<<<<<<< HEAD
+
 
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-=======
+
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
->>>>>>> tien-dev
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
