@@ -9,6 +9,8 @@ import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +50,7 @@ public class HomeController {
 
 
     @PostMapping("/search-moto-home")
-    public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv) {
+    public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("list-moto");
         Integer ccMin = null;
         Integer ccMax = null;
@@ -74,29 +76,28 @@ public class HomeController {
             pv = null;
         }
         String modelMotor = br + " " + sr;
-        Page<PostDTO> postDTOPage = postService.findTopByFilters(5, modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
-        System.out.println(postDTOPage.getContent());
-        return modelAndView;
-    }
-
-    @GetMapping("/bike-list")
-    public ModelAndView showBikeList(String br,String tp, String cc) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("list-moto");
-        br = "1_2_13";
-        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(br, tp, cc);
-        modelAndView.addObject("brandList", brandList);
-
+        Page<PostDTO> postDTOPage = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
         List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
         modelAndView.addObject("typeMotorList", typeMotorList);
-
-
-        Page<PostDTO> postDTOS = postService.findTopByFilters(25, null, null, null, null,
-                null, null, null, null, null, null, null);
-        modelAndView.addObject("postList", postDTOS);
-
-        System.out.println(postDTOS);
-
+        modelAndView.addObject("postList", postDTOPage);
         return modelAndView;
     }
+
+
+    @GetMapping("/search-all")
+    public ModelAndView searchAll(@RequestParam(value = "keyword", defaultValue = "null") String  keyword, Pageable pageable  ){
+        ModelAndView modelAndView = new ModelAndView();
+        if (keyword==null){
+            modelAndView.setViewName("index");
+        }else {
+            Page<PostDTO> postDTOPage = postService.findTopByModelMotorIsLike(PageRequest.of(pageable.getPageNumber(), 20), keyword);
+            modelAndView.setViewName("list-moto");
+            List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+            modelAndView.addObject("typeMotorList", typeMotorList);
+            modelAndView.addObject("postList", postDTOPage);
+        }
+        return modelAndView;
+    }
+
+
 }

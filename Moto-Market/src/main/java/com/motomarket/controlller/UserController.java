@@ -1,14 +1,11 @@
 package com.motomarket.controlller;
 
-import com.motomarket.service.dto.ImageDTO;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IImageService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +24,17 @@ public class UserController {
 
     @Autowired
     private IPostService postService;
+
+
+    @ModelAttribute("userLogin")
+    public UserDTO getUserLoginFromCookie(@CookieValue(value = "loginUser", defaultValue = "0") String loginUsername) {
+        UserDTO userLogin = null;
+        if (!loginUsername.equals("0")) {
+            userLogin = userService.getByUserName(loginUsername);
+        }
+        return userLogin;
+    }
+
 
 
     @GetMapping("/view/{id}")
@@ -48,19 +52,23 @@ public class UserController {
 
 
     @GetMapping("/my-account")
-    public ModelAndView showMyAccountView() {
-        UserDTO userDTO = userService.getById(1L);
+    public Object showMyAccountView(@ModelAttribute("userLogin") UserDTO userLogin) {
+        if (userLogin==null){
+            return "redirect:/signin";
+        }
         ModelAndView modelAndView = new ModelAndView("info-account");
-        modelAndView.addObject("userLogin", userDTO);
+        modelAndView.addObject("userLogin", userLogin);
         return modelAndView;
     }
 
     @PostMapping("/update-profile")
-    public ModelAndView updateProfile(@RequestParam("upLoadAvatar") MultipartFile[] files) {
-        UserDTO userDTO = userService.getById(1L);
-        userService.updateAvatar(files, userDTO);
+    public Object updateProfile(@RequestParam("upLoadAvatar") MultipartFile[] files, @ModelAttribute("userLogin") UserDTO userLogin) {
+        if (userLogin==null){
+            return "redirect:/signin";
+        }
+        userService.updateAvatar(files, userLogin);
         ModelAndView modelAndView = new ModelAndView("info-account");
-        modelAndView.addObject("userLogin", userDTO);
+        modelAndView.addObject("userLogin", userLogin);
         modelAndView.addObject("message", "Cập nhật ảnh đại diện thành công!");
         return modelAndView;
     }
