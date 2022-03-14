@@ -165,8 +165,8 @@ public class PostService implements IPostService {
 
     //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
     @Override
-    public Page<PostDTO> findTopByModelMotorIsLike(int pageSize, String modelMotor) {
-        Page<Post> posts = postRepository.findTopByModelMotorIsLike(Pageable.ofSize(pageSize), modelMotor, StatusPost.PUBLIC);
+    public Page<PostDTO> findTopByModelMotorIsLike(Pageable pageable, String modelMotor) {
+        Page<Post> posts = postRepository.findTopByModelMotorIsLike(pageable, modelMotor, StatusPost.PUBLIC);
         Page<PostDTO> postDTOS = posts.map(post -> {
             return PostDTO.parsePostDTO(post);
         });
@@ -201,10 +201,10 @@ public class PostService implements IPostService {
 
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     @Override
-    public Page<PostDTO> findTopByFilters(int pageSize, String modelMotor, Integer modelYearMin, Integer modelYearMax,
+    public Page<PostDTO> findTopByFilters(Pageable pageable, String modelMotor, Integer modelYearMin, Integer modelYearMax,
                                           String province, String typeMotor, Integer capacityMin, Integer capacityMax,
                                           Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
-        Page<Post> posts = postRepository.findTopByFilters(Pageable.ofSize(pageSize),
+        Page<Post> posts = postRepository.findTopByFilters(pageable,
                 modelMotor, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
                 priceMin, priceMax, kilometerCount, colorMotor, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
