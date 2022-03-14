@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi"  xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/internal_link.css?159650535020200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/top.css?159125667020200827">
 </head>
-
 
 
 <body>
@@ -50,7 +49,7 @@
                     </div>
                     <div class="info_name">
                         <h2>
-                            <p class="username" th:utext="${user.userName}" ></p>
+                            <p class="username" th:utext="${user.userName}"></p>
                         </h2>
                         <div>
                             <span><i class="fas fa-calendar-alt"></i> Ngày đăng ký:</span>
@@ -139,29 +138,34 @@
                                                     <span th:utext="${post.district}"></span><br>
                                                     <span th:utext="${post.province}"></span>
                                                 </p>
-                                                <p class="price" th:utext="${post.price} ? ${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ' : 'Liên hệ'"></p>
+                                                <p class="price"
+                                                   th:utext="${post.price} ? ${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ' : 'Liên hệ'"></p>
 
                                                 <p class="date" th:utext="|${post.timePeriod} trước|"></p>
                                             </div>
                                         </a>
                                     </div>
                                 </th:block>
-                                <div class="list_bike_paging">
-                                    <ul class="pagination">
 
-                                        <li class="active"><a href="javascript:void(0);">1</a></li>
-                                        <li><a th:href="@{|/user/view/${user.userId}?page=${publicList.number - 1}|}" th:if="${publicList.hasPrevious()}">Previous</a></li>
-                                        <th:block th:each="page: ${publicList.totalPages}">
-                                            <li><a th:href="@{|/user/view/${user.userId}?page=${page}|}" th:utext="${page}"></a></li>
-                                        </th:block>
-                                        <li><a th:href="@{|/user/view/${user.userId}?page=${publicList.number + 1}|}" th:if="${publicList.hasNext()}">Next</a></li>
-                                    </ul>
-
-                                </div>
                             </div>
-
                             <div class="list_bike_paging">
+                                <ul class="pagination">
+                                    <li>
+                                        <a th:href="@{'/user/view/'+ ${user.userId} (page=${publicList.number - 1})}"
+                                           th:if="${publicList.hasPrevious()}">Previous</a></li>
+
+                                    <th:block th:each="item : ${#numbers.sequence(0,publicList.totalPages -1)}">
+                                        <li th:class="${item == publicList.number ? 'active' :'' }" ><a th:href="@{'/user/view/'+ ${user.userId} (page=${item})}"> <span
+                                                th:text='${item+1}'></span></a></li>
+                                    </th:block>
+
+                                    <li>
+                                        <a th:href="@{'/user/view/'+ ${user.userId} (page=${publicList.number + 1})}"
+                                           th:if="${publicList.hasNext()}">Next</a></li>
+                                </ul>
+
                             </div>
+
                         </div>
                     </div>
                 </section>
@@ -362,7 +366,7 @@
     <div th:replace="~{fragments/footer :: footer}"></div>
     <script>
         const img = document.getElementById("avatar")
-        img.addEventListener("error", function(event) {
+        img.addEventListener("error", function (event) {
             event.target.src = "/frontend/default/avatar_default.jpg"
             event.onerror = null
         })

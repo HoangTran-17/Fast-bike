@@ -7,6 +7,7 @@ import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.PostResponse;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -51,8 +52,9 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //    List bài viết đang chờ (WAITING) của 1 user
     Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId);
 
+
     //    List bài viết đang hiển thị (PUBLIC) của 1 user
-    Page<PostDTO> findPublicListByUserId(int pageSize, Long userId);
+    Page<PostDTO> findPublicListByUserId(Pageable pageable, Long userId);
 
     //     Số lượng bài viết đang hiển thị (Public) của 1 user
     int getCountPublicPostByUser(User user);
@@ -60,8 +62,9 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //    List bài viết đang bị ẩn (HIDE) của 1 user
     Page<PostDTO> findHideListByUserId(int pageSize, Long userId);
 
+
     //    List bài viết về xe đã bán (SOLD) của 1 user
-    Page<PostDTO> findSoldListByUserId(int pageSize, Long userId);
+    Page<PostDTO> findSoldListByUserId(Pageable pageable, Long userId);
 
     //     Số lượng bài viết về xe đã bán (SOLD) của 1 user
     int getCountSoldPostByUser(User user);

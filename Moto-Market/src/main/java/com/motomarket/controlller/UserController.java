@@ -10,6 +10,7 @@ import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,8 @@ public class UserController {
     public ModelAndView showUserView(@PathVariable Long id, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         UserView userView = userService.getUserViewById(id);
-        Page<PostDTO> publicList = postService.findPublicListByUserId(12, id);
-        Page<PostDTO> soldList = postService.findSoldListByUserId(10, id);
+        Page<PostDTO> publicList = postService.findPublicListByUserId(PageRequest.of(pageable.getPageNumber(), 12), id);
+        Page<PostDTO> soldList = postService.findSoldListByUserId(pageable, id);
         modelAndView.setViewName("user-view");
         modelAndView.addObject("user", userView);
         modelAndView.addObject("publicList", publicList);
