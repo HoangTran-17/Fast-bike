@@ -1,9 +1,8 @@
 package com.motomarket.controlller;
 
-import com.motomarket.service.dto.BrandMotorDTO;
-import com.motomarket.service.dto.PostDTO;
-import com.motomarket.service.dto.TypeMotorDTO;
-import com.motomarket.service.dto.UserDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.motomarket.service.dto.*;
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.post.IPostService;
@@ -51,66 +50,49 @@ public class HomeController {
     @PostMapping("/search-moto-home")
     public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv) {
         ModelAndView modelAndView = new ModelAndView("list-moto");
-       Integer ccMin = null;
-       Integer ccMax = null;
-       Double prMin = 0.0;
-        if (br.equals("-1")){
+        Integer ccMin = null;
+        Integer ccMax = null;
+        Double prMin = 0.0;
+        if (br.equals("-1")) {
             br = "";
         }
-        if (cc.equals("-1")){
+        if (cc.equals("-1")) {
             cc = null;
-        } else{
-             ccMin = Integer.valueOf(cc.substring( 0, cc.indexOf("-")));
-             ccMax = Integer.valueOf(cc.substring(cc.indexOf("-")+1,cc.length()));
+        } else {
+            ccMin = Integer.valueOf(cc.substring(0, cc.indexOf("-")));
+            ccMax = Integer.valueOf(cc.substring(cc.indexOf("-") + 1, cc.length()));
 
         }
-        if (sr.equals("-1")){
+        if (sr.equals("-1")) {
             sr = "";
         }
-        if (pr == -1){
+        if (pr == -1) {
             pr = null;
             prMin = null;
         }
-        if (pv.equals("-1")){
+        if (pv.equals("-1")) {
             pv = null;
         }
         String modelMotor = br + " " + sr;
-        Page<PostDTO> postDTOPage = postService.findTopByFilters(5,modelMotor,null,null,pv,null,ccMin,ccMax, prMin,pr,null,null);
+        Page<PostDTO> postDTOPage = postService.findTopByFilters(5, modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
         System.out.println(postDTOPage.getContent());
         return modelAndView;
     }
 
     @GetMapping("/bike-list")
-    public ModelAndView showBikeList(String br) {
+    public ModelAndView showBikeList(String br,String tp, String cc) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list-moto");
-        List<BrandMotorDTO> brandList = brandMotorService.findAll();
+        br = "1_2_13";
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(br, tp, cc);
         modelAndView.addObject("brandList", brandList);
+
         List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
         modelAndView.addObject("typeMotorList", typeMotorList);
 
-        String modelMotor = "";
 
-
-        List<String> brandMotorList = new ArrayList<>();
-        br = "1_2_4";
-        if (br == null) {
-            modelMotor = null;
-        } else {
-            for (String s : br.split("_")) {
-                for (int i = 0; i < brandList.size(); i++) {
-                    if (Long.parseLong(s) == brandList.get(i).getBrandId()) {
-                        brandMotorList.add(brandList.get(i).getBrandName());
-                        break;
-                    }
-                }
-            }
-        }
-
-        System.out.println(brandMotorList);
-
-        Page<PostDTO> postDTOS = postService.findTopByFilters1(25,brandMotorList,null,null,null,
-                null,null,null,null,null,null,null);
+        Page<PostDTO> postDTOS = postService.findTopByFilters(25, null, null, null, null,
+                null, null, null, null, null, null, null);
         modelAndView.addObject("postList", postDTOS);
 
         System.out.println(postDTOS);

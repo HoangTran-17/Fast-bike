@@ -43,7 +43,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
-    Page<PostDTO> findTopByFilters1(int pageSize,List<String> brandMotorList,Integer modelYearMin, Integer modelYearMax,
+    Page<PostDTO> findTopByFilters1(int pageSize,String br,Integer modelYearMin, Integer modelYearMax,
                                    String province,String typeMotor,Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 

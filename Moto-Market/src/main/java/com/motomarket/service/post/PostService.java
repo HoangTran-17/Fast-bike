@@ -4,10 +4,8 @@ import com.motomarket.repository.IDetailMotorRepository;
 import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.*;
-import com.motomarket.service.dto.DetailMotorDTO;
-import com.motomarket.service.dto.ImageDTO;
-import com.motomarket.service.dto.PostDTO;
-import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.dto.*;
+import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.response.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +37,8 @@ public class PostService implements IPostService {
 
     @Autowired
     private IImageService imageService;
+    @Autowired
+    private IBrandMotorService brandMotorService;
 
     @Override
     public List<PostDTO> findAll() {
@@ -211,9 +211,24 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Page<PostDTO> findTopByFilters1(int pageSize, List<String> brandMotorList, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
+    public Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
+        List<String> brandMotorList = new ArrayList<>();
+        if (br != null) {
+            List<BrandMotorDTO> brandMotorDTOList = brandMotorService.findAll();
+            List<String> brList = List.of(br.split("_"));
+            brandMotorDTOList.forEach(brandMotorDTO -> {
+                for (int i = 0; i < brList.size(); i++) {
+                    if (brList.get(i).equals(brandMotorDTO.getBrandId().toString())) {
+                        brandMotorList.add(brandMotorDTO.getBrandName());
+                        break;
+                    }
+                }
+            });
+        }
+        System.out.println(brandMotorList);
+        System.out.println("test");
         Page<Post> posts = postRepository.findTopByFilters1(Pageable.ofSize(pageSize),
-                brandMotorList, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
+               brandMotorList, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
                 priceMin, priceMax, kilometerCount, colorMotor, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);    }
 

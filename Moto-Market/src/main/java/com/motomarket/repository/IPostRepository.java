@@ -5,15 +5,18 @@ import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.Predicate;
 import java.util.List;
 
 @Repository
-public interface IPostRepository extends JpaRepository<Post, Long> {
+public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecificationExecutor<Post> {
 
     @Override
     Page<Post> findAll(Pageable pageable);
@@ -75,7 +78,7 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             @Param("statusPost") StatusPost statusPost);
 
     @Query("select p from Post p where p.statusPost = :statusPost " +
-            "and (p.detailMotor.brandMotor.brandName in :brandMotorList) " +
+            "and ( p.detailMotor.brandMotor.brandName in :brandMotorList) " +
             "and ((:modelYearMin is null and :modelYearMax is null) " +
             "or (p.detailMotor.modelYear.modelYearName between :modelYearMin and :modelYearMax))" +
             "and (p.province = :province or :province is null) " +
@@ -99,10 +102,34 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             @Param("statusPost") StatusPost statusPost);
 
 
+
+    default Page<Post> findBy(Pageable pageable,List<String> brandNames, Integer modelYearMin, Integer modelYearMax) {
+        return findAll((root, criteriaQuery, criteriaBuilder) -> {
+            Predicate predicateForBrandNames = null;
+            if (!brandNames.isEmpty()) {
+                predicateForBrandNames = root.get("brandName").in(brandNames);
+            }
+            Predicate predicateForModelYear = null;
+            if (modelYearMin != null && modelYearMax != null) {
+                predicateForModelYear = criteriaBuilder.between(root.get("modelYearName"), modelYearMin, modelYearMax);
+            } else {
+                if (modelYearMin != null) {
+                    predicateForModelYear = criteriaBuilder.greaterThan(root.get("modelYearName"), modelYearMin);
+                }
+                if (modelYearMax != null) {
+                    predicateForModelYear = criteriaBuilder.lessThan(root.get("modelYearName"), modelYearMax);
+                }
+            }
+
+            return criteriaBuilder.and(predicateForBrandNames,predicateForModelYear);
+        },pageable);
+    }
+
+
     @Query("select p from Post p where p.user = :user " +
             "and (:statusPost is null or p.statusPost = :statusPost) " +
             "order by p.postDate desc ")
-    Page<Post> findTopByUser(Pageable pageable,@Param("user") User user,
+    Page<Post> findTopByUser(Pageable pageable, @Param("user") User user,
                              @Param("statusPost") StatusPost statusPost);
 
     @Query("select count(p) from Post p where p.user = :user and p.statusPost = :statusPost")
@@ -113,8 +140,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.user = :user " +
             "and  p.statusPost <> :statusPost " +
             "order by p.postDate desc ")
-    Page<Post> findTopByUserAndStatusPostNot(Pageable pageable,@Param("user") User user,
-                             @Param("statusPost") StatusPost statusPost);
+    Page<Post> findTopByUserAndStatusPostNot(Pageable pageable, @Param("user") User user,
+                                             @Param("statusPost") StatusPost statusPost);
 
     //    Mr Hữu
     @Query("SELECT p FROM Post p WHERE p.statusPost <> 3 AND p.statusPost <> 4 AND p.statusPost <> 5 ORDER BY p.postDate DESC ")
@@ -126,8 +153,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.statusPost = 2  ORDER BY p.postDate DESC ")
     Page<Post> findPostHideOrderByDate(Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE "+ "("
-            +" p.title LIKE %?1%"
+    @Query("SELECT p FROM Post p WHERE " + "("
+            + " p.title LIKE %?1%"
             + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
             + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
             + " OR p.detailMotor.colorMotor.colorName LIKE %?1%"
@@ -139,14 +166,14 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             + " OR CONCAT(p.price, '') LIKE %?1%"
             + " OR CONCAT(p.postDate, '') LIKE %?1%"
             + " OR CONCAT(p.ownership, '') LIKE %?1%"
-            +")"
-            +" AND p.statusPost <> 3"
-            +" AND p.statusPost <> 4"
-            +" AND p.statusPost <> 5"
+            + ")"
+            + " AND p.statusPost <> 3"
+            + " AND p.statusPost <> 4"
+            + " AND p.statusPost <> 5"
     )
     Page<Post> findPostByKeySearch(String key, Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE " + "("+
+    @Query("SELECT p FROM Post p WHERE " + "(" +
             "p.title LIKE %?1%"
             + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
             + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
@@ -158,12 +185,12 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             + " OR CONCAT(p.price, '') LIKE %?1%"
             + " OR CONCAT(p.postDate, '') LIKE %?1%"
             + " OR CONCAT(p.ownership, '') LIKE %?1%"
-            +")"
-            +" AND p.statusPost = 0"
+            + ")"
+            + " AND p.statusPost = 0"
     )
     Page<Post> findWaitingPostByKeySearch(String key, Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE " + "("+
+    @Query("SELECT p FROM Post p WHERE " + "(" +
             "p.title LIKE %?1%"
             + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
             + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
@@ -175,8 +202,8 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
             + " OR CONCAT(p.price, '') LIKE %?1%"
             + " OR CONCAT(p.postDate, '') LIKE %?1%"
             + " OR CONCAT(p.ownership, '') LIKE %?1%"
-            +")"
-            +" AND p.statusPost = 2"
+            + ")"
+            + " AND p.statusPost = 2"
     )
     Page<Post> findHidePostByKeySearch(String key, Pageable pageable);
 }

@@ -2,7 +2,7 @@ package com.motomarket.service.motor;
 
 import com.motomarket.repository.IBrandMotorRepository;
 import com.motomarket.repository.model.BrandMotor;
-import com.motomarket.repository.model.SeriesMotor;
+import com.motomarket.service.dto.BrandFilter;
 import com.motomarket.service.dto.BrandMotorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,62 @@ public class BrandMotorService implements IBrandMotorService {
     BrandMotor parseBrandMotor(BrandMotorDTO brandMotorDTO) {
         return new BrandMotor(brandMotorDTO.getBrandId(), brandMotorDTO.getBrandName());
     }
+
+
+    @Override
+    public List<BrandFilter> getAllBrandFilter(String br, String tp, String cc) {
+        List<BrandFilter> brandFilterList = new ArrayList<>();
+        brandMotorRepository.findAll().forEach(brandMotor -> {
+            String href = setHref(br, tp, cc, brandMotor.getBrandId());
+            Boolean bo = isSelected(br,brandMotor.getBrandId());
+            brandFilterList.add(BrandFilter.parseBrandFilter(brandMotor,href,bo));
+        });
+        return brandFilterList;
+    }
+
+    private Boolean isSelected(String br, Long brandId) {
+        if (br == null) {
+            return false;
+        }
+        List<String> list = new ArrayList<>(List.of(br.split("_")));
+        int i = list.indexOf(String.valueOf(brandId));
+        return i != -1;
+    }
+
+    private String setHref(String br, String tp, String cc, Long brandId) {
+        StringBuilder href = new StringBuilder("/bike-list?");
+        if (br == null) {
+            href.append("br=");
+            href.append(brandId);
+            href.append("&");
+        }
+        else if (!br.equals(brandId.toString())) {
+            href.append("br=");
+            List<String> list = new ArrayList<>(List.of(br.split("_")));
+            int i = list.indexOf(String.valueOf(brandId));
+            if (i == -1) {
+                list.add(String.valueOf(brandId));
+            } else {
+                list.remove(i);
+            }
+            br = String.join("_", list);
+            href.append(br);
+            href.append("&");
+
+        }
+        if (tp!=null) {
+            href.append("tp=");
+            href.append(tp);
+            href.append("&");
+        }
+        if (cc!=null) {
+            href.append("cc=");
+            href.append(cc);
+            href.append("&");
+        }
+        return String.valueOf(href);
+    }
+
 
 
 }
