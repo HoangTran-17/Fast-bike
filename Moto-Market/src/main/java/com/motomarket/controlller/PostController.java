@@ -1,6 +1,7 @@
 package com.motomarket.controlller;
 
 import com.motomarket.repository.IPostRepository;
+import com.motomarket.repository.model.StatusPost;
 import com.motomarket.service.dto.*;
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.IDetailMotorService;
@@ -84,8 +85,21 @@ public class PostController {
 
 
     @GetMapping("/detailpost/{postId}")
-    public ModelAndView viewDetailPost(@PathVariable Long postId, @ModelAttribute("userLogin") UserDTO userLogin) {
+    public Object viewDetailPost(@PathVariable Long postId, @ModelAttribute("userLogin") UserDTO userLogin) {
         PostDTO postDTO = postService.getById(postId);
+        if (postDTO.getStatusPost() == StatusPost.BLOCKED || postDTO.getStatusPost() == StatusPost.SOLD || postDTO.getStatusPost() == StatusPost.DELETE || postDTO.getStatusPost() == StatusPost.HIDE){
+            return "redirect:/errors/404";
+        } else{
+            if (postDTO.getStatusPost() == StatusPost.WAITING){
+                if (userLogin != null){
+                    if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()){
+                        return "redirect:/errors/404";
+                    }
+                } else {
+                    return "redirect:/errors/404";
+                }
+            }
+        }
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
         DetailMotorDTO detailMotorDTO = postDTO.getDetailMotorDTO();
         ModelAndView modelAndView = new ModelAndView("moto-detail");
@@ -101,14 +115,28 @@ public class PostController {
         return modelAndView;
     }
 
+    @GetMapping("/delete/{id}")
+    public void deletePost(@PathVariable Long id){
+
+    }
+
+    @GetMapping("/sold-moto/{id}")
+    public void setSoldMoto(@PathVariable Long id){
+
+    }
+
 
     @GetMapping("/edit/{id}")
     public Object showEditPost(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
+        PostDTO postDTO = postService.getById(id);
         if (userLogin==null){
             return "redirect:/signin";
+        } else{
+            if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()){
+                return "redirect:/errors/404";
+            }
         }
         ModelAndView modelAndView = new ModelAndView("edit-post");
-        PostDTO postDTO = postService.getById(id);
         modelAndView.addObject("userLogin", userLogin);
         modelAndView.addObject("post", postDTO);
         return modelAndView;
