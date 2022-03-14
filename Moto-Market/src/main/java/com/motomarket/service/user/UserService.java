@@ -4,51 +4,26 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
-<<<<<<< HEAD
-=======
 
->>>>>>> huu-dev
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
-=======
+
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
->>>>>>> huu-dev
-
->>>>>>> tien-dev
 import com.motomarket.service.response.UserResponse;
 
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> huu-dev
-
->>>>>>> tien-dev
-
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
-
->>>>>>> huu-dev
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 

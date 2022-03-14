@@ -206,6 +206,10 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             + " AND p.statusPost = 2"
     )
     Page<Post> findHidePostByKeySearch(String key, Pageable pageable);
+
+
+    @Query("SELECT p FROM Post p WHERE p.user.userId = :userId AND p.statusPost = :statusPost")
+    Page<Post> findAllByUserIdAndStatusPost(@Param("userId") Long id, @Param("statusPost") StatusPost statusPost, Pageable pageable);
 }
 
 
