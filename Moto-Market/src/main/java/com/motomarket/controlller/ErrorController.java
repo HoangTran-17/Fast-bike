@@ -52,6 +52,14 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         return errorPage;
     }
 
+    @GetMapping("/404")
+    public ModelAndView show404() {
+        ModelAndView errorPage = new ModelAndView("/admin/errorPage");
+        errorPage.addObject("errorType", "404");
+        errorPage.addObject("errorMsg", "Ops!! Không tìm thấy trang này hãy thử lại!!!");
+        return errorPage;
+    }
+
     @PostMapping
     public ModelAndView renderErrorPageMethod(HttpServletRequest httpRequest) {
 
