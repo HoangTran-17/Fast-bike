@@ -27,7 +27,7 @@
         <div th:replace="~{fragments/header :: header(userLogin=${userLogin})}"></div>
         <section class="wrapper moto_page" id="bike-list">
             <div id="contents" class="container">
-                
+
                 <div class="column-left">
                     <form id="left-filters" method="get" action="https://www.webike.vn/cho-xe-may/danh-sach-xe.html"
                         autocomplete="off">
@@ -1483,14 +1483,10 @@
                                                 <ul>
                                                     <li class="main_image">
                                                         <span class="condition used">Xe cũ</span>
-                                                        <span class="follow-icon" onclick="COMMON.followProduct(this);"
-                                                              href="javascript:void(0);" data-type="1" data-id="1903931">
-                                                        <i class="icon unlike"></i>
-                                                    </span>
                                                         <a th:href="@{/post/detailpost/{id}(id=${post.postId})}"
                                                            th:title="${post.title}">
                                                             <img class="lazy"
-                                                                 th:src="@{/api/image/load/{name}(name=${post.imageDTOList[0].imageName})}"
+                                                                 th:src="@{/api/image/load/{name}(name=${post.imageDTOList.get(0).imageName})}"
                                                                  th:alt="${post.title}">
                                                         </a>
                                                     </li>
@@ -1500,13 +1496,25 @@
                                                                 <a th:href="@{/post/detailpost/{id}(id=${post.postId})}"
                                                                    th:title="${post.title}">
                                                                     <img class="lazy"
-                                                                         th:src="@{/api/image/load/{name}(name=${post.imageDTOList[0].imageName})}"
+                                                                         th:src="@{/api/image/load/{name}(name=${post.imageDTOList.get(0).imageName})}"
                                                                          th:alt="${post.title}">
                                                                 </a>
                                                             </li>
                                                             <li>
+                                                                <a th:href="@{/post/detailpost/{id}(id=${post.postId})}"
+                                                                   th:title="${post.title}">
+                                                                    <img class="lazy"
+                                                                         th:src="@{/api/image/load/{name}(name=${post.imageDTOList.get(0).imageName})}"
+                                                                         th:alt="${post.title}">
+                                                                </a>
                                                             </li>
                                                             <li>
+                                                                <a th:href="@{/post/detailpost/{id}(id=${post.postId})}"
+                                                                   th:title="${post.title}">
+                                                                    <img class="lazy"
+                                                                         th:src="@{/api/image/load/{name}(name=${post.imageDTOList.get(0).imageName})}"
+                                                                         th:alt="${post.title}">
+                                                                </a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -1534,10 +1542,9 @@
                                                     <div class="price" th:utext="${post.price} ? ${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ' : 'Liên hệ'"></div>
                                                     <span class="time" th:utext="|${post.timePeriod} trước|"></span>
 
-                                                    <ul class="list-info-bike">
-                                                        <li><label class="spec-label">Xuất xứ</label>-</li>
-                                                        <li><label class="spec-label">Đã đi</label>&gt;<span th:utext="| ${post.kilometerCount} km|"></span>
-                                                        </li>
+                                                    <ul class="list-info-bike" style="font-size: 11px">
+                                                        <li ><label class="spec-label">Phân khối</label><span th:utext="${post.detailMotorDTO.seriesMotor.capacity} + 'cc'"></span></li>
+                                                        <li><label class="spec-label">Đã đi</label>&gt;<span th:utext="| ${post.kilometerCount} km|"></span></li>
                                                         <li><label class="spec-label">Đời xe</label><span th:utext="${post.detailMotorDTO.modelYear.modelYearName}"></span></li>
                                                         <li><label class="spec-label">Kiểu xe</label><span th:utext="${post.detailMotorDTO.typeMotor.typeMotorName}"></span></li>
                                                     </ul>
@@ -1546,7 +1553,7 @@
                                                 <div class="right">
                                                     <div class="user-info">
                                                         <div class="info">
-                                                            <img th:src="@{/api/image/load/{id}(id=${post.imageDTOList[0].imageName})}"
+                                                            <img th:src="@{/api/image/load/{id}(id=${post.userDTO.avatar})}"
                                                                  th:alt="${post.title}">
                                                             <label class="user-name">
                                                                 <a target="_blank"
@@ -1555,13 +1562,8 @@
                                                                 </a>
                                                             </label>
                                                             <label>Xe đang bán: </label>
-                                                            <span class="bike-count">1 Xe</span>
+                                                            <span class="bike-count" th:text="${post.userDTO.numberOfPost}"></span>
                                                         </div>
-
-                                                        <address class="address">
-                                                            <i class="icon icon-location"></i>
-                                                            Củ Chi, Hồ Ch&iacute; Minh
-                                                        </address>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1573,21 +1575,22 @@
                         </div>
                         <!--end list products-->
 
-                        <ul class="pagination">
+                        <div class="list_bike_paging">
+                            <ul class="pagination">
+                                <li>
+                                    <a th:href="@{'/post/moto-list/' (page=${postList.number - 1})}"
+                                       th:if="${postList.hasPrevious()}"><</a></li>
 
+                                <th:block th:each="item : ${#numbers.sequence(0,postList.totalPages -1)}">
+                                    <li th:class="${item == postList.number ? 'active' :'' }" ><a th:href="@{'/post/moto-list/' (page=${item})}"> <span
+                                            th:text='${item+1}'></span></a></li>
+                                </th:block>
 
-                            <li class="active"><a href="javascript:void(0);">1</a></li>
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=2">2</a></li>
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=3">3</a></li>
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=4">4</a></li>
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=5">5</a></li>
-
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=2"><i
-                                        class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-
-                            <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?page=8870"><i
-                                        class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                        </ul>
+                                <li>
+                                    <a th:href="@{'/post/moto-list/'(page=${postList.number + 1})}"
+                                       th:if="${postList.hasNext()}">></a></li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -1769,86 +1772,29 @@
             Page top
         </button>
     </div>
-    <script src="/frontend/vendor/jquery.js?158926651720200827"></script>
-    <script src="/v1/vendor/other/typeahead.bundle.js?154996577520200827" type="deferjs"></script>
-    <script src="/frontend/vendor/lazysizes/lazysizes.min.js?158926651720200827"></script>
-    <script src="/frontend/moto-v2/pc/js/wvn.js?160015879020200827"></script>
+<!--    <script src="/frontend/vendor/jquery.js?158926651720200827"></script>-->
+<!--    <script src="/v1/vendor/other/typeahead.bundle.js?154996577520200827" type="deferjs"></script>-->
+<!--    <script src="/frontend/vendor/lazysizes/lazysizes.min.js?158926651720200827"></script>-->
+<!--    <script src="/frontend/moto-v2/pc/js/wvn.js?160015879020200827"></script>-->
 
-    <script type="text/javascript">
-        deferscript('/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827');
-        deferstyle('/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827', 'sugesstion.css');
-        deferscript('https://www.webike.vn/frontend/vendor/alertify.js?159169869320200827');
-        deferscript('/frontend/moto-v2/pc/js/common.js?160015879020200827');
-    </script>
+<!--    <script type="text/javascript">-->
+<!--        deferscript('/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827');-->
+<!--        deferstyle('/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827', 'sugesstion.css');-->
+<!--        deferscript('https://www.webike.vn/frontend/vendor/alertify.js?159169869320200827');-->
+<!--        deferscript('/frontend/moto-v2/pc/js/common.js?160015879020200827');-->
+<!--    </script>-->
 
 
 
-    <style>
-        /* The Modal (background) */
-        #salePopup {
-            display: none;
-            text-align: center;
-            position: fixed;
-            /* Stay in place */
-            z-index: 999;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
 
-        /* Modal Content/Box */
-        #salePopup .popup-content {
-            /*background-color: #fefefe;*/
-            margin: 10% auto;
-            /* 15% from the top and centered */
-            padding: 20px;
-            /*border: 1px solid #888;*/
-            /*width: 80%;  Could be more or less, depending on screen size */
-            max-width: 600px;
-            /* Could be more or less, depending on screen size */
-        }
-
-        #salePopup img {
-            max-width: 500px;
-        }
-
-        /* The Close Button */
-        #salePopup .close {
-            color: #fff;
-            float: right;
-            font-size: 70px;
-            /*font-weight: bold;*/
-            position: absolute;
-            right: 285px;
-            top: 120px;
-        }
-
-        #salePopup .close:hover,
-        #salePopup .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-
-    <script defer src="/v1/vendor/select2/js/select2.min.js?152472729920200827"></script>
-    <script type="text/javascript">
-        var SEO_PAGE = false;
-    </script>
-    <script type="text/javascript">
-        deferscript('/frontend/moto-v2/pc/js/pages/bike-list.js?159944832020200827');
-        deferscript('/frontend/js/search/search.js?159342353320200827');
-    </script>
+<!--    <script defer src="/v1/vendor/select2/js/select2.min.js?152472729920200827"></script>-->
+<!--    <script type="text/javascript">-->
+<!--        var SEO_PAGE = false;-->
+<!--    </script>-->
+<!--    <script type="text/javascript">-->
+<!--        deferscript('/frontend/moto-v2/pc/js/pages/bike-list.js?159944832020200827');-->
+<!--        deferscript('/frontend/js/search/search.js?159342353320200827');-->
+<!--    </script>-->
 
 <script th:inline="javascript">
     function findGetParameter(parameterName) {
@@ -1859,7 +1805,7 @@
             .split("&")
             .forEach(function (item) {
                 tmp = item.split("=");
-                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[s1]);
             });
         return result;
     }
@@ -1893,7 +1839,7 @@
         let s = `<h1>HO</h1>`;
         $('#filter-brand-list').append(str);
     }
-    
+
     function checkItemInList(list, item) {
         for (const i of list) {
             if (item == i) {

@@ -43,7 +43,7 @@
         <div class="container">
 
             <div id="edit-profile" class="media" style="margin-top: 200px">
-                <div th:replace="~{fragments/slider-account :: slider-account}"></div>
+                <div th:replace="~{fragments/slider-account :: slider-account (userLogin=${userLogin})}"></div>
 
                 <div class="media-body">
 

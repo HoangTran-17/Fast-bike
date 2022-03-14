@@ -51,7 +51,7 @@
     <div class="container" >
 
         <div id="manage_product" class="media" >
-            <div th:replace="~{fragments/slider-account :: slider-account}"></div>
+            <div th:replace="~{fragments/slider-account :: slider-account (userLogin=${userLogin})}"></div>
 
             <div class="media-body">
                 <div class="heading-2">

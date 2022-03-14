@@ -71,16 +71,15 @@
                 </div>
             </div>
             <div class="bot">
-                <form id="search" method="get" action="https://www.webike.vn/cho-xe-may/danh-sach-xe.html"  style="margin-left: 100px">
+                <form id="search" method="get" th:action="@{/search-all}"  style="margin-left: 100px">
                     <div class="button-area">
-                        <button type="button" id="btn_submit">
+                        <button type="submit" id="btn_submit">
                             <i class='fas fa-search' style='font-size:24px; margin-top: 6px'></i>
                         </button>
                     </div>
                     <div class="search-input">
-                        <input class="txt-search" id="keyword" placeholder="Nhập từ khóa tìm kiếm"
-                               type="text" value="" name="q">
-                        <input id="m_code" type="hidden" value="" name="m_code" />
+                        <input class="txt-search" id="keyword" name="keyword" placeholder="Nhập từ khóa tìm kiếm"
+                               type="text" value="" >
                     </div>
                 </form>
                 <ul class="info-right">
@@ -98,134 +97,101 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
+                    <a href="/post/moto-list">
                         Tất cả xe
                     </a>
                 </li>
+
                 <li>
-                    <a href="https://www.webike.vn/cho-xe-may/xe-phan-khoi-lon.html">
-                        Phân khối lớn
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.webike.vn/cho-xe-may/hang-xe.html">
-                        Hang xe
+                    <a href="#">
+                       Hãng xe
                     </a>
                     <ul class="sub-menu">
-                        <li>
-                            <a class="title_menu btn-arrow-right"
-                               href="https://www.webike.vn/cho-xe-may/hang-xe.html"
-                               title="Tất cả hang xe">
-                                Tất cả hang xe
-                            </a>
-                        </li>
+
                         <li>
                             <a title="Honda" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/honda.html">
+                               href="/search-all?keyword=honda">
                                 Honda
                             </a>
                         </li>
                         <li>
                             <a title="Yamaha" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/yamaha.html">
+                               href="/search-all?keyword=yamaha">
                                 Yamaha
                             </a>
                         </li>
                         <li>
                             <a title="Kawasaki" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/kawasaki.html">
+                               href="/search-all?keyword=kawasaki">
                                 Kawasaki
                             </a>
                         </li>
                         <li>
                             <a title="Suzuki" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/suzuki.html">
+                               href="/search-all?keyword=suzuki">
                                 Suzuki
                             </a>
                         </li>
                         <li>
                             <a title="Ducati" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/ducati.html">
+                               href="/search-all?keyword=ducati">
                                 Ducati
                             </a>
                         </li>
                         <li>
                             <a title="Benelli" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/benelli.html">
+                               href="/search-all?keyword=beneli">
                                 Benelli
                             </a>
                         </li>
-                        <li>
-                            <a title="Lambretta" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/lambretta.html">
-                                Lambretta
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Mv agusta" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/mv-agusta.html">
-                                Mv agusta
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Piaggio" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/piaggio.html">
-                                Piaggio
-                            </a>
-                        </li>
-                        <li>
-                            <a title="American ironhorse" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/american-ironhorse.html">
-                                American ironhorse
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 <li>
-                    <a href="https://www.webike.vn/cho-xe-may/theo-phan-khoi.html">
+                    <a href="/theo-phan-khoi.html">
                         Phân khối
                     </a>
                     <ul class="sub-menu">
                         <li>
                             <a class="title_menu btn-arrow-right"
-                               href="https://www.webike.vn/cho-xe-may/theo-phan-khoi.html"
+                               href="/theo-phan-khoi.html"
                                title="Tất cả phân khối">
                                 Tất cả phân khối
                             </a>
                         </li>
                         <li>
                             <a title="-50cc" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/0-50cc.html">
+                               href="/bike-list/0-50cc.html">
                                 -50cc
                             </a>
                         </li>
                         <li>
                             <a title="51cc-174cc" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/51-174cc.html">
+                               href="/bike-list/51-174cc.html">
                                 51cc-174cc
                             </a>
                         </li>
                         <li>
                             <a title="175cc-400cc" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/175-400cc.html">
+                               href="/bike-list/175-400cc.html">
                                 175cc-400cc
                             </a>
                         </li>
                         <li>
                             <a title="401cc-750cc" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/401-750cc.html">
+                               href="/bike-list/401-750cc.html">
                                 401cc-750cc
                             </a>
                         </li>
                         <li>
                             <a title="751cc-1000cc" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/751-1000cc.html">
+                               href="/bike-list/751-1000cc.html">
                                 751cc-1000cc
                             </a>
                         </li>
                         <li>
                             <a title="1001cc-" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/1001-9999cc.html">
+                               href="/bike-list/1001-9999cc.html">
                                 1001cc-
                             </a>
                         </li>
@@ -234,116 +200,116 @@
 
                 </li>
                 <li>
-                    <a href="https://www.webike.vn/cho-xe-may/theo-loai-xe.html">
+                    <a href="/theo-loai-xe.html">
                         Loại xe
                     </a>
                     <ul class="sub-menu">
                         <li>
                             <a class="title_menu btn-arrow-right"
-                               href="https://www.webike.vn/cho-xe-may/theo-loai-xe.html"
+                               href="/theo-loai-xe.html"
                                title="Tất cả loại xe">
                                 Tất cả loại xe
                             </a>
                         </li>
                         <li>
                             <a title="Xe số" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-so.html">
+                               href="/bike-list/st-xe-so.html">
                                 Xe số
                             </a>
                         </li>
                         <li>
                             <a title="Xe côn tay" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-con-tay.html">
+                               href="/bike-list/st-xe-con-tay.html">
                                 Xe côn tay
                             </a>
                         </li>
                         <li>
                             <a title="Xe tay ga" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-ga.html">
+                               href="/bike-list/st-xe-ga.html">
                                 Xe tay ga
                             </a>
                         </li>
                         <li>
                             <a title="Classic" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-classic.html">
+                               href="/bike-list/st-classic.html">
                                 Classic
                             </a>
                         </li>
                         <li>
                             <a title="Cruiser" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-cruiser.html">
+                               href="/bike-list/st-cruiser.html">
                                 Cruiser
                             </a>
                         </li>
                         <li>
                             <a title="Sport bike" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-sport-bike.html">
+                               href="/bike-list/st-sport-bike.html">
                                 Sport bike
                             </a>
                         </li>
                         <li>
                             <a title="Naked bike" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-naked-bike.html">
+                               href="/bike-list/st-naked-bike.html">
                                 Naked bike
                             </a>
                         </li>
                         <li>
                             <a title="Chopper" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-chopper.html">
+                               href="/bike-list/st-chopper.html">
                                 Chopper
                             </a>
                         </li>
                         <li>
                             <a title="Bobber" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-bobber.html">
+                               href="/bike-list/st-bobber.html">
                                 Bobber
                             </a>
                         </li>
                         <li>
                             <a title="Drag" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-drag.html">
+                               href="/bike-list/st-drag.html">
                                 Drag
                             </a>
                         </li>
                         <li>
                             <a title="Street fighter" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-street-fighter.html">
+                               href="/bike-list/st-street-fighter.html">
                                 Street fighter
                             </a>
                         </li>
                         <li>
                             <a title="Touring" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-touring.html">
+                               href="/bike-list/st-touring.html">
                                 Touring
                             </a>
                         </li>
                         <li>
                             <a title="Sport touring" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-sport-touring.html">
+                               href="/bike-list/st-sport-touring.html">
                                 Sport touring
                             </a>
                         </li>
                         <li>
                             <a title="Off-road" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-off-road.html">
+                               href="/bike-list/st-off-road.html">
                                 Off-road
                             </a>
                         </li>
                         <li>
                             <a title="Dirt bike" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-dirt-bike.html">
+                               href="/bike-list/st-dirt-bike.html">
                                 Dirt bike
                             </a>
                         </li>
                         <li>
                             <a title="Adventure (dual-sport)" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-adventure.html">
+                               href="/bike-list/st-adventure.html">
                                 Adventure (dual-sport)
                             </a>
                         </li>
                         <li>
                             <a title="Vespa gts super 150" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/st-vespa-gts-super-150.html">
+                               href="/bike-list/st-vespa-gts-super-150.html">
                                 Vespa gts super 150
                             </a>
                         </li>
@@ -352,119 +318,80 @@
 
                 </li>
                 <li>
-                    <a href="https://www.webike.vn/cho-xe-may/theo-tinh-thanh.html">
+                    <a href="/theo-tinh-thanh.html">
                         Tỉnh thanh
                     </a>
                     <ul class="sub-menu">
                         <li>
                             <a class="title_menu btn-arrow-right"
-                               href="https://www.webike.vn/cho-xe-may/theo-tinh-thanh.html"
+                               href="/theo-tinh-thanh.html"
                                title="Toan quốc">
                                 Toan quốc
                             </a>
                         </li>
                         <li>
                             <a title="Hồ chí minh" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/ho-chi-minh-p50.html">
+                               href="/bike-list/ho-chi-minh-p50.html">
                                 Hồ chí minh
                             </a>
                         </li>
                         <li>
                             <a title="Ha nội" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/ha-noi-p18.html">
+                               href="/bike-list/ha-noi-p18.html">
                                 Ha nội
                             </a>
                         </li>
                         <li>
                             <a title="Đa nẵng" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/da-nang-p34.html">
+                               href="/bike-list/da-nang-p34.html">
                                 Đa nẵng
                             </a>
                         </li>
                         <li>
                             <a title="Cần thơ" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/can-tho-p55.html">
+                               href="/bike-list/can-tho-p55.html">
                                 Cần thơ
                             </a>
                         </li>
                         <li>
                             <a title="Khanh hàa" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/khanh-hoa-p35.html">
+                               href="/bike-list/khanh-hoa-p35.html">
                                 Khanh hàa
                             </a>
                         </li>
                         <li>
                             <a title="Hải phàng" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/hai-phong-p20.html">
+                               href="/bike-list/hai-phong-p20.html">
                                 Hải phàng
                             </a>
                         </li>
                         <li>
                             <a title="An giang" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/an-giang-p51.html">
+                               href="/bike-list/an-giang-p51.html">
                                 An giang
                             </a>
                         </li>
                         <li>
                             <a title="Ba rịa-vũng tau" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/ba-ria-vung-tau-p45.html">
+                               href="/bike-list/ba-ria-vung-tau-p45.html">
                                 Ba rịa-vũng tau
                             </a>
                         </li>
                         <li>
                             <a title="Bắc giang" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/bac-giang-p1.html">
+                               href="/bike-list/bac-giang-p1.html">
                                 Bắc giang
                             </a>
                         </li>
                         <li>
                             <a title="Bắc kạn" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/bike-list/bac-kan-p2.html">
+                               href="/bike-list/bac-kan-p2.html">
                                 Bắc kạn
                             </a>
                         </li>
                     </ul>
-
-
                 </li>
-                <li>
-                    <a href="https://www.webike.vn/cho-xe-may/dong-xe-pho-bien.html">
-                        Xếp hạng dàng xe
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a title="Phổ biến nhất" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/dong-xe-pho-bien.html">
-                                Phổ biến nhất
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Được xem nhiều nhất" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/dong-xe-duoc-xem-nhieu.html">
-                                Được xem nhiều nhất
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Quan tâm nhiều nhất" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/dong-xe-duoc-quan-tam.html">
-                                Quan tâm nhiều nhất
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Mới nhất" class="title_menu"
-                               href="https://www.webike.vn/cho-xe-may/dong-xe-moi-cap-nhat.html">
-                                Mới nhất
-                            </a>
-                        </li>
-                    </ul>
 
-
-                </li>
-                <li>
-                    <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe">
-                        Tư vấn chọn xe
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
