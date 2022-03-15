@@ -48,7 +48,7 @@
                                         <th:block th:each="item: ${brandList}">
                                             <li>
                                                 <label class="checkbox filter-checkbox">
-                                                    <a th:href="@{'/bike-list?'+${item.href}}"
+                                                    <a th:href="@{'/post/moto-list?'+${item.href}}"
                                                        th:utext="${item.brandName}"></a>
 <!--                                                    <span class="count">(86.289)</span>-->
                                                     <input type="checkbox" name="brand[]" th:value="${item.brandId}" />
@@ -76,7 +76,7 @@
                                         <th:block th:each="item:${typeMotorList}">
                                                 <li>
                                                     <label class="checkbox filter-checkbox">
-                                                        <a th:href="@{'/bike-list?'+${item.href}}"
+                                                        <a th:href="@{'/post/moto-list?'+${item.href}}"
 
                                                            th:utext="${item.typeMotorName}">
                                                         </a>

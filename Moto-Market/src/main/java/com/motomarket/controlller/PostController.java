@@ -3,6 +3,8 @@ package com.motomarket.controlller;
 import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.service.dto.*;
+import com.motomarket.service.filter.BrandFilter;
+import com.motomarket.service.filter.TypeMotorFilter;
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.IDetailMotorService;
 import com.motomarket.service.motor.IModelYearService;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -164,18 +167,31 @@ public class PostController {
         return "redirect:/post/detailpost/" + post.getPostId();
     }
 
+//    public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+//                                           Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+//                                           String kilometerCount, String color, String province) {
     @GetMapping("/moto-list")
-    public ModelAndView showBikeList(String br, String tp, String cc, Pageable pageable) {
+    public ModelAndView showBikeList(@RequestParam(value = "br",required = false) String brandMotor,
+                                     @RequestParam(value = "tp",required = false) String typeMotor,
+                                     @RequestParam(value = "cc",required = false) String capacity,
+                                     @RequestParam(value = "pr-fr",required = false) Double priceFrom,
+                                     @RequestParam(value = "pr-to",required = false) Double priceTo,
+                                     @RequestParam(value = "my-fr",required = false) Integer modelYearMin,
+                                     @RequestParam(value = "my-to",required = false) Integer modelYearMax,
+                                     @RequestParam(value = "km",required = false) String kilometerCount,
+                                     @RequestParam(value = "color",required = false) String color,
+                                     @RequestParam(value = "pr",required = false) String province,
+                                     Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list-moto");
-        br = "1_2_13";
-        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(br, tp, cc);
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(brandMotor, typeMotor, capacity);
         modelAndView.addObject("brandList", brandList);
 
-        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(brandMotor, typeMotor, capacity);
         modelAndView.addObject("typeMotorList", typeMotorList);
 
-        Page<PostDTO> postDTOS = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), null, null, null, null, null, null, null, null, null, null, null);
+        Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),
+                brandMotor, typeMotor, capacity,priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("postList", postDTOS);
 
         System.out.println(postDTOS);

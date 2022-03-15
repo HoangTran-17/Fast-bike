@@ -221,15 +221,16 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor,String typeMotor) {
-//                                           ,String capacity,String pr, Integer modelYearMin, Integer modelYearMax, String province, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor
+    public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+                                           Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+                                           String kilometerCount, String color, String province) {
 
         List<Long> brandIdList = setBrandIdList(brandMotor);
         List<Long> typeIdList = setTypeIdList(typeMotor);
 
 
 
-        Page<Post> posts = postRepository.findTopByFilters1(Pageable.ofSize(pageSize), brandIdList,typeIdList, StatusPost.PUBLIC);
+        Page<Post> posts = postRepository.findTopByFilters1(pageable, brandIdList,typeIdList, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 

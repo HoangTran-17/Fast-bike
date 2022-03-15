@@ -41,24 +41,20 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
     Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax);
 
-//    //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
-//    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,Integer modelYearMin, Integer modelYearMax,
-//                                   String province,String typeMotor,Integer capacityMin, Integer capacityMax,
-//                                   Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
-
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     Page<PostDTO> findTopByFilters(Pageable pageable, String modelMotor, Integer modelYearMin, Integer modelYearMax,
                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
 
-<<<<<<< HEAD
-=======
-    Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax,
-                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
-                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
->>>>>>> tien-dev
+    //        Page<PostDTO> postDTOS = postService.findTopByFilters1(cc,prfr,prto,myfr,myto,km,color,pr);
+    //
+    //public ModelAndView showBikeList(String br, String tp, String cc, Double prfr, Double prto,
+    //                                 int myfr, int myto, String km, String color, String pr, Pageable pageable) {
 
-    Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor, String typeMotor);
+
+    Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+                                    Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+                                    String kilometerCount, String color, String province);
 
     //    List bài viết đang chờ (WAITING) của 1 user
     Page<PostDTO> findWaitingListByUserId(int pageSize, Long userId);
@@ -101,10 +97,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     void publicPost(Long id);
     void blockPost(Long id);
 
-<<<<<<< HEAD
     void setSoldMoto(Long id);
-=======
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
->>>>>>> huu-dev
 }
 

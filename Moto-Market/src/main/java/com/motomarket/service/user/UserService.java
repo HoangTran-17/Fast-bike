@@ -9,68 +9,10 @@ import com.motomarket.service.response.UserResponse;
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> tien-dev
-=======
->>>>>>> huu-dev
 import com.motomarket.service.dto.UserView;
 import com.motomarket.service.post.IPostService;
 
 
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
-
-<<<<<<< HEAD
->>>>>>> huu-dev
-
-=======
->>>>>>> huu-dev
-import com.motomarket.service.response.UserResponse;
-
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> huu-dev
-
->>>>>>> tien-dev
-=======
->>>>>>> tien-dev
-
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
-
->>>>>>> huu-dev
-=======
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
-
->>>>>>> huu-dev
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
-
-=======
-import com.motomarket.service.dto.UserView;
-import com.motomarket.service.post.IPostService;
->>>>>>> tien-dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
