@@ -1,5 +1,6 @@
 package com.motomarket.service.post;
 
+import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
@@ -97,10 +98,13 @@ public interface IPostService extends IGeneralService<PostDTO> {
     PostResponse findHidePostByKeySearch(String key, Integer pageNo, Integer pageSize);
 
     void hide(Long id);
-
     void publicPost(Long id);
     void blockPost(Long id);
 
+<<<<<<< HEAD
     void setSoldMoto(Long id);
+=======
+    PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
+>>>>>>> huu-dev
 }
 

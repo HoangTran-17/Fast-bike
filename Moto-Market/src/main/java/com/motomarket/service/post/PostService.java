@@ -399,4 +399,11 @@ public class PostService implements IPostService {
         postResponse.setLast(posts.isLast());
         return postResponse;
     }
+
+    @Override
+    public PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> posts = postRepository.findAllByUserIdAndStatusPost(userId,statusPost, pageable);
+        return getPostResponse(posts);
+    }
 }
