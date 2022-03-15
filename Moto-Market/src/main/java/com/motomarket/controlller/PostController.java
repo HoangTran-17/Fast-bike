@@ -196,8 +196,6 @@ public class PostController {
         modelAndView.addObject("query", query);
 
 
-
-
 //        modelMotor = "HONDA";
         Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),
                 modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,

@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/pages/create_product.css?160015879020200827">
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/pages/top.css?159125667020200827">
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/frontend/toast-plugin/jquery.basic.toast.css">
 
     <link rel="stylesheet" href="/frontend/vendor/alertify/alertify.min.css?160015879020200827"/>
 </head>
@@ -414,6 +415,8 @@
 
 </div>
 <script src="/v1/pc/js/common/jquery.js?152472729920200827"></script>
+<script src="/frontend/toast-plugin/jquery.basic.toast.js"></script>
+
 
 <script>
     getProvinces();
@@ -600,6 +603,54 @@
         })
 
     })
+
+    $('#product-editor').on("submit", function () {
+        lengthFile = imagePost = document.getElementsByClassName("image-post").length;
+        let check = true;
+        var fileUpload = $("#ip-upload-multi");
+        var priceValue = $("#product_price_tmp").val();
+        if (parseInt(fileUpload.get(0).files.length + lengthFile)>10){
+            $.Toast("!!!Bạn chỉ có thể tải lên tối đa 10 ảnh", {
+                'position': 'top',
+                'class': 'alert',
+                'duration': 1500,
+                'width': 400
+            });
+            check = false;
+        }else {
+            if (parseInt(fileUpload.get(0).files.length + lengthFile)<5){
+                $.Toast("!!!Bạn phải tải lên ít nhất 5 ảnh", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+                check = false;
+            }
+        }
+
+        if (!isNaN(priceValue)){
+            if (priceValue < 0){
+                $.Toast("Giá phải lớn hơn hoặc bằng 0", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+                check = false;
+            }
+        } else{
+            $.Toast("Giá phải nhập đúng định dạng số!!", {
+                'position': 'top',
+                'class': 'alert',
+                'duration': 1500,
+                'width': 400
+            });
+            check = false;
+        }
+        return check;
+    })
+
 
 
 </script>

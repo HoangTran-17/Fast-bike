@@ -71,14 +71,14 @@
                 </div>
             </div>
             <div class="bot">
-                <form id="search" method="get" th:action="@{/search-all}"  style="margin-left: 100px">
+                <form id="search" method="get" th:action="@{/post/moto-list}"  style="margin-left: 100px">
                     <div class="button-area">
                         <button type="submit" id="btn_submit">
                             <i class='fas fa-search' style='font-size:24px; margin-top: 6px'></i>
                         </button>
                     </div>
                     <div class="search-input">
-                        <input class="txt-search" id="keyword" name="keyword" placeholder="Nhập từ khóa tìm kiếm"
+                        <input class="txt-search" id="q" name="q" placeholder="Nhập từ khóa tìm kiếm"
                                type="text" value="" >
                     </div>
                 </form>
@@ -110,37 +110,37 @@
 
                         <li>
                             <a title="Honda" class="title_menu"
-                               href="/search-all?keyword=honda">
+                               href="/post/moto-list?q=honda">
                                 Honda
                             </a>
                         </li>
                         <li>
                             <a title="Yamaha" class="title_menu"
-                               href="/search-all?keyword=yamaha">
+                               href="/post/moto-list?q=yamaha">
                                 Yamaha
                             </a>
                         </li>
                         <li>
                             <a title="Kawasaki" class="title_menu"
-                               href="/search-all?keyword=kawasaki">
+                               href="/post/moto-list?q=kawasaki">
                                 Kawasaki
                             </a>
                         </li>
                         <li>
                             <a title="Suzuki" class="title_menu"
-                               href="/search-all?keyword=suzuki">
+                               href="/post/moto-list?q=suzuki">
                                 Suzuki
                             </a>
                         </li>
                         <li>
                             <a title="Ducati" class="title_menu"
-                               href="/search-all?keyword=ducati">
+                               href="/post/moto-list?q=ducati">
                                 Ducati
                             </a>
                         </li>
                         <li>
                             <a title="Benelli" class="title_menu"
-                               href="/search-all?keyword=beneli">
+                               href="/post/moto-list?q=beneli">
                                 Benelli
                             </a>
                         </li>

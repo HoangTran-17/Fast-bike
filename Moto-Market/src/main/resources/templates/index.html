@@ -64,7 +64,7 @@
                             Xem tất cả (<span th:utext="${count}"></span>)
                         </a>
                     </div>
-                    <form th:action="@{/search-moto-home}" id="advanced_search" method="get">
+                    <form th:action="@{/search-moto-home}"  method="post">
                         <input type="hidden" id="search_condition" name="new"/>
                         <div class="row">
                             <ul class="box-search-topmoto">
@@ -131,7 +131,7 @@
                         <div class="row">
                             <ul class="list-brand">
                                 <li>
-                                    <a href="/search-all?keyword=honda">
+                                    <a href="/post/moto-list?q=honda">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/xkWyUOQ49rM_vkj53h8B3gOgQGE=/67x67/master/brand/honda.jpg"
@@ -141,7 +141,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=yamaha">
+                                    <a href="/post/moto-list?q=yamaha">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/QC8B2x4q_W4xBdiR1z7uc0ZKFec=/67x67/master/brand/yamaha.jpg"
@@ -151,7 +151,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=piago">
+                                    <a href="/post/moto-list?q=piago">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/o61B3NETjCzNc9nB7V8NoWdbauU=/67x67/master/brand/piaggio.jpg"
@@ -161,7 +161,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=suzuki">
+                                    <a href="/post/moto-list?q=suzuki">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/2dFdwGzzR9JItxesrszn1H-k-8w=/67x67/master/brand/suzuki.jpg"
@@ -171,7 +171,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=kawasaki">
+                                    <a href="/post/moto-list?q=kawasaki">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/XDYC6g9goGGXk7_za7NO7AviZt4=/67x67/master/brand/kawasaki.jpg"
@@ -181,7 +181,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=ducati">
+                                    <a href="/post/moto-list?q=ducati">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/u-odBE7VgJqQ4vXLKO_LOmp7SX0=/67x67/master/brand/ducati.jpg"
@@ -191,7 +191,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=HARLEYDAVIDSON">
+                                    <a href="/post/moto-list?q=HARLEYDAVIDSON">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/Tj9KBKFnAhoglx7ntifOVf9QESw=/67x67/master/brand/harley-davidson.jpg"
@@ -201,7 +201,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=benelli">
+                                    <a href="/post/moto-list?q=benelli">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/UMU_Wwmi2wa0BGbZY4899NdFvj4=/67x67/master/brand/benelli.jpg"
@@ -211,7 +211,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=agusta">
+                                    <a href="/post/moto-list?q=agusta">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/bQReawp-SwGLdEFj7TdWuah0nz0=/67x67/master/brand/mv-agusta.jpg"
@@ -221,7 +221,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="/search-all?keyword=lambretta">
+                                    <a href="/post/moto-list?q=lambretta">
                                         <figure class="zoom-image">
                                             <img class="lazy" src="/frontend/img/common/l_no_img.jpg?158440972220200827"
                                                  data-src="https://imgwebikevn-8743.kxcdn.com/8K-UBpuj7joSi07993aDm4dXs1s=/67x67/master/brand/lambretta.jpg"
@@ -264,7 +264,7 @@
                     <div class="grid-item-slide">
                         <ul class="list-model-topmoto">
                             <li>
-                                <a href="/search-all?keyword=YAMAHA Exciter 135"
+                                <a href="/post/moto-list?q=YAMAHA Exciter 135"
                                    title="YAMAHA Exciter 135">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -280,7 +280,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Wave 100 RS"
+                                <a href="/post/moto-list?q=HONDA Wave 100 RS"
                                    title="HONDA Wave 100 RS">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -295,7 +295,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=YAMAHA Sirius" title="YAMAHA Sirius">
+                                <a href="/post/moto-list?q=YAMAHA Sirius" title="YAMAHA Sirius">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
                                              data-src="https://imgwebikevn-8743.kxcdn.com/xLnXUnFpOP4WO-f0yk6-3HU-IIY=/fit-in/180x136/master/series/966_sirius.jpg"
@@ -309,7 +309,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Airblade 125 Fi"
+                                <a href="/post/moto-list?q=HONDA Airblade 125 Fi"
                                    title="HONDA Airblade 125 Fi">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -324,7 +324,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Vision 110"
+                                <a href="/post/moto-list?q=HONDA Vision 110"
                                    title="HONDA Vision 110">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -339,7 +339,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Airblade 110"
+                                <a href="/post/moto-list?q=HONDA Airblade 110"
                                    title="HONDA Airblade 110">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -354,7 +354,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword= HONDA SH 125" title="HONDA SH 125">
+                                <a href="/post/moto-list?q= HONDA SH 125" title="HONDA SH 125">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
                                              data-src="https://imgwebikevn-8743.kxcdn.com/Ul5YPViyr8vAfbnq-B1zWS7E-ms=/fit-in/180x136/master/series/375_sh-125.jpg"
@@ -368,7 +368,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Wave 100"
+                                <a href="/post/moto-list?q=HONDA Wave 100"
                                    title="HONDA Wave 100">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -383,7 +383,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword= HONDA Dream II"
+                                <a href="/post/moto-list?q= HONDA Dream II"
                                    title="HONDA Dream II">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -398,7 +398,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA Winner 150"
+                                <a href="/post/moto-list?q=HONDA Winner 150"
                                    title="HONDA Winner 150">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -413,7 +413,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/search-all?keyword=HONDA SH 150i"
+                                <a href="/post/moto-list?q=HONDA SH 150i"
                                    title="HONDA SH 150i">
                                     <figure class="thumbnail-cover zoom-image">
                                         <img class="lazy" src="/frontend/img/common/m_no_img.jpg?158440972220200827"
@@ -436,59 +436,59 @@
                     <label class="title">Các từ khóa phổ biến</label>
                     <ul>
                         <li>
-                            <a href="/search-all?keyword=excite 150"
+                            <a href="/post/moto-list?q=excite 150"
                                title="Exciter 150">Exciter 150</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=Kawasaki Z1000"
+                            <a href="/post/moto-list?q=Kawasaki Z1000"
                                title="Kawasaki Z1000">Kawasaki Z1000</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=honda"
+                            <a href="/post/moto-list?q=honda"
                                title="Tên chủ xeHONDA">HONDA</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=yamaha"
+                            <a href="/post/moto-list?q=yamaha"
                                title="YAMAHA">YAMAHA</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=piaggio"
+                            <a href="/post/moto-list?q=piaggio"
                                title="PIAGGIO">PIAGGIO</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=sym"
+                            <a href="/post/moto-list?q=sym"
                                title="SYM">SYM</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=suzuki"
+                            <a href="/post/moto-list?q=suzuki"
                                title="SUZUKI">SUZUKI</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=kawasaki"
+                            <a href="/post/moto-list?q=kawasaki"
                                title="Kawasaki">Kawasaki</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=ducati"
+                            <a href="/post/moto-list?q=ducati"
                                title="DUCATI">DUCATI</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=harley-davidson"
+                            <a href="/post/moto-list?q=harley-davidson"
                                title="HARLEY-DAVIDSON">HARLEY-DAVIDSON</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=benelli"
+                            <a href="/post/moto-list?q=benelli"
                                title="Benelli">Benelli</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=bmw"
+                            <a href="/post/moto-list?q=bmw"
                                title="BMW">BMW</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=ktm"
+                            <a href="/post/moto-list?q=ktm"
                                title="KTM">KTM</a>
                         </li>
                         <li>
-                            <a href="/search-all?keyword=daelim"
+                            <a href="/post/moto-list?q=daelim"
                                title="DAELIM">DAELIM</a>
                         </li>
                     </ul>
