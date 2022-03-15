@@ -35,22 +35,6 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
     List<Post> findTopBySeriesMotor(Pageable pageable, @Param("modelMotor") String modelMotor, @Param("statusPost") StatusPost statusPost);
 
 
-    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
-    @Query("select p from Post p where p.statusPost = :statusPost and p.modelMotor like :modelMotor% order by p.postDate DESC")
-    Page<Post> findTopByModelMotorIsLike(Pageable pageable, @Param("modelMotor") String modelMotor, @Param("statusPost") StatusPost statusPost);
-
-    //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
-    @Query("select p from Post p where p.statusPost = :statusPost and p.province = :province order by p.postDate DESC")
-    Page<Post> findTopByProvince(Pageable pageable, @Param("province") String province, @Param("statusPost") StatusPost statusPost);
-
-    //  List bài viết mới nhất, tìm kiếm theo typeMotor -"Xe tay ga"
-    @Query("select p from Post p where p.statusPost = :statusPost and p.detailMotor.typeMotor.typeMotorName = :typeMotor order by p.postDate DESC")
-    Page<Post> findTopByTypeMotor(Pageable pageable, @Param("typeMotor") String typeMotor, @Param("statusPost") StatusPost statusPost);
-
-    //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
-    @Query("select p from Post p where p.statusPost = :statusPost and (p.detailMotor.seriesMotor.capacity between :min and :max) order by p.postDate DESC")
-    Page<Post> findTopByCapacity(Pageable pageable, @Param("min") int min, @Param("max") int max, @Param("statusPost") StatusPost statusPost);
-
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, modelYear, province, typeMotor, Capacity,price, kilometerCount và colorMotor .
     @Query("select p from Post p where p.statusPost = :statusPost " +
             "and (:modelMotor is null or p.modelMotor like :modelMotor%) " +
@@ -77,7 +61,12 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             @Param("statusPost") StatusPost statusPost);
 
 
-    default Page<Post> findTopByFilters1(Pageable pageable, String modelMotor, List<Long> brandIdList, List<Long> typeIdList, Integer capacityMin, Integer capacityMax, StatusPost statusPost) {
+
+
+    default Page<Post> findTopByFilters1(Pageable pageable, String modelMotor, List<Long> brandIdList,
+                                         List<Long> typeIdList, Integer capacityMin, Integer capacityMax,
+                                         Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+                                         String kilometerCount, String color, String province, StatusPost statusPost) {
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             Predicate predicateForModelMotor = criteriaBuilder.conjunction();
@@ -108,9 +97,44 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
                     predicateForCapacity = criteriaBuilder.lessThan(root.get("detailMotor").get("seriesMotor").get("capacity"), capacityMax);
                 }
             }
+
+            Predicate predicateForPrice = criteriaBuilder.conjunction();
+            if (priceFrom != null && priceTo != null) {
+                predicateForPrice = criteriaBuilder.between(root.get("price"), priceFrom, priceTo);
+            } else {
+                if (priceFrom != null) {
+                    predicateForPrice = criteriaBuilder.greaterThan(root.get("price"), priceFrom);
+                }
+                if (priceTo != null) {
+                    predicateForPrice = criteriaBuilder.lessThan(root.get("price"), priceTo);
+
+                }
+            }
+
+            Predicate predicateForModelYear = criteriaBuilder.conjunction();
+            if (modelYearMin != null && modelYearMax != null) {
+                predicateForModelYear = criteriaBuilder.between(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMin, modelYearMax);
+            } else {
+                if (modelYearMin != null) {
+                    predicateForModelYear = criteriaBuilder.greaterThan(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMin);
+                }
+                if (modelYearMax != null) {
+                    predicateForModelYear = criteriaBuilder.lessThan(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMax);
+
+                }
+            }
+
+            Predicate predicateForKilometerCount = criteriaBuilder.equal(root.get("kilometerCount"), kilometerCount);
+
+            Predicate predicateForColor = criteriaBuilder.equal(root.get("detailMotor").get("colorMotor").get("colorName"), color);
+
+            Predicate predicateForProvince = criteriaBuilder.equal(root.get("province"), province);
+
             Predicate predicateForStatusPost = criteriaBuilder.equal(root.get("statusPost"), statusPost);
 
-            return criteriaBuilder.and(predicateForModelMotor,predicateForTypeIdList,predicateForCapacity,predicateForStatusPost);
+            return criteriaBuilder.and(predicateForModelMotor,predicateForTypeIdList,predicateForCapacity,
+                                        predicateForPrice,predicateForModelYear,predicateForKilometerCount,
+                                        predicateForColor,predicateForProvince,predicateForStatusPost);
         },pageable);
     }
 

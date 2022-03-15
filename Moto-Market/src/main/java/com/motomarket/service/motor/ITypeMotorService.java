@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ITypeMotorService extends IGeneralService<TypeMotorDTO> {
 
-    List<TypeMotorFilter> getAllTypeMotorFilter(String modelMotor, String br, String tp, String cc);
+    List<TypeMotorFilter> getAllTypeMotorFilter(String modelMotor, String br, String tp, String cc, Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province);
 }
 

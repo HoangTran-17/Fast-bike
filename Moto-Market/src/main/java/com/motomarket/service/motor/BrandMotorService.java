@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.motomarket.service.motor.TypeMotorService.getString;
+
 @Service
 public class BrandMotorService implements IBrandMotorService {
     @Autowired
@@ -51,10 +53,13 @@ public class BrandMotorService implements IBrandMotorService {
 
 
     @Override
-    public List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc) {
+    public List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc,
+                                               Double priceFrom, Double priceTo, Integer modelYearMin,
+                                               Integer modelYearMax, String kilometerCount, String color, String province) {
         List<BrandFilter> brandFilterList = new ArrayList<>();
         brandMotorRepository.findAll().forEach(brandMotor -> {
-            String href = setHref(modelMotor,br, tp, cc, brandMotor.getBrandId());
+            String href = setHref(modelMotor,br, tp, cc,priceFrom,priceTo,modelYearMin,modelYearMax,
+                                kilometerCount,color,province,brandMotor.getBrandId());
             Boolean bo = isSelected(br,brandMotor.getBrandId());
             brandFilterList.add(BrandFilter.parseBrandFilter(brandMotor,href,bo));
         });
@@ -70,7 +75,9 @@ public class BrandMotorService implements IBrandMotorService {
         return i != -1;
     }
 
-    private String setHref(String modelMotor,String br, String tp, String cc, Long brandId) {
+    private String setHref(String modelMotor, String br, String tp, String cc, Double priceFrom, Double priceTo,
+                           Integer modelYearMin, Integer modelYearMax, String kilometerCount,
+                           String color, String province, Long brandId) {
         StringBuilder href = new StringBuilder();
         if (modelMotor!=null) {
             href.append("q=");
@@ -106,8 +113,7 @@ public class BrandMotorService implements IBrandMotorService {
             href.append(cc);
             href.append("&");
         }
-
-        return String.valueOf(href);
+        return getString(priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province, href);
     }
 
 

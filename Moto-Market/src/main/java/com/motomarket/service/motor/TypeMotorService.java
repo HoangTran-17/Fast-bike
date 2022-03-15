@@ -41,10 +41,10 @@ public class TypeMotorService implements ITypeMotorService{
     }
 
     @Override
-    public List<TypeMotorFilter> getAllTypeMotorFilter(String modelMotor, String br, String tp, String cc) {
+    public List<TypeMotorFilter> getAllTypeMotorFilter(String modelMotor, String br, String tp, String cc, Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province) {
         List<TypeMotorFilter> typeMotorFilterList = new ArrayList<>();
         typeMotorRepository.findAll().forEach(typeMotor -> {
-            String href = setHref(modelMotor,br, tp, cc, typeMotor.getTypeMotorId());
+            String href = setHref(modelMotor,br, tp, cc,priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province, typeMotor.getTypeMotorId());
             Boolean bo = isSelected(tp,typeMotor.getTypeMotorId());
             typeMotorFilterList.add(TypeMotorFilter.parseTypeMotorFilter(typeMotor,href,bo));
         });
@@ -60,7 +60,7 @@ public class TypeMotorService implements ITypeMotorService{
         return i != -1;
     }
 
-    private String setHref(String modelMotor,String br, String tp, String cc, Long typeMotorId) {
+    private String setHref(String modelMotor, String br, String tp, String cc, Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province, Long typeMotorId) {
         StringBuilder href = new StringBuilder();
         if (modelMotor!=null) {
             href.append("q=");
@@ -94,6 +94,46 @@ public class TypeMotorService implements ITypeMotorService{
         if (cc!=null) {
             href.append("cc=");
             href.append(cc);
+            href.append("&");
+        }
+        return getString(priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province, href);
+    }
+
+    public static String getString(Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province, StringBuilder href) {
+
+        if (priceFrom!=null) {
+            href.append("pr-fr=");
+            href.append(priceFrom);
+            href.append("&");
+        }
+        if (priceTo!=null) {
+            href.append("pr-to=");
+            href.append(priceTo);
+            href.append("&");
+        }
+        if (modelYearMin!=null) {
+            href.append("my-fr=");
+            href.append(modelYearMin);
+            href.append("&");
+        }
+        if (modelYearMax!=null) {
+            href.append("my-to=");
+            href.append(modelYearMax);
+            href.append("&");
+        }
+        if (kilometerCount!=null) {
+            href.append("km=");
+            href.append(kilometerCount);
+            href.append("&");
+        }
+        if (color!=null) {
+            href.append("color=");
+            href.append(color);
+            href.append("&");
+        }
+        if (province!=null) {
+            href.append("pr=");
+            href.append(province);
             href.append("&");
         }
         return String.valueOf(href);

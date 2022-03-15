@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -186,27 +187,41 @@ public class PostController {
                                      @RequestParam(value = "pr",required = false) String province,
                                      Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
+<<<<<<< HEAD
+=======
+
+>>>>>>> hoang-dev
 
         modelAndView.setViewName("list-moto");
-        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity);
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
+                                                                    modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("brandList", brandList);
 
-        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(modelMotor,brandMotor, typeMotor, capacity);
+        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(modelMotor,brandMotor, typeMotor, capacity,
+                                                                    priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("typeMotorList", typeMotorList);
 
-        String[] query = postService.setQueryView(modelMotor,brandMotor, typeMotor, capacity);
+        String[] query = new String[2];
+        if (modelMotor != null) {
+            query = postService.setQueryView(modelMotor,brandMotor, typeMotor, capacity,
+                    priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
+        }
         modelAndView.addObject("query", query);
 
-        List<CapacityFilter> capacityList = postService.getCapacityList(modelMotor,brandMotor, typeMotor, capacity);
+        List<CapacityFilter> capacityList = postService.getCapacityList(modelMotor,brandMotor, typeMotor, capacity,
+                                        priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("capacityList", capacityList);
 
 
-        Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),
+        Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20, Sort.by("postDate").descending()),
                 modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
                 modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("postList", postDTOS);
-
         System.out.println(postDTOS);
+
+//        Long count = postService.countPostBy(modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
+//                modelYearMin,modelYearMax,kilometerCount,color,province);
+//        System.out.println(count);
 
         return modelAndView;
     }

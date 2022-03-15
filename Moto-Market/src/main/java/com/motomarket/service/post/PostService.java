@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.motomarket.service.motor.TypeMotorService.getString;
+
 @Service
 public class PostService implements IPostService {
     @Value("${server.rootPath}")
@@ -175,42 +177,6 @@ public class PostService implements IPostService {
         return postDTOList;
     }
 
-    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
-    @Override
-    public Page<PostDTO> findTopByModelMotorIsLike(Pageable pageable, String modelMotor) {
-        Page<Post> posts = postRepository.findTopByModelMotorIsLike(pageable, modelMotor, StatusPost.PUBLIC);
-        Page<PostDTO> postDTOS = posts.map(post -> {
-            return PostDTO.parsePostDTO(post);
-        });
-        return postDTOS;
-    }
-
-
-    //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
-    @Override
-    public Page<PostDTO> findTopByProvince(int pageSize, String province) {
-        Page<Post> posts = postRepository.findTopByProvince(Pageable.ofSize(pageSize), province, StatusPost.PUBLIC);
-        Page<PostDTO> postDTOS = posts.map(post -> {
-            return PostDTO.parsePostDTO(post);
-        });
-        return postDTOS;
-    }
-
-
-    //  List bài viết mới nhất, tìm kiếm theo typeMotor -"Xe tay ga"
-    @Override
-    public Page<PostDTO> findTopByTypeMotor(int pageSize, String typeMotor) {
-        Page<Post> posts = postRepository.findTopByTypeMotor(Pageable.ofSize(pageSize), typeMotor, StatusPost.PUBLIC);
-        return posts.map(PostDTO::parsePostDTO);
-    }
-
-    //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
-    @Override
-    public Page<PostDTO> findTopByCapacity(int pageSize, int capacityMin, int capacityMax) {
-        Page<Post> posts = postRepository.findTopByCapacity(Pageable.ofSize(pageSize), capacityMin, capacityMax, StatusPost.PUBLIC);
-        return posts.map(PostDTO::parsePostDTO);
-    }
-
     //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
     @Override
     public Page<PostDTO> findTopByFilters(Pageable pageable, String modelMotor, Integer modelYearMin, Integer modelYearMax,
@@ -223,12 +189,19 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Page<PostDTO> findTopByFilters1(Pageable pageable,String modelMotor, String brandMotor, String typeMotor, String capacity,
+    public Page<PostDTO> findTopByFilters1(Pageable pageable, String modelMotor, String brandMotor, String typeMotor, String capacity,
                                            Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
                                            String kilometerCount, String color, String province) {
 
-        List<Long> brandIdList = setBrandIdList(brandMotor);
-        List<Long> typeIdList = setTypeIdList(typeMotor);
+        List<Long> brandIdList = new ArrayList<>();
+        if (brandMotor != null) {
+            brandIdList = setBrandIdList(brandMotor);
+        }
+
+        List<Long> typeIdList = new ArrayList<>();
+        if (typeMotor != null) {
+            typeIdList = setTypeIdList(typeMotor);
+        }
         Integer capacityMin = null;
         Integer capacityMax = null;
         if (capacity != null) {
@@ -238,11 +211,21 @@ public class PostService implements IPostService {
                 capacityMax = capa[1];
             }
         }
+        if (priceFrom > priceTo) {
+            priceFrom = null;
+            priceTo = null;
+        }
+        if (modelYearMin > modelYearMax) {
+            modelYearMin = null;
+            modelYearMax = null;
+        }
 
-
-        Page<Post> posts = postRepository.findTopByFilters1(PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(), Sort.by("postDate").descending()),modelMotor, brandIdList,typeIdList,capacityMin,capacityMax, StatusPost.PUBLIC);
+        Page<Post> posts = postRepository.findTopByFilters1(pageable, modelMotor, brandIdList,typeIdList,
+                capacityMin,capacityMax,priceFrom,priceTo,modelYearMin,modelYearMax,
+                kilometerCount,color,province,StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
+
 
     private Integer[] getCapacityMinMax(String capacity) {
         List<CapacityFilter> capacityFilterList = getCapacityListSample();
@@ -431,7 +414,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity) {
+    public String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity, Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province) {
         StringBuilder href = new StringBuilder();
         if (brandMotor!=null) {
             href.append("br=");
@@ -448,15 +431,19 @@ public class PostService implements IPostService {
             href.append(capacity);
             href.append("&");
         }
-        String[] query = {modelMotor,String.valueOf(href)};
+        String queryHref = getString(priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province, href);
+        String[] query = {modelMotor,queryHref};
         return query;
     }
 
     @Override
-    public List<CapacityFilter> getCapacityList(String modelMotor, String brandMotor, String typeMotor, String capacity) {
+    public List<CapacityFilter> getCapacityList(String modelMotor, String brandMotor, String typeMotor, String capacity,
+                                                Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+                                                String kilometerCount, String color, String province) {
         List<CapacityFilter> capacityFilterList = getCapacityListSample();
         capacityFilterList.forEach(capacityFilter -> {
-            String href = setHref(modelMotor,brandMotor, typeMotor, capacity,capacityFilter.getParam());
+            String href = setHref(modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,modelYearMin,modelYearMax,
+                    kilometerCount,color,province,capacityFilter.getParam());
             Boolean bo = capacityFilter.getParam().equals(capacity);
             capacityFilter.setHref(href);
             capacityFilter.setSelected(bo);
@@ -464,7 +451,8 @@ public class PostService implements IPostService {
         return capacityFilterList;
     }
 
-    private String setHref(String modelMotor, String brandMotor, String typeMotor, String capacity, String param) {
+    private String setHref(String modelMotor, String brandMotor, String typeMotor, String capacity, Double priceFrom, Double priceTo,
+                           Integer modelYearMin, Integer modelYearMax, String kilometerCount, String color, String province, String param) {
         StringBuilder href = new StringBuilder();
         if (modelMotor!=null) {
             href.append("q=");
@@ -493,7 +481,7 @@ public class PostService implements IPostService {
             href.append(param);
             href.append("&");
         }
-        return String.valueOf(href);
+        return getString(priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province, href);
     }
 
     private List<CapacityFilter> getCapacityListSample() {
