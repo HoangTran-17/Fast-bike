@@ -136,15 +136,6 @@
             type: "GET",
             url: "/api/post/"+userId+"/"+status+"?pageNo="+pageNo+"&pageSize="+pageSize
         }).done(function (data) {
-            console.log(data);
-            if (data.content.length === 0){
-                $.Toast("Tải dữ liệu không hoàn thành hãy thử lại", {
-                    'position': 'top',
-                    'class': 'alert',
-                    'duration': 1500,
-                    'width': 400
-                });
-            }else {
                 let str = "";
                 $.each(data.content,function (key,value) {
                     let img;
@@ -162,7 +153,7 @@
                     }
 
                     let href;
-                    if(status==="DELETE") {
+                    if(status==="DELETE" ||status==="SOLD" ) {
                         href = "#";
                     } else {
                         href   = "/post/detailpost/"+value.postId;
@@ -208,7 +199,6 @@
                     doPrevPage(userId,status);
                     doNextPage(Number(data.totalPages-1),userId,status);
                 }
-            }
         })
     }
 
