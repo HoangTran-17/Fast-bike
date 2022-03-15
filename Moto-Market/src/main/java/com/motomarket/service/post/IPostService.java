@@ -96,5 +96,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     void publicPost(Long id);
     void blockPost(Long id);
+
+    void setSoldMoto(Long id);
 }
 

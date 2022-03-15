@@ -115,6 +115,13 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public void setSoldMoto(Long id) {
+        Post post = postRepository.getById(id);
+        post.setStatusPost(StatusPost.SOLD);
+        postRepository.save(post);
+    }
+
+    @Override
     public void update(PostDTO postDTO, MultipartFile[] files) {
         for (MultipartFile file : files) {
             String uuid = UUID.randomUUID().toString();

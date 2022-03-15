@@ -64,9 +64,9 @@ public class PostController {
 
     @GetMapping("/newpost")
     public String toPostPage(@ModelAttribute("userLogin") UserDTO userLogin, Model model) {
-        if (userLogin==null){
-         return "redirect:/signin";
-       } else {
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
             model.addAttribute("post", new PostDTO());
             model.addAttribute("userLogin", userLogin);
         }
@@ -74,8 +74,8 @@ public class PostController {
     }
 
     @PostMapping("/newpost")
-    public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId,@ModelAttribute("userLogin") UserDTO userLogin) throws IOException {
-        if (userLogin==null){
+    public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId, @ModelAttribute("userLogin") UserDTO userLogin) throws IOException {
+        if (userLogin == null) {
             return "redirect:/signin";
         }
         DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId, colorId);
@@ -87,12 +87,12 @@ public class PostController {
     @GetMapping("/detailpost/{postId}")
     public Object viewDetailPost(@PathVariable Long postId, @ModelAttribute("userLogin") UserDTO userLogin) {
         PostDTO postDTO = postService.getById(postId);
-        if (postDTO.getStatusPost() == StatusPost.BLOCKED || postDTO.getStatusPost() == StatusPost.SOLD || postDTO.getStatusPost() == StatusPost.DELETE || postDTO.getStatusPost() == StatusPost.HIDE){
+        if (postDTO.getStatusPost() == StatusPost.BLOCKED || postDTO.getStatusPost() == StatusPost.SOLD || postDTO.getStatusPost() == StatusPost.DELETE || postDTO.getStatusPost() == StatusPost.HIDE) {
             return "redirect:/errors/404";
-        } else{
-            if (postDTO.getStatusPost() == StatusPost.WAITING){
-                if (userLogin != null){
-                    if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()){
+        } else {
+            if (postDTO.getStatusPost() == StatusPost.WAITING) {
+                if (userLogin != null) {
+                    if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()) {
                         return "redirect:/errors/404";
                     }
                 } else {
@@ -116,23 +116,39 @@ public class PostController {
     }
 
     @GetMapping("/delete/{id}")
-    public void deletePost(@PathVariable Long id){
-
+    public String deletePost(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
+        PostDTO postDTO = postService.getById(id);
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+                postService.remove(id);
+            }
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/sold-moto/{id}")
-    public void setSoldMoto(@PathVariable Long id){
-
+    public String setSoldMoto(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
+        PostDTO postDTO = postService.getById(id);
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+                postService.setSoldMoto(id);
+            }
+        }
+        return "redirect:/";
     }
 
 
     @GetMapping("/edit/{id}")
     public Object showEditPost(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
         PostDTO postDTO = postService.getById(id);
-        if (userLogin==null){
+        if (userLogin == null) {
             return "redirect:/signin";
-        } else{
-            if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()){
+        } else {
+            if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()) {
                 return "redirect:/errors/404";
             }
         }
@@ -143,13 +159,13 @@ public class PostController {
     }
 
     @PostMapping("/edit")
-    public String hanlderEditPost(@ModelAttribute PostDTO post,  @RequestParam("ip-upload-multi") MultipartFile[] files) {
-        postService.update(post,files);
+    public String hanlderEditPost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files) {
+        postService.update(post, files);
         return "redirect:/post/detailpost/" + post.getPostId();
     }
 
     @GetMapping("/moto-list")
-    public ModelAndView showBikeList(String br, String tp, String cc,Pageable pageable) {
+    public ModelAndView showBikeList(String br, String tp, String cc, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list-moto");
         br = "1_2_13";
@@ -159,7 +175,7 @@ public class PostController {
         List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
         modelAndView.addObject("typeMotorList", typeMotorList);
 
-        Page<PostDTO> postDTOS = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20),null,null,null,null,null,null,null, null, null,null,null);
+        Page<PostDTO> postDTOS = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), null, null, null, null, null, null, null, null, null, null, null);
         modelAndView.addObject("postList", postDTOS);
 
         System.out.println(postDTOS);
