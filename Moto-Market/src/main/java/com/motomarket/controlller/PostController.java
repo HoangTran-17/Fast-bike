@@ -171,7 +171,8 @@ public class PostController {
 //                                           Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
 //                                           String kilometerCount, String color, String province) {
     @GetMapping("/moto-list")
-    public ModelAndView showBikeList(@RequestParam(value = "br",required = false) String brandMotor,
+    public ModelAndView showBikeList(@RequestParam(value = "q",required = false) String modelMotor,
+                                     @RequestParam(value = "br",required = false) String brandMotor,
                                      @RequestParam(value = "tp",required = false) String typeMotor,
                                      @RequestParam(value = "cc",required = false) String capacity,
                                      @RequestParam(value = "pr-fr",required = false) Double priceFrom,
@@ -190,8 +191,10 @@ public class PostController {
         List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(brandMotor, typeMotor, capacity);
         modelAndView.addObject("typeMotorList", typeMotorList);
 
+//        modelMotor = "HONDA";
         Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),
-                brandMotor, typeMotor, capacity,priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
+                modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
+                modelYearMin,modelYearMax,kilometerCount,color,province);
         modelAndView.addObject("postList", postDTOS);
 
         System.out.println(postDTOS);

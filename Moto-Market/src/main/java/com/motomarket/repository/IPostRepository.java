@@ -80,14 +80,20 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             @Param("statusPost") StatusPost statusPost);
 
 
-    default Page<Post> findTopByFilters1(Pageable pageable, List<Long> brandIdList, List<Long> typeIdList, StatusPost statusPost) {
+    default Page<Post> findTopByFilters1(Pageable pageable,String modelMotor, List<Long> brandIdList, List<Long> typeIdList, StatusPost statusPost) {
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
-            Predicate predicateForBrandIdList = criteriaBuilder.conjunction();
-            if (!brandIdList.isEmpty()) {
-                predicateForBrandIdList = root.get("detailMotor").get("brandMotor").get("brandId").in(brandIdList);
+            Predicate predicateForModelMotor = criteriaBuilder.conjunction();
+            if (modelMotor != null) {
+                if (!brandIdList.isEmpty()) {
+                    predicateForModelMotor = criteriaBuilder.or(root.get("detailMotor").get("brandMotor").get("brandId").in(brandIdList),
+                                                                criteriaBuilder.like(root.get("modelMotor"), '%' + modelMotor + '%'));
+                }else
+                    predicateForModelMotor = criteriaBuilder.like(root.get("modelMotor"), '%' + modelMotor + '%');
+            } else if (!brandIdList.isEmpty()) {
+                predicateForModelMotor = root.get("detailMotor").get("brandMotor").get("brandId").in(brandIdList);
             }
-
+            System.out.println(predicateForModelMotor);
             Predicate predicateForTypeIdList = criteriaBuilder.conjunction();
             if (!typeIdList.isEmpty()) {
                 predicateForTypeIdList = root.get("detailMotor").get("typeMotor").get("typeMotorId").in(typeIdList);
@@ -95,9 +101,25 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             }
             Predicate predicateForStatusPost = root.get("statusPost").in(statusPost);
 
-            return criteriaBuilder.and(predicateForBrandIdList,predicateForTypeIdList,predicateForStatusPost);
+            return criteriaBuilder.and(predicateForModelMotor,predicateForTypeIdList,predicateForStatusPost);
         },pageable);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

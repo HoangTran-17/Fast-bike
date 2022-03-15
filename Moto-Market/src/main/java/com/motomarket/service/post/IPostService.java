@@ -52,7 +52,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //                                 int myfr, int myto, String km, String color, String pr, Pageable pageable) {
 
 
-    Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+    Page<PostDTO> findTopByFilters1(Pageable pageable,String modelMotor, String brandMotor, String typeMotor, String capacity,
                                     Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
                                     String kilometerCount, String color, String province);
 
