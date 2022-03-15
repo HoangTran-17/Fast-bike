@@ -186,7 +186,6 @@ public class PostController {
                                      @RequestParam(value = "pr",required = false) String province,
                                      Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
-        capacity = "51-174";
 
         modelAndView.setViewName("list-moto");
         List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity);
