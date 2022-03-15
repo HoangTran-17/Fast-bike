@@ -7,7 +7,7 @@
 <html class="no-js lt-ie9" lang="vi"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
-<html lang="vi" ng-app="" class="no-js"><!--<![endif]-->
+<html lang="vi" ng-app="" class="no-js" xmlns:th="http://www.thymeleaf.org"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Quản lý xe đã bán</title>
@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto_market_header.css?159852541620200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/moto_market_footer.css?159852541620200827">
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827">
+    <link rel="stylesheet" type="text/css" href="/frontend/toast-plugin/jquery.basic.toast.css">
+
     <style type="text/css">#wrapper {
         margin-top: 165px;
     }</style>
@@ -56,6 +58,7 @@
             <div class="media-body">
                 <div class="heading-2">
                     <h2 id="head_title_posts">Quản lý xe đang bán</h2>
+                    <input type="hidden"  id="idUserLG" th:value="${userLogin.userId}">
                 </div>
                 <div class="comp_motors grid " id="body_post" style="height: 650px">
 
@@ -75,13 +78,16 @@
 <div th:replace="~{fragments/footer :: footer}"></div>
 
 <script src="/frontend/vendor/jquery.js?158926651720200827"></script>
+<script src="/frontend/toast-plugin/jquery.basic.toast.js"></script>
+
 
 <script>
 
-
+  let userID = 0;
     $( document ).ready(function() {
         $('.li-menu-moto').filter("[data-id='" + 1 + "']").addClass("active")
-        getPost(1,"PUBLIC",0,10);
+        userID = $("#idUserLG").val();
+        getPost(userID,"PUBLIC",0,10);
     });
 
 
@@ -93,22 +99,22 @@
         if (dataId == 1){
             $("#datatable_paginate").children().remove();
             $("#head_title_posts").text("Quản lý xe đang bán");
-            getPost(1, "PUBLIC",0,10)
+            getPost(userID, "PUBLIC",0,10)
         } else{
             if (dataId == 2){
                 $("#datatable_paginate").children().remove();
                 $("#head_title_posts").text("Quản lý xe đã bán");
-                getPost(1, "SOLD",0,10)
+                getPost(userID, "SOLD",0,10)
             } else {
                 if (dataId == 3){
                     $("#datatable_paginate").children().remove();
                     $("#head_title_posts").text("Quản lý xe đã xóa");
-                    getPost(1, "DELETE",0,10)
+                    getPost(userID, "DELETE",0,10)
                 } else{
                     if (dataId == 4){
                         $("#datatable_paginate").children().remove();
                         $("#head_title_posts").text("Quản lý xe đang chờ duyệt");
-                        getPost(1, "WAITING",0,10)
+                        getPost(userID, "WAITING",0,10)
                     }
                 }
             }
@@ -130,31 +136,40 @@
             type: "GET",
             url: "/api/post/"+userId+"/"+status+"?pageNo="+pageNo+"&pageSize="+pageSize
         }).done(function (data) {
-            let str = "";
-            $.each(data.content,function (key,value) {
-                let img;
+            console.log(data);
+            if (data.content.length === 0){
+                $.Toast("Tải dữ liệu không hoàn thành hãy thử lại", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+            }else {
+                let str = "";
+                $.each(data.content,function (key,value) {
+                    let img;
 
-                if (value.imageDTOList.length === 0) {
-                    img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
-                } else {
-                    img ='/api/image/load/'+ value.imageDTOList[0].imageName;
-                }
-                let price;
-                if (value.price==null) {
-                    price = "Liên hệ"
-                } else {
-                    price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
-                }
+                    if (value.imageDTOList.length === 0) {
+                        img = "https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2019_04_12/a2_1.jpg";
+                    } else {
+                        img ='/api/image/load/'+ value.imageDTOList[0].imageName;
+                    }
+                    let price;
+                    if (value.price==null) {
+                        price = "Liên hệ"
+                    } else {
+                        price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value.price);
+                    }
 
-                let href;
-                if(status==="DELETE") {
-                    href = "#";
-                } else {
-                    href   = "/post/detailpost/"+value.postId;
-                }
+                    let href;
+                    if(status==="DELETE") {
+                        href = "#";
+                    } else {
+                        href   = "/post/detailpost/"+value.postId;
+                    }
 
 
-                str+= `
+                    str+= `
                 <div class="item">
                         <a
                             href="${href}">
@@ -180,18 +195,19 @@
                     </div>
                 `
 
-            })
-            $("#body_post").html(str);
-            if (data.totalPages <= 1) {
-                $("#datatablePagination").css("display", "none");
-            } else {
-                let pagination = drawPaginationEntries(data);
-                $("#datatable_paginate").append(drawPaginationPrevAndNext());
-                $("#datatable_pagination li:first").after(pagination);
-                $("#datatablePagination").css("display", "");
-                changePageEntries(userId,status);
-                doPrevPage(userId,status);
-                doNextPage(Number(data.totalPages-1),userId,status);
+                })
+                $("#body_post").html(str);
+                if (data.totalPages <= 1) {
+                    $("#datatablePagination").css("display", "none");
+                } else {
+                    let pagination = drawPaginationEntries(data);
+                    $("#datatable_paginate").append(drawPaginationPrevAndNext());
+                    $("#datatable_pagination li:first").after(pagination);
+                    $("#datatablePagination").css("display", "");
+                    changePageEntries(userId,status);
+                    doPrevPage(userId,status);
+                    doNextPage(Number(data.totalPages-1),userId,status);
+                }
             }
         })
     }

@@ -46,11 +46,17 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
 
+<<<<<<< HEAD
     //        Page<PostDTO> postDTOS = postService.findTopByFilters1(cc,prfr,prto,myfr,myto,km,color,pr);
     //
     //public ModelAndView showBikeList(String br, String tp, String cc, Double prfr, Double prto,
     //                                 int myfr, int myto, String km, String color, String pr, Pageable pageable) {
 
+=======
+    Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax,
+                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
+                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
+>>>>>>> tien-dev
 
     Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
                                     Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,

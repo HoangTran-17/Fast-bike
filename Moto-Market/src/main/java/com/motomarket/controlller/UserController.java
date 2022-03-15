@@ -74,8 +74,12 @@ public class UserController {
     }
 
     @GetMapping("/moto-manager")
-    public ModelAndView showMotoManagerView() {
+    public Object showMotoManagerView(@ModelAttribute("userLogin") UserDTO userLogin) {
+        if (userLogin==null){
+            return "redirect:/signin";
+        }
         ModelAndView modelAndView = new ModelAndView("moto-manager");
+        modelAndView.addObject("userLogin", userLogin);
         return modelAndView;
     }
 

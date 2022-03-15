@@ -51,6 +51,7 @@ public class HomeController {
     }
 
 
+<<<<<<< HEAD
     @PostMapping("/search-moto-home")
     public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("list-moto");
@@ -82,6 +83,39 @@ public class HomeController {
 //        System.out.println(postDTOPage.getContent());
         return modelAndView;
     }
+=======
+//    @PostMapping("/search-moto-home")
+//    public ModelAndView showListSearch(@RequestParam String br, String cc, String sr, Double pr, String pv, Pageable pageable) {
+//        ModelAndView modelAndView = new ModelAndView("list-moto");
+//        Integer ccMin = null;
+//        Integer ccMax = null;
+//        Double prMin = 0.0;
+//        if (br.equals("-1")) {
+//            br = "";
+//        }
+//        if (cc.equals("-1")) {
+//            cc = null;
+//        } else {
+//            ccMin = Integer.valueOf(cc.substring(0, cc.indexOf("-")));
+//            ccMax = Integer.valueOf(cc.substring(cc.indexOf("-") + 1, cc.length()));
+//
+//        }
+//        if (sr.equals("-1")) {
+//            sr = "";
+//        }
+//        if (pr == -1) {
+//            pr = null;
+//            prMin = null;
+//        }
+//        if (pv.equals("-1")) {
+//            pv = null;
+//        }
+//        String modelMotor = br + " " + sr;
+//        Page<PostDTO> postDTOPage = postService.findTopByFilters(5, modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
+//        System.out.println(postDTOPage.getContent());
+//        return modelAndView;
+//    }
+>>>>>>> tien-dev
 
 //    @GetMapping("/bike-list")
 //    public ModelAndView showBikeList(String br,String tp, String cc,Double prfr, Double prto,int myfr, int myto,String km,String color,String pr) {
@@ -91,10 +125,15 @@ public class HomeController {
 //        modelAndView.addObject("brandList", brandList);
 //
 //        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(br, tp, cc);
+<<<<<<< HEAD
 //=======
 //        Page<PostDTO> postDTOPage = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
 //        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
 //>>>>>>> tien-dev
+=======
+//        Page<PostDTO> postDTOPage = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), modelMotor, null, null, pv, null, ccMin, ccMax, prMin, pr, null, null);
+//        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+>>>>>>> tien-dev
 //        modelAndView.addObject("typeMotorList", typeMotorList);
 //        modelAndView.addObject("postList", postDTOPage);
 //        return modelAndView;
