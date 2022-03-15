@@ -1,5 +1,6 @@
 package com.motomarket.repository;
 
+import com.motomarket.repository.model.DetailMotor;
 import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.User;
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import java.util.List;
 
@@ -77,47 +79,45 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             @Param("color") String colorMotor,
             @Param("statusPost") StatusPost statusPost);
 
-    @Query("select p from Post p where p.statusPost = :statusPost " +
-            "and ( p.detailMotor.brandMotor.brandName in :brandMotorList) " +
-            "and ((:modelYearMin is null and :modelYearMax is null) " +
-            "or (p.detailMotor.modelYear.modelYearName between :modelYearMin and :modelYearMax))" +
-            "and (p.province = :province or :province is null) " +
-            "and (:typeMotor is null or p.detailMotor.typeMotor.typeMotorName = :typeMotor)" +
-            "and ((:capacityMin is null and :capacityMax is null) " +
-            "or (p.detailMotor.seriesMotor.capacity between :capacityMin and :capacityMax))" +
-            "and ((:priceMin is null and :priceMax is null) " +
-            "or (p.price between :priceMin and :priceMax)) " +
-            "and (:km is null or p.kilometerCount = :km)" +
-            "and (:color is null or p.detailMotor.colorMotor.colorName = :color) " +
-            "order by p.postDate DESC")
-    Page<Post> findTopByFilters1(
-            Pageable pageable, @Param("brandMotorList") List<String> brandMotorList,
-            @Param("modelYearMin") Integer modelYearMin, @Param("modelYearMax") Integer modelYearMax,
-            @Param("province") String province,
-            @Param("typeMotor") String typeMotor,
-            @Param("capacityMin") Integer capacityMin, @Param("capacityMax") Integer capacityMax,
-            @Param("priceMin") Double priceMin, @Param("priceMax") Double priceMax,
-            @Param("km") String kilometerCount,
-            @Param("color") String colorMotor,
-            @Param("statusPost") StatusPost statusPost);
+
+    default Page<Post> findTopByFilters1(Pageable pageable, List<Long> brandIdList, List<Long> typeIdList, StatusPost statusPost) {
+        return findAll((root, criteriaQuery, criteriaBuilder) -> {
+
+            Predicate predicateForBrandIdList = criteriaBuilder.conjunction();
+            if (!brandIdList.isEmpty()) {
+                predicateForBrandIdList = root.get("detailMotor").get("brandMotor").get("brandId").in(brandIdList);
+            }
+
+            Predicate predicateForTypeIdList = criteriaBuilder.conjunction();
+            if (!typeIdList.isEmpty()) {
+                predicateForTypeIdList = root.get("detailMotor").get("typeMotor").get("typeMotorId").in(typeIdList);
+
+            }
+            Predicate predicateForStatusPost = root.get("statusPost").in(statusPost);
+
+            return criteriaBuilder.and(predicateForBrandIdList,predicateForTypeIdList,predicateForStatusPost);
+        },pageable);
+    }
 
 
 
     default Page<Post> findBy(Pageable pageable,List<String> brandNames, Integer modelYearMin, Integer modelYearMax) {
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
-            Predicate predicateForBrandNames = null;
+
+            Predicate predicateForBrandNames = criteriaBuilder.conjunction();
             if (!brandNames.isEmpty()) {
-                predicateForBrandNames = root.get("brandName").in(brandNames);
+                predicateForBrandNames = root.get("detailMotor").get("brandMotor").get("brandName").in(brandNames);
             }
-            Predicate predicateForModelYear = null;
+
+            Predicate predicateForModelYear = criteriaBuilder.conjunction();
             if (modelYearMin != null && modelYearMax != null) {
-                predicateForModelYear = criteriaBuilder.between(root.get("modelYearName"), modelYearMin, modelYearMax);
+                predicateForModelYear = criteriaBuilder.between(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMin, modelYearMax);
             } else {
                 if (modelYearMin != null) {
-                    predicateForModelYear = criteriaBuilder.greaterThan(root.get("modelYearName"), modelYearMin);
+                    predicateForModelYear = criteriaBuilder.greaterThan(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMin);
                 }
                 if (modelYearMax != null) {
-                    predicateForModelYear = criteriaBuilder.lessThan(root.get("modelYearName"), modelYearMax);
+                    predicateForModelYear = criteriaBuilder.lessThan(root.get("detailMotor").get("modelYear").get("modelYearName"), modelYearMax);
                 }
             }
 
@@ -206,6 +206,7 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             + " AND p.statusPost = 2"
     )
     Page<Post> findHidePostByKeySearch(String key, Pageable pageable);
+
 }
 
 
