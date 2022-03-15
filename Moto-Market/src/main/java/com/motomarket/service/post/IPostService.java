@@ -6,6 +6,7 @@ import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.DetailMotorDTO;
 import com.motomarket.service.dto.PostDTO;
 import com.motomarket.service.dto.UserDTO;
+import com.motomarket.service.filter.CapacityFilter;
 import com.motomarket.service.response.PostResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -101,5 +102,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
 
     String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity);
+
+    List<CapacityFilter> getCapacityList(String modelMotor, String brandMotor, String typeMotor, String capacity);
 }
 
