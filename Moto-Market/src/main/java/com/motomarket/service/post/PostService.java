@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -228,12 +229,31 @@ public class PostService implements IPostService {
 
         List<Long> brandIdList = setBrandIdList(brandMotor);
         List<Long> typeIdList = setTypeIdList(typeMotor);
-        String[] capa = capacity.split("-");
-        String capacityMin = capa[0];
-        String capacityMax = capa[1];
+        Integer capacityMin = null;
+        Integer capacityMax = null;
+        if (capacity != null) {
+            Integer[] capa = getCapacityMinMax(capacity);
+            if (capa != null) {
+                capacityMin = capa[0];
+                capacityMax = capa[1];
+            }
+        }
 
-        Page<Post> posts = postRepository.findTopByFilters1(pageable,modelMotor, brandIdList,typeIdList, StatusPost.PUBLIC);
+
+        Page<Post> posts = postRepository.findTopByFilters1(PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(), Sort.by("postDate").descending()),modelMotor, brandIdList,typeIdList,capacityMin,capacityMax, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
+    }
+
+    private Integer[] getCapacityMinMax(String capacity) {
+        List<CapacityFilter> capacityFilterList = getCapacityListSample();
+        for (int i = 0; i < capacityFilterList.size(); i++) {
+            if (capacityFilterList.get(i).getParam().equals(capacity)) {
+                Integer min = capacityFilterList.get(i).getMin();
+                Integer max = capacityFilterList.get(i).getMax();
+                return new Integer[]{min,max};
+            }
+        }
+        return null;
     }
 
     private List<Long> setTypeIdList(String typeMotor) {
@@ -478,12 +498,12 @@ public class PostService implements IPostService {
 
     private List<CapacityFilter> getCapacityListSample() {
         List<CapacityFilter> capacityFilterList = new ArrayList<>();
-        capacityFilterList.add(new CapacityFilter("0-50","- 50cc"));
-        capacityFilterList.add(new CapacityFilter("51-174","51-174cc"));
-        capacityFilterList.add(new CapacityFilter("175-400","175-400cc"));
-        capacityFilterList.add(new CapacityFilter("401-750cc","401-750cc"));
-        capacityFilterList.add(new CapacityFilter("751-1000","751-1000cc"));
-        capacityFilterList.add(new CapacityFilter("1001-9999","1001cc -"));
+        capacityFilterList.add(new CapacityFilter(0,50,"0-50","- 50cc"));
+        capacityFilterList.add(new CapacityFilter(51,174,"51-174","51-174cc"));
+        capacityFilterList.add(new CapacityFilter(175,400,"175-400","175-400cc"));
+        capacityFilterList.add(new CapacityFilter(401,750,"401-750cc","401-750cc"));
+        capacityFilterList.add(new CapacityFilter(751,1000,"751-1000","751-1000cc"));
+        capacityFilterList.add(new CapacityFilter(1000,9999,"1001-9999","1001cc -"));
         return capacityFilterList;
     }
 }

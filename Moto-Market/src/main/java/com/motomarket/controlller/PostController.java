@@ -186,6 +186,8 @@ public class PostController {
                                      @RequestParam(value = "pr",required = false) String province,
                                      Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
+        capacity = "51-174";
+
         modelAndView.setViewName("list-moto");
         List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity);
         modelAndView.addObject("brandList", brandList);
@@ -200,7 +202,6 @@ public class PostController {
         modelAndView.addObject("capacityList", capacityList);
 
 
-//        modelMotor = "HONDA";
         Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),
                 modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
                 modelYearMin,modelYearMax,kilometerCount,color,province);
