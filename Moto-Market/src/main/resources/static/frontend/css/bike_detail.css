@@ -891,6 +891,37 @@ a.report-product{
     color: #000;
 }
 
+.msg_info_prouduct{
+	background-color: lightgray;
+	width: 400px;
+	margin: 0 auto;
+	margin-left: 600px;
+	padding: 5px;
+	text-align: center;
+	margin-top: -30px;
+	border-radius: 3px;
+	margin-bottom: 5px;
+	color: #0e2fb8;
+}
+
+.btn-action-post{
+	background-color: #0e2fb8;
+	width: 135px;
+	height: 30px;
+	margin-left: 50px;
+	color: #fff;
+	font-style: italic;
+	border-radius: 4px;
+	text-transform:none;
+}
+.btn-action-post:hover{
+	background-color: #0060ce;
+}
+.btn-action-post:active{
+	background-color: #003f86;
+}
+
+
 .p-old {
   padding: 1px 5px !important;
   border: 1px solid #f49500 !important;

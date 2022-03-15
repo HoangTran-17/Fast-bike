@@ -7,9 +7,10 @@ import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
 <<<<<<< HEAD
 <<<<<<< HEAD
-import com.motomarket.service.dto.UserView;
-
+<<<<<<< HEAD
 =======
+>>>>>>> tien-dev
+import com.motomarket.service.dto.UserView;
 
 import com.motomarket.service.dto.UserView;
 =======
@@ -22,7 +23,6 @@ import com.motomarket.service.dto.UserView;
 >>>>>>> huu-dev
 
 import com.motomarket.service.dto.UserView;
->>>>>>> tien-dev
 import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
 
@@ -30,11 +30,14 @@ import com.motomarket.service.dto.UserView;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 
 >>>>>>> huu-dev
 
+>>>>>>> tien-dev
+=======
 >>>>>>> tien-dev
 import com.motomarket.service.dto.UserView;
 import org.springframework.web.multipart.MultipartFile;

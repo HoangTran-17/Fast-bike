@@ -7,7 +7,7 @@ import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
@@ -41,17 +40,14 @@ public class LoginController {
 
 
     @GetMapping("/signin")
-    public ModelAndView toLoginView(@ModelAttribute("userLogin") UserDTO userLogin) {
-        ModelAndView modelAndView = new ModelAndView();
-        if (userLogin==null){
-            modelAndView.setViewName("/loginPage/login");
-            modelAndView.addObject("user",new UserDTO());
+    public String toLoginView(@ModelAttribute("userLogin") UserDTO userLogin, Model model) {
+        if (userLogin == null) {
+            model.addAttribute("user", new UserDTO());
+            return "/loginPage/login";
         } else {
-            modelAndView.addObject("userLogin", userLogin);
-            modelAndView.setViewName("index");
+            return "redirect:/";
         }
-        return modelAndView;
-}
+    }
 
 
     @GetMapping("/signup")
@@ -62,18 +58,17 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView handleSignUp(@ModelAttribute UserDTO user) {
+    public String handleSignUp(@ModelAttribute UserDTO user) {
         Date date = new Date();
         user.setRole(Role.USER);
         user.setUserStatus(StatusUser.ACTIVATE);
         user.setCreated(date);
         userService.save(user);
-        ModelAndView modelAndView = new ModelAndView("/loginPage/login");
-        return modelAndView;
+        return "redirect:/signin";
     }
 
     @PostMapping("/signin")
-    public ModelAndView handleSignIn(@ModelAttribute UserDTO user, @CookieValue(value = "loginUser", defaultValue = "0") String loginUsername, HttpServletResponse response, HttpServletRequest request) {
+    public Object handleSignIn(@ModelAttribute UserDTO user, @CookieValue(value = "loginUser", defaultValue = "0") String loginUsername, HttpServletResponse response, HttpServletRequest request) {
         UserDTO userDTO = userService.findUserByEmail(user.getEmail());
         ModelAndView modelAndView = new ModelAndView();
         if (userDTO != null) {
@@ -83,8 +78,7 @@ public class LoginController {
                 Cookie cookie = new Cookie("loginUser", loginUsername);
                 cookie.setMaxAge(24 * 60 * 60 * 30);
                 response.addCookie(cookie);
-                modelAndView.addObject("loginUser", userDTO);
-                modelAndView.setViewName("index");
+                return "redirect:/";
             } else {
                 modelAndView.addObject("message", "Đăng nhập không thành công vui lòng thử lại!");
                 modelAndView.addObject("user", new UserDTO());
@@ -98,30 +92,12 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping("/test")
-    public ModelAndView testController() {
-        ModelAndView modelAndView = new ModelAndView("list-moto");
-        return modelAndView;
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("loginUser", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
-
-    @GetMapping("/test2")
-    public ModelAndView testController2(@ModelAttribute("userLogin") UserDTO userLogin) {
-        ModelAndView modelAndView = new ModelAndView("edit-post");
-
-        return modelAndView;
-    }
-
-    @GetMapping("/test3")
-    public ModelAndView testController3() {
-        ModelAndView modelAndView = new ModelAndView("moto-manager");
-        return modelAndView;
-    }
-
-    @GetMapping("/test4")
-    public ModelAndView testController4() {
-        ModelAndView modelAndView = new ModelAndView("user-view");
-        return modelAndView;
-    }
-
 
 }

@@ -1,25 +1,27 @@
 package com.motomarket.controlller;
 
 import com.motomarket.repository.IPostRepository;
-import com.motomarket.service.dto.DetailMotorDTO;
-import com.motomarket.service.dto.ImageDTO;
-import com.motomarket.service.dto.PostDTO;
-import com.motomarket.service.dto.UserDTO;
+import com.motomarket.repository.model.StatusPost;
+import com.motomarket.service.dto.*;
+import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.IDetailMotorService;
 import com.motomarket.service.motor.IModelYearService;
+import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.post.IImageService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
-import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/post")
@@ -43,62 +45,142 @@ public class PostController {
     @Autowired
     private IPostRepository postRepository;
 
+    @Autowired
+    IBrandMotorService brandMotorService;
+
+    @Autowired
+    ITypeMotorService typeMotorService;
+
+
+    @ModelAttribute("userLogin")
+    public UserDTO getUserLoginFromCookie(@CookieValue(value = "loginUser", defaultValue = "0") String loginUsername) {
+        UserDTO userLogin = null;
+        if (!loginUsername.equals("0")) {
+            userLogin = userService.getByUserName(loginUsername);
+        }
+        return userLogin;
+    }
+
+
     @GetMapping("/newpost")
-    public ModelAndView toPostPage() {
-        UserDTO userLogin = userService.getById(1L);
-        ModelAndView modelAndView = new ModelAndView("new-post");
-        modelAndView.addObject("post", new PostDTO());
-        modelAndView.addObject("userLogin", userLogin);
-        return modelAndView;
+    public String toPostPage(@ModelAttribute("userLogin") UserDTO userLogin, Model model) {
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            model.addAttribute("post", new PostDTO());
+            model.addAttribute("userLogin", userLogin);
+        }
+        return "new-post";
     }
 
     @PostMapping("/newpost")
-    public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId) throws IOException {
-        UserDTO user = userService.getById(1L);
+    public String handlePost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files, @RequestParam("moder-year-id") Long moderYearId, @RequestParam("color-id") Long colorId, @ModelAttribute("userLogin") UserDTO userLogin) throws IOException {
+        if (userLogin == null) {
+            return "redirect:/signin";
+        }
         DetailMotorDTO detailMotor = detailMotorService.getByModelYearAndColorMotor(moderYearId, colorId);
-        Long newPostId = postService.savePost(post, user, detailMotor, files);
+        Long newPostId = postService.savePost(post, userLogin, detailMotor, files);
         return "redirect:/post/detailpost/" + newPostId;
     }
 
 
     @GetMapping("/detailpost/{postId}")
-    public ModelAndView viewDetailPost(@PathVariable Long postId) {
+    public Object viewDetailPost(@PathVariable Long postId, @ModelAttribute("userLogin") UserDTO userLogin) {
         PostDTO postDTO = postService.getById(postId);
+        if (postDTO.getStatusPost() == StatusPost.BLOCKED || postDTO.getStatusPost() == StatusPost.SOLD || postDTO.getStatusPost() == StatusPost.DELETE || postDTO.getStatusPost() == StatusPost.HIDE) {
+            return "redirect:/errors/404";
+        } else {
+            if (postDTO.getStatusPost() == StatusPost.WAITING) {
+                if (userLogin != null) {
+                    if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()) {
+                        return "redirect:/errors/404";
+                    }
+                } else {
+                    return "redirect:/errors/404";
+                }
+            }
+        }
         List<ImageDTO> imageList = imageService.findAllByPostDTO(postDTO);
         DetailMotorDTO detailMotorDTO = postDTO.getDetailMotorDTO();
         ModelAndView modelAndView = new ModelAndView("moto-detail");
-        UserDTO userDTO = postDTO.getUserDTO();
-        PrettyTime p = new PrettyTime(new Locale("vi"));
-        String time = p.format(postDTO.getPostDate());
-        String timeFormat = time.substring(0, 1).toUpperCase() + time.substring(1);
         String seriesName = detailMotorDTO.getBrandMotor().getBrandName() + " " + detailMotorDTO.getSeriesMotor().getSeriesName();
         List<PostDTO> relatedPostDTO = postService.findTopBySeriesMotor(8, seriesName);
         List<PostDTO> newPostList = postService.findListOfLatestPosts(15);
+        modelAndView.addObject("userLogin", userLogin);
         modelAndView.addObject("post", postDTO);
         modelAndView.addObject("images", imageList);
         modelAndView.addObject("detail", detailMotorDTO);
-//        modelAndView.addObject("timePost", timeFormat);
         modelAndView.addObject("postsRelated", relatedPostDTO);
         modelAndView.addObject("newPosts", newPostList);
-        modelAndView.addObject("postOwner", userDTO);
         return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
+        PostDTO postDTO = postService.getById(id);
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+                postService.remove(id);
+            }
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/sold-moto/{id}")
+    public String setSoldMoto(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
+        PostDTO postDTO = postService.getById(id);
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+                postService.setSoldMoto(id);
+            }
+        }
+        return "redirect:/";
     }
 
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEditPost(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("edit-post");
+    public Object showEditPost(@PathVariable Long id, @ModelAttribute("userLogin") UserDTO userLogin) {
         PostDTO postDTO = postService.getById(id);
-        UserDTO userLogin = userService.getById(1L);
+        if (userLogin == null) {
+            return "redirect:/signin";
+        } else {
+            if (userLogin.getUserId() != postDTO.getUserDTO().getUserId()) {
+                return "redirect:/errors/404";
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("edit-post");
         modelAndView.addObject("userLogin", userLogin);
         modelAndView.addObject("post", postDTO);
         return modelAndView;
     }
 
     @PostMapping("/edit")
-    public String hanlderEditPost(@ModelAttribute PostDTO post,  @RequestParam("ip-upload-multi") MultipartFile[] files) {
-        postService.update(post,files);
+    public String hanlderEditPost(@ModelAttribute PostDTO post, @RequestParam("ip-upload-multi") MultipartFile[] files) {
+        postService.update(post, files);
         return "redirect:/post/detailpost/" + post.getPostId();
+    }
+
+    @GetMapping("/moto-list")
+    public ModelAndView showBikeList(String br, String tp, String cc, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("list-moto");
+        br = "1_2_13";
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(br, tp, cc);
+        modelAndView.addObject("brandList", brandList);
+
+        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+        modelAndView.addObject("typeMotorList", typeMotorList);
+
+        Page<PostDTO> postDTOS = postService.findTopByFilters(PageRequest.of(pageable.getPageNumber(), 20), null, null, null, null, null, null, null, null, null, null, null);
+        modelAndView.addObject("postList", postDTOS);
+
+        System.out.println(postDTOS);
+
+        return modelAndView;
     }
 
 }

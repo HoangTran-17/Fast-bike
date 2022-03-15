@@ -27,8 +27,9 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //  List bài viết mới nhất, tìm kiếm theo seriesMotor -"Honda Future 125"
     List<PostDTO> findTopBySeriesMotor(int listSize, String seriesMotor);
 
-    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 "
-    Page<PostDTO> findTopByModelMotorIsLike(int pageSize,String modelMotor);
+
+    //  List bài viết mới nhất, tìm kiếm theo modelMotor -"Honda Future 125 2018 Trắng"
+    Page<PostDTO> findTopByModelMotorIsLike(Pageable pageable, String modelMotor);
 
     //  List bài viết mới nhất, tìm kiếm theo province -"Hà Nội"
     Page<PostDTO> findTopByProvince(int pageSize,String province);
@@ -39,11 +40,22 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //  List bài viết mới nhất, tìm kiếm theo phân khối -"51 - 174"
     Page<PostDTO> findTopByCapacity(int pageSize,int capacityMin, int capacityMax);
 
-    //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
-    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,Integer modelYearMin, Integer modelYearMax,
-                                   String province,String typeMotor,Integer capacityMin, Integer capacityMax,
-                                   Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
+//    //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
+//    Page<PostDTO> findTopByFilters(int pageSize,String modelMotor,Integer modelYearMin, Integer modelYearMax,
+//                                   String province,String typeMotor,Integer capacityMin, Integer capacityMax,
+//                                   Double priceMin, Double priceMax,String kilometerCount, String colorMotor);
 
+    //    List bài viêt mới nhất, tìm kiếm theo bộ lọc: modeMotor, province, typeMotor và Capacity.
+    Page<PostDTO> findTopByFilters(Pageable pageable, String modelMotor, Integer modelYearMin, Integer modelYearMax,
+                                   String province, String typeMotor, Integer capacityMin, Integer capacityMax,
+                                   Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
+
+<<<<<<< HEAD
+=======
+    Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax,
+                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
+                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
+>>>>>>> tien-dev
 
     Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor, String typeMotor);
 
@@ -88,5 +100,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     void publicPost(Long id);
     void blockPost(Long id);
+
+    void setSoldMoto(Long id);
 }
 

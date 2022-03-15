@@ -16,7 +16,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=1050">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/frontend/css/font.css?152877481320200827">
     <link rel="stylesheet" href="/frontend/css/desktop.css?159852541620200827">
     <link rel="stylesheet" href="/frontend/css/main.css?158348098520200827">
@@ -31,8 +35,8 @@
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827">
     <link rel="stylesheet" href="/frontend/css/bike_detail.css?159852541620200827">
 
-    <link href="/frontend/slider/thumbnail-slider.css" rel="stylesheet" type="text/css" />
-    <link href="/frontend/slider/ninja-slider.css" rel="stylesheet" type="text/css" />
+    <link href="/frontend/slider/thumbnail-slider.css" rel="stylesheet" type="text/css"/>
+    <link href="/frontend/slider/ninja-slider.css" rel="stylesheet" type="text/css"/>
     <script src="/frontend/slider/thumbnail-slider.js" type="text/javascript"></script>
     <script src="/frontend/slider/ninja-slider.js" type="text/javascript"></script>
 
@@ -65,19 +69,27 @@
             <!--                </ul>-->
             <!--            </div>-->
 
-            <div id="center" class="product_detail"  >
+            <div id="center" class="product_detail">
                 <div id="content">
                     <article class="product" id="product-123">
                         <h1 class="module_title">
-                            <th:block  th:switch="${post.statusPost}">
-                                    <p class="msg_publish_prouduct" th:case="${T(com.motomarket.repository.model.StatusPost).WAITING}">
-                                        Bài đăng đang được ban quản trị kiểm duyệt vui lòng chờ chúng tôi xử lí.
-                                    </p>
+                            <th:block
+                                    th:if="${post.statusPost} == ${T(com.motomarket.repository.model.StatusPost).WAITING}">
+                                <p class="msg_publish_prouduct">
+                                    Bài đăng của bạn đang được ban quản trị kiểm duyệt vui lòng chờ chúng tôi xử lí.
+                                </p>
                             </th:block>
+
 
                             <span class="bottom_redline" th:utext="${post.title}">
                             </span>
+
                             <label class="i-condition p-new"> Xe cũ</label>
+                            <th:block th:if="${userLogin != null}">
+                                <p class="msg_info_prouduct" th:if="${post.userDTO.userId} == ${userLogin.userId}">
+                                    Bạn đang xem bài đăng của bạn
+                                </p>
+                            </th:block>
                         </h1>
 
 
@@ -88,7 +100,9 @@
                                         <div class="slider-inner">
                                             <ul>
                                                 <th:block th:each="image : ${images}">
-                                                    <li><a class="ns-img" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a></li>
+                                                    <li><a class="ns-img"
+                                                           th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a>
+                                                    </li>
                                                 </th:block>
                                             </ul>
                                         </div>
@@ -97,7 +111,8 @@
                                                 <ul>
                                                     <th:block th:each="image : ${images}">
                                                         <li>
-                                                            <a class="thumb" th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a>
+                                                            <a class="thumb"
+                                                               th:href="@{/api/image/load/{idImage}(idImage=${image.imageName})}"></a>
                                                         </li>
                                                     </th:block>
                                                 </ul>
@@ -109,11 +124,13 @@
                             <div class="module_body">
                                 <strong>
                                     <th:block th:if="${post.price}">
-                                        <big class="price" <p th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p></big>
+                                        <big class="price"
+                                        <p th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p></big>
                                         <!-- Other code -->
                                     </th:block>
                                     <th:block th:unless="${post.price}">
-                                        <big class="price" <p>Liên hệ</p></big>
+                                        <big class="price"
+                                        <p>Liên hệ</p></big>
                                         <!-- Other code -->
                                     </th:block>
                                     <!-- End Group button action -->
@@ -183,17 +200,17 @@
                                         <td>
                                             <label title="Đời xe">Đời xe</label>
                                         </td>
-                                        <td  th:utext="${detail.modelYear.modelYearName}">
+                                        <td th:utext="${detail.modelYear.modelYearName}">
                                         </td>
                                         <td>
                                             <label title="Sở hữu">Sở Hữu</label>
                                         </td>
-                                        <th:block  th:switch="${post.ownership}">
+                                        <th:block th:switch="${post.ownership}">
                                             <td th:case="${T(com.motomarket.repository.model.Ownership).OWNERSHIP}">
                                                 Chính Chủ
                                             </td>
                                             <td th:case="${T(com.motomarket.repository.model.Ownership).NO_OWNERSHIP}">
-                                                 Không Chính Chủ
+                                                Không Chính Chủ
                                             </td>
                                         </th:block>
 
@@ -202,7 +219,7 @@
                                         <td>
                                             <label title="Phân khối">Phân khối</label>
                                         </td>
-                                        <td  th:utext="${detail.seriesMotor.capacity} + ' cc'">
+                                        <td th:utext="${detail.seriesMotor.capacity} + ' cc'">
 
                                         </td>
                                         <td>
@@ -223,7 +240,8 @@
                                             <label title="Địa điểm">Địa điểm</label>
                                         </td>
                                         <td>
-                                          <span th:utext="${post.district}"></span>, <span th:utext="${post.province}"></span>
+                                            <span th:utext="${post.district}"></span>, <span
+                                                th:utext="${post.province}"></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -235,7 +253,7 @@
                                         </td>
                                         <td colspan="2">
                                             <a target="_blank"
-                                               href="https://www.webike.vn/cho-xe-may/series/wave-alpha-395.html">
+                                               href="javascript:void(0)">
                                                 Xem thống kê xe <b th:utext="${detail.seriesMotor.seriesName}"></b> khác
                                             </a>
                                         </td>
@@ -243,56 +261,160 @@
                                 </table>
                                 <!-- process customer info -->
                                 <!-- end - process customer info -->
-                                <th:block  th:switch="${post.statusPost}">
-                                    <div class="customer_info" id="right-shop-info" th:case="${T(com.motomarket.repository.model.StatusPost).PUBLIC}">
-                                        <p class="name">
-                                            Họ tên chủ xe:
-                                            <strong>
-                                                <b th:utext="${post.sellerName}"></b>
-                                            </strong>
-                                            <br>
-                                            Liên hệ người đăng:
-                                            <a target="_blank" th:href="@{/user/view/{idUser}(idUser=${postOwner.userId})}">
-                                                <b th:utext="${postOwner.userName}"></b>
-                                            </a>
-                                        </p>
-                                        <div class="action">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <a aria-hidden="true" id="showPhone-btn" href="javascript:void(0);"
-                                                           class="btn-show-address show-address">
-                                                            <em class="icon phone"></em>
-                                                            <span id="phoneShowBox">Bấm để xem số điện thoại</span>
-                                                        </a>
-                                                        <input type="hidden" id="phoneNumber" th:value="${post.sellerPhoneNumber}">
-                                                    </td>
-                                                    <td>
-                                                        <p class="note_contact">* Vui lòng cho người bán biết
-                                                            bạn đã tìm thấy xe của họ tại Fastbike</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                <th:block th:if="${userLogin != null}">
+                                    <th:block
+                                            th:if="${T(com.motomarket.repository.model.StatusPost).PUBLIC} AND ${post.userDTO.userId} != ${userLogin.userId}">
+                                        <div class="customer_info" id="right-shop-info">
+                                            <p class="name">
+                                                Tên chủ xe:
+                                                <strong>
+                                                    <b th:utext="${post.sellerName}"></b>
+                                                </strong>
+                                                <br>
+                                                Liên hệ người đăng:
+                                                <a target="_blank"
+                                                   th:href="@{/user/view/{idUser}(idUser=${post.userDTO.userId})}">
+                                                    <b th:utext="${post.userDTO.userName}"></b>
+                                                </a>
+                                            </p>
+                                            <div class="action">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <a aria-hidden="true" id="showPhone-btn"
+                                                               href="javascript:void(0);"
+                                                               class="btn-show-address show-address">
+                                                                <em class="icon phone"></em>
+                                                                <span id="phoneShowBox">Bấm để xem số điện thoại</span>
+                                                            </a>
+                                                            <input type="hidden" id="phoneNumber"
+                                                                   th:value="${post.sellerPhoneNumber}">
+                                                        </td>
+                                                        <td>
+                                                            <p class="note_contact">* Vui lòng cho người bán biết
+                                                                bạn đã tìm thấy xe của họ tại Fastbike</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th:block>
-
-                                <div class="safety-buy">
-                                    <h3 class="module_title line_bottom">
+                                        <div class="safety-buy">
+                                            <h3 class="module_title line_bottom">
                                         <span class="title">
                                             Mua xe an toàn
                                         </span>
-                                    </h3>
-                                    <ul class="content">
-                                        <li><span style="color:red">KHÔNG ĐẶT CỌC, CHUYỂN KHOẢN trước khi nhận
+                                            </h3>
+                                            <ul class="content">
+                                                <li><span style="color:red">KHÔNG ĐẶT CỌC, CHUYỂN KHOẢN trước khi nhận
                                                 xe.</span></li>
-                                        <li>Nhờ người có chuyên môn kiểm tra xe, tránh mua xe bị thay thế phụ tùng kém
-                                            chất lượng, không rõ nguồn gốc, xe gian...
-                                        </li>
-                                        <li>Kiểm tra kỹ giấy tờ xe và các giấy tờ mua bán liên quan.</li>
-                                        <li>Hẹn gặp, giao dịch ở nơi an toàn.</li>
-                                    </ul>
-                                </div>
+                                                <li>Nhờ người có chuyên môn kiểm tra xe, tránh mua xe bị thay thế phụ
+                                                    tùng
+                                                    kém
+                                                    chất lượng, không rõ nguồn gốc, xe gian...
+                                                </li>
+                                                <li>Kiểm tra kỹ giấy tờ xe và các giấy tờ mua bán liên quan.</li>
+                                                <li>Hẹn gặp, giao dịch ở nơi an toàn.</li>
+                                            </ul>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+
+                                <th:block th:if="${userLogin == null}">
+                                    <th:block
+                                            th:if="${post.statusPost} == ${T(com.motomarket.repository.model.StatusPost).PUBLIC}">
+                                        <div class="customer_info" id="right-shop-info">
+                                            <p class="name">
+                                                Tên chủ xe:
+                                                    <b th:utext="${post.sellerName}"></b>
+                                                <br>
+                                                Liên hệ người đăng:
+                                                <a target="_blank"
+                                                   th:href="@{/user/view/{idUser}(idUser=${post.userDTO.userId})}">
+                                                    <b th:utext="${post.userDTO.userName}"></b>
+                                                </a>
+                                            </p>
+                                            <div class="action">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <a aria-hidden="true" id="showPhone-btn"
+                                                               href="javascript:void(0);"
+                                                               class="btn-show-address show-address">
+                                                                <em class="icon phone"></em>
+                                                                <span id="phoneShowBox">Bấm để xem số điện thoại</span>
+                                                            </a>
+                                                            <input type="hidden" id="phoneNumber"
+                                                                   th:value="${post.sellerPhoneNumber}">
+                                                        </td>
+                                                        <td>
+                                                            <p class="note_contact">* Vui lòng cho người bán biết
+                                                                bạn đã tìm thấy xe của họ tại Fastbike</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="safety-buy">
+                                            <h3 class="module_title line_bottom">
+                                        <span class="title">
+                                            Mua xe an toàn
+                                        </span>
+                                            </h3>
+                                            <ul class="content">
+                                                <li><span style="color:red">KHÔNG ĐẶT CỌC, CHUYỂN KHOẢN trước khi nhận
+                                                xe.</span></li>
+                                                <li>Nhờ người có chuyên môn kiểm tra xe, tránh mua xe bị thay thế phụ
+                                                    tùng
+                                                    kém
+                                                    chất lượng, không rõ nguồn gốc, xe gian...
+                                                </li>
+                                                <li>Kiểm tra kỹ giấy tờ xe và các giấy tờ mua bán liên quan.</li>
+                                                <li>Hẹn gặp, giao dịch ở nơi an toàn.</li>
+                                            </ul>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+
+                                <th:block th:if="${userLogin != null}">
+                                    <th:block
+                                            th:if="${post.userDTO.userId} == ${userLogin.userId}">
+                                        <div class="customer_info" id="right-shop-info">
+                                            <p class="name">
+                                                Tên chủ xe:
+                                                    <b th:utext="${post.sellerName}"></b>
+                                            </p>
+                                            <div class="action">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="javascript:void(0);">
+                                                                <button th:data=" '/post/delete/' + ${post.postId}"
+                                                                        id="delete-post-btn" class="btn-action-post">Xóa
+                                                                    bài
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a th:href="@{/post/edit/{idPost}(idPost=${post.postId})}">
+                                                                <button class="btn-action-post">Sửa bài</button>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0);">
+                                                                <button th:data=" '/post/sold-moto/' + ${post.postId}"
+                                                                        id="sold-post-btn" class="btn-action-post">Xác nhận đã bán
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </th:block>
+                                </th:block>
+
+
                             </div>
                         </section>
 
@@ -426,7 +548,7 @@
                                                         <th:block th:each="newPost : ${newPosts}">
                                                             <div class="item" style="max-height: 182px;">
                                                                 <a th:href="@{/post/detailpost/{id} (id=${newPost.postId})}">
-                                                                <div class="thumbnail">
+                                                                    <div class="thumbnail">
                                                                         <img class="lazy" width="155px" height="116px"
                                                                              th:src="@{/api/image/load/{idImage}(idImage=${newPost.imageDTOList.get(0).imageName})}">
 
@@ -434,7 +556,8 @@
                                                                     <label th:utext="${newPost.title}">
                                                                     </label>
                                                                     <th:block th:if="${newPost.price}">
-                                                                        <span class="price" th:text="${#numbers.formatDecimal(newPost.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'" ></span>
+                                                                        <span class="price"
+                                                                              th:text="${#numbers.formatDecimal(newPost.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></span>
                                                                         <i style="font-size: 10px" class="old">Xe cũ</i>
                                                                     </th:block>
                                                                     <th:block th:unless="${newPost.price}">
@@ -442,7 +565,8 @@
                                                                         <i style="font-size: 10px" class="old">Xe cũ</i>
                                                                     </th:block>
                                                                     </span>
-                                                                    <address style="font-size: 11px" th:utext="${newPost.district}+', ' + ${newPost.province}"></address>
+                                                                    <address style="font-size: 11px"
+                                                                             th:utext="${newPost.district}+', ' + ${newPost.province}"></address>
                                                                 </a>
                                                             </div>
                                                         </th:block>
@@ -457,25 +581,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <style>
-                                            .info-moto {
-                                                position: absolute;
-                                                bottom: 70px;
-                                                right: 15px;
-                                                float: left
-                                            }
 
-                                            .info-moto .count-img {
-                                                margin: 0 0 0 5px;
-                                                padding: 1px 5px;
-                                                color: #fff;
-                                                font-weight: 700;
-                                                float: left;
-                                                background-color: rgba(0, 0, 0, .5);
-                                                border-radius: 2px;
-                                                line-height: 16.8px
-                                            }
-                                        </style>
                                     </div>
                                 </section>
 
@@ -505,16 +611,18 @@
                                                         <p class="product-title">
                                                             <a
                                                                     th:href="@{/post/detailpost/{id} (id=${post.postId})}">
-                                                               <span th:utext="${post.title}"></span>
+                                                                <span th:utext="${post.title}"></span>
                                                             </a>
                                                         </p>
                                                         <th:block th:if="${post.price}">
-                                                            <p class="price" th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
+                                                            <p class="price"
+                                                               th:text="${#numbers.formatDecimal(post.price, 0, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></p>
                                                         </th:block>
                                                         <th:block th:unless="${post.price}">
                                                             <p class="price">Liên hệ</p>
                                                         </th:block>
-                                                        <p class="address" th:utext="${post.district}+', ' + ${post.province}"></p>
+                                                        <p class="address"
+                                                           th:utext="${post.district}+', ' + ${post.province}"></p>
                                                     </div>
                                                 </li>
                                             </th:block>
@@ -533,6 +641,26 @@
                         </section>
 
                     </article>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalComfirm" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+             tabindex="-1" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel">Comfirm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size: 15px; color: red; font-style: italic" id="conten-modal"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">No</button>
+                        <a id="comfirm-a">
+                            <button class="btn btn-primary">Yes</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -563,10 +691,28 @@
     <script type="text/javascript" src="/frontend/js/products/comments_product.js?159833824020200827"></script>
 
     <script>
-        $( "#showPhone-btn" ).click(function() {
+        $("#showPhone-btn").click(function () {
             let phone = $('#phoneNumber').val();
             $("#phoneShowBox").text(phone)
         });
+
+        $('#delete-post-btn').on("click", function () {
+            var datahref = $(this).attr('data')
+            $('#modalComfirm').modal('show');
+            $('#modalComfirm').modal({backdrop: 'static', keyboard: false})
+            $("#comfirm-a").attr("href", datahref)
+            $("#conten-modal").text("Bạn có muốn xóa bài đăng này?, bạn không thể khôi phục sau khi xóa!!")
+        })
+
+
+        $('#sold-post-btn').on("click", function () {
+            var datahref = $(this).attr('data')
+            $('#modalComfirm').modal('show');
+            $('#modalComfirm').modal({backdrop: 'static', keyboard: false})
+            $("#comfirm-a").attr("href", datahref)
+            $("#conten-modal").text("Nhấn Yes nếu bạn muốn xác nhận xe này đã được bán!!")
+        })
+
     </script>
     </body>
 </html>
