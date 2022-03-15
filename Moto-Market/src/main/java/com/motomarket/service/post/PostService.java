@@ -221,6 +221,11 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
+        return null;
+    }
+
+    @Override
     public Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor,String typeMotor) {
 //                                           ,String capacity,String pr, Integer modelYearMin, Integer modelYearMax, String province, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor
 

@@ -51,12 +51,9 @@ public interface IPostService extends IGeneralService<PostDTO> {
                                    String province, String typeMotor, Integer capacityMin, Integer capacityMax,
                                    Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
 
-<<<<<<< HEAD
-=======
     Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax,
                                     String province, String typeMotor, Integer capacityMin, Integer capacityMax,
                                     Double priceMin, Double priceMax, String kilometerCount, String colorMotor);
->>>>>>> tien-dev
 
     Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor, String typeMotor);
 
@@ -101,10 +98,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     void publicPost(Long id);
     void blockPost(Long id);
 
-<<<<<<< HEAD
     void setSoldMoto(Long id);
-=======
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
->>>>>>> huu-dev
 }
 
