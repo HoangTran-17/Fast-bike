@@ -73,6 +73,14 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("/change-password")
+    public ModelAndView changePasswordShow(@ModelAttribute("userLogin") UserDTO userLogin){
+        ModelAndView modelAndView = new ModelAndView("change-password");
+        modelAndView.addObject("userLogin", userLogin);
+
+        return modelAndView;
+    }
+
     @GetMapping("/moto-manager")
     public Object showMotoManagerView(@ModelAttribute("userLogin") UserDTO userLogin) {
         if (userLogin==null){
