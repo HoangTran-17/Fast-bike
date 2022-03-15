@@ -6,6 +6,7 @@ import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.*;
 import com.motomarket.service.dto.*;
 import com.motomarket.service.motor.IBrandMotorService;
+import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.response.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +40,8 @@ public class PostService implements IPostService {
     private IImageService imageService;
     @Autowired
     private IBrandMotorService brandMotorService;
+    @Autowired
+    private ITypeMotorService typeMotorService;
 
     @Override
     public List<PostDTO> findAll() {
@@ -211,26 +214,51 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
-        List<String> brandMotorList = new ArrayList<>();
-        if (br != null) {
-            List<BrandMotorDTO> brandMotorDTOList = brandMotorService.findAll();
-            List<String> brList = List.of(br.split("_"));
-            brandMotorDTOList.forEach(brandMotorDTO -> {
+    public Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor,String typeMotor) {
+//                                           ,String capacity,String pr, Integer modelYearMin, Integer modelYearMax, String province, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor
+
+        List<Long> brandIdList = setBrandIdList(brandMotor);
+        List<Long> typeIdList = setTypeIdList(typeMotor);
+
+
+
+        Page<Post> posts = postRepository.findTopByFilters1(Pageable.ofSize(pageSize), brandIdList,typeIdList, StatusPost.PUBLIC);
+        return posts.map(PostDTO::parsePostDTO);
+    }
+
+    private List<Long> setTypeIdList(String typeMotor) {
+        List<TypeMotorDTO> typeMotorDTOList = typeMotorService.findAll();
+        List<Long> typeIdList = new ArrayList<>();
+        if (typeMotor != null) {
+            List<String> brList = List.of(typeMotor.split("_"));
+            typeMotorDTOList.forEach(typeMotorDTO -> {
                 for (int i = 0; i < brList.size(); i++) {
-                    if (brList.get(i).equals(brandMotorDTO.getBrandId().toString())) {
-                        brandMotorList.add(brandMotorDTO.getBrandName());
+                    if (brList.get(i).equals(typeMotorDTO.getTypeMotorId().toString())) {
+                        typeIdList.add(typeMotorDTO.getTypeMotorId());
                         break;
                     }
                 }
             });
         }
-        System.out.println(brandMotorList);
-        System.out.println("test");
-        Page<Post> posts = postRepository.findTopByFilters1(Pageable.ofSize(pageSize),
-               brandMotorList, modelYearMin, modelYearMax, province, typeMotor, capacityMin, capacityMax,
-                priceMin, priceMax, kilometerCount, colorMotor, StatusPost.PUBLIC);
-        return posts.map(PostDTO::parsePostDTO);    }
+        return typeIdList;
+    }
+
+    private List<Long> setBrandIdList(String brandMotor) {
+        List<BrandMotorDTO> brandMotorDTOList = brandMotorService.findAll();
+        List<Long> brandIdList = new ArrayList<>();
+        if (brandMotor != null) {
+            List<String> brList = List.of(brandMotor.split("_"));
+            brandMotorDTOList.forEach(brandMotorDTO -> {
+                for (int i = 0; i < brList.size(); i++) {
+                    if (brList.get(i).equals(brandMotorDTO.getBrandId().toString())) {
+                        brandIdList.add(brandMotorDTO.getBrandId());
+                        break;
+                    }
+                }
+            });
+        }
+        return brandIdList;
+    }
 
     //    List bài viết đang chờ (WAITING) của 1 user
     @Override

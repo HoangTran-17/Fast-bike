@@ -45,7 +45,17 @@
 
 
                                     <ul id="filter-brand-list" class="checkbox-list custom_scroll">
-
+                                        <th:block th:each="item: ${brandList}">
+                                            <li>
+                                                <label class="checkbox filter-checkbox">
+                                                    <a th:href="@{'/bike-list?'+${item.href}}"
+                                                       th:utext="${item.brandName}"></a>
+<!--                                                    <span class="count">(86.289)</span>-->
+                                                    <input type="checkbox" name="brand[]" th:value="${item.brandId}" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </li>
+                                        </th:block>
                                     </ul>
 
 
@@ -63,17 +73,19 @@
                                             data-target="#filter-brand-list" placeholder="Nhập loại xe">
                                     </label>
                                     <ul id="filter-type-list" class="checkbox-list custom_scroll">
-                                        <th:block th:each="tm:${typeMotorList}">
-                                            <li>
-                                                <label class="checkbox filter-checkbox">
-                                                    <a href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-ga.html"
-                                                        th:title="${tm.typeMotorName}" th:text="${tm.typeMotorName}">
-                                                    </a>
-                                                    <span class="count">(72.843)</span>
-                                                    <input type="checkbox" name="type[]" th:value="${tm.typeMotorId}" />
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
+                                        <th:block th:each="item:${typeMotorList}">
+                                                <li>
+                                                    <label class="checkbox filter-checkbox">
+                                                        <a th:href="@{'/bike-list?'+${item.href}}"
+
+                                                           th:utext="${item.typeMotorName}">
+                                                        </a>
+<!--                                                        <span class="count">(72.843)</span>-->
+                                                        <input type="checkbox" name="type[]" th:value="${item.typeMotorId}" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+
                                         </th:block>
                                     </ul>
                                 </div>
@@ -1880,15 +1892,7 @@
             if (boolean) {
                 // a =
             }
-            str += `<li>
-                        <label class="checkbox filter-checkbox">
-                            <a href="https://www.webike.vn/cho-xe-may/bike-list/honda.html"
-                               title="${item.brandName}">${item.brandName}</a>
-                            <span class="count">(86.289)</span>
-                            <input type="checkbox" name="brand[]" value="${item.brandId}" />
-                            <span class="checkmark"></span>
-                        </label>
-                    </li>`;
+            str += ``;
         };
         let s = `<h1>HO</h1>`;
         $('#filter-brand-list').append(str);

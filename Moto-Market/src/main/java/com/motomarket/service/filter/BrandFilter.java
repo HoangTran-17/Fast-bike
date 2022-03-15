@@ -1,4 +1,4 @@
-package com.motomarket.service.dto;
+package com.motomarket.service.filter;
 
 import com.motomarket.repository.model.BrandMotor;
 import lombok.*;

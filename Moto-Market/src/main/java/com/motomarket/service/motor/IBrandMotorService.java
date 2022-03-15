@@ -2,7 +2,7 @@ package com.motomarket.service.motor;
 
 import com.motomarket.repository.model.SeriesMotor;
 import com.motomarket.service.IGeneralService;
-import com.motomarket.service.dto.BrandFilter;
+import com.motomarket.service.filter.BrandFilter;
 import com.motomarket.service.dto.BrandMotorDTO;
 
 import java.util.List;

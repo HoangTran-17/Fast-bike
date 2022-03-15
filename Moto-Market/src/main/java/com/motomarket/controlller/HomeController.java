@@ -3,6 +3,8 @@ package com.motomarket.controlller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.motomarket.service.dto.*;
+import com.motomarket.service.filter.BrandFilter;
+import com.motomarket.service.filter.TypeMotorFilter;
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.post.IPostService;
@@ -80,19 +82,17 @@ public class HomeController {
     }
 
     @GetMapping("/bike-list")
-    public ModelAndView showBikeList(String br,String tp, String cc) {
+    public ModelAndView showBikeList(String br,String tp, String cc,Double prfr, Double prto,int myfr, int myto,String km,String color,String pr) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list-moto");
-        br = "1_2_13";
         List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(br, tp, cc);
         modelAndView.addObject("brandList", brandList);
 
-        List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(br, tp, cc);
         modelAndView.addObject("typeMotorList", typeMotorList);
 
 
-        Page<PostDTO> postDTOS = postService.findTopByFilters(25, null, null, null, null,
-                null, null, null, null, null, null, null);
+        Page<PostDTO> postDTOS = postService.findTopByFilters1(25, br,tp);
         modelAndView.addObject("postList", postDTOS);
 
         System.out.println(postDTOS);

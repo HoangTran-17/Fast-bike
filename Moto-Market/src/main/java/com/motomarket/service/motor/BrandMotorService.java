@@ -2,7 +2,7 @@ package com.motomarket.service.motor;
 
 import com.motomarket.repository.IBrandMotorRepository;
 import com.motomarket.repository.model.BrandMotor;
-import com.motomarket.service.dto.BrandFilter;
+import com.motomarket.service.filter.BrandFilter;
 import com.motomarket.service.dto.BrandMotorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +71,7 @@ public class BrandMotorService implements IBrandMotorService {
     }
 
     private String setHref(String br, String tp, String cc, Long brandId) {
-        StringBuilder href = new StringBuilder("/bike-list?");
+        StringBuilder href = new StringBuilder();
         if (br == null) {
             href.append("br=");
             href.append(brandId);
