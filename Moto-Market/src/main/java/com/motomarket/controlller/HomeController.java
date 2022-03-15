@@ -83,4 +83,19 @@ public class HomeController {
         return modelAndView;
     }
 
+    @GetMapping("/search-all")
+    public ModelAndView searchAll(@RequestParam(value = "keyword", defaultValue = "null") String  keyword, Pageable pageable  ){
+        ModelAndView modelAndView = new ModelAndView();
+        if (keyword==null){
+            modelAndView.setViewName("index");
+        }else {
+            Page<PostDTO> postDTOPage = postService.findTopByModelMotorIsLike(PageRequest.of(pageable.getPageNumber(), 20), keyword);
+            modelAndView.setViewName("list-moto");
+            List<TypeMotorDTO> typeMotorList = typeMotorService.findAll();
+            modelAndView.addObject("1", typeMotorList);
+            modelAndView.addObject("postList", postDTOPage);
+        }
+        return modelAndView;
+    }
+
 }
