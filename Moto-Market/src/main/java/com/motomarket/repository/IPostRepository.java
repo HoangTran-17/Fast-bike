@@ -1,19 +1,16 @@
 package com.motomarket.repository;
 
-import com.motomarket.repository.model.DetailMotor;
 import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.repository.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import java.util.List;
 
@@ -80,7 +77,7 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             @Param("statusPost") StatusPost statusPost);
 
 
-    default Page<Post> findTopByFilters1(Pageable pageable,String modelMotor, List<Long> brandIdList, List<Long> typeIdList, StatusPost statusPost) {
+    default Page<Post> findTopByFilters1(Pageable pageable, String modelMotor, List<Long> brandIdList, List<Long> typeIdList, Integer capacityMin, Integer capacityMax, StatusPost statusPost) {
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             Predicate predicateForModelMotor = criteriaBuilder.conjunction();
@@ -99,9 +96,21 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
                 predicateForTypeIdList = root.get("detailMotor").get("typeMotor").get("typeMotorId").in(typeIdList);
 
             }
-            Predicate predicateForStatusPost = root.get("statusPost").in(statusPost);
 
-            return criteriaBuilder.and(predicateForModelMotor,predicateForTypeIdList,predicateForStatusPost);
+            Predicate predicateForCapacity = criteriaBuilder.conjunction();
+            if (capacityMin != null && capacityMax != null) {
+                predicateForCapacity = criteriaBuilder.between(root.get("detailMotor").get("seriesMotor").get("capacity"), capacityMin, capacityMax);
+            } else {
+                if (capacityMin != null) {
+                    predicateForCapacity = criteriaBuilder.greaterThan(root.get("detailMotor").get("seriesMotor").get("capacity"), capacityMin);
+                }
+                if (capacityMax != null) {
+                    predicateForCapacity = criteriaBuilder.lessThan(root.get("detailMotor").get("seriesMotor").get("capacity"), capacityMax);
+                }
+            }
+            Predicate predicateForStatusPost = criteriaBuilder.equal(root.get("statusPost"), statusPost);
+
+            return criteriaBuilder.and(predicateForModelMotor,predicateForTypeIdList,predicateForCapacity,predicateForStatusPost);
         },pageable);
     }
 
