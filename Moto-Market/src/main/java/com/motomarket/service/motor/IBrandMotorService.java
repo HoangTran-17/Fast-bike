@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface IBrandMotorService extends IGeneralService<BrandMotorDTO> {
 
-    List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc);
+    List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc,
+                                        Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
+                                        String kilometerCount, String color, String province);
 }
 
