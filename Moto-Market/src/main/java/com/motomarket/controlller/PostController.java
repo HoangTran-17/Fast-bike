@@ -196,9 +196,12 @@ public class PostController {
         String[] query = postService.setQueryView(modelMotor,brandMotor, typeMotor, capacity);
         modelAndView.addObject("query", query);
 
+<<<<<<< HEAD
+=======
         List<CapacityFilter> capacityList = postService.getCapacityList(modelMotor,brandMotor, typeMotor, capacity);
         modelAndView.addObject("capacityList", capacityList);
 
+>>>>>>> e29966f188144bde84e4afe2f2ad8736910c4851
 
 //        modelMotor = "HONDA";
         Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),

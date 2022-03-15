@@ -51,7 +51,12 @@
                                                     <a th:href="@{'/post/moto-list?'+${item.href}}"
                                                        th:utext="${item.brandName}"></a>
 <!--                                                    <span class="count">(86.289)</span>-->
-                                                    <input type="checkbox" name="brand[]" th:value="${item.brandId}" />
+                                                    <th:block th:if="${item.isSelected()}">
+                                                        <input type="checkbox" name="brand[]" data-check="0"  class="checkbox-brand" th:data-href="'/post/moto-list?'+${item.href}" />
+                                                    </th:block >
+                                                    <th:block th:unless="${item.isSelected()}">
+                                                        <input type="checkbox" name="brand[]" data-check="1"  class="checkbox-brand" th:data-href="'/post/moto-list?'+${item.href}" />
+                                                    </th:block >
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </li>
@@ -81,7 +86,13 @@
                                                            th:utext="${item.typeMotorName}">
                                                         </a>
 <!--                                                        <span class="count">(72.843)</span>-->
-                                                        <input type="checkbox" name="type[]" th:value="${item.typeMotorId}" />
+                                                        <th:block th:if="${item.selected}">
+                                                            <input type="checkbox" name="type[]" data-check="0" class="checkbox-type" th:data-href="'/post/moto-list?'+${item.href}"/>
+                                                        </th:block >
+                                                        <th:block th:unless="${item.selected}">
+                                                            <input type="checkbox" name="type[]" data-check="1" class="checkbox-type"th:data-href="'/post/moto-list?'+${item.href}" />
+                                                        </th:block >
+
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </li>
@@ -1796,6 +1807,7 @@
 <!--        deferscript('/frontend/moto-v2/pc/js/common.js?160015879020200827');-->
 <!--    </script>-->
 
+<script src="/v1/pc/js/common/jquery.js?152472729920200827"></script>
 
 
 
@@ -1852,6 +1864,35 @@
         }
         return false;
     }
+</script>
+
+<script>
+    checked("checkbox-brand");
+    checked("checkbox-type");
+    hanlderClickCheckbox("checkbox-brand");
+    hanlderClickCheckbox("checkbox-type");
+    function checked(className) {
+        let checkbox = document.getElementsByClassName(className);
+        for (let i = 0; i < checkbox.length; i++) {
+            if ($(checkbox[i]).attr('data-check') == 0 ){
+                $(checkbox[i]).prop('checked', true);
+            } else{
+                $(checkbox[i]).prop('checked', false);
+            }
+        }
+    }
+
+    function hanlderClickCheckbox(className) {
+        $("."+className).change(function() {
+            var ischecked= $(this).is(':checked');
+            if(ischecked || !ischecked) {
+                window.location.href = $(this).attr('data-href');
+            }
+        });
+    }
+
+
+
 </script>
 </body>
 

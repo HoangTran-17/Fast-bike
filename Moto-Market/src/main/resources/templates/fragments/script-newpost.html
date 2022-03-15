@@ -315,6 +315,64 @@
             }
         }
     });
+    
+    
+    // function validate() {
+    //     $("#submit_btn").on("click",function(){
+    //         var $fileUpload = $("input[type='file']");
+    //         if (parseInt($fileUpload.get(0).files.length)>10){
+    //             alert("You can only upload a maximum of 10 files");
+    //         }
+    //         if (parseInt($fileUpload.get(0).files.length)>10){
+    //             alert("You can only upload a minimum of 5 files");
+    //         }
+    //     });
+    // }
+
+    $('#product-editor').on("submit", function () {
+        let check = true;
+        var fileUpload = $("#ip-upload-multi");
+        var priceValue = $("#product_price_tmp").val();
+        if (parseInt(fileUpload.get(0).files.length)>10){
+            $.Toast("!!!Bạn chỉ có thể tải lên tối đa 10 ảnh", {
+                'position': 'top',
+                'class': 'alert',
+                'duration': 1500,
+                'width': 400
+            });
+            check = false;
+        }else {
+            if (parseInt(fileUpload.get(0).files.length)<5){
+                $.Toast("!!!Bạn phải tải lên ít nhất 5 ảnh", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+                check = false;
+            }
+        }
+        if (!isNaN(priceValue)){
+            if (priceValue < 0){
+                $.Toast("Giá phải lớn hơn hoặc bằng 0", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+                check = false;
+            }
+        } else{
+            $.Toast("Giá phải nhập đúng định dạng số!!", {
+                'position': 'top',
+                'class': 'alert',
+                'duration': 1500,
+                'width': 400
+            });
+            check = false;
+        }
+        return check;
+    })
 
     //    Format Input Currency
     // function formatNumber(n) {
