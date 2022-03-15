@@ -5,6 +5,7 @@ import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.IUserRepository;
 import com.motomarket.repository.model.*;
 import com.motomarket.service.dto.*;
+import com.motomarket.service.filter.CapacityFilter;
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.response.PostResponse;
@@ -227,8 +228,9 @@ public class PostService implements IPostService {
 
         List<Long> brandIdList = setBrandIdList(brandMotor);
         List<Long> typeIdList = setTypeIdList(typeMotor);
-
-
+        String[] capa = capacity.split("-");
+        String capacityMin = capa[0];
+        String capacityMax = capa[1];
 
         Page<Post> posts = postRepository.findTopByFilters1(pageable,modelMotor, brandIdList,typeIdList, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
@@ -428,5 +430,60 @@ public class PostService implements IPostService {
         }
         String[] query = {modelMotor,String.valueOf(href)};
         return query;
+    }
+
+    @Override
+    public List<CapacityFilter> getCapacityList(String modelMotor, String brandMotor, String typeMotor, String capacity) {
+        List<CapacityFilter> capacityFilterList = getCapacityListSample();
+        capacityFilterList.forEach(capacityFilter -> {
+            String href = setHref(modelMotor,brandMotor, typeMotor, capacity,capacityFilter.getParam());
+            Boolean bo = capacity.equals(capacityFilter.getParam());
+            capacityFilter.setHref(href);
+            capacityFilter.setSelected(bo);
+        });
+        return capacityFilterList;
+    }
+
+    private String setHref(String modelMotor, String brandMotor, String typeMotor, String capacity, String param) {
+        StringBuilder href = new StringBuilder();
+        if (modelMotor!=null) {
+            href.append("q=");
+            href.append(modelMotor);
+            href.append("&");
+        }
+        if (brandMotor!=null) {
+            href.append("br=");
+            href.append(brandMotor);
+            href.append("&");
+        }
+        if (typeMotor!=null) {
+            href.append("tp=");
+            href.append(typeMotor);
+            href.append("&");
+        }
+
+        if (capacity != null) {
+            if (!capacity.equals(param)) {
+                href.append("cc=");
+                href.append(param);
+                href.append("&");
+            }
+        } else{
+            href.append("cc=");
+            href.append(param);
+            href.append("&");
+        }
+        return String.valueOf(href);
+    }
+
+    private List<CapacityFilter> getCapacityListSample() {
+        List<CapacityFilter> capacityFilterList = new ArrayList<>();
+        capacityFilterList.add(new CapacityFilter("0-50","- 50cc"));
+        capacityFilterList.add(new CapacityFilter("51-174","51-174cc"));
+        capacityFilterList.add(new CapacityFilter("175-400","175-400cc"));
+        capacityFilterList.add(new CapacityFilter("401-750cc","401-750cc"));
+        capacityFilterList.add(new CapacityFilter("751-1000","751-1000cc"));
+        capacityFilterList.add(new CapacityFilter("1001-9999","1001cc -"));
+        return capacityFilterList;
     }
 }
