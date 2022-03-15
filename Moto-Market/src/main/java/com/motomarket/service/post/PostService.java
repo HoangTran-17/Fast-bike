@@ -407,4 +407,26 @@ public class PostService implements IPostService {
         Page<Post> posts = postRepository.findAllByUserIdAndStatusPost(userId,statusPost, pageable);
         return getPostResponse(posts);
     }
+
+    @Override
+    public String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity) {
+        StringBuilder href = new StringBuilder();
+        if (brandMotor!=null) {
+            href.append("br=");
+            href.append(brandMotor);
+            href.append("&");
+        }
+        if (typeMotor!=null) {
+            href.append("tp=");
+            href.append(typeMotor);
+            href.append("&");
+        }
+        if (capacity!=null) {
+            href.append("cc=");
+            href.append(capacity);
+            href.append("&");
+        }
+        String[] query = {modelMotor,String.valueOf(href)};
+        return query;
+    }
 }

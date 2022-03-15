@@ -12,6 +12,7 @@ import com.motomarket.service.motor.ITypeMotorService;
 import com.motomarket.service.post.IImageService;
 import com.motomarket.service.post.IPostService;
 import com.motomarket.service.user.IUserService;
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -185,11 +186,17 @@ public class PostController {
                                      Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list-moto");
-        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(brandMotor, typeMotor, capacity);
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity);
         modelAndView.addObject("brandList", brandList);
 
-        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(brandMotor, typeMotor, capacity);
+        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(modelMotor,brandMotor, typeMotor, capacity);
         modelAndView.addObject("typeMotorList", typeMotorList);
+
+        String[] query = postService.setQueryView(modelMotor,brandMotor, typeMotor, capacity);
+        modelAndView.addObject("query", query);
+
+
+
 
 //        modelMotor = "HONDA";
         Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20),

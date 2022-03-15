@@ -3,7 +3,6 @@ package com.motomarket.service.motor;
 import com.motomarket.repository.ITypeMotorRepository;
 import com.motomarket.repository.model.TypeMotor;
 import com.motomarket.service.dto.TypeMotorDTO;
-import com.motomarket.service.filter.BrandFilter;
 import com.motomarket.service.filter.TypeMotorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +41,10 @@ public class TypeMotorService implements ITypeMotorService{
     }
 
     @Override
-    public List<TypeMotorFilter> getAllTypeMotorFilter(String br, String tp, String cc) {
+    public List<TypeMotorFilter> getAllTypeMotorFilter(String modelMotor, String br, String tp, String cc) {
         List<TypeMotorFilter> typeMotorFilterList = new ArrayList<>();
         typeMotorRepository.findAll().forEach(typeMotor -> {
-            String href = setHref(br, tp, cc, typeMotor.getTypeMotorId());
+            String href = setHref(modelMotor,br, tp, cc, typeMotor.getTypeMotorId());
             Boolean bo = isSelected(tp,typeMotor.getTypeMotorId());
             typeMotorFilterList.add(TypeMotorFilter.parseTypeMotorFilter(typeMotor,href,bo));
         });
@@ -61,8 +60,13 @@ public class TypeMotorService implements ITypeMotorService{
         return i != -1;
     }
 
-    private String setHref(String br, String tp, String cc, Long typeMotorId) {
+    private String setHref(String modelMotor,String br, String tp, String cc, Long typeMotorId) {
         StringBuilder href = new StringBuilder();
+        if (modelMotor!=null) {
+            href.append("q=");
+            href.append(modelMotor);
+            href.append("&");
+        }
         if (br!=null) {
             href.append("br=");
             href.append(br);

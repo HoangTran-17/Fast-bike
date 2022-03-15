@@ -99,5 +99,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     void setSoldMoto(Long id);
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
+
+    String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity);
 }
 
