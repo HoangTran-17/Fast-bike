@@ -105,55 +105,25 @@
 
                             <li>
                                 <div class="module-title">
-                                    <a class="btn-module-title" href="javascript:void(0)">T&igrave;nh trạng</a>
-                                </div>
-                                <div class="module-body">
-                                    <!--<ul id="filter-condition-list" class="checkbox-list">-->
-                                    <ul id="filter-status-list" class="checkbox-list">
-                                        <li>
-
-
-                                            <label class="checkbox filter-checkbox">
-                                                <a href="https://www.webike.vn/cho-xe-may/bike-list/xe-cu.html">Cũ</a>
-                                                <span class="count">(144.654)</span>
-                                                <input type="checkbox" name="type[]" value="0" />
-                                                <span class="checkmark"></span>
-                                            </label>
-
-
-                                        </li>
-                                        <li>
-
-
-                                            <label class="checkbox filter-checkbox">
-                                                <a href="https://www.webike.vn/cho-xe-may/bike-list/xe-moi.html">Mới</a>
-                                                <span class="count">(1.437)</span>
-                                                <input type="checkbox" name="type[]" value="1" />
-                                                <span class="checkmark"></span>
-                                            </label>
-
-
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-
-                            <li>
-                                <div class="module-title">
-                                    <a class="btn-module-title" href="javascript:void(0)">Ph&acirc;n khối</a>
+                                    <a class="btn-module-title" href="javascript:void(0)" >Ph&acirc;n khối</a>
                                 </div>
                                 <div class="module-body">
                                     <ul id="filter-capacity-list" class="checkbox-list">
-                                        <li>
-                                            <label class="checkbox filter-checkbox">
-                                                <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/0-50cc.html">-50cc</a>
-                                                <span class="count">(2.061)</span>
-                                                <input type="checkbox" name="capacity[]" value="0-50" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
+                                        <th:block th:each="item:${capacityList}">
+                                            <li>
+                                                <label class="checkbox filter-checkbox">
+                                                    <a th:href="@{'/post/moto-list?'+${item.href}}"  th:utext="${item.name}"></a>
+                                                    <th:block th:if="${item.selected}">
+                                                        <input type="checkbox" name="capacity[]" data-check="0" class="checkbox-capacity" th:data-href="'/post/moto-list?'+${item.href}"/>
+                                                    </th:block >
+                                                    <th:block th:unless="${item.selected}">
+                                                        <input type="checkbox"  name="capacity[]" data-check="1" class="checkbox-capacity" th:data-href="'/post/moto-list?'+${item.href}" />
+                                                    </th:block >
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </li>
+                                        </th:block>
+
                                         <li>
                                             <label class="checkbox filter-checkbox">
                                                 <a
@@ -1576,7 +1546,7 @@
                                                 <div class="right">
                                                     <div class="user-info">
                                                         <div class="info">
-                                                            <img th:src="@{/api/image/load/{id}(id=${post.userDTO.avatar})}"
+                                                            <img th:src="@{/api/image/load/{id}(id=${post.userDTO.avatar})}" class="avatar-user"
                                                                  th:alt="${post.title}">
                                                             <label class="user-name">
                                                                 <a target="_blank"
@@ -1869,8 +1839,10 @@
 <script>
     checked("checkbox-brand");
     checked("checkbox-type");
+    checked("checkbox-capacity");
     hanlderClickCheckbox("checkbox-brand");
     hanlderClickCheckbox("checkbox-type");
+    hanlderClickCheckbox("checkbox-capacity");
     function checked(className) {
         let checkbox = document.getElementsByClassName(className);
         for (let i = 0; i < checkbox.length; i++) {
@@ -1889,6 +1861,22 @@
                 window.location.href = $(this).attr('data-href');
             }
         });
+    }
+
+
+//    default avatar
+    const avatar = document.getElementById("avatar")
+    avatar.addEventListener("error", function(event) {
+        event.target.src = "/frontend/default/avatar_default.jpg"
+        event.onerror = null
+    })
+
+    let avatar_user = document.getElementsByClassName("avatar-user");
+    for (let i = 0; i < avatar_user.length; i++) {
+        avatar_user[i].addEventListener("error", function(event) {
+            event.target.src = "/frontend/default/avatar_default.jpg"
+            event.onerror = null
+        })
     }
 
 

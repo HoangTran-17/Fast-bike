@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -437,7 +438,7 @@ public class PostService implements IPostService {
         List<CapacityFilter> capacityFilterList = getCapacityListSample();
         capacityFilterList.forEach(capacityFilter -> {
             String href = setHref(modelMotor,brandMotor, typeMotor, capacity,capacityFilter.getParam());
-            Boolean bo = capacity.equals(capacityFilter.getParam());
+            Boolean bo = capacityFilter.getParam().equals(capacity);
             capacityFilter.setHref(href);
             capacityFilter.setSelected(bo);
         });

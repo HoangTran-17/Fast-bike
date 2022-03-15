@@ -134,8 +134,8 @@
             }
         }
 
-        const img = document.getElementById("avatar")
-        img.addEventListener("error", function(event) {
+        const avatar = document.getElementById("avatar")
+        avatar.addEventListener("error", function(event) {
             event.target.src = "/frontend/default/avatar_default.jpg"
             event.onerror = null
         })

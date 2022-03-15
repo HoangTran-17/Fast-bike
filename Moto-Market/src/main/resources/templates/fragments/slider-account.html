@@ -1,7 +1,7 @@
 <div class="sidebar" style="position: sticky;top: 11vh;" th:fragment="slider-account (userLogin)" xmlns:th="http://www.thymeleaf.org">
     <div class="user_info media">
         <a href="javascript:void(0)">
-            <img width="38" height="38" class="lazy" th:src="@{/api/image/load/{avatar}(avatar=${userLogin.avatar})}">
+            <img width="38" height="38" id="avatar-mini" class="lazy" th:src="@{/api/image/load/{avatar}(avatar=${userLogin.avatar})}">
         </a>
         <div class="media-body">
             <a href="javascript:void(0)" class="user_mame" th:utext="${userLogin.email}"></a>
@@ -46,4 +46,14 @@
             </ul>
         </li>
     </ul>
+
+    <script>
+
+        const img = document.getElementById("avatar-mini")
+        img.addEventListener("error", function(event) {
+            event.target.src = "/frontend/default/avatar_default.jpg"
+            event.onerror = null
+        })
+
+    </script>
 </div>
