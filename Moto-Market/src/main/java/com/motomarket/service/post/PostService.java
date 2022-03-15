@@ -221,19 +221,9 @@ public class PostService implements IPostService {
     }
 
     @Override
-<<<<<<< HEAD
     public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
                                            Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
                                            String kilometerCount, String color, String province) {
-=======
-    public Page<PostDTO> findTopByFilters1(int pageSize, String br, Integer modelYearMin, Integer modelYearMax, String province, String typeMotor, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor) {
-        return null;
-    }
-
-    @Override
-    public Page<PostDTO> findTopByFilters1(int pageSize, String brandMotor,String typeMotor) {
-//                                           ,String capacity,String pr, Integer modelYearMin, Integer modelYearMax, String province, Integer capacityMin, Integer capacityMax, Double priceMin, Double priceMax, String kilometerCount, String colorMotor
->>>>>>> tien-dev
 
         List<Long> brandIdList = setBrandIdList(brandMotor);
         List<Long> typeIdList = setTypeIdList(typeMotor);

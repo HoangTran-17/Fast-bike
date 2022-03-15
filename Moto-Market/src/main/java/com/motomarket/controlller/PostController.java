@@ -4,10 +4,7 @@ import com.motomarket.repository.IPostRepository;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.service.dto.*;
 import com.motomarket.service.filter.BrandFilter;
-<<<<<<< HEAD
 import com.motomarket.service.filter.TypeMotorFilter;
-=======
->>>>>>> tien-dev
 import com.motomarket.service.motor.IBrandMotorService;
 import com.motomarket.service.motor.IDetailMotorService;
 import com.motomarket.service.motor.IModelYearService;
