@@ -52,7 +52,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //                                 int myfr, int myto, String km, String color, String pr, Pageable pageable) {
 
 
-    Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+    Page<PostDTO> findTopByFilters1(Pageable pageable,String modelMotor, String brandMotor, String typeMotor, String capacity,
                                     Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
                                     String kilometerCount, String color, String province);
 
@@ -99,5 +99,7 @@ public interface IPostService extends IGeneralService<PostDTO> {
 
     void setSoldMoto(Long id);
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
+
+    String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity);
 }
 

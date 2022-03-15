@@ -51,10 +51,10 @@ public class BrandMotorService implements IBrandMotorService {
 
 
     @Override
-    public List<BrandFilter> getAllBrandFilter(String br, String tp, String cc) {
+    public List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc) {
         List<BrandFilter> brandFilterList = new ArrayList<>();
         brandMotorRepository.findAll().forEach(brandMotor -> {
-            String href = setHref(br, tp, cc, brandMotor.getBrandId());
+            String href = setHref(modelMotor,br, tp, cc, brandMotor.getBrandId());
             Boolean bo = isSelected(br,brandMotor.getBrandId());
             brandFilterList.add(BrandFilter.parseBrandFilter(brandMotor,href,bo));
         });
@@ -70,8 +70,13 @@ public class BrandMotorService implements IBrandMotorService {
         return i != -1;
     }
 
-    private String setHref(String br, String tp, String cc, Long brandId) {
+    private String setHref(String modelMotor,String br, String tp, String cc, Long brandId) {
         StringBuilder href = new StringBuilder();
+        if (modelMotor!=null) {
+            href.append("q=");
+            href.append(modelMotor);
+            href.append("&");
+        }
         if (br == null) {
             href.append("br=");
             href.append(brandId);
@@ -101,6 +106,7 @@ public class BrandMotorService implements IBrandMotorService {
             href.append(cc);
             href.append("&");
         }
+
         return String.valueOf(href);
     }
 

@@ -221,7 +221,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+    public Page<PostDTO> findTopByFilters1(Pageable pageable,String modelMotor, String brandMotor, String typeMotor, String capacity,
                                            Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
                                            String kilometerCount, String color, String province) {
 
@@ -230,7 +230,7 @@ public class PostService implements IPostService {
 
 
 
-        Page<Post> posts = postRepository.findTopByFilters1(pageable, brandIdList,typeIdList, StatusPost.PUBLIC);
+        Page<Post> posts = postRepository.findTopByFilters1(pageable,modelMotor, brandIdList,typeIdList, StatusPost.PUBLIC);
         return posts.map(PostDTO::parsePostDTO);
     }
 
@@ -406,5 +406,27 @@ public class PostService implements IPostService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> posts = postRepository.findAllByUserIdAndStatusPost(userId,statusPost, pageable);
         return getPostResponse(posts);
+    }
+
+    @Override
+    public String[] setQueryView(String modelMotor, String brandMotor, String typeMotor, String capacity) {
+        StringBuilder href = new StringBuilder();
+        if (brandMotor!=null) {
+            href.append("br=");
+            href.append(brandMotor);
+            href.append("&");
+        }
+        if (typeMotor!=null) {
+            href.append("tp=");
+            href.append(typeMotor);
+            href.append("&");
+        }
+        if (capacity!=null) {
+            href.append("cc=");
+            href.append(capacity);
+            href.append("&");
+        }
+        String[] query = {modelMotor,String.valueOf(href)};
+        return query;
     }
 }
