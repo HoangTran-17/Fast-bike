@@ -266,30 +266,64 @@
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
+<script src="/frontend/vendor/jquery.js?158926651720200827"></script>
 
-<!--    <script src="https://www.webike.vn/v1/pc/js/common/jquery.js?152472729920200827"></script>-->
-
-<!--<script src="https://www.webike.vn/language_pc.js?v=1.0"></script>-->
-
-<!--<script src="https://www.webike.vn/v1/vendor/bootstrap/js/bootstrap.min.js?152472729920200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/vendor/slick/slick.js?152472729920200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/vendor/select2/js/select2.min.js?152472729920200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/vendor/other/typeahead.bundle.js?154996577520200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/vendor/other/js-cookie.js?152695796120200827"></script>-->
-<!--<script type="text/javascript" src="https://www.webike.vn/v1/vendor/yall/yall-2.1.0.min.js?154996577520200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/pc/js/common/02-wvn.js?152695796120200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/pc/js/common/main.js?158210531020200827"></script>-->
-<!--<script src="https://www.webike.vn/v1/pc/js/common/app.js?159852541620200827"></script>-->
-<!--<script src="https://www.webike.vn/frontend/js/fancybox.js?152472729920200827"></script>-->
-
-<!--<script type="text/javascript" src="https://www.webike.vn/v1/vendor/yall/yall-2.1.0.min.js?154996577520200827"></script>-->
-<!--<script type="text/javascript" src="https://www.webike.vn/v1/pc/js/main.min.js?154996577520200827"></script>-->
-
-<!--<script defer src="https://www.webike.vn/v1/pc/js/common/cookies_shopping.js?152472729920200827"></script>-->
-
-<!--<script type="text/javascript" src="https://www.webike.vn/v1/vendor/yall/yall-2.1.0.min.js?154996577520200827"></script>-->
-<!--<script type="text/javascript" src="https://www.webike.vn/frontend/js/user/my_products.js?154996577520200827"></script>-->
+<script>
 
 
+    $( document ).ready(function() {
+        $('.li-menu-moto').filter("[data-id='" + 1 + "']").addClass("active")
+    });
+
+
+    $(".li-menu-moto").on("click", function () {
+        var dataId = $(this).attr('data-id')
+        $('.li-menu-moto').filter("[data-id='" + dataId + "']").addClass("active")
+        removeClass(dataId);
+        
+        if (dataId == 1){
+            getPostOnsale()
+        } else{
+            if (dataId == 2){
+                getPostsold()
+            } else {
+                if (dataId == 3){
+                    getPostDeleted()
+                } else{
+                    if (dataId == 4){
+                     getPostwaiting()
+                    }
+                }
+            }
+        }
+    })
+
+    function removeClass(id) {
+        let li_menu = document.getElementsByClassName("li-menu-moto");
+        for (let i = 0; i < li_menu.length; i++) {
+            if ($(li_menu[i]).attr('data-id') !== id ){
+                li_menu[i].classList.remove("active");
+            }
+        }
+    }
+
+//   API GET POST LIST 
+    function getPostOnsale() {
+        
+    }
+
+    function getPostsold() {
+
+    }
+
+    function getPostDeleted() {
+
+    }
+
+    function getPostwaiting() {
+
+    }
+
+</script>
 </body>
 </html>
