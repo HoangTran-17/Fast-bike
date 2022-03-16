@@ -64,20 +64,19 @@
                             Xem tất cả (<span th:utext="${count}"></span>)
                         </a>
                     </div>
-                    <form th:action="@{/search-moto-home}"  method="post">
                         <input type="hidden" id="search_condition" name="new"/>
                         <div class="row">
                             <ul class="box-search-topmoto">
                                 <li class="col-xs-2">
                                     <select autocomplete placeholder="Hãng Xe" tabindex="1"
                                             id="ip_search_brand" name="br" class="select-box">
-                                        <option value="-1" selected>Hãng xe</option>
+                                        <option value="" selected>Hãng xe</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
                                     <select autocomplete  placeholder="Phân khối" tabindex="2"
                                             name="cc" id="ip_search_capacity" class="select-box">
-                                        <option value="-1">Phân khối</option>
+                                        <option value="">Phân khối</option>
                                         <option value="0-50">-50cc</option>
                                         <option value="51-174">51cc-174cc</option>
                                         <option value="175-400">175cc-400cc</option>
@@ -89,13 +88,13 @@
                                 <li class="col-xs-2">
                                     <select autocomplete tabindex="3" name="sr" id="ip_search_series"
                                             placeholder="Dòng xe" class="select-box" disabled>
-                                        <option value="-1" selected>Dòng xe</option>
+                                        <option value="" selected>Dòng xe</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
                                     <select autocomplete tabindex="6" name="pr" id="search_price_to"
                                             class="form-control align-right">
-                                        <option value="-1">Đến giá</option>
+                                        <option value="">Đến giá</option>
                                         <option value="0">0 VND</option>
                                         <option value="10000000">10,000,000 VND</option>
                                         <option value="50000000">50,000,000 VND</option>
@@ -107,13 +106,12 @@
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <select autocomplete tabindex="7" name="pv"  id="ip_search_province"
-                                            class="select-box">
-                                        <option value="-1" selected>Tỉnh thành</option>
+                                    <select autocomplete tabindex="7" name="pv" id="ip_search_province" class="select-box">
+                                        <option value="" selected>Tỉnh thành</option>
                                     </select>
                                 </li>
                                 <li class="col-xs-2">
-                                    <button class="btn btn-danger"  type="submit" id="btnAdvanceSearch"
+                                    <button class="btn btn-danger"  id="btnSearchIndex"
                                             style="width: 100%">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                         Tìm kiếm
@@ -121,7 +119,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </form>
                 </div>
                 <div class="search-brand-type">
                     <div class="ct-brand">
@@ -431,69 +428,7 @@
                     </div>
                 </div>
             </section>
-            <section id="internal_link">
-                <div class="container">
-                    <label class="title">Các từ khóa phổ biến</label>
-                    <ul>
-                        <li>
-                            <a href="/post/moto-list?q=excite 150"
-                               title="Exciter 150">Exciter 150</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=Kawasaki Z1000"
-                               title="Kawasaki Z1000">Kawasaki Z1000</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=honda"
-                               title="Tên chủ xeHONDA">HONDA</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=yamaha"
-                               title="YAMAHA">YAMAHA</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=piaggio"
-                               title="PIAGGIO">PIAGGIO</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=sym"
-                               title="SYM">SYM</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=suzuki"
-                               title="SUZUKI">SUZUKI</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=kawasaki"
-                               title="Kawasaki">Kawasaki</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=ducati"
-                               title="DUCATI">DUCATI</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=harley-davidson"
-                               title="HARLEY-DAVIDSON">HARLEY-DAVIDSON</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=benelli"
-                               title="Benelli">Benelli</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=bmw"
-                               title="BMW">BMW</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=ktm"
-                               title="KTM">KTM</a>
-                        </li>
-                        <li>
-                            <a href="/post/moto-list?q=daelim"
-                               title="DAELIM">DAELIM</a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+            <div th:replace="~{fragments/internal-link :: html}"></div>
         </section>
     </div>
 
@@ -597,6 +532,8 @@
         })
     }
 </script>
+
+
 
 <div th:replace="~{fragments/script-index :: custom_script}"></div>
 

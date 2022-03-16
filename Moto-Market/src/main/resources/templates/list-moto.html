@@ -19,6 +19,8 @@
           media="screen" onload="media='screen'">
     <link rel="stylesheet" type="text/css" href="/frontend/moto-v2/pc/css/internal_link.css?159650535020200827">
     <link rel="stylesheet" href="/frontend/moto-v2/pc/css/pages/suggest_bike_menu.css?160162130020200827">
+    <link rel="stylesheet" type="text/css" href="/frontend/toast-plugin/jquery.basic.toast.css">
+
 </head>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="15" style="padding-bottom:0px !important">
@@ -143,8 +145,8 @@
                         <li>
                             <div class="module-title">
                                 <a class="btn-module-title"
-                                   title="Mức gi&aacute; thấp nhất v&agrave; cao nhất hiển thị theo c&aacute;c xe đang c&oacute; tại Webike dựa tr&ecirc;n điều kiện t&igrave;m kiếm của bạn."
-                                   href="javascript:void(0)">Gi&aacute; (VND)</a>
+                                   title="Mức giá thấp nhất v&agrave; cao nhất hiển thị theo các xe đang c&oacute; tại Webike dựa tr&ecirc;n điều kiện t&igrave;m kiếm của bạn."
+                                   href="javascript:void(0)">Giá (VND)</a>
                             </div>
                             <div class="module-body clearfix">
                                 <div id="filter-price-list">
@@ -434,7 +436,6 @@
                                             aria-hidden="true"></i></button>
                                     </div>
                                 </div>
-
                             </div>
                         </li>
 
@@ -446,629 +447,628 @@
                             <div class="module-body">
                                 <div id="filter-km-list">
                                     <select id="filter-odo-ddl" name="odo" class="form-control">
-                                        <option value="">Chọn</option>
-                                        <option value="0-4999">0 - 4 999 (km)</option>
-                                        <option value="5000-9999">5 000 - 9 999 (km)</option>
-                                        <option value="10000-14999">10 000 - 14 999 (km)</option>
-                                        <option value="15000-19999">15 000 - 19 999 (km)</option>
-                                        <option value="20000-24999">20 000 - 24 999 (km)</option>
-                                        <option value="25000-29999">25 000 - 29 999 (km)</option>
-                                        <option value="30000-34999">30 000 - 34 999 (km)</option>
-                                        <option value="35000-39999">35 000 - 39 999 (km)</option>
-                                        <option value="40000-44999">40 000 - 44 999 (km)</option>
-                                        <option value="45000-49999">45 000 - 49 999 (km)</option>
-                                        <option value="50000-59999">50 000 - 59 999 (km)</option>
-                                        <option value="60000-69999">60 000 - 69 999 (km)</option>
-                                        <option value="70000-79999">70 000 - 79 999 (km)</option>
-                                        <option value="80000-89999">80 000 - 89 999 (km)</option>
-                                        <option value="90000-99999">90 000 - 99 999 (km)</option>
-                                        <option value="&gt;100000">&gt; 100 000 (km)</option>
+                                        <option value="" selected disabled>Chọn</option>
+                                        <option value="0 - 4 999">0 - 4 999</option>
+                                        <option value="5 000 - 9 999">5 000 - 9 999</option>
+                                        <option value="10 000 - 14 999">10 000 - 14 999</option>
+                                        <option value="15 000 - 19 999">15 000 - 19 999</option>
+                                        <option value="20 000 - 24 999">20 000 - 24 999</option>
+                                        <option value="25 000 - 29 999">25 000 - 29 999</option>
+                                        <option value="30 000 - 34 999">30 000 - 34 999</option>
+                                        <option value="35 000 - 39 999">35 000 - 39 999</option>
+                                        <option value="40 000 - 44 999">40 000 - 44 999</option>
+                                        <option value="45 000 - 49 999">45 000 - 49 999</option>
+                                        <option value="50 000 - 59 999">50 000 - 59 999</option>
+                                        <option value="60 000 - 69 999">60 000 - 69 999</option>
+                                        <option value="70 000 - 79 999">70 000 - 79 999</option>
+                                        <option value="80 000 - 89 999">80 000 - 89 999</option>
+                                        <option value="90 000 - 99 999">90 000 - 99 999</option>
+                                        <option value="&gt; 100 000">&gt; 100 000</option>
                                     </select>
                                 </div>
                             </div>
                         </li>
 
 
-                        <li>
-                            <div class="module-title">
-                                <a class="btn-module-title" href="javascript:void(0)">Tỉnh th&agrave;nh</a>
-                            </div>
-                            <div class="module-body">
-                                <label class="filter-box">
-                                    <input id="list-city-filter" class="list-filter"
-                                           data-target="#filter-brand-list">
-                                </label>
-                                <ul id="filter-city-list" class="checkbox-list custom_scroll">
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ho-chi-minh-p50.html">Hồ
-                                                Ch&iacute; Minh</a>
-                                            <span class="count">(68.070)</span>
-                                            <input type="checkbox" name="city[]" value="50"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-noi-p18.html">H&agrave;
-                                                Nội</a>
-                                            <span class="count">(23.109)</span>
-                                            <input type="checkbox" name="city[]" value="18"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-duong-p46.html">B&igrave;nh
-                                                Dương</a>
-                                            <span class="count">(7.431)</span>
-                                            <input type="checkbox" name="city[]" value="46"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/da-nang-p34.html">Đ&agrave;
-                                                Nẵng</a>
-                                            <span class="count">(7.343)</span>
-                                            <input type="checkbox" name="city[]" value="34"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dong-nai-p48.html">Đồng
-                                                Nai</a>
-                                            <span class="count">(5.885)</span>
-                                            <input type="checkbox" name="city[]" value="48"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/can-tho-p55.html">Cần
-                                                Thơ</a>
-                                            <span class="count">(5.652)</span>
-                                            <input type="checkbox" name="city[]" value="55"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/an-giang-p51.html">An
-                                                Giang</a>
-                                            <span class="count">(3.074)</span>
-                                            <input type="checkbox" name="city[]" value="51"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hai-phong-p20.html">Hải
-                                                Ph&ograve;ng</a>
-                                            <span class="count">(3.064)</span>
-                                            <input type="checkbox" name="city[]" value="20"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dak-lak-p40.html">Đắk
-                                                Lắk</a>
-                                            <span class="count">(2.355)</span>
-                                            <input type="checkbox" name="city[]" value="40"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ba-ria-vung-tau-p45.html">B&agrave;
-                                                Rịa-Vũng T&agrave;u</a>
-                                            <span class="count">(2.019)</span>
-                                            <input type="checkbox" name="city[]" value="45"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/vinh-long-p63.html">Vĩnh
-                                                Long</a>
-                                            <span class="count">(1.330)</span>
-                                            <input type="checkbox" name="city[]" value="63"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/thua-thien-hue-p31.html">Thừa
-                                                Thi&ecirc;n Huế</a>
-                                            <span class="count">(1.318)</span>
-                                            <input type="checkbox" name="city[]" value="31"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/kien-giang-p58.html">Ki&ecirc;n
-                                                Giang</a>
-                                            <span class="count">(1.185)</span>
-                                            <input type="checkbox" name="city[]" value="58"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ben-tre-p53.html">Bến
-                                                Tre</a>
-                                            <span class="count">(1.171)</span>
-                                            <input type="checkbox" name="city[]" value="53"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dong-thap-p56.html">Đồng
-                                                Th&aacute;p</a>
-                                            <span class="count">(1.154)</span>
-                                            <input type="checkbox" name="city[]" value="56"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/long-an-p59.html">Long
-                                                An</a>
-                                            <span class="count">(1.074)</span>
-                                            <input type="checkbox" name="city[]" value="59"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/tien-giang-p61.html">Tiền
-                                                Giang</a>
-                                            <span class="count">(972)</span>
-                                            <input type="checkbox" name="city[]" value="61"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/soc-trang-p60.html">S&oacute;c
-                                                Trăng</a>
-                                            <span class="count">(961)</span>
-                                            <input type="checkbox" name="city[]" value="60"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/tay-ninh-p49.html">T&acirc;y
-                                                Ninh</a>
-                                            <span class="count">(764)</span>
-                                            <input type="checkbox" name="city[]" value="49"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hau-giang-p57.html">Hậu
-                                                Giang</a>
-                                            <span class="count">(650)</span>
-                                            <input type="checkbox" name="city[]" value="57"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lam-dong-p44.html">L&acirc;m
-                                                Đồng</a>
-                                            <span class="count">(608)</span>
-                                            <input type="checkbox" name="city[]" value="44"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/quang-nam-p38.html">Quảng
-                                                Nam</a>
-                                            <span class="count">(592)</span>
-                                            <input type="checkbox" name="city[]" value="38"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-phuoc-p47.html">B&igrave;nh
-                                                Phước</a>
-                                            <span class="count">(456)</span>
-                                            <input type="checkbox" name="city[]" value="47"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-ninh-p16.html">Bắc
-                                                Ninh</a>
-                                            <span class="count">(422)</span>
-                                            <input type="checkbox" name="city[]" value="16"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/khanh-hoa-p35.html">Kh&aacute;nh
-                                                H&ograve;a</a>
-                                            <span class="count">(363)</span>
-                                            <input type="checkbox" name="city[]" value="35"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/tra-vinh-p62.html">Tr&agrave;
-                                                Vinh</a>
-                                            <span class="count">(352)</span>
-                                            <input type="checkbox" name="city[]" value="62"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ca-mau-p54.html">C&agrave;
-                                                Mau</a>
-                                            <span class="count">(331)</span>
-                                            <input type="checkbox" name="city[]" value="54"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/nam-dinh-p22.html">Nam
-                                                Định</a>
-                                            <span class="count">(329)</span>
-                                            <input type="checkbox" name="city[]" value="22"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/gia-lai-p42.html">Gia
-                                                Lai</a>
-                                            <span class="count">(326)</span>
-                                            <input type="checkbox" name="city[]" value="42"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/thanh-hoa-p30.html">Thanh
-                                                H&oacute;a</a>
-                                            <span class="count">(323)</span>
-                                            <input type="checkbox" name="city[]" value="30"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/nghe-an-p27.html">Nghệ
-                                                An</a>
-                                            <span class="count">(317)</span>
-                                            <input type="checkbox" name="city[]" value="27"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-thuan-p33.html">B&igrave;nh
-                                                Thuận</a>
-                                            <span class="count">(309)</span>
-                                            <input type="checkbox" name="city[]" value="33"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/binh-dinh-p32.html">B&igrave;nh
-                                                Định</a>
-                                            <span class="count">(285)</span>
-                                            <input type="checkbox" name="city[]" value="32"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/thai-binh-p24.html">Th&aacute;i
-                                                B&igrave;nh</a>
-                                            <span class="count">(207)</span>
-                                            <input type="checkbox" name="city[]" value="24"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dak-nong-p41.html">Đắk
-                                                N&ocirc;ng</a>
-                                            <span class="count">(183)</span>
-                                            <input type="checkbox" name="city[]" value="41"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hai-duong-p19.html">Hải
-                                                Dương</a>
-                                            <span class="count">(182)</span>
-                                            <input type="checkbox" name="city[]" value="19"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-lieu-p52.html">Bạc
-                                                Li&ecirc;u</a>
-                                            <span class="count">(182)</span>
-                                            <input type="checkbox" name="city[]" value="52"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-ngai-p39.html">Quảng
-                                                Ngãi</a>
-                                            <span class="count">(179)</span>
-                                            <input type="checkbox" name="city[]" value="39"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-nam-p17.html">H&agrave;
-                                                Nam</a>
-                                            <span class="count">(166)</span>
-                                            <input type="checkbox" name="city[]" value="17"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-giang-p1.html">Bắc
-                                                Giang</a>
-                                            <span class="count">(159)</span>
-                                            <input type="checkbox" name="city[]" value="1"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/kon-tum-p43.html">Kon
-                                                Tum</a>
-                                            <span class="count">(140)</span>
-                                            <input type="checkbox" name="city[]" value="43"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/vinh-phuc-p25.html">Vĩnh
-                                                Ph&uacute;c</a>
-                                            <span class="count">(137)</span>
-                                            <input type="checkbox" name="city[]" value="25"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hung-yen-p21.html">Hưng
-                                                Y&ecirc;n</a>
-                                            <span class="count">(106)</span>
-                                            <input type="checkbox" name="city[]" value="21"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/phu-tho-p10.html">Ph&uacute;
-                                                Thọ</a>
-                                            <span class="count">(91)</span>
-                                            <input type="checkbox" name="city[]" value="10"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-tinh-p26.html">H&agrave;
-                                                Tĩnh</a>
-                                            <span class="count">(89)</span>
-                                            <input type="checkbox" name="city[]" value="26"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ninh-thuan-p36.html">Ninh
-                                                Thuận</a>
-                                            <span class="count">(81)</span>
-                                            <input type="checkbox" name="city[]" value="36"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/thai-nguyen-p13.html">Th&aacute;i
-                                                Nguy&ecirc;n</a>
-                                            <span class="count">(80)</span>
-                                            <input type="checkbox" name="city[]" value="13"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-binh-p28.html">Quảng
-                                                B&igrave;nh</a>
-                                            <span class="count">(74)</span>
-                                            <input type="checkbox" name="city[]" value="28"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ninh-binh-p23.html">Ninh
-                                                B&igrave;nh</a>
-                                            <span class="count">(70)</span>
-                                            <input type="checkbox" name="city[]" value="23"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/phu-yen-p37.html">Ph&uacute;
-                                                Y&ecirc;n</a>
-                                            <span class="count">(69)</span>
-                                            <input type="checkbox" name="city[]" value="37"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-ninh-p11.html">Quảng
-                                                Ninh</a>
-                                            <span class="count">(67)</span>
-                                            <input type="checkbox" name="city[]" value="11"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/quang-tri-p29.html">Quảng
-                                                Trị</a>
-                                            <span class="count">(62)</span>
-                                            <input type="checkbox" name="city[]" value="29"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hoa-binh-p6.html">H&ograve;a
-                                                B&igrave;nh</a>
-                                            <span class="count">(45)</span>
-                                            <input type="checkbox" name="city[]" value="6"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a
-                                                    href="https://www.webike.vn/cho-xe-may/bike-list/tuyen-quang-p14.html">Tuy&ecirc;n
-                                                Quang</a>
-                                            <span class="count">(26)</span>
-                                            <input type="checkbox" name="city[]" value="14"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lang-son-p8.html">Lạng
-                                                Sơn</a>
-                                            <span class="count">(24)</span>
-                                            <input type="checkbox" name="city[]" value="8"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/son-la-p12.html">Sơn
-                                                La</a>
-                                            <span class="count">(15)</span>
-                                            <input type="checkbox" name="city[]" value="12"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-giang-p5.html">H&agrave;
-                                                Giang</a>
-                                            <span class="count">(13)</span>
-                                            <input type="checkbox" name="city[]" value="5"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lao-cai-p9.html">L&agrave;o
-                                                Cai</a>
-                                            <span class="count">(13)</span>
-                                            <input type="checkbox" name="city[]" value="9"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/yen-bai-p15.html">Y&ecirc;n
-                                                B&aacute;i</a>
-                                            <span class="count">(11)</span>
-                                            <input type="checkbox" name="city[]" value="15"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-kan-p2.html">Bắc
-                                                Kạn</a>
-                                            <span class="count">(7)</span>
-                                            <input type="checkbox" name="city[]" value="2"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dien-bien-p4.html">Điện
-                                                Bi&ecirc;n</a>
-                                            <span class="count">(6)</span>
-                                            <input type="checkbox" name="city[]" value="4"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lai-chau-p7.html">Lai
-                                                Ch&acirc;u</a>
-                                            <span class="count">(4)</span>
-                                            <input type="checkbox" name="city[]" value="7"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox filter-checkbox">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/cao-bang-p3.html">Cao
-                                                Bằng</a>
-                                            <span class="count">(3)</span>
-                                            <input type="checkbox" name="city[]" value="3"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+<!--                        <li>-->
+<!--                            <div class="module-title">-->
+<!--                                <a class="btn-module-title" href="javascript:void(0)">Tỉnh th&agrave;nh</a>-->
+<!--                            </div>-->
+<!--                            <div class="module-body">-->
+<!--                                <label class="filter-box">-->
+<!--                                    <input id="list-city-filter" class="list-filter"-->
+<!--                                           data-target="#filter-brand-list">-->
+<!--                                </label>-->
+<!--                                <ul id="filter-city-list" class="checkbox-list custom_scroll">-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ho-chi-minh-p50.html">Hồ-->
+<!--                                                Ch&iacute; Minh</a>-->
+<!--                                            <span class="count">(68.070)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="50"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-noi-p18.html">H&agrave;-->
+<!--                                                Nội</a>-->
+<!--                                            <span class="count">(23.109)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="18"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-duong-p46.html">B&igrave;nh-->
+<!--                                                Dương</a>-->
+<!--                                            <span class="count">(7.431)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="46"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/da-nang-p34.html">Đ&agrave;-->
+<!--                                                Nẵng</a>-->
+<!--                                            <span class="count">(7.343)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="34"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dong-nai-p48.html">Đồng-->
+<!--                                                Nai</a>-->
+<!--                                            <span class="count">(5.885)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="48"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/can-tho-p55.html">Cần-->
+<!--                                                Thơ</a>-->
+<!--                                            <span class="count">(5.652)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="55"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/an-giang-p51.html">An-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(3.074)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="51"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hai-phong-p20.html">Hải-->
+<!--                                                Ph&ograve;ng</a>-->
+<!--                                            <span class="count">(3.064)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="20"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dak-lak-p40.html">Đắk-->
+<!--                                                Lắk</a>-->
+<!--                                            <span class="count">(2.355)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="40"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ba-ria-vung-tau-p45.html">B&agrave;-->
+<!--                                                Rịa-Vũng T&agrave;u</a>-->
+<!--                                            <span class="count">(2.019)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="45"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/vinh-long-p63.html">Vĩnh-->
+<!--                                                Long</a>-->
+<!--                                            <span class="count">(1.330)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="63"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/thua-thien-hue-p31.html">Thừa-->
+<!--                                                Thi&ecirc;n Huế</a>-->
+<!--                                            <span class="count">(1.318)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="31"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/kien-giang-p58.html">Ki&ecirc;n-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(1.185)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="58"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ben-tre-p53.html">Bến-->
+<!--                                                Tre</a>-->
+<!--                                            <span class="count">(1.171)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="53"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dong-thap-p56.html">Đồng-->
+<!--                                                Tháp</a>-->
+<!--                                            <span class="count">(1.154)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="56"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/long-an-p59.html">Long-->
+<!--                                                An</a>-->
+<!--                                            <span class="count">(1.074)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="59"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/tien-giang-p61.html">Tiền-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(972)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="61"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/soc-trang-p60.html">S&oacute;c-->
+<!--                                                Trăng</a>-->
+<!--                                            <span class="count">(961)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="60"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/tay-ninh-p49.html">T&acirc;y-->
+<!--                                                Ninh</a>-->
+<!--                                            <span class="count">(764)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="49"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hau-giang-p57.html">Hậu-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(650)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="57"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lam-dong-p44.html">L&acirc;m-->
+<!--                                                Đồng</a>-->
+<!--                                            <span class="count">(608)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="44"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/quang-nam-p38.html">Quảng-->
+<!--                                                Nam</a>-->
+<!--                                            <span class="count">(592)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="38"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-phuoc-p47.html">B&igrave;nh-->
+<!--                                                Phước</a>-->
+<!--                                            <span class="count">(456)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="47"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-ninh-p16.html">Bắc-->
+<!--                                                Ninh</a>-->
+<!--                                            <span class="count">(422)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="16"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/khanh-hoa-p35.html">Khánh-->
+<!--                                                H&ograve;a</a>-->
+<!--                                            <span class="count">(363)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="35"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/tra-vinh-p62.html">Tr&agrave;-->
+<!--                                                Vinh</a>-->
+<!--                                            <span class="count">(352)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="62"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ca-mau-p54.html">C&agrave;-->
+<!--                                                Mau</a>-->
+<!--                                            <span class="count">(331)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="54"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/nam-dinh-p22.html">Nam-->
+<!--                                                Định</a>-->
+<!--                                            <span class="count">(329)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="22"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/gia-lai-p42.html">Gia-->
+<!--                                                Lai</a>-->
+<!--                                            <span class="count">(326)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="42"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/thanh-hoa-p30.html">Thanh-->
+<!--                                                H&oacute;a</a>-->
+<!--                                            <span class="count">(323)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="30"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/nghe-an-p27.html">Nghệ-->
+<!--                                                An</a>-->
+<!--                                            <span class="count">(317)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="27"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/binh-thuan-p33.html">B&igrave;nh-->
+<!--                                                Thuận</a>-->
+<!--                                            <span class="count">(309)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="33"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/binh-dinh-p32.html">B&igrave;nh-->
+<!--                                                Định</a>-->
+<!--                                            <span class="count">(285)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="32"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/thai-binh-p24.html">Thái-->
+<!--                                                B&igrave;nh</a>-->
+<!--                                            <span class="count">(207)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="24"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dak-nong-p41.html">Đắk-->
+<!--                                                N&ocirc;ng</a>-->
+<!--                                            <span class="count">(183)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="41"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hai-duong-p19.html">Hải-->
+<!--                                                Dương</a>-->
+<!--                                            <span class="count">(182)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="19"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-lieu-p52.html">Bạc-->
+<!--                                                Li&ecirc;u</a>-->
+<!--                                            <span class="count">(182)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="52"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-ngai-p39.html">Quảng-->
+<!--                                                Ngãi</a>-->
+<!--                                            <span class="count">(179)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="39"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-nam-p17.html">H&agrave;-->
+<!--                                                Nam</a>-->
+<!--                                            <span class="count">(166)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="17"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-giang-p1.html">Bắc-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(159)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="1"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/kon-tum-p43.html">Kon-->
+<!--                                                Tum</a>-->
+<!--                                            <span class="count">(140)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="43"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/vinh-phuc-p25.html">Vĩnh-->
+<!--                                                Ph&uacute;c</a>-->
+<!--                                            <span class="count">(137)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="25"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hung-yen-p21.html">Hưng-->
+<!--                                                Y&ecirc;n</a>-->
+<!--                                            <span class="count">(106)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="21"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/phu-tho-p10.html">Ph&uacute;-->
+<!--                                                Thọ</a>-->
+<!--                                            <span class="count">(91)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="10"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-tinh-p26.html">H&agrave;-->
+<!--                                                Tĩnh</a>-->
+<!--                                            <span class="count">(89)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="26"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/ninh-thuan-p36.html">Ninh-->
+<!--                                                Thuận</a>-->
+<!--                                            <span class="count">(81)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="36"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/thai-nguyen-p13.html">Thái-->
+<!--                                                Nguy&ecirc;n</a>-->
+<!--                                            <span class="count">(80)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="13"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-binh-p28.html">Quảng-->
+<!--                                                B&igrave;nh</a>-->
+<!--                                            <span class="count">(74)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="28"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ninh-binh-p23.html">Ninh-->
+<!--                                                B&igrave;nh</a>-->
+<!--                                            <span class="count">(70)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="23"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/phu-yen-p37.html">Ph&uacute;-->
+<!--                                                Y&ecirc;n</a>-->
+<!--                                            <span class="count">(69)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="37"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/quang-ninh-p11.html">Quảng-->
+<!--                                                Ninh</a>-->
+<!--                                            <span class="count">(67)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="11"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/quang-tri-p29.html">Quảng-->
+<!--                                                Trị</a>-->
+<!--                                            <span class="count">(62)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="29"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/hoa-binh-p6.html">H&ograve;a-->
+<!--                                                B&igrave;nh</a>-->
+<!--                                            <span class="count">(45)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="6"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a-->
+<!--                                                    href="https://www.webike.vn/cho-xe-may/bike-list/tuyen-quang-p14.html">Tuy&ecirc;n-->
+<!--                                                Quang</a>-->
+<!--                                            <span class="count">(26)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="14"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lang-son-p8.html">Lạng-->
+<!--                                                Sơn</a>-->
+<!--                                            <span class="count">(24)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="8"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/son-la-p12.html">Sơn-->
+<!--                                                La</a>-->
+<!--                                            <span class="count">(15)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="12"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/ha-giang-p5.html">H&agrave;-->
+<!--                                                Giang</a>-->
+<!--                                            <span class="count">(13)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="5"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lao-cai-p9.html">L&agrave;o-->
+<!--                                                Cai</a>-->
+<!--                                            <span class="count">(13)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="9"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/yen-bai-p15.html">Y&ecirc;n-->
+<!--                                                Bái</a>-->
+<!--                                            <span class="count">(11)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="15"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/bac-kan-p2.html">Bắc-->
+<!--                                                Kạn</a>-->
+<!--                                            <span class="count">(7)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="2"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/dien-bien-p4.html">Điện-->
+<!--                                                Bi&ecirc;n</a>-->
+<!--                                            <span class="count">(6)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="4"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/lai-chau-p7.html">Lai-->
+<!--                                                Ch&acirc;u</a>-->
+<!--                                            <span class="count">(4)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="7"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <label class="checkbox filter-checkbox">-->
+<!--                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/cao-bang-p3.html">Cao-->
+<!--                                                Bằng</a>-->
+<!--                                            <span class="count">(3)</span>-->
+<!--                                            <input type="checkbox" name="city[]" value="3"/>-->
+<!--                                            <span class="checkmark"></span>-->
+<!--                                        </label>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </li>-->
 
 
                         <li>
                             <div class="module-title">
                                 <a class="btn-module-title"
-                                   title="M&agrave;u sắc hiển thị b&ecirc;n dưới l&agrave; c&aacute;c m&agrave;u xe đang c&oacute; tại Webike dựa tr&ecirc;n điều kiện t&igrave;m kiếm của bạn."
                                    href="javascript:void(0)">M&agrave;u xe</a>
                             </div>
                             <div class="module-body">
@@ -1133,14 +1133,14 @@
                                         <li>
                                             <label class="filter-color">
                                                 <input type="checkbox" name="color[]" value="10"/>
-                                                <span class="checkmark " title="X&aacute;m (185)"
+                                                <span class="checkmark " title="Xám (185)"
                                                       style="background-color:#666666"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="filter-color">
                                                 <input type="checkbox" name="color[]" value="14"/>
-                                                <span class="checkmark " title="Xanh L&aacute; (146)"
+                                                <span class="checkmark " title="Xanh Lá (146)"
                                                       style="background-color:#007000"></span>
                                             </label>
                                         </li>
@@ -1233,155 +1233,18 @@
                             </div>
                         </li>
                     </ul>
-                    <input id="url_follow_product" name="url_follow_product" type="hidden"
-                           value="https://www.webike.vn/product/follow"/>
-                </form>
-                <input id="customer_id" name="customer_id" type="hidden" value="0"/>
-                <input id="series_code" name="series_code" type="hidden" value="0"/>
-                <input id="phone_code" name="phone_code" type="hidden" value=""/>
-                <input id="contact_name" name="contact_name" type="hidden" value=""/>
-                <input id="key_word" name="key_word" type="hidden" value=""/>
-                <input id="import_bike" name="import_bike" type="hidden" value=""/>
-                <input id="web_code" name="web_code" type="hidden" value="0"/>
-                <input id="has_filter" name="has_filter" type="hidden" value="25"/>
-                <input id="query_string" name="query_string" type="hidden" value=""/>
-                <div class="block-news">
-                    <div class="module-title">Tin tức xe m&aacute;y</div>
-                    <ul class="list-news">
-                        <li>
-                            <a href="https://news.webike.vn/ys-gear-va-akrapovic-ra-mat-ong-xa-chuyen-dung-cho-mt-07-mt-09-va-tracer-9.html"
-                               target="_blank"
-                               title="Y&#8217;S GEAR v&agrave; Akrapovic ra mắt ống xả chuy&ecirc;n dụng cho MT-07, MT-09 v&agrave; TRACER 9"></a>
-                            <img class="lazy"
-                                 src='https://www.webike.vn/frontend/img/common/product_default.jpg?152472729920200827'
-                                 data-src="https://news.webike.vn/wp-content/uploads/2022/02/1-1-1-600x400.jpg"
-                                 alt="Y&#8217;S GEAR v&agrave; Akrapovic ra mắt ống xả chuy&ecirc;n dụng cho MT-07, MT-09 v&agrave; TRACER 9">
-                            <div class="info">
-                                <label class="title">Y&#8217;S GEAR v&agrave; Akrapovic ra mắt ống xả chuy&ecirc;n
-                                    dụng cho MT-07, MT-09 v&agrave; TRACER 9</label>
-                                <span>15/02/2022</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://news.webike.vn/lich-su-phat-trien-huyen-thoai-honda-super-cub-50-tai-nhat-ban-p-2.html"
-                               target="_blank"
-                               title="Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại Nhật Bản P.2"></a>
-                            <img class="lazy"
-                                 src='https://www.webike.vn/frontend/img/common/product_default.jpg?152472729920200827'
-                                 data-src="https://news.webike.vn/wp-content/uploads/2022/02/Honda-Super-Cub-50-11-600x400.jpg"
-                                 alt="Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại Nhật Bản P.2">
-                            <div class="info">
-                                <label class="title">Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại
-                                    Nhật Bản P.2</label>
-                                <span>14/02/2022</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://news.webike.vn/lich-su-phat-trien-huyen-thoai-honda-super-cub-50-tai-nhat-ban-p-1.html"
-                               target="_blank"
-                               title="Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại Nhật Bản P.1"></a>
-                            <img class="lazy"
-                                 src='https://www.webike.vn/frontend/img/common/product_default.jpg?152472729920200827'
-                                 data-src="https://news.webike.vn/wp-content/uploads/2022/02/Honda-Super-Cub-50-1-600x400.jpg"
-                                 alt="Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại Nhật Bản P.1">
-                            <div class="info">
-                                <label class="title">Lịch sử ph&aacute;t triển huyền thoại Honda Super Cub 50 tại
-                                    Nhật Bản P.1</label>
-                                <span>14/02/2022</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://news.webike.vn/phu-tung-phu-kien-cho-dong-xe-honda-nsr50-nhap-khau-tu-nhat.html"
-                               target="_blank"
-                               title="Phụ t&ugrave;ng phụ kiện cho d&ograve;ng xe Honda NSR50 nhập khẩu từ Nhật"></a>
-                            <img class="lazy"
-                                 src='https://www.webike.vn/frontend/img/common/product_default.jpg?152472729920200827'
-                                 data-src="https://news.webike.vn/wp-content/uploads/2022/02/L_nsr50_199612-e1644457888574-600x400.jpg"
-                                 alt="Phụ t&ugrave;ng phụ kiện cho d&ograve;ng xe Honda NSR50 nhập khẩu từ Nhật">
-                            <div class="info">
-                                <label class="title">Phụ t&ugrave;ng phụ kiện cho d&ograve;ng xe Honda NSR50 nhập
-                                    khẩu từ Nhật</label>
-                                <span>10/02/2022</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://news.webike.vn/honda-vario-160-moi-co-the-sanh-ngang-voi-yamaha-aerox-155.html"
-                               target="_blank"
-                               title="Honda Vario 160 mới c&oacute; thể s&aacute;nh ngang với Yamaha Aerox 155?"></a>
-                            <img class="lazy"
-                                 src='https://www.webike.vn/frontend/img/common/product_default.jpg?152472729920200827'
-                                 data-src="https://news.webike.vn/wp-content/uploads/2022/02/2022-honda-vario-160-e1644208761189-600x339.jpg"
-                                 alt="Honda Vario 160 mới c&oacute; thể s&aacute;nh ngang với Yamaha Aerox 155?">
-                            <div class="info">
-                                <label class="title">Honda Vario 160 mới c&oacute; thể s&aacute;nh ngang với Yamaha
-                                    Aerox 155?</label>
-                                <span>07/02/2022</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="block_menu_suggest_bike">
-                    <div class="module-title">Tư vấn chọn xe</div>
-                    <ul>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/xe-phu-hop-cho-nam-1">Xe
-                                ph&ugrave; hợp cho nam</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/xe-phu-hop-cho-nu-2">Xe
-                                ph&ugrave; hợp cho nữ</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/con-tay-10">C&ocirc;n tay</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/tay-ga-11">Tay ga</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/du-lich-17">Du lịch</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/di-duong-dai-18">Đi đường
-                                d&agrave;i</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/duoi-10-trieu-20">Dưới 10
-                                triệu</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/tu-10-30-trieu-21">Từ 10 - 30
-                                triệu</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/menh-kim-23">Mệnh Kim</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                        <li>
-                            <a href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe/menh-moc-24">Mệnh Mộc</a>
-                            <i class="icon icon-arrow-right"></i>
-                        </li>
-                    </ul>
-                    <a class="btn_viewmore" href="https://www.webike.vn/cho-xe-may/tu-van-chon-xe">
-                        <span>Xem tất cả gợi ý</span>
-                    </a>
-                </div>
+                </form>
+                
             </div>
 
             <div class="main">
                 <div class="module-list">
                     <div class="heading">
-                        <h1 class="name" title="Mua b&aacute;n xe m&aacute;y">Mua bán xe máy </h1>
+                        <h1 class="name" title="Mua bán xe máy">Mua bán xe máy </h1>
+
                         <ul class="list-sort-grid">
-                            <li class="count">221.740 Xe</li>
+                            <li class="count" th:utext="${postList.getSize()} + ' Xe'"></li>
                             <li>
                                 <a id="view-grid-bike-list" class="" href="javascript:void(0)">
                                     <i class="icon icon-grid"></i></a>
@@ -1393,29 +1256,16 @@
 
                                 <select id="product-order" name="order" class="select-control">
                                     <option value="">Sắp xếp</option>
-                                    <option value="newest_desc">
+                                    <option data-sn="postDate" data-st="asc">
                                         Mới nhất
                                     </option>
-                                    <option value="priceoder_asc">
-                                        Gi&aacute; thấp
+                                    <option data-sn="price" data-st="asc">
+                                        Giá thấp
                                     </option>
-                                    <option value="priceoder_desc">
-                                        Gi&aacute; cao
-                                    </option>
-                                    <option value="odor_asc">
-                                        ODO thấp
-                                    </option>
-                                    <option value="odor_desc">
-                                        ODO cao
-                                    </option>
-                                    <option value="cco_asc">
-                                        Xe phổ th&ocirc;ng
-                                    </option>
-                                    <option value="cco_desc">
-                                        Ph&acirc;n khối lớn
+                                    <option data-sn="price" data-st="desc">
+                                        Giá cao
                                     </option>
                                 </select>
-
                             </li>
                             <li>
                                 <select id="limit_product" name="limit" class="select-control">
@@ -1428,7 +1278,16 @@
                         </ul>
                     </div>
 
+                            <div class="list-filters">
+                                <ul>
+                                    <li>Lọc theo:</li>
 
+                                    <div id="listFilters">
+<!--                                        <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html"><span>PIAGGIO <i class="fa fa-times" aria-hidden="true"></i></span></a></li>-->
+                                    </div>
+
+                                </ul>
+                            </div>
                     <!--list products-->
                     <div class="list-product">
                         <ul class="list-bike list-view">
@@ -1515,7 +1374,6 @@
                                                             th:utext="${post.detailMotorDTO.typeMotor.typeMotorName}"></span>
                                                     </li>
                                                 </ul>
-
                                             </div>
                                             <div class="right">
                                                 <div class="user-info">
@@ -1538,7 +1396,6 @@
                                         </div>
                                     </div>
                                 </li>
-
                             </th:block>
                         </ul>
                     </div>
@@ -1546,19 +1403,15 @@
 
                     <div class="list_bike_paging">
                         <ul class="pagination">
+
                             <li>
-                                <a th:href="@{'/post/moto-list/' (page=${postList.number - 1})}"
+                                <a id="previousPageBtn"
                                    th:if="${postList.hasPrevious()}"><</a></li>
 
-                            <th:block th:each="item : ${#numbers.sequence(0,postList.totalPages -1)}">
-                                <li th:class="${item == postList.number ? 'active' :'' }"><a
-                                        th:href="@{'/post/moto-list/' (page=${item})}"> <span
-                                        th:text='${item+1}'></span></a></li>
-                            </th:block>
-
                             <li>
-                                <a th:href="@{'/post/moto-list/'(page=${postList.number + 1})}"
-                                   th:if="${postList.hasNext()}">></a></li>
+                                <a  id="nextPageBtn"
+                                   th:if="${postList.hasNext()}">></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1567,173 +1420,8 @@
 
         </div>
 
-        <section id="internal_link">
-            <div class="container">
-                <label class="title">Các từ khóa phổ biến</label>
-                <ul>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/series/winner-x-1390.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Honda Winner X">Honda Winner X</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/series/exciter-150-858.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Exciter 150">Exciter 150</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/series/z1000-25.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Kawasaki Z1000">Kawasaki Z1000</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/series/yzf-r6-581.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Yamaha R6">Yamaha R6</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/honda.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe HONDA">Xe HONDA</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/yamaha.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe YAMAHA">Xe YAMAHA</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/piaggio.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe PIAGGIO">Xe PIAGGIO</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/sym.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe SYM">Xe SYM</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/suzuki.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe SUZUKI">Xe SUZUKI</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kawasaki.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Kawasaki">Xe Kawasaki</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/ducati.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe DUCATI">Xe DUCATI</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/harley-davidson.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe HARLEY-DAVIDSON">Xe HARLEY-DAVIDSON</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/benelli.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Benelli">Xe Benelli</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bmw.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe BMW">Xe BMW</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/ktm.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe KTM">Xe KTM</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/daelim.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe DAELIM">Xe DAELIM</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/triumph.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe TRIUMPH">Xe TRIUMPH</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kymco.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe KYMCO">Xe KYMCO</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/royal-enfield.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Royal Enfield">Xe Royal Enfield</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/brixton.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Brixton">Xe Brixton</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/visitor.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe VISITOR">Xe VISITOR</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/mv-agusta.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe MV AGUSTA">Xe MV AGUSTA</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/gpx.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe GPX">Xe GPX</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/rebel-usa.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe REBEL USA">Xe REBEL USA</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/sachs.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe SACHS">Xe SACHS</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bajaj-pulsar.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Bajaj Pulsar">Xe Bajaj Pulsar</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/moto-guzzi.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Moto Guzzi">Xe Moto Guzzi</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/daehan.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe DAEHAN">Xe DAEHAN</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/kengo.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Kengo">Xe Kengo</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/cfmoto.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe CFMoto">Xe CFMoto</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/bosscity.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Bosscity">Xe Bosscity</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/aprilia.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe aprilia">Xe aprilia</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/lifan.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Lifan">Xe Lifan</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/lambretta.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Lambretta">Xe Lambretta</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/vento.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Vento">Xe Vento</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/hyosung.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Hyosung">Xe Hyosung</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/minsk.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe Minsk">Xe Minsk</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/keeway.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe KEEWAY">Xe KEEWAY</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/mobylette.html?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe MOBYLETTE">Xe MOBYLETTE</a>
-                    </li>
-                    <li>
-                        <a href="https://www.webike.vn/cho-xe-may/bike-list/st-xe-ga.html?priceoder=asc?utm_campaign=wvn&amp;utm_source=quick_link&amp;utm_medium=bikelist&amp;utm_content=footer"
-                           title="Xe tay ga gi&aacute; rẻ">Xe tay ga gi&aacute; rẻ</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
+        <div th:replace="~{fragments/internal-link :: html}"></div>
+
     </section>
 
     <div th:replace="~{fragments/footer :: footer}"></div>
@@ -1742,165 +1430,16 @@
         Page top
     </button>
 </div>
-<!--    <script src="/frontend/vendor/jquery.js?158926651720200827"></script>-->
-<!--    <script src="/v1/vendor/other/typeahead.bundle.js?154996577520200827" type="deferjs"></script>-->
-<!--    <script src="/frontend/vendor/lazysizes/lazysizes.min.js?158926651720200827"></script>-->
-<!--    <script src="/frontend/moto-v2/pc/js/wvn.js?160015879020200827"></script>-->
 
-<!--    <script type="text/javascript">-->
-<!--        deferscript('/frontend/moto-v2/pc/js/sugesstion.js?159852541620200827');-->
-<!--        deferstyle('/frontend/moto-v2/pc/css/sugesstion.css?158926651620200827', 'sugesstion.css');-->
-<!--        deferscript('https://www.webike.vn/frontend/vendor/alertify.js?159169869320200827');-->
-<!--        deferscript('/frontend/moto-v2/pc/js/common.js?160015879020200827');-->
-<!--    </script>-->
 
 <script src="/v1/pc/js/common/jquery.js?152472729920200827"></script>
+<script src="/frontend/toast-plugin/jquery.basic.toast.js"></script>
 
 
-<!--    <script defer src="/v1/vendor/select2/js/select2.min.js?152472729920200827"></script>-->
-<!--    <script type="text/javascript">-->
-<!--        var SEO_PAGE = false;-->
-<!--    </script>-->
-<!--    <script type="text/javascript">-->
-<!--        deferscript('/frontend/moto-v2/pc/js/pages/bike-list.js?159944832020200827');-->
-<!--        deferscript('/frontend/js/search/search.js?159342353320200827');-->
-<!--    </script>-->
 
-<script th:inline="javascript">
-    function findGetParameter(parameterName) {
-        var result = null,
-            tmp = [];
-        location.search
-            .substr(1)
-            .split("&")
-            .forEach(function (item) {
-                tmp = item.split("=");
-                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-            });
-        return result;
-    }
-
-    let br = findGetParameter("br");
-    let tp = findGetParameter("tp");
-    let cc = findGetParameter("cc");
-
-    /*<![CDATA[*/
-    brandList =  /*[[${brandList}]]*/
-        /*]]>*/
-        // showCheckBoxBrandList();
-        function showCheckBoxBrandList() {
-            let brList = br.split("_");
-
-            let str = "";
-            for (let item of brandList) {
-                boolean = checkItemInList(brList, item.brandId);
-                if (boolean) {
-                    // a =
-                }
-                str += ``;
-            }
-            ;
-            let s = `<h1>HO</h1>`;
-            $('#filter-brand-list').append(str);
-        }
-
-    function checkItemInList(list, item) {
-        for (const i of list) {
-            if (item == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-</script>
-
-<script>
-    checked("checkbox-brand");
-    checked("checkbox-type");
-    checked("checkbox-capacity");
-    hanlderClickCheckbox("checkbox-brand");
-    hanlderClickCheckbox("checkbox-type");
-    hanlderClickCheckbox("checkbox-capacity");
-
-    function checked(className) {
-        let checkbox = document.getElementsByClassName(className);
-        for (let i = 0; i < checkbox.length; i++) {
-            if ($(checkbox[i]).attr('data-check') == 0) {
-                $(checkbox[i]).prop('checked', true);
-            } else {
-                $(checkbox[i]).prop('checked', false);
-            }
-        }
-    }
-
-    function hanlderClickCheckbox(className) {
-        $("." + className).change(function () {
-            var ischecked = $(this).is(':checked');
-            if (ischecked || !ischecked) {
-                window.location.href = $(this).attr('data-href');
-            }
-        });
-    }
-
-    $("#submitprice").on("click", function () {
-        getPriceParam();
-    })
-
-    function getPriceParam() {
-        let param = "/post/moto-list"
-        let prfrom = $("#filter-price-from-list").val()
-        let prto = $("#filter-price-to-list").val()
-        var pathname = window.location.pathname; // Returns path only (/path/example.html)
-        var url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
-        var origin = window.location.origin;
-        let paramUrl = window.location.search;
-        let prfrurl = findGetParameter("pr-fr");
-        let prtourl = findGetParameter("pr-to");
-        if (paramUrl == '') {
-            window.location.href = param + '?' + "pr-fr=" + prfrom + "&pr-to=" + prto + '&';
-        } else {
-            if(prfrurl == '' && prfrurl == ''){
-                window.location.href = pathname + paramUrl + "pr-fr=" + prfrom + "&pr-to=" + prto + '&';
-            } else{
-                 window.location.href = updateQueryStringParameter( updateQueryStringParameter(pathname+paramUrl,"pr-fr", prfrom ),"pr-to", prto )
-                }
-        }
-    }
-
-    function getCustomParam() {
-        let param = "/post/moto-list"
-        let prfrom = $("#" + idFrom).val()
-        let prto = $("#").val()
-        var pathname = window.location.pathname; // Returns path only (/path/example.html)
-        var url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
-        var origin = window.location.origin;
-        let paramUrl = window.location.search;
-        let prfrurl = findGetParameter("pr-fr");
-        let prtourl = findGetParameter("pr-to");
-        if (paramUrl == '') {
-            window.location.href = param + '?' + "pr-fr=" + prfrom + "&pr-to=" + prto + '&';
-        } else {
-            if(prfrurl == '' && prfrurl == ''){
-                window.location.href = pathname + paramUrl + "pr-fr=" + prfrom + "&pr-to=" + prto + '&';
-            } else{
-                window.location.href = updateQueryStringParameter( updateQueryStringParameter(pathname+paramUrl,"pr-fr", prfrom ),"pr-to", prto )
-            }
-        }
-    }
-
-    function updateQueryStringParameter(uri, key, value) {
-        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-        if (uri.match(re)) {
-            return uri.replace(re, '$1' + key + "=" + value + '$2');
-        }
-        else {
-            return uri + separator + key + "=" + value;
-        }
-    }
+<div th:replace="~{fragments/script-list-moto :: script}"></div>
 
 
-</script>
 </body>
 
 </html>

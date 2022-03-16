@@ -2,6 +2,7 @@
 
     getAllBrand()
     getProvinces()
+
     function getAllBrand() {
         $.ajax({
             type: "GET",
@@ -21,7 +22,7 @@
 
     $('#ip_search_brand').on('change', function (e) {
         let brandId = $(this).find(':selected').attr('data-id')
-        if (brandId == -1){
+        if (brandId == -1) {
             $('#ip_search_series').val("-1").change();
             $('#ip_search_series').prop("disabled", true);
         } else {
@@ -34,7 +35,7 @@
                 },
                 url: "/api/moto/getSeries/" + brandId,
             }).done(function (data) {
-                let str = "<option value='-1' selected>Dòng xe</option>";
+                let str = "<option value='' selected>Dòng xe</option>";
                 $.each(data, (index, item) => {
                     str += `<option value="${item.seriesName}" class="op-series">${item.seriesName}</option> `
                 })
@@ -45,7 +46,7 @@
         }
     });
 
-//    Province Ajax
+    //    Province Ajax
     function getProvinces() {
         $.ajax({
             type: "GET",
@@ -57,6 +58,33 @@
         }).fail(function () {
         })
     }
+
+
+    //    Hander Search Form
+    $("#btnSearchIndex").on("click", function () {
+        let brand = $("#ip_search_brand").val();
+        let series = $('#ip_search_series').val();
+        let prTo = $('#search_price_to').val();
+        let province = $('#ip_search_province').val();
+        let capacity = $('#ip_search_capacity').val();
+        let q;
+        if (brand == "") {
+             q = "";
+        } else {
+            if (series == "") {
+                q = brand;
+            } else {
+                q = brand + " " + series;
+            }
+        }
+        let param = "/post/moto-list"
+        let pathname = window.location.pathname;
+        let url = window.location.href;
+        let origin = window.location.origin;
+        window.location.href = param + '?' + "q=" +q + "&cc=" + capacity + "&pr-to=" + prTo + "&pr=" + province
+
+
+    })
 
 
 </script>

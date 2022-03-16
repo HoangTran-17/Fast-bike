@@ -537,7 +537,7 @@
                                         <div class="module" id="bottom-recommendation">
                                             <h3 class="module_title line_bottom">
                                                 <span class="title">
-                                                    <a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html">
+                                                    <a href="javascript:void(0)">
                                                         Danh sách mua bán xe máy
                                                     </a>
                                                 </span>
@@ -573,8 +573,7 @@
 
                                                     </div>
                                                     <div class="center">
-                                                        <a class="module-btn btn-style2"
-                                                           href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=lastest">
+                                                        <a class="module-btn btn-style2" th:href="@{'/post/moto-list'}">
                                                             Xem thêm
                                                         </a>
                                                     </div>
@@ -591,7 +590,7 @@
                                 <section class="module recently-motor">
                                     <h3 class="module_title line_bottom">
                                         <span class="title">
-                                            <a href="https://www.webike.vn/cho-xe-may/bike-list/honda/wave-alpha.html">
+                                            <a href="javascript:void(0)">
                                                 Có thể bạn quan tâm
                                             </a>
                                         </span>
@@ -629,10 +628,9 @@
 
                                             <li class="see_more">
                                                 <a target="_blank"
-                                                   href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html?sc=395&amp;utm_campaign=wvn&amp;utm_source=bikedetail&amp;utm_medium=moto&amp;utm_content=related">
+                                                   th:href="@{'/post/moto-list?q=' + ${seriesName}}">
                                                     Xem thêm
-                                                </a>
-                                            </li>
+                                                </a></li>
                                         </ul>
                                     </div>
                                 </section>

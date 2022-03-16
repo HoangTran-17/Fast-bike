@@ -123,12 +123,18 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
 
                 }
             }
-
-            Predicate predicateForKilometerCount = criteriaBuilder.equal(root.get("kilometerCount"), kilometerCount);
-
-            Predicate predicateForColor = criteriaBuilder.equal(root.get("detailMotor").get("colorMotor").get("colorName"), color);
-
-            Predicate predicateForProvince = criteriaBuilder.equal(root.get("province"), province);
+            Predicate predicateForKilometerCount = criteriaBuilder.conjunction();
+            if (kilometerCount != null) {
+                predicateForKilometerCount = criteriaBuilder.equal(root.get("kilometerCount"), kilometerCount);
+            }
+            Predicate predicateForColor = criteriaBuilder.conjunction();
+            if (color != null) {
+                predicateForColor = criteriaBuilder.equal(root.get("detailMotor").get("colorMotor").get("colorName"), color);
+            }
+            Predicate predicateForProvince = criteriaBuilder.conjunction();
+            if (province != null) {
+                predicateForProvince = criteriaBuilder.equal(root.get("province"), province);
+            }
 
             Predicate predicateForStatusPost = criteriaBuilder.equal(root.get("statusPost"), statusPost);
 

@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -74,6 +75,7 @@ public class PostService implements IPostService {
     }
 
     @Override
+    @Transactional
     public Long savePost(PostDTO postDTO, UserDTO user, DetailMotorDTO detailMotor, MultipartFile[] files) {
         Date date = new Date();
         postDTO.setStatusPost(StatusPost.WAITING);
@@ -129,6 +131,7 @@ public class PostService implements IPostService {
     }
 
     @Override
+    @Transactional
     public void update(PostDTO postDTO, MultipartFile[] files) {
         for (MultipartFile file : files) {
             String uuid = UUID.randomUUID().toString();
@@ -211,14 +214,14 @@ public class PostService implements IPostService {
                 capacityMax = capa[1];
             }
         }
-        if (priceFrom > priceTo) {
-            priceFrom = null;
-            priceTo = null;
-        }
-        if (modelYearMin > modelYearMax) {
-            modelYearMin = null;
-            modelYearMax = null;
-        }
+//        if (priceFrom > priceTo) {
+//            priceFrom = null;
+//            priceTo = null;
+//        }
+//        if (modelYearMin > modelYearMax) {
+//            modelYearMin = null;
+//            modelYearMax = null;
+//        }
 
         Page<Post> posts = postRepository.findTopByFilters1(pageable, modelMotor, brandIdList,typeIdList,
                 capacityMin,capacityMax,priceFrom,priceTo,modelYearMin,modelYearMax,
