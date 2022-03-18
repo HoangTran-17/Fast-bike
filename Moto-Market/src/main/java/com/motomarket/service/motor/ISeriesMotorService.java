@@ -11,5 +11,7 @@ public interface ISeriesMotorService extends IGeneralService<SeriesMotorDTO> {
     List<SeriesMotorDTO> findAllByBrandMotorDTO(BrandMotorDTO brandMotorDTO);
 
     SeriesMotor parseSeriesMotor(SeriesMotorDTO seriesMotorDTO);
+
+    SeriesMotorDTO getBySeriesName(String seriesName);
 }
 

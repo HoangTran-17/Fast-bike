@@ -313,7 +313,7 @@
         if ($('#a_add_new_admin').data("role")==='DBA') {
             $.ajax({
                 type: "GET",
-                url: "/admin/api/users/dba?pageNo=" + pageNo + "&pageSize=" + pageSize
+                url: "/admin/api/user/all/dba?pageNo=" + pageNo + "&pageSize=" + pageSize
             }).done(function (data) {
                 handlerGetUser(data);
                 doSuspendUser();
@@ -322,7 +322,7 @@
         } else {
             $.ajax({
                 type: "GET",
-                url: "/admin/api/users?pageNo=" + pageNo + "&pageSize=" + pageSize
+                url: "/admin/api/user/all?pageNo=" + pageNo + "&pageSize=" + pageSize
             }).done(function (data) {
                 handlerGetUser(data);
                 doSuspendUser();
@@ -448,7 +448,7 @@
         if ($('#a_add_new_admin').data("role")==='DBA') {
             $.ajax({
                 type: "GET",
-                url: "/admin/users/search/dba/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+                url: "/admin/api/user/search/dba/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
             }).done(function (data) {
                 handlerGetUser(data);
                 doSuspendUser();
@@ -457,7 +457,7 @@
         } else {
             $.ajax({
                 type: "GET",
-                url: "/admin/users/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+                url: "/admin/api/user/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
             }).done(function (data) {
                 handlerGetUser(data);
                 doSuspendUser();
@@ -514,7 +514,7 @@ function doSuspendUser() {
                     'Content-Type': 'application/json'
                 },
                 type: "DELETE",
-                url: "/admin/delete",
+                url: "/admin/api/user/delete",
                 data: JSON.stringify(id)
 
             }).done(function (data) {
@@ -537,7 +537,7 @@ function doSuspendUser() {
             let id = $(this).data("id");
             $.ajax({
                 type: "PUT",
-                url: "/admin/edit-status/" + id
+                url: "/admin/api/user/edit-status/" + id
             }).done(function (data) {
                 let key =  $("#datatableSearch").val();
                 if (key==="") {

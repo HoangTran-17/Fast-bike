@@ -419,7 +419,7 @@
     function getWaitingPostByKeySearch(key, pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/waiting-post/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+            url: "/admin/api/post/waiting/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
         }).done(function (data) {
             drawEntriesToTable(data);
             $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
@@ -443,7 +443,7 @@
     function getWaitingPost(pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/waiting-post?pageNo=" + pageNo + "&pageSize=" + pageSize
+            url: "/admin/api/post/waiting?pageNo=" + pageNo + "&pageSize=" + pageSize
         }).done(function (data) {
             console.log(data)
             drawEntriesToTable(data);
