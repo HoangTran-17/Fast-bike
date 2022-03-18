@@ -1,0 +1,241 @@
+<script th:fragment="script">
+
+    $(document).ready(function () {
+        checked("checkbox-brand");
+        checked("checkbox-type");
+        checked("checkbox-capacity");
+        hanlderClickCheckbox("checkbox-brand");
+        hanlderClickCheckbox("checkbox-type");
+        hanlderClickCheckbox("checkbox-capacity");
+        getKeyword()
+        hanlderPagiton()
+    });
+
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+
+    function getKeyword() {
+        let keyword = findGetParameter("q");
+        if (keyword !== null || keyword !== "") {
+            $('#listFilters').append(`<li><a href="javascript:void(0)" class="filter-li" data-filter="keyword"><span>${keyword}<i class="fa fa-times" aria-hidden="true"></i></span></a></li>`)
+        }
+        hanlderClickFilter();
+    }
+
+    let br = findGetParameter("br");
+    let tp = findGetParameter("tp");
+    let cc = findGetParameter("cc");
+    let pr_fr = findGetParameter("pr-fr");
+    let pr_to = findGetParameter("pr-to");
+    let my_fr = findGetParameter("my-fr");
+    let km = findGetParameter("km");
+    let pr = findGetParameter("pr");
+
+
+    function hanlderClickFilter() {
+        $(".filter-li").on("click", function () {
+            let dataFilter = $(this).attr("data-filter");
+            if (dataFilter == "keyword") {
+                var pathname = window.location.pathname;
+                let paramUrl = window.location.search;
+                window.location.href = updateQueryStringParameter(pathname + paramUrl, "q", "")
+            }
+        })
+    }
+
+    /*<![CDATA[*/
+    brandList =  /*[[${brandList}]]*/
+        /*]]>*/
+        // showCheckBoxBrandList();
+        function showCheckBoxBrandList() {
+            let brList = br.split("_");
+
+            let str = "";
+            for (let item of brandList) {
+                boolean = checkItemInList(brList, item.brandId);
+                if (boolean) {
+                    // a =
+                }
+                str += ``;
+            }
+            ;
+            let s = `<h1>HO</h1>`;
+            $('#filter-brand-list').append(str);
+        }
+
+    function checkItemInList(list, item) {
+        for (const i of list) {
+            if (item == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function checked(className) {
+        let checkbox = document.getElementsByClassName(className);
+        for (let i = 0; i < checkbox.length; i++) {
+            if ($(checkbox[i]).attr('data-check') == 0) {
+                $(checkbox[i]).prop('checked', true);
+            } else {
+                $(checkbox[i]).prop('checked', false);
+            }
+        }
+    }
+
+    function hanlderClickCheckbox(className) {
+        $("." + className).change(function () {
+            var ischecked = $(this).is(':checked');
+            if (ischecked || !ischecked) {
+                window.location.href = $(this).attr('data-href');
+            }
+        });
+    }
+
+    $("#submitprice").on("click", function () {
+        getCustomParam("filter-price-from-list", "filter-price-to-list", "pr-fr", "pr-to")
+    })
+
+    $("#submitYear").on("click", function () {
+        getCustomParam("filter-year-from-list", "filter-year-to-list", "my-fr", "my-to")
+    })
+
+    function checkPrice(prFr, prTo) {
+        let check = true
+        if (prFr < 0 || prTo < 0) {
+            check = false;
+            $.Toast("Giá trị  không được nhỏ hơn 0", {
+                'position': 'top',
+                'class': 'alert',
+                'duration': 1500,
+                'width': 400
+            });
+        } else {
+            if (prFr > prTo) {
+                check = false;
+                $.Toast("Giá trị trước phải nhỏ hơn giá sau", {
+                    'position': 'top',
+                    'class': 'alert',
+                    'duration': 1500,
+                    'width': 400
+                });
+            }
+        }
+        return check
+    }
+
+    $('#product-order').on('change', function (e) {
+        let prfrom = $(this).find(':selected').attr('data-sn')
+        let prto = $(this).find(':selected').attr('data-st')
+        var pathname = window.location.pathname; // Returns path only (/path/example.html)
+        let param = "/post/moto-list"
+        let paramUrl = window.location.search;
+        let prfrurl = findGetParameter("sortName");
+        let prtourl = findGetParameter("sortType");
+        if (paramUrl == '') {
+            window.location.href = param + '?' + "sortName" + "=" + prfrom + "&" + "sortType" + "=" + prto + '&';
+        } else {
+            if (prfrurl == '' && prtourl == '') {
+                window.location.href = pathname + paramUrl + "sortName" + "=" + prfrom + "&" + "sortType" + "=" + prto + '&';
+            } else {
+                window.location.href = updateQueryStringParameter(updateQueryStringParameter(pathname + paramUrl, "sortName", prfrom), "sortType", prto)
+            }
+        }
+    });
+
+
+    $('#filter-odo-ddl').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        let param = "/post/moto-list"
+        var pathname = window.location.pathname;
+        var url = window.location.href;
+        var origin = window.location.origin;
+        let paramUrl = window.location.search;
+        let kmfrurl = findGetParameter(cc);
+        if (paramUrl == '') {
+            window.location.href = param + '?' + "km=" + valueSelected + "&"
+        } else {
+            if (kmfrurl == '') {
+                window.location.href = pathname + paramUrl + "km=" + valueSelected + "&"
+            } else {
+                window.location.href = updateQueryStringParameter(pathname + paramUrl, "km", valueSelected)
+            }
+        }
+    });
+
+    function getCustomParam(idFrom, idTo, keyFr, keyTo) {
+        let param = "/post/moto-list"
+        let prfrom = $("#" + idFrom).val()
+        let prto = $("#" + idTo).val()
+        var pathname = window.location.pathname; // Returns path only (/path/example.html)
+        var url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
+        var origin = window.location.origin;
+        let paramUrl = window.location.search;
+        let prfrurl = findGetParameter(keyFr);
+        let prtourl = findGetParameter(keyTo);
+        if (!checkPrice(prfrom, prto)) {
+            return
+        }
+        if (paramUrl == '') {
+            window.location.href = param + '?' + keyFr + "=" + prfrom + "&" + keyTo + "=" + prto + '&';
+        } else {
+            if (prfrurl == '' && prtourl == '') {
+                window.location.href = pathname + paramUrl + keyFr + "=" + prfrom + "&" + keyTo + "=" + prto + '&';
+            } else {
+                window.location.href = updateQueryStringParameter(updateQueryStringParameter(pathname + paramUrl, keyFr, prfrom), keyTo, prto)
+            }
+        }
+
+    }
+
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+
+    function hanlderPagiton() {
+        var url_string = window.location.href //window.location.href
+        var url = new URL(url_string);
+        var page = url.searchParams.get("page");
+        let countPage = $("#countPage").val();
+        let currentPage = $("#currentPage").val();
+        let param = "/post/moto-list"
+        var pathname = window.location.pathname; // Returns path only (/path/example.html)
+        let paramUrl = window.location.search;
+        let previos = $("#previousPageBtn");
+        let next = $("#nextPageBtn");
+        if (page === null) {
+            if (paramUrl == ''){
+                previos.attr("href", "#")
+                next.attr("href", pathname + paramUrl + "?page=1&")
+            }else {
+                previos.attr("href", "#")
+                next.attr("href", pathname + paramUrl + "page=1&")
+            }
+        }else {
+            if (page > 0){
+                previos.attr("href",updateQueryStringParameter(pathname + paramUrl, "page", Number(page) -1))
+                next.attr("href",updateQueryStringParameter(pathname + paramUrl, "page",Number(page) +1))
+            }
+        }
+    }
+
+
+</script>

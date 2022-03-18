@@ -1,6 +1,8 @@
 package com.motomarket.controlller;
 
+import com.motomarket.repository.IBrandMotorRepository;
 import com.motomarket.repository.IPostRepository;
+import com.motomarket.repository.model.Post;
 import com.motomarket.repository.model.StatusPost;
 import com.motomarket.service.dto.*;
 import com.motomarket.service.filter.BrandFilter;
@@ -27,7 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/post")
@@ -51,11 +55,12 @@ public class PostController {
     @Autowired
     private IPostRepository postRepository;
 
-    @Autowired
-    IBrandMotorService brandMotorService;
 
     @Autowired
-    ITypeMotorService typeMotorService;
+    private IBrandMotorService brandMotorService;
+
+    @Autowired
+    private ITypeMotorService typeMotorService;
 
 
     @ModelAttribute("userLogin")
@@ -118,6 +123,7 @@ public class PostController {
         modelAndView.addObject("detail", detailMotorDTO);
         modelAndView.addObject("postsRelated", relatedPostDTO);
         modelAndView.addObject("newPosts", newPostList);
+        modelAndView.addObject("seriesName", seriesName);
         return modelAndView;
     }
 
@@ -127,7 +133,7 @@ public class PostController {
         if (userLogin == null) {
             return "redirect:/signin";
         } else {
-            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()) {
                 postService.remove(id);
             }
         }
@@ -140,7 +146,7 @@ public class PostController {
         if (userLogin == null) {
             return "redirect:/signin";
         } else {
-            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()){
+            if (postDTO.getUserDTO().getUserId() == userLogin.getUserId()) {
                 postService.setSoldMoto(id);
             }
         }
@@ -170,52 +176,75 @@ public class PostController {
         return "redirect:/post/detailpost/" + post.getPostId();
     }
 
-//    public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
+    //    public Page<PostDTO> findTopByFilters1(Pageable pageable, String brandMotor, String typeMotor, String capacity,
 //                                           Double priceFrom, Double priceTo, Integer modelYearMin, Integer modelYearMax,
 //                                           String kilometerCount, String color, String province) {
     @GetMapping("/moto-list")
-    public ModelAndView showBikeList(@RequestParam(value = "q",required = false) String modelMotor,
-                                     @RequestParam(value = "br",required = false) String brandMotor,
-                                     @RequestParam(value = "tp",required = false) String typeMotor,
-                                     @RequestParam(value = "cc",required = false) String capacity,
-                                     @RequestParam(value = "pr-fr",required = false) Double priceFrom,
-                                     @RequestParam(value = "pr-to",required = false) Double priceTo,
-                                     @RequestParam(value = "my-fr",required = false) Integer modelYearMin,
-                                     @RequestParam(value = "my-to",required = false) Integer modelYearMax,
-                                     @RequestParam(value = "km",required = false) String kilometerCount,
-                                     @RequestParam(value = "color",required = false) String color,
-                                     @RequestParam(value = "pr",required = false) String province,
+    public ModelAndView showBikeList(@RequestParam(value = "q", required = false) String modelMotor,
+                                     @RequestParam(value = "br", required = false) String brandMotor,
+                                     @RequestParam(value = "tp", required = false) String typeMotor,
+                                     @RequestParam(value = "cc", required = false) String capacity,
+                                     @RequestParam(value = "pr-fr", required = false) Double priceFrom,
+                                     @RequestParam(value = "pr-to", required = false) Double priceTo,
+                                     @RequestParam(value = "my-fr", required = false) Integer modelYearMin,
+                                     @RequestParam(value = "my-to", required = false) Integer modelYearMax,
+                                     @RequestParam(value = "km", required = false) String kilometerCount,
+                                     @RequestParam(value = "color", required = false) String color,
+                                     @RequestParam(value = "pr", required = false) String province,
+                                     @RequestParam(value = "sortName", required = false) String sortName,
+                                     @RequestParam(value = "sortType", required = false) String sortTyle,
                                      Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
-<<<<<<< HEAD
-=======
 
->>>>>>> hoang-dev
+        Sort sort = Sort.by("postDate").descending();
+        if (sortName != null && sortTyle != null) {
+            if (sortName.equals("price") && sortTyle.equals("asc")) {
+                sort = Sort.by("price").ascending();
+            } else if (sortName.equals("price") && sortTyle.equals("desc")) {
+                sort = Sort.by("price").descending();
+            }
+        }
+        if (modelMotor != null) {
+            if (modelMotor.equals("")) {
+                modelMotor = null;
+            }
+        }
+        if (capacity != null) {
+            if (capacity.equals("")) {
+                capacity = null;
+            }
+        }
+
+        if (province != null) {
+            if (province.equals("")) {
+                province = null;
+            }
+        }
 
         modelAndView.setViewName("list-moto");
-        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
-                                                                    modelYearMin,modelYearMax,kilometerCount,color,province);
+        List<BrandFilter> brandList = brandMotorService.getAllBrandFilter(modelMotor, brandMotor, typeMotor, capacity, priceFrom, priceTo,
+                modelYearMin, modelYearMax, kilometerCount, color, province);
         modelAndView.addObject("brandList", brandList);
 
-        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(modelMotor,brandMotor, typeMotor, capacity,
-                                                                    priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
+        List<TypeMotorFilter> typeMotorList = typeMotorService.getAllTypeMotorFilter(modelMotor, brandMotor, typeMotor, capacity,
+                priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province);
         modelAndView.addObject("typeMotorList", typeMotorList);
 
         String[] query = new String[2];
         if (modelMotor != null) {
-            query = postService.setQueryView(modelMotor,brandMotor, typeMotor, capacity,
-                    priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
+            query = postService.setQueryView(modelMotor, brandMotor, typeMotor, capacity,
+                    priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province);
         }
         modelAndView.addObject("query", query);
 
-        List<CapacityFilter> capacityList = postService.getCapacityList(modelMotor,brandMotor, typeMotor, capacity,
-                                        priceFrom,priceTo,modelYearMin,modelYearMax,kilometerCount,color,province);
+        List<CapacityFilter> capacityList = postService.getCapacityList(modelMotor, brandMotor, typeMotor, capacity,
+                priceFrom, priceTo, modelYearMin, modelYearMax, kilometerCount, color, province);
         modelAndView.addObject("capacityList", capacityList);
 
 
-        Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20, Sort.by("postDate").descending()),
-                modelMotor,brandMotor, typeMotor, capacity,priceFrom,priceTo,
-                modelYearMin,modelYearMax,kilometerCount,color,province);
+        Page<PostDTO> postDTOS = postService.findTopByFilters1(PageRequest.of(pageable.getPageNumber(), 20,sort),
+                modelMotor, brandMotor, typeMotor, capacity, priceFrom, priceTo,
+                modelYearMin, modelYearMax, kilometerCount, color, province);
         modelAndView.addObject("postList", postDTOS);
         System.out.println(postDTOS);
 
