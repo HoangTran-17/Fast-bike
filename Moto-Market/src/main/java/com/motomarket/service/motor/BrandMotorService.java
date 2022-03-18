@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BrandMotorService implements IBrandMotorService {
@@ -27,7 +28,16 @@ public class BrandMotorService implements IBrandMotorService {
 
     @Override
     public BrandMotorDTO getById(Long id) {
-        BrandMotor brandMotor = brandMotorRepository.getById(id);
+        Optional<BrandMotor> brandMotor = brandMotorRepository.findById(id);
+        return BrandMotorDTO.parseBrandMotorDTO(brandMotor.get());
+    }
+
+    @Override
+    public BrandMotorDTO getBrandByBrandName(String brandName) {
+        BrandMotor brandMotor = brandMotorRepository.getByBrandName(brandName);
+        if (brandMotor==null) {
+            return null;
+        }
         return BrandMotorDTO.parseBrandMotorDTO(brandMotor);
     }
 
@@ -42,7 +52,7 @@ public class BrandMotorService implements IBrandMotorService {
 
     @Override
     public void remove(Long id) {
-
+        brandMotorRepository.deleteById(id);
     }
 
     BrandMotor parseBrandMotor(BrandMotorDTO brandMotorDTO) {

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SeriesMotorService implements ISeriesMotorService {
@@ -28,11 +29,14 @@ public class SeriesMotorService implements ISeriesMotorService {
     @Autowired
     private BrandMotorService brandMotorService;
 
+    @Autowired
+    private ISpecificationsService specificationsService;
+
     @Override
     public List<SeriesMotorDTO> findAllByBrandMotorDTO(BrandMotorDTO brandMotorDTO) {
-        BrandMotor brandMotor = brandMotorRepository.getById(brandMotorDTO.getBrandId());
+        Optional<BrandMotor> brandMotor = brandMotorRepository.findById(brandMotorDTO.getBrandId());
         List<SeriesMotorDTO> seriesMotorList = new ArrayList<>();
-        seriesMotorRepository.getAllByBrandMotor(brandMotor).forEach(seriesMotor -> {
+        seriesMotorRepository.getAllByBrandMotor(brandMotor.get()).forEach(seriesMotor -> {
             seriesMotorList.add(SeriesMotorDTO.parseSeriesMotorDTO(seriesMotor));
         });
         return seriesMotorList;
@@ -55,19 +59,46 @@ public class SeriesMotorService implements ISeriesMotorService {
     }
 
     @Override
+    public SeriesMotorDTO getBySeriesName(String seriesName) {
+       SeriesMotor seriesMotor = seriesMotorRepository.getBySeriesName(seriesName);
+        if (seriesMotor == null) {
+            return null;
+        }
+        return SeriesMotorDTO.parseSeriesMotorDTO(seriesMotor);
+    }
+
+    @Override
     public SeriesMotorDTO save(SeriesMotorDTO seriesMotorDTO) {
+        Optional<BrandMotor> brandMotor = brandMotorRepository.findById(seriesMotorDTO.getBrandId());
         SeriesMotor seriesMotor = new SeriesMotor();
-        seriesMotor.setSeriesId(seriesMotorDTO.getSeriesId());
         seriesMotor.setSeriesName(seriesMotorDTO.getSeriesName());
         seriesMotor.setCapacity(seriesMotorDTO.getCapacity());
-        seriesMotor.setBrandMotor(seriesMotor.getBrandMotor());
+        seriesMotor.setBrandMotor(brandMotor.get());
         TypeMotor typeMotor = TypeMotorDTO.parseTypeMotor(seriesMotorDTO.getTypeMotorDTO());
         seriesMotor.setTypeMotor(typeMotor);
         Specifications specifications = SpecificationsDTO.parseSpecifications(seriesMotorDTO.getSpecificationsDTO());
-        seriesMotor.setSpecifications(specifications);
+        specifications.setSeriesMotor(seriesMotor);
+        seriesMotor.setSpecifications(specificationsService.save(specifications));
+        brandMotor.get().getSeriesMotorList().add(seriesMotor);
+        brandMotorRepository.save(brandMotor.get());
+        seriesMotorRepository.save(seriesMotor);
+        return SeriesMotorDTO.parseSeriesMotorDTO(seriesMotor);
+    }
 
-        SeriesMotor newSeriesMotor = seriesMotorRepository.save(seriesMotor);
-        return SeriesMotorDTO.parseSeriesMotorDTO(newSeriesMotor);
+    public SeriesMotorDTO create(SeriesMotorDTO seriesMotorDTO) {
+        BrandMotor brandMotor = brandMotorRepository.getById(seriesMotorDTO.getBrandId());
+        SeriesMotor seriesMotor = new SeriesMotor();
+        seriesMotor.setSeriesName(seriesMotorDTO.getSeriesName());
+        seriesMotor.setCapacity(seriesMotorDTO.getCapacity());
+        seriesMotor.setBrandMotor(brandMotor);
+        TypeMotor typeMotor = TypeMotorDTO.parseTypeMotor(seriesMotorDTO.getTypeMotorDTO());
+        seriesMotor.setTypeMotor(typeMotor);
+        Specifications specifications = specificationsService.save(seriesMotorDTO.getSpecificationsDTO());
+        seriesMotor.setSpecifications(specifications);
+        brandMotor.getSeriesMotorList().add(seriesMotor);
+        brandMotorRepository.save(brandMotor);
+        seriesMotorRepository.save(seriesMotor);
+        return SeriesMotorDTO.parseSeriesMotorDTO(seriesMotor);
     }
 
     @Override

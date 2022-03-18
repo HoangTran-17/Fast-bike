@@ -424,7 +424,7 @@ function deletePost() {
            let postId = $(this).data("id");
            $.ajax({
                type: "DELETE",
-               url: "/admin/post/delete/"+postId
+               url: "/admin/api/post/delete/"+postId
            }).done(function () {
                $("#set_status_post").remove();
                $("#myModal").modal("hide");
@@ -442,7 +442,7 @@ function deletePost() {
             let postId = $(this).data("id");
             $.ajax({
                 type: "PUT",
-                url: "/admin/post/hide/"+postId
+                url: "/admin/api/post/hide/"+postId
             }).done(function () {
                 $("#set_status_post").remove();
                 createAlert('','Success!','This post has been made hide!','success',true,true,'pageMessages');
@@ -459,7 +459,7 @@ function deletePost() {
             let postId = $(this).data("id");
             $.ajax({
                 type: "PUT",
-                url: "/admin/post/public/"+postId
+                url: "/admin/api/post/public/"+postId
             }).done(function () {
                 $("#set_status_post").remove();
                 createAlert('','Success!','This post has been made public!','success',true,true,'pageMessages');

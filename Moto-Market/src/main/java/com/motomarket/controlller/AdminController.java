@@ -73,22 +73,9 @@ public class AdminController {
             Cookie cookie = new Cookie("loginAdmin", adminDTO.getUserName());
             cookie.setMaxAge(24 * 60 * 60 * 30);
             response.addCookie(cookie);
-            modelAndView.addObject("users", getAllByRoleUser(adminDTO));
-            System.out.println(adminDTO.getRole());
             modelAndView.addObject("adminLogin", adminDTO);
             return modelAndView;
         }
-    }
-
-    public List<UserDTO> getAllByRoleUser(UserDTO userDTO) {
-        List<UserDTO> userDTOS = userService.findAllByDeletedIsFalse();
-        if (userDTO.getRole().equals(Role.ADMIN)) {
-            userDTOS.removeIf(u -> u.getRole().equals(Role.ADMIN) || u.getRole().equals(Role.DBA));
-        } else {
-            userDTOS.removeIf(u -> u.getRole().equals(Role.DBA));
-        }
-
-        return userDTOS;
     }
 
     @GetMapping("/logout")
@@ -151,13 +138,18 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("admin/all-post");
         if (loginAdmin.equals("0")) {
             modelAndView.setViewName("admin/login");
-            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
-            return modelAndView;
         } else {
             UserDTO adminLogin = userService.getByUserName(loginAdmin);
-            modelAndView.addObject("adminLogin",adminLogin);
-            return modelAndView;
+            System.out.println(adminLogin.getEmail());
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+            } else {
+                modelAndView.addObject("adminLogin", adminLogin);
+            }
+
         }
+        return modelAndView;
 
     }
 
@@ -166,13 +158,17 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("admin/waiting-post");
         if (loginAdmin.equals("0")) {
             modelAndView.setViewName("admin/login");
-            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
-            return modelAndView;
         } else {
             UserDTO adminLogin = userService.getByUserName(loginAdmin);
-            modelAndView.addObject("adminLogin",adminLogin);
-            return modelAndView;
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+            } else {
+                modelAndView.addObject("adminLogin", adminLogin);
+            }
+
         }
+        return modelAndView;
 
     }
 
@@ -181,13 +177,17 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("admin/hide-post");
         if (loginAdmin.equals("0")) {
             modelAndView.setViewName("admin/login");
-            modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
-            return modelAndView;
         } else {
             UserDTO adminLogin = userService.getByUserName(loginAdmin);
-            modelAndView.addObject("adminLogin",adminLogin);
-            return modelAndView;
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+            } else {
+                modelAndView.addObject("adminLogin", adminLogin);
+            }
+
         }
+        return modelAndView;
 
     }
 
@@ -201,6 +201,10 @@ public class AdminController {
             modelAndView.setViewName("admin/login");
             modelAndView.addObject("messages","Bạn hãy đăng nhập tài khoản admin");
             return modelAndView;
+        } else if (adminLogin.getRole().equals(Role.USER)) {
+            modelAndView.setViewName("admin/login");
+            modelAndView.addObject("messages", "Access denied!");
+            return modelAndView;
         } else if (!postDTO.getStatusPost().equals(StatusPost.DELETE)){
             modelAndView.addObject("adminLogin",adminLogin);
             modelAndView.addObject("post",postDTO);
@@ -210,6 +214,26 @@ public class AdminController {
             modelAndView.addObject("adminLogin",adminLogin);
             return modelAndView;
         }
+
+    }
+
+    @GetMapping("/catalog")
+    public ModelAndView toCatalogPage(@CookieValue(value = "loginAdmin", defaultValue = "0") String loginAdmin,
+                                         HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("admin/catalog");
+        if (loginAdmin.equals("0")) {
+            modelAndView.setViewName("admin/login");
+        } else {
+            UserDTO adminLogin = userService.getByUserName(loginAdmin);
+            if (adminLogin.getRole().equals(Role.USER)) {
+                modelAndView.setViewName("admin/login");
+                modelAndView.addObject("messages", "Access denied!");
+            } else {
+                modelAndView.addObject("adminLogin", adminLogin);
+            }
+
+        }
+        return modelAndView;
 
     }
 

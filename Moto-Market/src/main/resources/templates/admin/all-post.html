@@ -403,7 +403,7 @@
     function getAllPost(pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/all-post?pageNo=" + pageNo + "&pageSize=" + pageSize
+            url: "/admin/api/post/all?pageNo=" + pageNo + "&pageSize=" + pageSize
         }).done(function (data) {
             drawEntriesToTable(data);
             $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
@@ -513,7 +513,7 @@
     function getAllPostByKeySearch(key,pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/post/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+            url: "/admin/api/post/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
         }).done(function (data) {
             drawEntriesToTable(data);
             $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);

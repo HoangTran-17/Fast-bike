@@ -415,7 +415,7 @@
     function getHidePostByKeySearch(key, pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/hide-post/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
+            url: "/admin/api/post/hide/search/"+key+"?pageNo="+pageNo+"&pageSize="+pageSize
         }).done(function (data) {
             drawEntriesToTable(data);
             $("#datatableWithPaginationInfoTotalQty").text(data.totalElements);
@@ -439,7 +439,7 @@
     function getHidePost(pageNo, pageSize) {
         $.ajax({
             type: "GET",
-            url: "/admin/hide-post?pageNo=" + pageNo + "&pageSize=" + pageSize
+            url: "/admin/api/post/hide?pageNo=" + pageNo + "&pageSize=" + pageSize
         }).done(function (data) {
             console.log(data)
             drawEntriesToTable(data);

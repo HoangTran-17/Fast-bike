@@ -4,6 +4,7 @@ import com.motomarket.repository.model.BrandMotor;
 import com.motomarket.repository.model.SeriesMotor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public interface ISeriesMotorRepository extends JpaRepository<SeriesMotor, Long>
 //    List<User> getAllUserByWorkspaceId(@Param("id") Long id);'a%'
 
     List<SeriesMotor> getAllByBrandMotor(BrandMotor brandMotor);
+
+    @Query("SELECT s FROM SeriesMotor s WHERE s.seriesName = :seriesName")
+    SeriesMotor getBySeriesName(@Param("seriesName") String seriesName);
 
 }
 
