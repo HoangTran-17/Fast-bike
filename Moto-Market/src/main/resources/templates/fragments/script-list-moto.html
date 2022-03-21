@@ -26,7 +26,7 @@
 
     function getKeyword() {
         let keyword = findGetParameter("q");
-        if (keyword !== null || keyword !== "") {
+        if (keyword !== null && keyword !== "") {
             $('#listFilters').append(`<li><a href="javascript:void(0)" class="filter-li" data-filter="keyword"><span>${keyword}<i class="fa fa-times" aria-hidden="true"></i></span></a></li>`)
         }
         hanlderClickFilter();
