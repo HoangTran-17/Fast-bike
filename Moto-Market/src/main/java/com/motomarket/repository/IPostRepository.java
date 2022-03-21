@@ -208,11 +208,8 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
     @Query("SELECT p FROM Post p WHERE p.statusPost <> 3 AND p.statusPost <> 4 AND p.statusPost <> 5 ORDER BY p.postDate DESC ")
     Page<Post> findPostDeletedIsFalseOrderByDate(Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE p.statusPost = 0  ORDER BY p.postDate ASC ")
-    Page<Post> findPostWaitingOrderByDate(Pageable pageable);
-
-    @Query("SELECT p FROM Post p WHERE p.statusPost = 2  ORDER BY p.postDate DESC ")
-    Page<Post> findPostHideOrderByDate(Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.statusPost = :statusPost  ORDER BY p.postDate ASC ")
+    Page<Post> findPostByStatusPostOrderByDate(@Param("statusPost") StatusPost statusPost, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE " + "("
             + " p.title LIKE %?1%"
@@ -231,43 +228,27 @@ public interface IPostRepository extends JpaRepository<Post, Long>, JpaSpecifica
             + " AND p.statusPost <> 3"
             + " AND p.statusPost <> 4"
             + " AND p.statusPost <> 5"
+            + " ORDER BY p.postDate"
     )
     Page<Post> findPostByKeySearch(String key, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE " + "(" +
-            "p.title LIKE %?1%"
-            + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
-            + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
-            + " OR p.detailMotor.colorMotor.colorName LIKE %?1%"
-            + " OR CONCAT(p.detailMotor.modelYear.modelYearName,'') LIKE %?1%"
-            + " OR p.detailMotor.typeMotor.typeMotorName LIKE %?1%"
-            + " OR p.user.userName LIKE %?1%"
-            + " OR p.user.email LIKE %?1%"
-            + " OR CONCAT(p.price, '') LIKE %?1%"
-            + " OR CONCAT(p.postDate, '') LIKE %?1%"
-            + " OR CONCAT(p.ownership, '') LIKE %?1%"
+            "p.title LIKE %:key%"
+            + " OR p.detailMotor.brandMotor.brandName LIKE %:key%"
+            + " OR p.detailMotor.seriesMotor.seriesName LIKE %:key%"
+            + " OR p.detailMotor.colorMotor.colorName LIKE %:key%"
+            + " OR CONCAT(p.detailMotor.modelYear.modelYearName,'') LIKE %:key%"
+            + " OR p.detailMotor.typeMotor.typeMotorName LIKE %:key%"
+            + " OR p.user.userName LIKE %:key%"
+            + " OR p.user.email LIKE %:key%"
+            + " OR CONCAT(p.price, '') LIKE %:key%"
+            + " OR CONCAT(p.postDate, '') LIKE %:key%"
+            + " OR CONCAT(p.ownership, '') LIKE %:key%"
             + ")"
-            + " AND p.statusPost = 0"
+            + " AND p.statusPost = :statusPost"
+            + " ORDER BY p.postDate "
     )
-    Page<Post> findWaitingPostByKeySearch(String key, Pageable pageable);
-
-    @Query("SELECT p FROM Post p WHERE " + "(" +
-            "p.title LIKE %?1%"
-            + " OR p.detailMotor.brandMotor.brandName LIKE %?1%"
-            + " OR p.detailMotor.seriesMotor.seriesName LIKE %?1%"
-            + " OR p.detailMotor.colorMotor.colorName LIKE %?1%"
-            + " OR CONCAT(p.detailMotor.modelYear.modelYearName,'') LIKE %?1%"
-            + " OR p.detailMotor.typeMotor.typeMotorName LIKE %?1%"
-            + " OR p.user.userName LIKE %?1%"
-            + " OR p.user.email LIKE %?1%"
-            + " OR CONCAT(p.price, '') LIKE %?1%"
-            + " OR CONCAT(p.postDate, '') LIKE %?1%"
-            + " OR CONCAT(p.ownership, '') LIKE %?1%"
-            + ")"
-            + " AND p.statusPost = 2"
-    )
-    Page<Post> findHidePostByKeySearch(String key, Pageable pageable);
-
+    Page<Post> findPostByStatusPostByKeySearch(@Param("key") String key,@Param("statusPost") StatusPost statusPost, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE p.user.userId = :userId AND p.statusPost = :statusPost")
     Page<Post> findAllByUserIdAndStatusPost(@Param("userId") Long id, @Param("statusPost") StatusPost statusPost, Pageable pageable);

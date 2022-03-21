@@ -41,7 +41,7 @@ public class AdminController {
                 modelAndView.addObject("messages", "Access denied!");
                 return modelAndView;
             } else {
-                modelAndView.setViewName("admin/home");
+                modelAndView.setViewName("admin/waiting-post");
                 modelAndView.addObject("adminLogin", adminLogin);
             }
 
@@ -68,7 +68,7 @@ public class AdminController {
             modelAndView.addObject("messages", "Access denied!");
             return modelAndView;
         } else {
-            modelAndView.setViewName("admin/home");
+            modelAndView.setViewName("admin/waiting-post");
             // create cookie and set it in response
             Cookie cookie = new Cookie("loginAdmin", adminDTO.getUserName());
             cookie.setMaxAge(24 * 60 * 60 * 30);

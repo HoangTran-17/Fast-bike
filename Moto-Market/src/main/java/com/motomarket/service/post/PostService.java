@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -339,16 +338,9 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize) {
+    public PostResponse findPostByStatusPostOrderByDate(StatusPost statusPost,Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Post> posts = postRepository.findPostWaitingOrderByDate(pageable);
-        return getPostResponse(posts);
-    }
-
-    @Override
-    public PostResponse findPostHideOrderByDate(Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Post> posts = postRepository.findPostHideOrderByDate(pageable);
+        Page<Post> posts = postRepository.findPostByStatusPostOrderByDate(statusPost,pageable);
         return getPostResponse(posts);
     }
 
@@ -362,37 +354,37 @@ public class PostService implements IPostService {
 
 
     @Override
-    public PostResponse findWaitingPostByKeySearch(String key, Integer pageNo, Integer pageSize) {
+    public PostResponse findPostByStatusPostByKeySearch(String key,StatusPost statusPost, Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Post> posts = postRepository.findWaitingPostByKeySearch(key, pageable);
+        Page<Post> posts = postRepository.findPostByStatusPostByKeySearch(key,statusPost, pageable);
         return getPostResponse(posts);
     }
 
-    @Override
-    public PostResponse findHidePostByKeySearch(String key, Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Post> posts = postRepository.findHidePostByKeySearch(key, pageable);
-        return getPostResponse(posts);
-    }
+//    @Override
+//    public void hide(Long id) {
+//        Post post = postRepository.getById(id);
+//        post.setStatusPost(StatusPost.HIDE);
+//        postRepository.save(post);
+//    }
+//
+//    @Override
+//    public void publicPost(Long id) {
+//        Post post = postRepository.getById(id);
+//        post.setStatusPost(StatusPost.PUBLIC);
+//        postRepository.save(post);
+//    }
+//
+//    @Override
+//    public void blockPost(Long id) {
+//        Post post = postRepository.getById(id);
+//        post.setStatusPost(StatusPost.BLOCKED);
+//        postRepository.save(post);
+//    }
 
     @Override
-    public void hide(Long id) {
+    public void setStatusPostById(StatusPost statusPost, Long id) {
         Post post = postRepository.getById(id);
-        post.setStatusPost(StatusPost.HIDE);
-        postRepository.save(post);
-    }
-
-    @Override
-    public void publicPost(Long id) {
-        Post post = postRepository.getById(id);
-        post.setStatusPost(StatusPost.PUBLIC);
-        postRepository.save(post);
-    }
-
-    @Override
-    public void blockPost(Long id) {
-        Post post = postRepository.getById(id);
-        post.setStatusPost(StatusPost.BLOCKED);
+        post.setStatusPost(statusPost);
         postRepository.save(post);
     }
 

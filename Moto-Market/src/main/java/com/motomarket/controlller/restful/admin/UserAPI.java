@@ -61,13 +61,15 @@ public class UserAPI {
     @PutMapping("/edit-status/{id}")
     public ResponseEntity<UserDTO> changeStatusUser(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
+
         if (user.getUserStatus().equals(StatusUser.BLOCK)) {
             user.setUserStatus(StatusUser.ACTIVATE);
             List<Post> posts = user.getPostList();
             for (Post p: posts
             ) {
                 if (p.getStatusPost().equals(StatusPost.BLOCKED)) {
-                    postService.publicPost(p.getPostId());
+                    StatusPost statusPost = StatusPost.PUBLIC;
+                    postService.setStatusPostById(statusPost,p.getPostId());
                 }
             }
         } else {
@@ -76,7 +78,8 @@ public class UserAPI {
             for (Post p: posts
             ) {
                 if (p.getStatusPost().equals(StatusPost.PUBLIC)) {
-                    postService.blockPost(p.getPostId());
+                    StatusPost statusPost = StatusPost.BLOCKED;
+                    postService.setStatusPostById(statusPost,p.getPostId());
                 }
             }
         }
@@ -109,4 +112,5 @@ public class UserAPI {
                                                    @RequestParam(defaultValue = "5") Integer pageSize) {
         return userService.findUserByKeySearchByDBA(key,pageNo,pageSize);
     }
+
 }

@@ -68,20 +68,16 @@ public interface IPostService extends IGeneralService<PostDTO> {
     //    Mr Hữu
     PostResponse findPostDeletedIsFalseOrderByDate(Integer pageNo, Integer pageSize);
 
-    PostResponse findPostWaitingOrderByDate(Integer pageNo, Integer pageSize);
-
-    PostResponse findPostHideOrderByDate(Integer pageNo, Integer pageSize);
+    PostResponse findPostByStatusPostOrderByDate(StatusPost statusPost, Integer pageNo, Integer pageSize);
 
     PostResponse findPostByKeySearch(String key, Integer pageNo, Integer pageSize);
 
-    PostResponse findWaitingPostByKeySearch(String key, Integer pageNo, Integer pageSize);
+    PostResponse findPostByStatusPostByKeySearch(String key,StatusPost statusPost, Integer pageNo, Integer pageSize);
 
-    PostResponse findHidePostByKeySearch(String key, Integer pageNo, Integer pageSize);
-
-    void hide(Long id);
-    void publicPost(Long id);
-    void blockPost(Long id);
-
+//    void hide(Long id);
+//    void publicPost(Long id);
+//    void blockPost(Long id);
+    void setStatusPostById(StatusPost statusPost, Long id);
     void setSoldMoto(Long id);
     PostResponse findAllByUserIdAndStatusPost(Long userId, StatusPost statusPost,Integer pageNo, Integer pageSize );
 

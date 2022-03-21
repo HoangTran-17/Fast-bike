@@ -1,6 +1,7 @@
 package com.motomarket.service.user;
 
 import com.motomarket.repository.IUserRepository;
+import com.motomarket.repository.model.StatusUser;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.dto.UserDTO;
 import com.motomarket.service.response.UserResponse;
@@ -204,7 +205,5 @@ public class UserService implements IUserService{
         userResponse.setLast(users.isLast());
         return userResponse;
     }
-
-//    Hữu
 
 }

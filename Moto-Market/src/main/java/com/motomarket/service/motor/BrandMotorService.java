@@ -76,6 +76,11 @@ public class BrandMotorService implements IBrandMotorService {
         return brandFilterList;
     }
 
+    @Override
+    public List<BrandFilter> getAllBrandFilter(String modelMotor, String br, String tp, String cc) {
+        return null;
+    }
+
     private Boolean isSelected(String br, Long brandId) {
         if (br == null) {
             return false;

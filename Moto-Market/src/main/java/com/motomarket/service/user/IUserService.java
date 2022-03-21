@@ -1,5 +1,6 @@
 package com.motomarket.service.user;
 
+import com.motomarket.repository.model.StatusUser;
 import com.motomarket.repository.model.User;
 import com.motomarket.service.IGeneralService;
 import com.motomarket.service.dto.UserDTO;
@@ -7,11 +8,13 @@ import com.motomarket.service.response.UserResponse;
 import org.springframework.data.domain.Pageable;
 import com.motomarket.service.dto.UserView;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.motomarket.service.dto.UserView;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,5 +40,7 @@ public interface IUserService extends IGeneralService<UserDTO> {
     UserResponse findUserByKeySearchByAdmin(String key, Integer pageNo, Integer pageSize);
 
     UserView getUserViewById(Long id);
+
+
 }
 
