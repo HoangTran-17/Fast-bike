@@ -72,9 +72,8 @@ public class LoginController {
         UserDTO userDTO = userService.findUserByEmail(user.getEmail());
         ModelAndView modelAndView = new ModelAndView();
         if (userDTO != null) {
-            if (userDTO.getPassword().equals(user.getPassword())) {
+            if (userDTO.getPassword().equals(user.getPassword()) && userDTO.getRole() == Role.USER && userDTO.getUserStatus()  == StatusUser.ACTIVATE) {
                 loginUsername = userDTO.getUserName();
-                // create cookie and set it in response
                 Cookie cookie = new Cookie("loginUser", loginUsername);
                 cookie.setMaxAge(24 * 60 * 60 * 30);
                 response.addCookie(cookie);

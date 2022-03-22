@@ -299,7 +299,7 @@
     $('#ownershipSelect').on('change', function (e) {
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
-        if (valueSelected==0){
+        if (valueSelected=="OWNERSHIP"){
             let sellerNameHide = $("#hide-userNameLG").val();
             let sellerPhoneNumberHide = $("#hide-phoneLG").val();
             $("#sellerName").val(sellerNameHide);
@@ -307,7 +307,7 @@
             $("#sellerName").attr("readonly", true);
             $("#sellerPhoneNumber").attr("readonly", true);
         } else{
-            if (valueSelected == 1){
+            if (valueSelected == "NO_OWNERSHIP"){
                 $("#sellerName").val(" ");
                 $("#sellerPhoneNumber").val(" ");
                 $("#sellerName").attr("readonly", false);

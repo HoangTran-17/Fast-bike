@@ -1244,7 +1244,7 @@
                         <h1 class="name" title="Mua bán xe máy">Mua bán xe máy </h1>
 
                         <ul class="list-sort-grid">
-                            <li class="count" th:utext="${postList.getSize()} + ' Xe'"></li>
+                            <li class="count" th:utext="${postList.getContent().size()} + ' Xe'"></li>
                             <li>
                                 <a id="view-grid-bike-list" class="" href="javascript:void(0)">
                                     <i class="icon icon-grid"></i></a>
@@ -1283,7 +1283,6 @@
                                     <li>Lọc theo:</li>
 
                                     <div id="listFilters">
-<!--                                        <li><a href="https://www.webike.vn/cho-xe-may/danh-sach-xe.html"><span>PIAGGIO <i class="fa fa-times" aria-hidden="true"></i></span></a></li>-->
                                     </div>
 
                                 </ul>
