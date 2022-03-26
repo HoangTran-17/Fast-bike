@@ -4,16 +4,16 @@
 - Dự án hướng đến đối tượng có nhu cầu mua/bán xe máy đã qua sử dụng.
 - Trang web cho phép mọi người xem danh sách bài đăng, thông tin chi tiết về xe và người bán, đồng thời sử dụng bộ lọc để tìm kiếm chiếc xe phù hợp với nhu cầu của mình.
 - Người dùng cần đăng ký, đăng nhập để đăng bán xe và quản lý danh sách xe của mình.
-- Quản trị viên quản lý danh sách người dùng và danh sách các bài đăng.
+- Quản trị viên quản lý danh sách người dùng, danh sách các bài đăng và duyệt bài trước khi hiển thị lên trang chủ.
 
 # Môi trường và các công cụ sử dụng
 - Sử dụng phần mềm : IntelliJ IDEA
-- Framework sử dụng Spring Framework: Spring Boot, Spring Data JPA, Spring Security...
-- Một số khác: HTML - CSS - JavaScript, JQuery-Ajax, Mail API, RESTful , Centos, JPA Criteria API,...
+- Framework sử dụng Spring Framework: Spring Boot, Spring Data JPA, Spring Security,Spring
+Validation.
+- Một số khác: HTML - CSS - JavaScript, Thymeleaf,Bootstrap, JQuery-Ajax, Mail API, RESTful , Centos, JPA Criteria API, MySQL.
 
 # Cài đặt sử dụng
  - Xem Backlog dự án tại [Link Backlog]( https://docs.google.com/spreadsheets/d/1t1PancFldN_m5UjzsWeKbJl5c1QNxx-0skfPtfK3JVs)
- - Link Trello (https://trello.com/b/ZwrO3UdE/sale-motor)
  - Xem sản phẩm tại [link](https://fastbikevn.tk/)
  - Tài khoản quản trị viên: dba@fastbike.com - 12345
  - Tài khoản người dùng: user@fastbike.com - 12345
